@@ -47,7 +47,7 @@ const plans: Plan[] = [
     checkColor: "text-blue-400",
     coins: "9k",
     borderColor: "border-white/[0.08]",
-    checkoutUrl: "#",
+    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=wat2yhev",
   },
   {
     name: "Pro",
@@ -68,7 +68,7 @@ const plans: Plan[] = [
     checkColor: "text-accent",
     coins: "12k",
     borderColor: "border-accent/30",
-    checkoutUrl: "#",
+    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=y2uzyv4s",
   },
   {
     name: "Elite",
@@ -89,7 +89,7 @@ const plans: Plan[] = [
     checkColor: "text-purple-400",
     coins: "17,5k",
     borderColor: "border-purple-500/20",
-    checkoutUrl: "#",
+    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=owgp5cz5",
   },
 ];
 
