@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Instagram } from "lucide-react";
 
 export default function CTAFinal() {
   return (
-    <section className="py-32 px-4 relative overflow-hidden">
+    <section className="py-20 px-4 relative overflow-hidden">
       {/* Multi-layer glow background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-accent/8 rounded-full blur-[150px] animate-pulse-glow" />

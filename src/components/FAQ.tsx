@@ -74,8 +74,8 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) 
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-28 px-4">
-      <div className="section-divider max-w-4xl mx-auto mb-28" />
+    <section id="faq" className="py-20 px-4">
+      <div className="section-divider max-w-4xl mx-auto mb-16" />
 
       <div className="max-w-3xl mx-auto">
         <motion.div

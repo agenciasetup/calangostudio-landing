@@ -395,12 +395,12 @@ export default function Tools() {
   const [selected, setSelected] = useState<Tool | null>(null);
 
   return (
-    <section id="ferramentas" className="py-32 px-4 relative overflow-hidden">
+    <section id="ferramentas" className="py-20 px-4 relative overflow-hidden">
       {/* Background glows */}
       <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-purple-500/3 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="section-divider max-w-6xl mx-auto mb-32" />
+      <div className="section-divider max-w-6xl mx-auto mb-16" />
 
       <div className="max-w-6xl mx-auto">
         <motion.div
