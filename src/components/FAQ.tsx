@@ -75,7 +75,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >

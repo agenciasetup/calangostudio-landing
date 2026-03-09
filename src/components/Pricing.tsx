@@ -96,31 +96,38 @@ const plans: Plan[] = [
 function AnimatedPrice({ price }: { price: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [displayed, setDisplayed] = useState(price);
-  const [inView, setInView] = useState(false);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !inView) setInView(true); },
-      { threshold: 0.5 }
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          observer.disconnect();
+          const target = parseFloat(price.replace(",", "."));
+          const duration = 1000;
+          const start = performance.now();
+          let lastDisplay = "";
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const display = (eased * target).toFixed(2).replace(".", ",");
+            if (display !== lastDisplay) {
+              lastDisplay = display;
+              setDisplayed(display);
+            }
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
-  }, [inView]);
-
-  useEffect(() => {
-    if (!inView) return;
-    const target = parseFloat(price.replace(",", "."));
-    const duration = 1200;
-    const startTime = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplayed((eased * target).toFixed(2).replace(".", ","));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [inView, price]);
+  }, [price]);
 
   return <span ref={ref}>{displayed}</span>;
 }
@@ -137,7 +144,7 @@ export default function Pricing() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-14"
         >
@@ -155,7 +162,7 @@ export default function Pricing() {
               key={plan.name}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               className={`relative rounded-[24px] md:rounded-[28px] bg-black/40 border p-6 md:p-8 transition-all duration-300 group hover:border-white/15 ${plan.borderColor} ${
                 plan.popular
@@ -215,7 +222,7 @@ export default function Pricing() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           className="text-center text-[11px] text-txt-muted mt-8 md:mt-10 max-w-3xl mx-auto uppercase tracking-wider font-bold"
         >
           Créditos renovam mensalmente e não acumulam. Ao mudar de plano, seu saldo é redefinido para o valor do novo plano.

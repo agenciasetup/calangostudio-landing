@@ -49,7 +49,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
@@ -73,7 +73,7 @@ export default function Testimonials() {
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(i * 0.06, 0.2), duration: 0.4 }}
               className="group glass-card p-5 md:p-7 hover:!border-white/15 transition-all duration-300 relative overflow-hidden"
             >

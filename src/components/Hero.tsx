@@ -19,33 +19,48 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  return isMobile;
+}
+
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const [inView, setInView] = useState(false);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.5 }
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          observer.disconnect();
+          const duration = 1200;
+          const start = performance.now();
+          let lastValue = -1;
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.floor(eased * target);
+            if (value !== lastValue) {
+              lastValue = value;
+              setCount(value);
+            }
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.3 }
     );
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const duration = 1500;
-    const startTime = Date.now();
-    const tick = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [inView, target]);
+  }, [target]);
 
   return <span ref={ref}>{count.toLocaleString("pt-BR")}{suffix}</span>;
 }
@@ -67,12 +82,14 @@ const dashboardModules = [
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const mockupY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  // Disable parallax on mobile — scroll-linked transforms cause jank on low-end devices
+  const mockupY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 150]);
+  const bgOpacity = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [1, 0]);
 
   return (
     <section ref={sectionRef} className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 pt-28 pb-24 overflow-hidden">
@@ -164,7 +181,7 @@ export default function Hero() {
               <div className="flex items-center justify-between mb-4 md:mb-6">
                 <div className="flex items-center gap-2.5 md:gap-3">
                   <div className="relative w-9 h-9 md:w-11 md:h-11 rounded-full flex-shrink-0">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400 to-green-600 animate-[spin_8s_linear_infinite] p-[2px]">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400 to-green-600 md:animate-[spin_8s_linear_infinite] p-[2px]">
                       <div className="w-full h-full rounded-full bg-bg-primary" />
                     </div>
                     <div className="absolute inset-[3px] rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">

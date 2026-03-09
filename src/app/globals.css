@@ -155,7 +155,10 @@ body {
   color: #fff;
 }
 
-/* Mobile-specific optimizations */
+/* ============================================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ============================================================ */
+
 @media (max-width: 767px) {
   /* Ensure no horizontal scroll */
   html, body {
@@ -166,6 +169,37 @@ body {
   /* Smoother scroll on mobile */
   * {
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Disable continuous gradient animation on mobile — static gradient instead */
+  .text-gradient-animated {
+    animation: none;
+    background-position: 50% 50%;
+  }
+
+  .animate-gradient-shift {
+    animation: none;
+  }
+
+  /* Reduce text-shadow intensity on mobile (GPU compositing cost) */
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 170, 0, 0.15);
+  }
+
+  .text-glow-strong {
+    text-shadow: 0 0 20px rgba(255, 170, 0, 0.25);
+  }
+
+  /* Disable hover transforms on mobile — prevents sticky hover states */
+  .btn-primary:hover {
+    transform: none;
+    filter: none;
+  }
+
+  /* Force GPU compositing for animated elements */
+  .glass-card,
+  .glass-panel {
+    transform: translateZ(0);
   }
 }
 
