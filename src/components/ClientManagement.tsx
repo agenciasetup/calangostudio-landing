@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import {
   ShoppingBag,
-  Image,
+  ImageIcon,
   TrendingUp,
   Sparkles,
   PenTool,
@@ -96,7 +96,7 @@ export default function ClientManagement() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -top-6 -right-6 w-12 h-12 rounded-xl bg-gradient-to-br from-accent/10 to-accent-end/10 border border-accent/10 flex items-center justify-center"
             >
-              <Image size={18} className="text-accent/60" />
+              <ImageIcon size={18} className="text-accent/60" />
             </motion.div>
             <motion.div
               animate={{ y: [6, -6, 6], rotate: [2, -2, 2] }}
@@ -146,7 +146,7 @@ export default function ClientManagement() {
                 </div>
                 <div className="flex justify-between items-center p-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
                   <div className="flex items-center gap-2">
-                    <Image size={14} className="text-txt-muted" />
+                    <ImageIcon size={14} className="text-txt-muted" />
                     <span className="text-txt-muted">Imagens geradas</span>
                   </div>
                   <span className="text-white font-bold">247</span>
