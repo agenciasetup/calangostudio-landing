@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Zap, Rocket, Crown, Check, Sparkles } from "lucide-react";
+import { Zap, Sparkles, Crown, Check } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Plan {
@@ -13,8 +13,10 @@ interface Plan {
   features: string[];
   cta: string;
   popular: boolean;
-  accent: boolean;
   iconGradient: string;
+  checkColor: string;
+  coins: string;
+  borderColor: string;
 }
 
 const plans: Plan[] = [
@@ -22,55 +24,60 @@ const plans: Plan[] = [
     name: "Base",
     icon: Zap,
     price: "97,90",
-    subtitle: "Para quem quer começar a produzir mais rápido",
+    subtitle: "Acesso aos geradores de imagem e ferramentas essenciais.",
     features: [
-      "Todos os Geradores de Imagem",
-      "Prompt Maker",
-      "Google Drive integrado",
-      "Até 4 clientes cadastrados",
-      "1 personagem por cliente",
+      "Geradores de Imagem (todos)",
+      "Extrator de Prompt",
+      "Vínculo ao Google Drive",
+      "4 Clientes cadastrados",
+      "1 Personagem por cliente",
     ],
     cta: "Assinar Base",
     popular: false,
-    accent: false,
     iconGradient: "from-blue-500 to-cyan-500",
+    checkColor: "text-blue-400",
+    coins: "9k",
+    borderColor: "border-white/[0.08]",
   },
   {
     name: "Pro",
-    icon: Rocket,
+    icon: Sparkles,
     price: "169,90",
-    subtitle: "O workflow completo para designers sérios",
+    subtitle: "Todas as ferramentas do Base + Copy, Análise e Remix.",
     features: [
-      "Tudo do Base",
+      "Tudo do plano Base",
       "CopyMaker",
-      "Consultor de Perfil",
+      "Análise de Perfil",
       "Remix de Layout",
-      "Até 10 clientes cadastrados",
-      "2 personagens por cliente",
+      "10 Clientes cadastrados",
+      "2 Personagens por cliente",
     ],
     cta: "Assinar Pro",
     popular: true,
-    accent: true,
     iconGradient: "from-accent to-accent-end",
+    checkColor: "text-accent",
+    coins: "12k",
+    borderColor: "border-accent/30",
   },
   {
     name: "Elite",
     icon: Crown,
     price: "319,90",
-    subtitle: "Para quem opera no nível agência",
+    subtitle: "Acesso total + comunidade, mentorias e cursos.",
     features: [
-      "Tudo do Pro",
-      "Até 30 clientes cadastrados",
-      "3 personagens por cliente",
-      "Acesso antecipado a novas features",
+      "Tudo do plano Pro",
+      "30 Clientes cadastrados",
+      "3 Personagens por cliente",
+      "Acesso antecipado às features",
       "Comunidade Calango PRO com mentorias ao vivo",
       "Cursos da Agência Setup",
-      "CalangoPartner (programa de afiliados)",
     ],
     cta: "Assinar Elite",
     popular: false,
-    accent: false,
     iconGradient: "from-purple-500 to-violet-500",
+    checkColor: "text-purple-400",
+    coins: "17,5k",
+    borderColor: "border-purple-500/20",
   },
 ];
 
@@ -97,8 +104,7 @@ function AnimatedPrice({ price }: { price: string }) {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = (eased * target).toFixed(2).replace(".", ",");
-      setDisplayed(current);
+      setDisplayed((eased * target).toFixed(2).replace(".", ","));
       if (progress < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -109,8 +115,7 @@ function AnimatedPrice({ price }: { price: string }) {
 
 export default function Pricing() {
   return (
-    <section id="planos" className="py-28 px-4 relative">
-      {/* Background glow */}
+    <section id="planos" className="py-20 px-4 relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/3 rounded-full blur-[200px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
@@ -118,20 +123,14 @@ export default function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
             <Sparkles size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-              Planos flexíveis
-            </span>
+            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">Planos flexíveis</span>
           </div>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            Escolha seu ritmo.
-          </h2>
-          <p className="text-txt-secondary text-lg">
-            Sem fidelidade. Cancele quando quiser.
-          </p>
+          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">Escolha seu ritmo.</h2>
+          <p className="text-txt-secondary text-lg">Sem fidelidade. Cancele quando quiser.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-5 items-start">
@@ -142,10 +141,10 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className={`relative glass-card p-8 hover:!border-white/15 transition-all duration-500 group ${
+              className={`relative rounded-[28px] bg-black/40 backdrop-blur-[18px] border p-8 transition-all duration-500 group hover:border-white/15 ${plan.borderColor} ${
                 plan.popular
-                  ? "!border-accent/30 !shadow-[0_20px_60px_rgba(0,0,0,0.35),0_0_60px_rgba(255,170,0,0.08)] md:scale-[1.04]"
-                  : ""
+                  ? "shadow-[0_20px_80px_rgba(0,0,0,0.4),0_0_60px_rgba(255,170,0,0.06)] md:scale-[1.03]"
+                  : "shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               }`}
             >
               {plan.popular && (
@@ -153,44 +152,43 @@ export default function Pricing() {
                   initial={{ opacity: 0, y: -10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black text-[10px] font-black uppercase tracking-widest shadow-glow"
+                  className="absolute -top-3.5 left-6 px-4 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black text-[9px] font-black uppercase tracking-[0.18em] shadow-glow"
                 >
                   Mais Popular
                 </motion.span>
               )}
 
-              <div className="text-center mb-8">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                  <plan.icon size={24} className="text-white" strokeWidth={2} />
-                </div>
-                <h3 className="font-poppins font-bold text-2xl mb-1">
-                  {plan.name}
-                </h3>
-                <p className="text-sm text-txt-muted mb-5">
-                  {plan.subtitle}
-                </p>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-sm text-txt-muted">R$</span>
-                  <span className="font-poppins font-black text-4xl text-white text-glow">
-                    <AnimatedPrice price={plan.price} />
-                  </span>
-                  <span className="text-sm text-txt-muted">/mês</span>
-                </div>
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <plan.icon size={24} className="text-white" strokeWidth={2} />
               </div>
 
-              <ul className="space-y-3.5 mb-8">
+              <h3 className="font-poppins font-black text-2xl mb-1">{plan.name}</h3>
+              <div className="flex items-baseline gap-0.5 mb-2">
+                <span className="text-sm text-txt-muted">R$</span>
+                <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
+                  <AnimatedPrice price={plan.price} />
+                </span>
+                <span className="text-sm text-txt-muted">/mês</span>
+              </div>
+              <p className="text-sm text-txt-muted mb-6 leading-relaxed">{plan.subtitle}</p>
+
+              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6 w-fit">
+                <Sparkles size={14} className="text-accent" />
+                <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
+                <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 {plan.features.map((f, j) => (
                   <motion.li
                     key={j}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.3 + j * 0.05 }}
+                    transition={{ delay: 0.3 + j * 0.04 }}
                     className="flex items-start gap-3 text-sm"
                   >
-                    <div className="w-5 h-5 rounded-md bg-accent/10 border border-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check size={11} className="text-accent" strokeWidth={3} />
-                    </div>
+                    <Check size={14} className={`${plan.checkColor} flex-shrink-0 mt-0.5`} strokeWidth={3} />
                     <span className="text-txt-secondary">{f}</span>
                   </motion.li>
                 ))}
@@ -198,9 +196,9 @@ export default function Pricing() {
 
               <a
                 href="#"
-                className={`block w-full text-center py-3.5 rounded-xl font-bold text-sm tracking-wider uppercase transition-all duration-300 ${
-                  plan.accent
-                    ? "btn-primary"
+                className={`block w-full text-center py-4 rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
+                  plan.popular
+                    ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5"
                     : "border border-white/10 text-txt-secondary hover:text-white hover:border-accent/30 hover:bg-accent/[0.03] hover:shadow-glow-sm"
                 }`}
               >
@@ -214,11 +212,9 @@ export default function Pricing() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-sm text-txt-muted mt-14 max-w-2xl mx-auto leading-relaxed"
+          className="text-center text-[11px] text-txt-muted mt-10 max-w-3xl mx-auto uppercase tracking-wider font-bold"
         >
-          Créditos renovam mensalmente. Em média, você gera mais de 100 imagens
-          por mês. Existe ainda o Incentivo Google que pode liberar até 3.000
-          gerações extras — ensinamos como ativar.
+          Créditos renovam mensalmente e não acumulam. Ao mudar de plano, seu saldo é redefinido para o valor do novo plano.
         </motion.p>
       </div>
     </section>

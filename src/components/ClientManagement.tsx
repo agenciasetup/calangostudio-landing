@@ -22,8 +22,8 @@ const bullets = [
 
 export default function ClientManagement() {
   return (
-    <section id="clientes" className="py-28 px-4">
-      <div className="section-divider max-w-5xl mx-auto mb-28" />
+    <section id="clientes" className="py-20 px-4">
+      <div className="section-divider max-w-5xl mx-auto mb-16" />
 
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         {/* Text */}

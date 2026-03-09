@@ -21,8 +21,8 @@ export default function Problem() {
   const lineHeight = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "100%"]);
 
   return (
-    <section ref={sectionRef} className="py-28 px-4 relative">
-      <div className="section-divider max-w-4xl mx-auto mb-28" />
+    <section ref={sectionRef} className="py-16 px-4 relative">
+      <div className="section-divider max-w-4xl mx-auto mb-16" />
 
       <div className="max-w-4xl mx-auto">
         <motion.h2
