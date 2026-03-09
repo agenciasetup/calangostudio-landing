@@ -82,19 +82,6 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-panel mb-10"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
-          <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-            Plataforma ativa e em constante atualização
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
