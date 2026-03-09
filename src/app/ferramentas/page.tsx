@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Ferramentas de IA para Designers e Social Media | Calango Studio",
@@ -184,6 +186,10 @@ export default function FerramentasHubPage() {
           </p>
         </div>
       </section>
+
+      <FuncaoShowcase slug="imagem-criativa,copymaker,mockup-produto" />
+
+      <ResultadosGaleria />
 
       <CtaBanner slug="ferramentas" />
     </SeoLayout>

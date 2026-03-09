@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 import RelatedPages from "@/app/components/seo/RelatedPages";
 
 export const metadata: Metadata = {
@@ -106,6 +108,8 @@ export default function ComoCriarCopyParaPostPage() {
       </p>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="copymaker" />
+      <ResultadosGaleria />
       <CtaBanner slug="social-media/como-criar-copy-para-post" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

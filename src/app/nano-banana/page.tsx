@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Nano Banana: o modelo de IA de imagens do Calango Studio | Calango Studio",
@@ -150,6 +152,8 @@ export default function NanoBananaHubPage() {
         </div>
       </section>
 
+      <FuncaoShowcase slug="imagem-criativa,estudio-de-foto,assets-3d" />
+      <ResultadosGaleria />
       <CtaBanner slug="nano-banana" />
     </SeoLayout>
   );

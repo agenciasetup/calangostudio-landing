@@ -3,6 +3,8 @@ import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
 import RelatedPages from "@/app/components/seo/RelatedPages";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Como Colocar Produto em Cenário com IA | Calango Studio",
@@ -106,6 +108,8 @@ export default function ComoColocarProdutoEmCenarioComIaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="mockup-produto" />
+      <ResultadosGaleria />
       <CtaBanner slug="foto-produto/como-colocar-produto-em-cenario-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

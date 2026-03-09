@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 import RelatedPages from "@/app/components/seo/RelatedPages";
 
 export const metadata: Metadata = {
@@ -234,6 +236,8 @@ export default function ComoCriarConteudoComIaPage() {
       </p>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="copymaker" />
+      <ResultadosGaleria />
       <CtaBanner slug="guias/como-criar-conteudo-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

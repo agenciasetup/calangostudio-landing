@@ -3,6 +3,8 @@ import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
 import RelatedPages from "@/app/components/seo/RelatedPages";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title:
@@ -200,6 +202,10 @@ export default function IaParaSocialMediaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="copymaker" />
+
+      <ResultadosGaleria />
+
       <CtaBanner slug="ferramentas/ia-para-social-media" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Freelancer de Design e Social Media: guias para escalar com IA | Calango Studio",
@@ -171,6 +173,8 @@ export default function FreelancerHubPage() {
         </div>
       </section>
 
+      <FuncaoShowcase slug="meus-clientes,copymaker,imagem-criativa" />
+      <ResultadosGaleria />
       <CtaBanner slug="freelancer" />
     </SeoLayout>
   );

@@ -3,6 +3,8 @@ import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
 import RelatedPages from "@/app/components/seo/RelatedPages";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Como Automatizar a Produção de Conteúdo para Clientes | Calango Studio",
@@ -102,6 +104,8 @@ export default function ComoAutomatizarProducaoDeConteudoPage() {
       </p>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="meus-clientes" />
+      <ResultadosGaleria />
       <CtaBanner slug="freelancer/como-automatizar-producao-de-conteudo" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

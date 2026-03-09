@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Foto de Produto com IA: sem estúdio, sem fotógrafo | Calango Studio",
@@ -160,6 +162,8 @@ export default function FotoProdutoHubPage() {
         </div>
       </section>
 
+      <FuncaoShowcase slug="mockup-produto,estudio-de-foto,ugc-build" />
+      <ResultadosGaleria />
       <CtaBanner slug="foto-produto" />
     </SeoLayout>
   );

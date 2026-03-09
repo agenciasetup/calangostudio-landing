@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 import RelatedPages from "@/app/components/seo/RelatedPages";
 
 export const metadata: Metadata = {
@@ -85,6 +87,8 @@ export default function CalangoVsFreepikPage() {
       </div>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="imagem-criativa,copymaker" />
+      <ResultadosGaleria />
       <CtaBanner slug="comparativo/calango-vs-freepik" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>

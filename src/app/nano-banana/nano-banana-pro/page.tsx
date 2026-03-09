@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 import RelatedPages from "@/app/components/seo/RelatedPages";
 
 export const metadata: Metadata = {
@@ -83,6 +85,8 @@ export default function NanoBananaProPage() {
       </p>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="imagem-criativa" />
+      <ResultadosGaleria />
       <CtaBanner message="Ver planos a partir de R$97,90" slug="nano-banana/nano-banana-pro" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
