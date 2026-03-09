@@ -147,7 +147,7 @@ const relatedPages = [
 
 export default function ComoCriarConteudoComIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="guias/como-criar-conteudo-com-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Como Criar Conteúdo com IA
       </h1>
@@ -234,7 +234,7 @@ export default function ComoCriarConteudoComIaPage() {
       </p>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="guias/como-criar-conteudo-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

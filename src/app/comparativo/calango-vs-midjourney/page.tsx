@@ -110,7 +110,7 @@ const relatedPages = [
 
 export default function CalangoVsMidjourneyPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="comparativo/calango-vs-midjourney">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Calango Studio vs Midjourney
       </h1>
@@ -211,7 +211,7 @@ export default function CalangoVsMidjourneyPage() {
       </div>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="comparativo/calango-vs-midjourney" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

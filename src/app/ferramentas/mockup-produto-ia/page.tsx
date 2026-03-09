@@ -128,7 +128,7 @@ const relatedPages = [
 
 export default function MockupProdutoIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/mockup-produto-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Mockup de Produto com IA
       </h1>
@@ -197,7 +197,7 @@ export default function MockupProdutoIaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/mockup-produto-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

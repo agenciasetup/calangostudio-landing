@@ -128,7 +128,7 @@ const relatedPages = [
 
 export default function AgenteParaSocialMediaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="guias/agente-para-social-media">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Agente de IA para Social Media
       </h1>
@@ -208,7 +208,7 @@ export default function AgenteParaSocialMediaPage() {
       </p>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="guias/agente-para-social-media" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

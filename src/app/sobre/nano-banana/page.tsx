@@ -126,7 +126,7 @@ const relatedPages = [
 
 export default function NanoBananaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="sobre/nano-banana">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Nano Banana
       </h1>
@@ -188,7 +188,7 @@ export default function NanoBananaPage() {
       </p>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="sobre/nano-banana" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

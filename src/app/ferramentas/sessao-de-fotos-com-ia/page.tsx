@@ -128,7 +128,7 @@ const relatedPages = [
 
 export default function SessaoDeFotosComIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/sessao-de-fotos-com-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Sessão de Fotos com IA
       </h1>
@@ -194,7 +194,7 @@ export default function SessaoDeFotosComIaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/sessao-de-fotos-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

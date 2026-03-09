@@ -128,7 +128,7 @@ const relatedPages = [
 
 export default function IaParaSocialMediaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/ia-para-social-media">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         IA para Social Media
       </h1>
@@ -200,7 +200,7 @@ export default function IaParaSocialMediaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/ia-para-social-media" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );
