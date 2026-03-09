@@ -3,10 +3,63 @@ import { GoogleGenAI, Type } from "@google/genai";
 import OpenAI from "openai";
 
 const GEMINI_TIMEOUT_MS = 30_000;
+const DAILY_LIMIT = 3;
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10 MB
+const BURST_WINDOW_MS = 5_000; // 5s between requests per identity
 
 const UNIVERSAL_HEADER =
   "#Aplique as instruções acima e estilize com o prompt abaixo";
 
+/* ── Rate limiting store (in-memory, resets on deploy) ── */
+interface UsageEntry {
+  count: number;
+  date: string; // YYYY-MM-DD
+  lastRequest: number; // timestamp ms
+}
+
+const usageByIp = new Map<string, UsageEntry>();
+const usageByFingerprint = new Map<string, UsageEntry>();
+
+function getTodayKey(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function getUsage(map: Map<string, UsageEntry>, key: string): UsageEntry {
+  const today = getTodayKey();
+  const entry = map.get(key);
+  if (!entry || entry.date !== today) {
+    const fresh = { count: 0, date: today, lastRequest: 0 };
+    map.set(key, fresh);
+    return fresh;
+  }
+  return entry;
+}
+
+function checkAndIncrement(ip: string, fingerprint: string): { allowed: boolean; burstBlocked: boolean } {
+  const now = Date.now();
+
+  // Check IP
+  const ipEntry = getUsage(usageByIp, ip);
+  if (ipEntry.count >= DAILY_LIMIT) return { allowed: false, burstBlocked: false };
+
+  // Check fingerprint (even if IP changed, same browser = same person)
+  const fpEntry = getUsage(usageByFingerprint, fingerprint);
+  if (fpEntry.count >= DAILY_LIMIT) return { allowed: false, burstBlocked: false };
+
+  // Burst protection: min 5s between requests
+  if (now - ipEntry.lastRequest < BURST_WINDOW_MS) return { allowed: false, burstBlocked: true };
+  if (fingerprint && now - fpEntry.lastRequest < BURST_WINDOW_MS) return { allowed: false, burstBlocked: true };
+
+  // Increment both
+  ipEntry.count++;
+  ipEntry.lastRequest = now;
+  fpEntry.count++;
+  fpEntry.lastRequest = now;
+
+  return { allowed: true, burstBlocked: false };
+}
+
+/* ── Schemas ── */
 const geminiSchema = {
   type: Type.OBJECT,
   properties: {
@@ -94,7 +147,6 @@ async function callGemini(mimeType: string, base64Data: string): Promise<string>
       .replace(/```/g, "")
       .trim();
 
-    // Validate it's real JSON before returning
     JSON.parse(text);
     return text;
   } finally {
@@ -142,9 +194,40 @@ async function callOpenAIFallback(mimeType: string, base64Data: string): Promise
   return text;
 }
 
-/* ── Route handler: Gemini → OpenAI fallback ── */
+/* ── Helpers ── */
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
+
+/* ── Route handler ── */
 export async function POST(request: NextRequest) {
   try {
+    const ip = getClientIp(request);
+    const fingerprint = request.headers.get("x-fingerprint") || "";
+
+    // Bot detection: require fingerprint header
+    if (!fingerprint) {
+      return NextResponse.json(
+        { error: "Requisição inválida." },
+        { status: 403 }
+      );
+    }
+
+    // Rate limit check (IP + fingerprint, 3/day)
+    const { allowed, burstBlocked } = checkAndIncrement(ip, fingerprint);
+    if (!allowed) {
+      const status = 429;
+      const error = burstBlocked
+        ? "Aguarde alguns segundos entre as extrações."
+        : "Limite diário atingido. Assine o Calango Studio para uso ilimitado.";
+      return NextResponse.json({ error }, { status });
+    }
+
+    // Parse body
     const body = await request.json();
     const { image } = body;
 
@@ -152,6 +235,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: "Imagem não fornecida." },
         { status: 400 }
+      );
+    }
+
+    // Size check (base64 ~= 4/3 of original)
+    if (image.length > MAX_IMAGE_BYTES * 1.4) {
+      return NextResponse.json(
+        { error: "Imagem muito grande. Máximo 10 MB." },
+        { status: 413 }
       );
     }
 
