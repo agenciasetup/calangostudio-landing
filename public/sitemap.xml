@@ -262,4 +262,48 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- ia-gratuita -->
+  <url>
+    <loc>https://www.calangostudio.com.br/ia-gratuita/ia-gratuita-para-designers</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/ia-gratuita/ia-gratuita-para-gerar-imagens</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/ia-gratuita/melhor-ia-gratuita-para-social-media</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/ia-gratuita/gpt-gratis-para-criar-conteudo</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- nano-banana -->
+  <url>
+    <loc>https://www.calangostudio.com.br/nano-banana/nano-banana-gratis</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/nano-banana/nano-banana-pro</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/nano-banana/como-usar-nano-banana</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

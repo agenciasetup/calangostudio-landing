@@ -69,6 +69,10 @@ export default function Footer() {
             <li><a href="/comparativo/alternativa-ao-designi" className="hover:text-white transition-colors">Alternativa ao Designi</a></li>
             <li><a href="/banco-de-imagens/melhor-banco-de-imagens-para-designer" className="hover:text-white transition-colors">Melhor Banco de Imagens</a></li>
             <li><a href="/banco-de-imagens/como-nao-depender-de-banco-de-imagens" className="hover:text-white transition-colors">Não Depender de Banco de Imagens</a></li>
+            <li><a href="/ia-gratuita/ia-gratuita-para-designers" className="hover:text-white transition-colors">IA Gratuita para Designers</a></li>
+            <li><a href="/ia-gratuita/ia-gratuita-para-gerar-imagens" className="hover:text-white transition-colors">IA Gratuita para Gerar Imagens</a></li>
+            <li><a href="/nano-banana/nano-banana-pro" className="hover:text-white transition-colors">Nano Banana Pro</a></li>
+            <li><a href="/nano-banana/como-usar-nano-banana" className="hover:text-white transition-colors">Como Usar o Nano Banana</a></li>
           </ul>
         </nav>
 
