@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "IA Gratuita para Designers e Social Media: o que funciona | Calango Studio",
@@ -160,6 +162,8 @@ export default function IaGratuitaHubPage() {
         </div>
       </section>
 
+      <FuncaoShowcase slug="imagem-criativa,copymaker,assets-3d" />
+      <ResultadosGaleria />
       <CtaBanner slug="ia-gratuita" />
     </SeoLayout>
   );

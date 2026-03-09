@@ -3,6 +3,8 @@ import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import ClusterHero from "@/app/components/seo/ClusterHero";
 import CtaBanner from "@/app/components/seo/CtaBanner";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Social Media com IA: guias para produzir conteúdo mais rápido | Calango Studio",
@@ -172,6 +174,8 @@ export default function SocialMediaHubPage() {
         </div>
       </section>
 
+      <FuncaoShowcase slug="copymaker,imagem-criativa,consultor-de-perfil" />
+      <ResultadosGaleria />
       <CtaBanner slug="social-media" />
     </SeoLayout>
   );

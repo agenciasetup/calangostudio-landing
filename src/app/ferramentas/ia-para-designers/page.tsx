@@ -3,6 +3,8 @@ import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
 import RelatedPages from "@/app/components/seo/RelatedPages";
+import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
+import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "IA para Designers: ferramentas e workflow para 2025 | Calango Studio",
@@ -207,6 +209,10 @@ export default function IaParaDesignersPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
+      <FuncaoShowcase slug="imagem-criativa" />
+
+      <ResultadosGaleria />
+
       <CtaBanner slug="ferramentas/ia-para-designers" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
