@@ -39,7 +39,25 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-white/[0.04] text-center space-y-2">
+        {/* SEO Internal Links */}
+        <nav aria-label="Páginas do Calango Studio" className="mt-10 pt-8 border-t border-white/[0.04]">
+          <h3 className="text-sm font-semibold text-txt-secondary mb-3 text-center">
+            Explore o Calango Studio
+          </h3>
+          <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-txt-muted">
+            <li><a href="/ferramentas/ia-para-designers" className="hover:text-white transition-colors">IA para Designers</a></li>
+            <li><a href="/ferramentas/ia-para-social-media" className="hover:text-white transition-colors">IA para Social Media</a></li>
+            <li><a href="/guias/como-gerar-imagens-com-ia" className="hover:text-white transition-colors">Como Gerar Imagens com IA</a></li>
+            <li><a href="/guias/como-criar-conteudo-com-ia" className="hover:text-white transition-colors">Como Criar Conteúdo com IA</a></li>
+            <li><a href="/guias/estilos-de-imagem-com-ia" className="hover:text-white transition-colors">Estilos de Imagem com IA</a></li>
+            <li><a href="/comparativo/calango-vs-canva" className="hover:text-white transition-colors">Calango vs Canva</a></li>
+            <li><a href="/comparativo/calango-vs-midjourney" className="hover:text-white transition-colors">Calango vs Midjourney</a></li>
+            <li><a href="/sobre/agencia-setup" className="hover:text-white transition-colors">Agência Setup</a></li>
+            <li><a href="/sobre/nano-banana" className="hover:text-white transition-colors">Nano Banana</a></li>
+          </ul>
+        </nav>
+
+        <div className="mt-8 pt-6 border-t border-white/[0.04] text-center space-y-2">
           <p className="text-sm text-txt-muted">
             &copy; 2026 Calango Studio. Todos os direitos reservados.
           </p>
