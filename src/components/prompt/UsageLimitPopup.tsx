@@ -67,9 +67,7 @@ export default function UsageLimitPopup({ open, onClose }: UsageLimitPopupProps)
 
                 {/* CTA */}
                 <a
-                  href="https://calango.studio/?utm_source=promptmaker&utm_medium=limit_popup&utm_campaign=pro_20off&coupon=PROMPT20"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/?utm_source=promptmaker&utm_medium=limit_popup&utm_campaign=pro_20off&coupon=20LANGOS"
                   className="w-full flex items-center justify-center gap-2.5 py-4 rounded-xl font-black text-sm tracking-[0.14em] uppercase bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5 transition-all duration-300"
                 >
                   Assinar com 20% OFF

@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import CouponBar from "@/components/CouponBar";
 
 const Problem = dynamic(() => import("@/components/Problem"));
 const BeforeAfter = dynamic(() => import("@/components/BeforeAfter"));
@@ -16,7 +18,12 @@ const Footer = dynamic(() => import("@/components/Footer"));
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Suspense fallback={null}>
+        <CouponBar />
+      </Suspense>
+      <Suspense fallback={null}>
+        <Navbar />
+      </Suspense>
       <main>
         <Hero />
         <Problem />
@@ -25,7 +32,9 @@ export default function Home() {
         <Tools />
         <ClientManagement />
         <Testimonials />
-        <Pricing />
+        <Suspense fallback={null}>
+          <Pricing />
+        </Suspense>
         <FAQ />
         <CTAFinal />
       </main>
