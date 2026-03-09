@@ -131,6 +131,11 @@ html::before {
   background: linear-gradient(90deg, transparent, rgba(255, 170, 0, 0.2), transparent);
 }
 
+/* Animate gradient shift for inline styles */
+.animate-gradient-shift {
+  animation: gradient-shift 8s ease infinite;
+}
+
 /* Selection color */
 ::selection {
   background: rgba(255, 170, 0, 0.3);
