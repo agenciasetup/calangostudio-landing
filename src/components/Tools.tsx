@@ -275,115 +275,112 @@ function ToolModal({ tool, onClose }: { tool: Tool; onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-50 flex items-end md:items-center justify-center md:p-4"
       onClick={onClose}
     >
-      <div className="absolute inset-0 bg-black/85 backdrop-blur-lg" />
+      <div className="absolute inset-0 bg-black/80 md:bg-black/85" />
+
+      {/* Mobile: bottom sheet / Desktop: centered modal */}
       <motion.div
-        initial={{ scale: 0.9, opacity: 0, y: 30 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.9, opacity: 0, y: 30 }}
-        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        initial={{ y: "100%", opacity: 0.5 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: "100%", opacity: 0 }}
+        transition={{ type: "spring", damping: 30, stiffness: 400 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-2xl glass-card !rounded-[32px] overflow-hidden"
+        className="relative w-full md:max-w-2xl max-h-[90vh] md:max-h-[85vh] bg-[#0a0a0c] md:bg-transparent overflow-hidden rounded-t-[28px] md:rounded-[32px]"
         style={{
-          boxShadow: `0 30px 100px rgba(0,0,0,0.6), 0 0 80px ${tool.glowColor}`,
+          boxShadow: `0 -10px 40px rgba(0,0,0,0.5)`,
         }}
       >
-        {/* Colored top bar */}
-        <div className={`h-1.5 bg-gradient-to-r ${tool.color}`} />
+        {/* Mobile drag handle */}
+        <div className="md:hidden flex justify-center pt-3 pb-1">
+          <div className="w-10 h-1 rounded-full bg-white/20" />
+        </div>
 
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-txt-muted hover:text-white hover:bg-white/10 transition-all z-20"
-        >
-          <X size={16} />
-        </button>
+        {/* Glass card wrapper for desktop */}
+        <div className="md:glass-card md:!rounded-[32px] overflow-y-auto max-h-[88vh] md:max-h-[85vh] overscroll-contain">
+          {/* Colored top bar */}
+          <div className={`h-1 md:h-1.5 bg-gradient-to-r ${tool.color}`} />
 
-        <div className="p-8 lg:p-10">
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-6">
-            <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tool.color} bg-opacity-20 flex items-center justify-center border border-white/15 shadow-xl flex-shrink-0`}>
-              <tool.icon size={26} className="text-white" strokeWidth={2} />
-            </div>
-            <div>
-              <h3 className="font-poppins font-bold text-2xl mb-1">{tool.name}</h3>
-              <p className="text-sm text-txt-secondary leading-relaxed max-w-lg">
-                {tool.description}
-              </p>
-            </div>
-          </div>
+          {/* Close button - larger tap target on mobile */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-4 md:top-5 md:right-5 w-10 h-10 md:w-9 md:h-9 rounded-xl bg-white/10 md:bg-white/5 border border-white/10 flex items-center justify-center text-white md:text-txt-muted hover:text-white hover:bg-white/15 transition-all z-20"
+          >
+            <X size={18} />
+          </button>
 
-          {/* Screenshot placeholder */}
-          <div className="relative w-full aspect-video rounded-2xl bg-white/[0.02] border border-white/[0.08] mb-6 overflow-hidden group">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${tool.color} opacity-20 flex items-center justify-center`}>
-                <ImageIcon size={28} className="text-white/60" />
+          <div className="p-5 pb-8 md:p-8 lg:p-10">
+            {/* Header */}
+            <div className="flex items-start gap-3 md:gap-4 mb-5 md:mb-6 pr-10">
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${tool.color} bg-opacity-20 flex items-center justify-center border border-white/15 shadow-xl flex-shrink-0`}>
+                <tool.icon size={24} className="text-white" strokeWidth={2} />
               </div>
-              <p className="text-xs text-txt-muted">Screenshot da ferramenta — 1920x1080</p>
+              <div>
+                <h3 className="font-poppins font-bold text-xl md:text-2xl mb-1">{tool.name}</h3>
+                <p className="text-sm text-txt-secondary leading-relaxed max-w-lg">
+                  {tool.description}
+                </p>
+              </div>
             </div>
-            {/* Subtle animated gradient overlay */}
-            <div
-              className="absolute inset-0 opacity-30 animate-gradient-shift"
-              style={{
-                background: `linear-gradient(135deg, ${tool.glowColor}, transparent, ${tool.glowColor})`,
-                backgroundSize: "200% 200%",
-              }}
-            />
-          </div>
 
-          {/* Example of use */}
-          <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] mb-6">
-            <p className="text-[10px] text-txt-muted uppercase tracking-[0.18em] mb-2 font-black">
-              Exemplo de uso
-            </p>
-            <p className="text-white text-sm font-medium leading-relaxed">{tool.example}</p>
-          </div>
+            {/* Screenshot placeholder */}
+            <div className="relative w-full aspect-video rounded-2xl bg-white/[0.02] border border-white/[0.08] mb-5 md:mb-6 overflow-hidden">
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${tool.color} opacity-20 flex items-center justify-center`}>
+                  <ImageIcon size={24} className="text-white/60" />
+                </div>
+                <p className="text-xs text-txt-muted">Screenshot da ferramenta</p>
+              </div>
+            </div>
 
-          {/* Advantages */}
-          <div className="mb-6">
-            <p className="text-[10px] text-txt-muted uppercase tracking-[0.18em] mb-3 font-black">
-              Vantagens
-            </p>
-            <div className="space-y-2.5">
-              {tool.advantages.map((adv, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.08 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-6 h-6 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle size={12} className="text-accent" />
+            {/* Example of use */}
+            <div className="p-4 md:p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] mb-5 md:mb-6">
+              <p className="text-[10px] text-txt-muted uppercase tracking-[0.18em] mb-2 font-black">
+                Exemplo de uso
+              </p>
+              <p className="text-white text-sm font-medium leading-relaxed">{tool.example}</p>
+            </div>
+
+            {/* Advantages */}
+            <div className="mb-5 md:mb-6">
+              <p className="text-[10px] text-txt-muted uppercase tracking-[0.18em] mb-3 font-black">
+                Vantagens
+              </p>
+              <div className="space-y-2.5">
+                {tool.advantages.map((adv, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-6 h-6 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle size={12} className="text-accent" />
+                    </div>
+                    <span className="text-sm text-txt-secondary">{adv}</span>
                   </div>
-                  <span className="text-sm text-txt-secondary">{adv}</span>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* User feedback */}
-          <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] mb-6">
-            <Quote size={16} className="text-accent/30 mb-2" />
-            <p className="text-sm text-txt-secondary italic mb-2">&ldquo;{tool.feedback.text}&rdquo;</p>
-            <p className="text-[11px] text-accent/70 font-bold">{tool.feedback.name}</p>
-          </div>
+            {/* User feedback */}
+            <div className="p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] mb-5 md:mb-6">
+              <Quote size={16} className="text-accent/30 mb-2" />
+              <p className="text-sm text-txt-secondary italic mb-2">&ldquo;{tool.feedback.text}&rdquo;</p>
+              <p className="text-[11px] text-accent/70 font-bold">{tool.feedback.name}</p>
+            </div>
 
-          {/* CTA row */}
-          <div className="flex items-center justify-between">
-            <span className="text-xs px-4 py-2 rounded-xl bg-accent/10 text-accent border border-accent/20 font-black uppercase tracking-wider">
-              Plano {tool.plan}
-            </span>
-            <a
-              href="#planos"
-              onClick={onClose}
-              className="btn-primary px-8 py-3 text-xs tracking-widest flex items-center gap-2"
-            >
-              Assinar agora
-              <ChevronRight size={14} />
-            </a>
+            {/* CTA row */}
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs px-3 md:px-4 py-2 rounded-xl bg-accent/10 text-accent border border-accent/20 font-black uppercase tracking-wider whitespace-nowrap">
+                Plano {tool.plan}
+              </span>
+              <a
+                href="#planos"
+                onClick={onClose}
+                className="btn-primary px-6 md:px-8 py-3 text-xs tracking-widest flex items-center gap-2"
+              >
+                Assinar agora
+                <ChevronRight size={14} />
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -395,97 +392,85 @@ export default function Tools() {
   const [selected, setSelected] = useState<Tool | null>(null);
 
   return (
-    <section id="ferramentas" className="py-20 px-4 relative overflow-hidden">
-      {/* Background glows */}
-      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-purple-500/3 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-accent/3 rounded-full blur-[120px] pointer-events-none" />
+    <section id="ferramentas" className="py-16 md:py-20 px-4 relative overflow-hidden">
+      {/* Background glows - simplified */}
+      <div className="absolute top-1/4 left-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/3 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-accent/3 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
 
-      <div className="section-divider max-w-6xl mx-auto mb-16" />
+      <div className="section-divider max-w-6xl mx-auto mb-12 md:mb-16" />
 
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-10 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-panel mb-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-panel mb-6 md:mb-8">
             <Sparkles size={14} className="text-accent" />
             <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
               12 Ferramentas integradas
             </span>
           </div>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-5 tracking-tight">
+          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-5 tracking-tight">
             Tudo que você precisa.{" "}
             <span className="text-gradient-animated text-glow">
               Em um único lugar.
             </span>
           </h2>
-          <p className="text-txt-secondary text-lg max-w-2xl mx-auto">
+          <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto">
             Clique em qualquer ferramenta para ver os detalhes, vantagens e exemplos de uso.
           </p>
         </motion.div>
 
-        {/* Tool cards - matching Calango.studio dashboard style */}
-        <div className="glass-card !rounded-[32px] p-5 sm:p-6 lg:p-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Tool cards */}
+        <div className="glass-card !rounded-[24px] md:!rounded-[32px] p-3 sm:p-5 lg:p-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {tools.map((tool, i) => (
               <motion.button
                 key={tool.name}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ delay: Math.min(i * 0.03, 0.2), duration: 0.4 }}
                 onClick={() => setSelected(tool)}
-                className="text-left relative rounded-[24px] bg-black/40 border border-white/[0.08] overflow-hidden cursor-pointer hover:border-white/[0.18] transition-all duration-500 group min-h-[180px] p-5"
-                style={{
-                  boxShadow: "0 20px 60px rgba(8,14,30,0.45)",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 20px 60px rgba(8,14,30,0.45), 0 0 40px ${tool.glowColor}`;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.boxShadow = "0 20px 60px rgba(8,14,30,0.45)";
-                }}
+                className="text-left relative rounded-[16px] md:rounded-[24px] bg-black/40 border border-white/[0.08] overflow-hidden cursor-pointer active:scale-[0.98] md:hover:border-white/[0.18] transition-all duration-300 group min-h-[140px] md:min-h-[180px] p-3.5 md:p-5"
               >
                 {/* Colored gradient top bar */}
-                <div className={`absolute top-0 inset-x-0 h-1 rounded-t-[24px] bg-gradient-to-r ${tool.color} opacity-55 group-hover:opacity-100 transition-opacity duration-500`} />
-
-                {/* Radial light */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.04)_0%,transparent_60%)]" />
-
-                {/* Hover highlight */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-transparent via-white/[0.02] to-white/[0.04]" />
+                <div className={`absolute top-0 inset-x-0 h-[2px] md:h-1 rounded-t-[16px] md:rounded-t-[24px] bg-gradient-to-r ${tool.color} opacity-55 group-hover:opacity-100 transition-opacity duration-300`} />
 
                 <div className="relative z-10 flex flex-col justify-between h-full">
                   {/* Icon */}
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/15 shadow-xl mb-4 group-hover:scale-110 group-hover:bg-white/20 transition-all duration-500">
-                    <tool.icon size={22} className="text-white" strokeWidth={2} />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-white/10 flex items-center justify-center border border-white/15 shadow-xl mb-3 md:mb-4">
+                    <tool.icon size={18} className="text-white md:hidden" strokeWidth={2} />
+                    <tool.icon size={22} className="text-white hidden md:block" strokeWidth={2} />
                   </div>
 
                   <div className="flex-1 flex flex-col justify-end">
-                    <h3 className="font-poppins font-bold text-base mb-1 text-white">
+                    <h3 className="font-poppins font-bold text-sm md:text-base mb-0.5 md:mb-1 text-white">
                       {tool.name}
                     </h3>
-                    <p className="text-[11px] text-zinc-400 group-hover:text-zinc-200 transition-colors leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-[10px] md:text-[11px] text-zinc-400 leading-relaxed mb-3 md:mb-4 line-clamp-2">
                       {tool.short}
                     </p>
 
                     {/* CTA row */}
                     <div className="flex items-center justify-between">
-                      <span className="text-[8px] font-black text-zinc-500 group-hover:text-zinc-200 uppercase tracking-[0.20em] transition-colors">
-                        Acessar Estúdio Criativo
+                      <span className="text-[7px] md:text-[8px] font-black text-zinc-500 uppercase tracking-[0.15em] md:tracking-[0.20em] hidden sm:block">
+                        Acessar Estúdio
                       </span>
-                      <div className="w-9 h-9 rounded-full bg-white/10 text-zinc-100 group-hover:bg-accent group-hover:text-black flex items-center justify-center shadow-lg transition-all duration-300">
-                        <ChevronRight size={14} strokeWidth={2.5} />
+                      <div className="w-7 h-7 md:w-9 md:h-9 rounded-full bg-white/10 text-zinc-100 flex items-center justify-center shadow-lg ml-auto">
+                        <ChevronRight size={12} strokeWidth={2.5} className="md:hidden" />
+                        <ChevronRight size={14} strokeWidth={2.5} className="hidden md:block" />
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Plan badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`text-[8px] px-2.5 py-1 rounded-lg font-black uppercase tracking-wider ${
+                <div className="absolute top-3 md:top-4 right-3 md:right-4">
+                  <span className={`text-[7px] md:text-[8px] px-2 md:px-2.5 py-0.5 md:py-1 rounded-md md:rounded-lg font-black uppercase tracking-wider ${
                     tool.plan === "Pro"
                       ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
                       : "bg-accent/8 text-accent/70 border border-accent/15"

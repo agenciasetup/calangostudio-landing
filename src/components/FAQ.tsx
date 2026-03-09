@@ -31,22 +31,16 @@ const faqs = [
   },
 ];
 
-function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) {
+function FAQItem({ faq }: { faq: (typeof faqs)[number] }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.06, duration: 0.5 }}
-      className="border-b border-white/[0.06] last:border-0 group"
-    >
+    <div className="border-b border-white/[0.06] last:border-0 group">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-6 text-left"
+        className="flex items-center justify-between w-full py-5 md:py-6 text-left"
       >
-        <span className="font-poppins font-bold text-base md:text-lg pr-4 group-hover:text-accent transition-colors duration-300">
+        <span className="font-poppins font-bold text-sm md:text-lg pr-4 group-hover:text-accent transition-colors duration-300">
           {faq.q}
         </span>
         <div className={`flex-shrink-0 w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 group-hover:border-accent/30 group-hover:bg-accent/[0.05] ${open ? "rotate-180 !border-accent/30 !bg-accent/10" : ""}`}>
@@ -59,30 +53,31 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) 
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-txt-secondary leading-relaxed">
+            <p className="pb-5 md:pb-6 text-sm md:text-base text-txt-secondary leading-relaxed">
               {faq.a}
             </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-20 px-4">
-      <div className="section-divider max-w-4xl mx-auto mb-16" />
+    <section id="faq" className="py-16 md:py-20 px-4">
+      <div className="section-divider max-w-4xl mx-auto mb-12 md:mb-16" />
 
       <div className="max-w-3xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-10 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
             <HelpCircle size={14} className="text-accent" />
@@ -98,9 +93,9 @@ export default function FAQ() {
           </h2>
         </motion.div>
 
-        <div className="glass-card !rounded-3xl p-6 md:p-8">
+        <div className="glass-card !rounded-2xl md:!rounded-3xl p-4 md:p-8">
           {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} />
+            <FAQItem key={i} faq={faq} />
           ))}
         </div>
       </div>

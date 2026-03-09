@@ -98,7 +98,7 @@ function AnimatedPrice({ price }: { price: string }) {
   useEffect(() => {
     if (!inView) return;
     const target = parseFloat(price.replace(",", "."));
-    const duration = 1500;
+    const duration = 1200;
     const startTime = Date.now();
     const tick = () => {
       const elapsed = Date.now() - startTime;
@@ -115,54 +115,50 @@ function AnimatedPrice({ price }: { price: string }) {
 
 export default function Pricing() {
   return (
-    <section id="planos" className="py-20 px-4 relative">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/3 rounded-full blur-[200px] pointer-events-none" />
+    <section id="planos" className="py-16 md:py-20 px-4 relative">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/3 rounded-full blur-[100px] md:blur-[200px] pointer-events-none" />
 
       <div className="relative max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-10 md:mb-14"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
             <Sparkles size={14} className="text-accent" />
             <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">Planos flexíveis</span>
           </div>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">Escolha seu ritmo.</h2>
-          <p className="text-txt-secondary text-lg">Sem fidelidade. Cancele quando quiser.</p>
+          <p className="text-txt-secondary text-base md:text-lg">Sem fidelidade. Cancele quando quiser.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-5 items-start">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-5 items-start">
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className={`relative rounded-[28px] bg-black/40 backdrop-blur-[18px] border p-8 transition-all duration-500 group hover:border-white/15 ${plan.borderColor} ${
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className={`relative rounded-[24px] md:rounded-[28px] bg-black/40 border p-6 md:p-8 transition-all duration-300 group hover:border-white/15 ${plan.borderColor} ${
                 plan.popular
                   ? "shadow-[0_20px_80px_rgba(0,0,0,0.4),0_0_60px_rgba(255,170,0,0.06)] md:scale-[1.03]"
-                  : "shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+                  : "shadow-[0_15px_40px_rgba(0,0,0,0.3)] md:shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               }`}
             >
               {plan.popular && (
-                <motion.span
-                  initial={{ opacity: 0, y: -10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="absolute -top-3.5 left-6 px-4 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black text-[9px] font-black uppercase tracking-[0.18em] shadow-glow"
-                >
+                <span className="absolute -top-3.5 left-6 px-4 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black text-[9px] font-black uppercase tracking-[0.18em] shadow-glow">
                   Mais Popular
-                </motion.span>
+                </span>
               )}
 
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                <plan.icon size={24} className="text-white" strokeWidth={2} />
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mb-4 md:mb-5 shadow-lg`}>
+                <plan.icon size={22} className="text-white" strokeWidth={2} />
               </div>
 
-              <h3 className="font-poppins font-black text-2xl mb-1">{plan.name}</h3>
+              <h3 className="font-poppins font-black text-xl md:text-2xl mb-1">{plan.name}</h3>
               <div className="flex items-baseline gap-0.5 mb-2">
                 <span className="text-sm text-txt-muted">R$</span>
                 <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
@@ -170,36 +166,29 @@ export default function Pricing() {
                 </span>
                 <span className="text-sm text-txt-muted">/mês</span>
               </div>
-              <p className="text-sm text-txt-muted mb-6 leading-relaxed">{plan.subtitle}</p>
+              <p className="text-sm text-txt-muted mb-5 md:mb-6 leading-relaxed">{plan.subtitle}</p>
 
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6 w-fit">
+              <div className="flex items-center gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-5 md:mb-6 w-fit">
                 <Sparkles size={14} className="text-accent" />
                 <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
                 <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-2.5 md:space-y-3 mb-6 md:mb-8">
                 {plan.features.map((f, j) => (
-                  <motion.li
-                    key={j}
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + j * 0.04 }}
-                    className="flex items-start gap-3 text-sm"
-                  >
+                  <li key={j} className="flex items-start gap-3 text-sm">
                     <Check size={14} className={`${plan.checkColor} flex-shrink-0 mt-0.5`} strokeWidth={3} />
                     <span className="text-txt-secondary">{f}</span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
 
               <a
                 href="#"
-                className={`block w-full text-center py-4 rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
+                className={`block w-full text-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
                   plan.popular
                     ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5"
-                    : "border border-white/10 text-txt-secondary hover:text-white hover:border-accent/30 hover:bg-accent/[0.03] hover:shadow-glow-sm"
+                    : "border border-white/10 text-txt-secondary hover:text-white hover:border-accent/30 hover:bg-accent/[0.03]"
                 }`}
               >
                 {plan.cta}
@@ -212,7 +201,7 @@ export default function Pricing() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-[11px] text-txt-muted mt-10 max-w-3xl mx-auto uppercase tracking-wider font-bold"
+          className="text-center text-[11px] text-txt-muted mt-8 md:mt-10 max-w-3xl mx-auto uppercase tracking-wider font-bold"
         >
           Créditos renovam mensalmente e não acumulam. Ao mudar de plano, seu saldo é redefinido para o valor do novo plano.
         </motion.p>
