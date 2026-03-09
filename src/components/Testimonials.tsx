@@ -42,15 +42,16 @@ function StarRating() {
 
 export default function Testimonials() {
   return (
-    <section className="py-20 px-4">
-      <div className="section-divider max-w-5xl mx-auto mb-16" />
+    <section className="py-16 md:py-20 px-4">
+      <div className="section-divider max-w-5xl mx-auto mb-12 md:mb-16" />
 
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.4 }}
+          className="text-center mb-10 md:mb-16"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
             <MessageSquare size={14} className="text-accent" />
@@ -66,25 +67,21 @@ export default function Testimonials() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-              className="group glass-card p-7 hover:!border-white/15 transition-all duration-500 relative overflow-hidden"
+              transition={{ delay: Math.min(i * 0.06, 0.2), duration: 0.4 }}
+              className="group glass-card p-5 md:p-7 hover:!border-white/15 transition-all duration-300 relative overflow-hidden"
             >
-              {/* Subtle glow on hover */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent/0 group-hover:bg-accent/5 blur-[60px] rounded-full transition-all duration-700" />
-
               <div className="relative">
-                {/* Quote icon */}
-                <Quote size={24} className="text-accent/20 mb-4" />
+                <Quote size={20} className="text-accent/20 mb-3 md:mb-4" />
 
-                <div className="flex items-center gap-3 mb-5">
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold text-white shadow-lg`}>
+                <div className="flex items-center gap-3 mb-4 md:mb-5">
+                  <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold text-white shadow-lg`}>
                     {t.name[0]}
                   </div>
                   <div>
@@ -95,7 +92,7 @@ export default function Testimonials() {
                     <StarRating />
                   </div>
                 </div>
-                <p className="text-txt-secondary leading-relaxed text-[15px]">
+                <p className="text-txt-secondary leading-relaxed text-sm md:text-[15px]">
                   &ldquo;{t.text}&rdquo;
                 </p>
               </div>
