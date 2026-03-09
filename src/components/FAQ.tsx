@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -38,23 +39,19 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08 }}
-      className="border-b border-glass"
+      transition={{ delay: index * 0.06, duration: 0.5 }}
+      className="border-b border-white/[0.06] last:border-0 group"
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-5 text-left group"
+        className="flex items-center justify-between w-full py-6 text-left"
       >
-        <span className="font-semibold text-lg pr-4 group-hover:text-accent transition-colors">
+        <span className="font-poppins font-bold text-base md:text-lg pr-4 group-hover:text-accent transition-colors duration-300">
           {faq.q}
         </span>
-        <span
-          className={`text-accent text-xl flex-shrink-0 transition-transform duration-300 ${
-            open ? "rotate-45" : ""
-          }`}
-        >
-          +
-        </span>
+        <div className={`flex-shrink-0 w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center transition-all duration-300 group-hover:border-accent/30 group-hover:bg-accent/[0.05] ${open ? "rotate-180 !border-accent/30 !bg-accent/10" : ""}`}>
+          <ChevronDown size={16} className={`transition-colors duration-300 ${open ? "text-accent" : "text-txt-muted"}`} />
+        </div>
       </button>
       <AnimatePresence>
         {open && (
@@ -62,10 +59,12 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) 
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
             className="overflow-hidden"
           >
-            <p className="pb-5 text-[#cccccc] leading-relaxed">{faq.a}</p>
+            <p className="pb-6 text-txt-secondary leading-relaxed">
+              {faq.a}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -75,21 +74,31 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[number]; index: number }) 
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-24 px-4">
+    <section id="faq" className="py-28 px-4">
+      <div className="section-divider max-w-4xl mx-auto mb-28" />
+
       <div className="max-w-3xl mx-auto">
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-syne font-bold text-3xl sm:text-4xl md:text-5xl text-center mb-16"
+          className="text-center mb-16"
         >
-          Respostas rápidas para quem{" "}
-          <span className="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">
-            pensa rápido.
-          </span>
-        </motion.h2>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
+            <HelpCircle size={14} className="text-accent" />
+            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
+              Perguntas frequentes
+            </span>
+          </div>
+          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
+            Respostas rápidas para quem{" "}
+            <span className="text-gradient-animated">
+              pensa rápido.
+            </span>
+          </h2>
+        </motion.div>
 
-        <div className="space-y-0">
+        <div className="glass-card !rounded-3xl p-6 md:p-8">
           {faqs.map((faq, i) => (
             <FAQItem key={i} faq={faq} index={i} />
           ))}
