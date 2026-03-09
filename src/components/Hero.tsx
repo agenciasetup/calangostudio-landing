@@ -82,29 +82,16 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-panel mb-10"
-        >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.6)]" />
-          <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-            Plataforma ativa e em constante atualização
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
           className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 tracking-tight"
         >
-          O studio completo para{" "}
-          <span className="text-gradient-animated">Designers</span>{" "}
-          e{" "}
-          <span className="text-gradient-animated">Social Media.</span>
+          Gere imagens, copies e criativos{" "}
+          <span className="text-gradient-animated">profissionais</span>{" "}
+          em{" "}
+          <span className="text-gradient-animated">minutos.</span>
         </motion.h1>
 
         <motion.p
@@ -113,9 +100,9 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-12 leading-relaxed"
         >
-          Gere imagens, crie copies, gerencie clientes e acelere todo o seu
-          workflow — sem trocar de aba, sem assinar várias ferramentas, sem
-          perder horas no processo.
+          Uma plataforma com 12 ferramentas de IA para designers e social media
+          managers que precisam produzir mais — sem abrir mil abas ou reexplicar
+          o cliente pra IA toda semana.
         </motion.p>
 
         <motion.div

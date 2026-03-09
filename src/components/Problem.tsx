@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 import { RefreshCw, Search, Palette, Scissors, Clock } from "lucide-react";
 
 const pains = [
-  { icon: RefreshCw, text: "Abre o ChatGPT e explica o cliente do zero de novo", color: "text-red-400" },
-  { icon: Search, text: "Passa 40 minutos no Freepik procurando a imagem certa", color: "text-orange-400" },
-  { icon: Palette, text: "Testa 10 prompts até sair algo parecido com o que queria", color: "text-yellow-400" },
-  { icon: Scissors, text: "Abre o Photoshop pra ajustar tudo manualmente", color: "text-amber-400" },
-  { icon: Clock, text: "4 horas depois: um carrossel pronto", color: "text-red-500" },
+  { icon: RefreshCw, text: "Você abre o ChatGPT. Explica o cliente do zero. De novo.", color: "text-red-400" },
+  { icon: Search, text: "Passa 40 minutos no Freepik procurando a imagem quase certa.", color: "text-orange-400" },
+  { icon: Palette, text: "Testa 10 prompts. O resultado não parece nada do que você imaginou.", color: "text-yellow-400" },
+  { icon: Scissors, text: "Abre o Photoshop pra tentar salvar o que sobrou.", color: "text-amber-400" },
+  { icon: Clock, text: "4 horas depois: um post. Só.", color: "text-red-500" },
 ];
 
 export default function Problem() {
@@ -64,9 +64,9 @@ export default function Problem() {
           transition={{ duration: 0.4 }}
           className="font-poppins font-black text-2xl sm:text-3xl md:text-4xl text-center leading-snug"
         >
-          Um único post. Quatro horas.{" "}
+          4 horas. Um post.{" "}
           <span className="text-gradient-animated">
-            Isso não é criatividade — é operação braçal.
+            Isso não é criatividade. É trabalho braçal disfarçado de produção.
           </span>
         </motion.p>
       </div>

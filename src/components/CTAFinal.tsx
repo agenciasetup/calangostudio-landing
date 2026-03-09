@@ -32,7 +32,7 @@ export default function CTAFinal() {
           transition={{ delay: 0.1, duration: 0.4 }}
           className="text-base md:text-lg text-txt-secondary mb-10 md:mb-12"
         >
-          Ou você continua gastando 4 horas. A escolha é sua.
+          E o próximo cliente também.
         </motion.p>
 
         <motion.div

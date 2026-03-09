@@ -15,8 +15,8 @@ import {
 
 const bullets = [
   { text: "Identidade visual por cliente salva e pronta", icon: FolderOpen },
-  { text: "Geração de imagem e copy direto do perfil do cliente", icon: Sparkles },
-  { text: "Sem confusão de contexto entre projetos", icon: Shield },
+  { text: "Gere imagem e copy diretamente do perfil do cliente", icon: Sparkles },
+  { text: "Sem cruzamento de contexto entre projetos", icon: Shield },
   { text: "Em breve: contratos, cobranças e notificações integrados", icon: Bell },
 ];
 
@@ -41,15 +41,15 @@ export default function ClientManagement() {
           </div>
 
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-5 md:mb-6 tracking-tight">
-            Sua agência{" "}
+            Chega de reexplicar o cliente{" "}
             <span className="text-gradient-animated">
-              dentro da plataforma.
+              pra IA toda semana.
             </span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
-            Cadastre seus clientes, adicione briefing, fotos, estilos e
-            referências. A partir daí, gere imagens e conteúdos para eles em
-            segundos — sem dar contexto pra IA toda vez.
+            Com o Calango, você cadastra o briefing uma vez. A partir daí, gera
+            qualquer conteúdo direto do perfil do cliente — com o contexto já
+            carregado, sem cruzamento entre projetos.
           </p>
 
           <ul className="space-y-4 md:space-y-5 mb-8 md:mb-10">

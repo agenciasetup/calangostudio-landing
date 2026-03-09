@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 
 const Problem = dynamic(() => import("@/components/Problem"));
 const BeforeAfter = dynamic(() => import("@/components/BeforeAfter"));
+const WhatIsCalango = dynamic(() => import("@/components/WhatIsCalango"));
 const Tools = dynamic(() => import("@/components/Tools"));
 const ClientManagement = dynamic(() => import("@/components/ClientManagement"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <Problem />
         <BeforeAfter />
+        <WhatIsCalango />
         <Tools />
         <ClientManagement />
         <Testimonials />
