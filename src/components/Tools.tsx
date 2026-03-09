@@ -286,7 +286,7 @@ function ToolModal({ tool, onClose }: { tool: Tool; onClose: () => void }) {
         initial={{ y: "100%", opacity: 0.5 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: "100%", opacity: 0 }}
-        transition={{ type: "spring", damping: 30, stiffness: 400 }}
+        transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
         className="relative w-full md:max-w-2xl max-h-[90vh] md:max-h-[85vh] bg-[#0a0a0c] md:bg-transparent overflow-hidden rounded-t-[28px] md:rounded-[32px]"
         style={{
@@ -403,7 +403,7 @@ export default function Tools() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
@@ -432,7 +432,7 @@ export default function Tools() {
                 key={tool.name}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: Math.min(i * 0.03, 0.2), duration: 0.4 }}
                 onClick={() => setSelected(tool)}
                 className="text-left relative rounded-[16px] md:rounded-[24px] bg-black/40 border border-white/[0.08] overflow-hidden cursor-pointer active:scale-[0.98] md:hover:border-white/[0.18] transition-all duration-300 group min-h-[140px] md:min-h-[180px] p-3.5 md:p-5"

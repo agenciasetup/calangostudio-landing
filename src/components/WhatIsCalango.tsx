@@ -25,7 +25,7 @@ export default function WhatIsCalango() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
@@ -45,7 +45,7 @@ export default function WhatIsCalango() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
           className="relative mx-auto max-w-4xl mb-12 md:mb-16"
         >
@@ -199,7 +199,7 @@ export default function WhatIsCalango() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="max-w-3xl mx-auto"
         >

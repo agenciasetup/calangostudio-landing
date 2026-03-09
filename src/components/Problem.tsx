@@ -20,7 +20,7 @@ export default function Problem() {
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl text-center mb-4 tracking-tight"
         >
@@ -29,7 +29,7 @@ export default function Problem() {
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: 0.05, duration: 0.4 }}
           className="text-txt-secondary text-center mb-12 md:mb-16 text-lg"
         >
@@ -40,10 +40,10 @@ export default function Problem() {
           {pains.map((pain, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06, duration: 0.4 }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.04, duration: 0.3 }}
               className="group flex items-center gap-4 md:gap-5 p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-red-500/20 hover:bg-red-500/[0.02] transition-all duration-300"
             >
               <div className="relative z-10 flex-shrink-0 w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:border-red-500/30 group-hover:bg-red-500/[0.06] transition-all duration-300">
@@ -60,7 +60,7 @@ export default function Problem() {
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="font-poppins font-black text-2xl sm:text-3xl md:text-4xl text-center leading-snug"
         >

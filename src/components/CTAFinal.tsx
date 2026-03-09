@@ -15,7 +15,7 @@ export default function CTAFinal() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
           className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 md:mb-6 tracking-tight"
         >
@@ -28,7 +28,7 @@ export default function CTAFinal() {
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: 0.1, duration: 0.4 }}
           className="text-base md:text-lg text-txt-secondary mb-10 md:mb-12"
         >
@@ -38,7 +38,7 @@ export default function CTAFinal() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: 0.15, duration: 0.4 }}
         >
           <a
@@ -53,7 +53,7 @@ export default function CTAFinal() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: 0.3 }}
           className="mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-2 text-sm text-txt-muted"
         >

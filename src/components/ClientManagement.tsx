@@ -30,7 +30,7 @@ export default function ClientManagement() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
@@ -56,10 +56,10 @@ export default function ClientManagement() {
             {bullets.map((item, i) => (
               <motion.li
                 key={i}
-                initial={{ opacity: 0, x: -15 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06, duration: 0.4 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.04, duration: 0.3 }}
                 className="flex items-center gap-3 md:gap-4 group"
               >
                 <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-accent/8 border border-accent/15 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/15 group-hover:border-accent/30 transition-all duration-300">
@@ -85,7 +85,7 @@ export default function ClientManagement() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="flex justify-center"
         >

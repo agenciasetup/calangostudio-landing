@@ -44,8 +44,8 @@ export default function BeforeAfter() {
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ type: "tween", duration: 0.3, delay: 0.2 }}
               className="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent-end flex items-center justify-center shadow-glow"
             >
               <ArrowRight size={22} className="text-black" strokeWidth={2.5} />
@@ -54,10 +54,10 @@ export default function BeforeAfter() {
 
           {/* ===== BEFORE ===== */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4 }}
             className="glass-card p-6 md:p-10 !border-white/[0.06] hover:!border-red-500/20 transition-all duration-500 group relative overflow-hidden"
           >
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-red-500/50 to-red-900/30 rounded-t-3xl" />
@@ -76,10 +76,10 @@ export default function BeforeAfter() {
               {before.map((item, i) => (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, x: -15 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 + i * 0.06 }}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: 0.1 + i * 0.04 }}
                   className="flex items-center gap-3 md:gap-4 text-txt-secondary/80"
                 >
                   <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-red-500/5 border border-red-500/10 flex items-center justify-center flex-shrink-0">
@@ -99,10 +99,10 @@ export default function BeforeAfter() {
 
           {/* ===== AFTER ===== */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.4 }}
             className="relative glass-card p-6 md:p-10 !border-accent/25 transition-all duration-500 group overflow-hidden"
             style={{
               boxShadow: "0 20px 80px rgba(0,0,0,0.4), 0 0 60px rgba(255,170,0,0.08)",
@@ -127,10 +127,10 @@ export default function BeforeAfter() {
                 {after.map((item, i) => (
                   <motion.li
                     key={i}
-                    initial={{ opacity: 0, x: 15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.15 + i * 0.06 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: 0.1 + i * 0.04 }}
                     className={`flex items-center gap-3 md:gap-4 ${item.highlight ? "text-white" : "text-txt-primary/90"}`}
                   >
                     <div className={`w-8 h-8 md:w-9 md:h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
@@ -171,7 +171,7 @@ export default function BeforeAfter() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
           className="text-center"
         >
