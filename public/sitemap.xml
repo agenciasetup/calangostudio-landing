@@ -212,4 +212,54 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- comparativo batch 3 -->
+  <url>
+    <loc>https://www.calangostudio.com.br/comparativo/calango-vs-freepik</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/comparativo/calango-vs-designi</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/comparativo/alternativa-ao-freepik</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/comparativo/alternativa-ao-designi</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- banco-de-imagens -->
+  <url>
+    <loc>https://www.calangostudio.com.br/banco-de-imagens/melhor-banco-de-imagens-para-designer</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/banco-de-imagens/como-encontrar-imagem-para-post</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/banco-de-imagens/imagem-gratuita-para-uso-comercial</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.calangostudio.com.br/banco-de-imagens/como-nao-depender-de-banco-de-imagens</loc>
+    <lastmod>2026-03-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>
