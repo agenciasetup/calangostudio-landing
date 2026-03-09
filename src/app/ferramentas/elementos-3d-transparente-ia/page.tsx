@@ -128,7 +128,7 @@ const relatedPages = [
 
 export default function Elementos3dTransparenteIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/elementos-3d-transparente-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Elementos 3D com Fundo Transparente
       </h1>
@@ -197,7 +197,7 @@ export default function Elementos3dTransparenteIaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/elementos-3d-transparente-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

@@ -3,9 +3,14 @@ import Link from "next/link";
 interface SeoLayoutProps {
   children: React.ReactNode;
   schema: object;
+  slug?: string;
 }
 
-export default function SeoLayout({ children, schema }: SeoLayoutProps) {
+export default function SeoLayout({ children, schema, slug }: SeoLayoutProps) {
+  const ctaHref = slug
+    ? `https://calangostudio.com.br/?utm_source=site&utm_medium=seo&utm_campaign=${encodeURIComponent(slug)}`
+    : "https://calangostudio.com.br";
+
   return (
     <>
       <script
@@ -20,12 +25,14 @@ export default function SeoLayout({ children, schema }: SeoLayoutProps) {
           >
             Calango <span className="text-accent">Studio</span>
           </Link>
-          <Link
-            href="/#pricing"
+          <a
+            href={ctaHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-accent text-black font-semibold text-sm px-5 py-2 rounded-lg hover:bg-accent-hover transition-colors"
           >
             Assinar agora
-          </Link>
+          </a>
         </div>
       </header>
 

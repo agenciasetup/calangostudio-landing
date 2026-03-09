@@ -127,7 +127,7 @@ const relatedPages = [
 
 export default function IaParaDesignersPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/ia-para-designers">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         IA para Designers
       </h1>
@@ -207,7 +207,7 @@ export default function IaParaDesignersPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/ia-para-designers" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

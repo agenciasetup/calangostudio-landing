@@ -110,7 +110,7 @@ const relatedPages = [
 
 export default function CalangoVsCanvaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="comparativo/calango-vs-canva">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Calango Studio vs Canva
       </h1>
@@ -213,7 +213,7 @@ export default function CalangoVsCanvaPage() {
       </div>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="comparativo/calango-vs-canva" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

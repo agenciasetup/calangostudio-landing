@@ -123,7 +123,7 @@ const relatedPages = [
 
 export default function AgenciaSetupPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="sobre/agencia-setup">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Agência Setup
       </h1>
@@ -189,7 +189,7 @@ export default function AgenciaSetupPage() {
       </p>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="sobre/agencia-setup" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

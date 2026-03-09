@@ -127,7 +127,7 @@ const relatedPages = [
 
 export default function UgcComIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="ferramentas/ugc-com-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         UGC com IA
       </h1>
@@ -198,7 +198,7 @@ export default function UgcComIaPage() {
       </ul>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="ferramentas/ugc-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

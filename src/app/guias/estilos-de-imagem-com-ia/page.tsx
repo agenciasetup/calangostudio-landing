@@ -110,7 +110,7 @@ const relatedPages = [
 
 export default function EstilosDeImagemComIaPage() {
   return (
-    <SeoLayout schema={schema}>
+    <SeoLayout schema={schema} slug="guias/estilos-de-imagem-com-ia">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
         Estilos de Imagem com IA
       </h1>
@@ -218,7 +218,7 @@ export default function EstilosDeImagemComIaPage() {
       </p>
 
       <FaqSection faqs={faqs} />
-      <CtaBanner />
+      <CtaBanner slug="guias/estilos-de-imagem-com-ia" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );
