@@ -63,6 +63,12 @@ export default function Footer() {
             <li><a href="/freelancer/como-sair-do-modo-freelancer" className="hover:text-white transition-colors">Sair do Modo Freelancer</a></li>
             <li><a href="/foto-produto/como-fazer-foto-produto-sem-estudio" className="hover:text-white transition-colors">Foto de Produto sem Estúdio</a></li>
             <li><a href="/foto-produto/como-colocar-produto-em-cenario-com-ia" className="hover:text-white transition-colors">Produto em Cenário com IA</a></li>
+            <li><a href="/comparativo/calango-vs-freepik" className="hover:text-white transition-colors">Calango vs Freepik</a></li>
+            <li><a href="/comparativo/calango-vs-designi" className="hover:text-white transition-colors">Calango vs Designi</a></li>
+            <li><a href="/comparativo/alternativa-ao-freepik" className="hover:text-white transition-colors">Alternativa ao Freepik</a></li>
+            <li><a href="/comparativo/alternativa-ao-designi" className="hover:text-white transition-colors">Alternativa ao Designi</a></li>
+            <li><a href="/banco-de-imagens/melhor-banco-de-imagens-para-designer" className="hover:text-white transition-colors">Melhor Banco de Imagens</a></li>
+            <li><a href="/banco-de-imagens/como-nao-depender-de-banco-de-imagens" className="hover:text-white transition-colors">Não Depender de Banco de Imagens</a></li>
           </ul>
         </nav>
 
