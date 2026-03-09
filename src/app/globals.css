@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ffffff;
+  --background: #030303;
+  --foreground: #e5e5e5;
+  --accent: #ffaa00;
+  --accent-end: #ff7b47;
 }
 
 html {
@@ -14,19 +16,123 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
+  overflow-x: hidden;
+}
+
+/* Dot texture overlay */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(at 20% 80%, #fff 1px, transparent 0px);
+  background-size: 3px 3px;
+  opacity: 0.012;
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #030303;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #ffaa00;
+}
+
+/* Glass morphism */
+.glass-panel {
+  background: rgba(15, 15, 18, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+  background: rgba(0, 0, 0, 0.40);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Gradient text animated */
+.text-gradient-animated {
+  background: linear-gradient(135deg, #ffaa00, #ff7b47, #ffaa00);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 5s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glow text */
+.text-glow {
+  text-shadow: 0 0 15px rgba(255, 170, 0, 0.25);
+}
+
+.text-glow-strong {
+  text-shadow: 0 0 30px rgba(255, 170, 0, 0.4), 0 0 60px rgba(255, 170, 0, 0.15);
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #ffaa00 0%, #ff7b47 100%);
+  color: #0b0b0b;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.28);
+  transition: transform 0.12s ease, filter 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(249, 115, 22, 0.4);
+}
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.10);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  font-weight: 800;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 170, 0, 0.2), transparent);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 170, 0, 0.3);
+  color: #fff;
 }

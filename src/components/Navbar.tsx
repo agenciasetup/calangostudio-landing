@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -24,23 +25,21 @@ export default function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-bg-primary/80 backdrop-blur-xl border-b border-glass"
-          : "bg-transparent"
+      transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "glass-panel" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <span className="text-2xl">🦎</span>
-            <span className="font-syne font-bold text-xl text-white">
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-end flex items-center justify-center group-hover:shadow-glow transition-shadow duration-300">
+              <Sparkles size={16} className="text-black" strokeWidth={2.5} />
+            </div>
+            <span className="font-poppins font-bold text-lg text-white tracking-tight">
               Calango{" "}
-              <span className="bg-gradient-to-r from-accent to-accent-end bg-clip-text text-transparent">
-                Studio
-              </span>
+              <span className="text-gradient-animated">Studio</span>
             </span>
           </a>
 
@@ -50,14 +49,15 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-txt-secondary hover:text-white transition-colors"
+                className="text-sm text-txt-secondary hover:text-white transition-colors duration-300 relative group"
               >
                 {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-accent to-accent-end group-hover:w-full transition-all duration-300" />
               </a>
             ))}
             <a
               href="#planos"
-              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black font-semibold text-sm hover:shadow-[0_0_24px_rgba(255,170,0,0.4)] transition-shadow"
+              className="btn-primary px-5 py-2.5 text-xs tracking-widest"
             >
               Assinar agora
             </a>
@@ -66,51 +66,46 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
             aria-label="Menu"
           >
-            <svg
-              width="24"
-              height="24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              {mobileOpen ? (
-                <path d="M6 6l12 12M6 18L18 6" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
         {/* Mobile menu */}
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            className="md:hidden pb-4 space-y-3"
-          >
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block text-txt-secondary hover:text-white transition-colors py-2"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#planos"
-              onClick={() => setMobileOpen(false)}
-              className="block w-full text-center px-5 py-2.5 rounded-lg bg-gradient-to-r from-accent to-accent-end text-black font-semibold text-sm"
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+              className="md:hidden pb-6 space-y-1 overflow-hidden"
             >
-              Assinar agora
-            </a>
-          </motion.div>
-        )}
+              {links.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-txt-secondary hover:text-white hover:bg-white/5 transition-all py-3 px-4 rounded-xl"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <a
+                href="#planos"
+                onClick={() => setMobileOpen(false)}
+                className="block w-full text-center btn-primary px-5 py-3 text-xs tracking-widest mt-3"
+              >
+                Assinar agora
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
