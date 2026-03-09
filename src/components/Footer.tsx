@@ -54,6 +54,15 @@ export default function Footer() {
             <li><a href="/comparativo/calango-vs-midjourney" className="hover:text-white transition-colors">Calango vs Midjourney</a></li>
             <li><a href="/sobre/agencia-setup" className="hover:text-white transition-colors">Agência Setup</a></li>
             <li><a href="/sobre/nano-banana" className="hover:text-white transition-colors">Nano Banana</a></li>
+            <li><a href="/criativos/como-criar-criativos-com-ia" className="hover:text-white transition-colors">Como Criar Criativos com IA</a></li>
+            <li><a href="/criativos/criativos-para-facebook-ads" className="hover:text-white transition-colors">Criativos para Facebook Ads</a></li>
+            <li><a href="/criativos/o-que-e-creative-fatigue" className="hover:text-white transition-colors">O que é Creative Fatigue</a></li>
+            <li><a href="/social-media/como-fazer-carrossel-instagram-ia" className="hover:text-white transition-colors">Carrossel para Instagram com IA</a></li>
+            <li><a href="/social-media/como-criar-copy-para-post" className="hover:text-white transition-colors">Copy para Post com IA</a></li>
+            <li><a href="/freelancer/como-atender-mais-clientes" className="hover:text-white transition-colors">Como Atender Mais Clientes</a></li>
+            <li><a href="/freelancer/como-sair-do-modo-freelancer" className="hover:text-white transition-colors">Sair do Modo Freelancer</a></li>
+            <li><a href="/foto-produto/como-fazer-foto-produto-sem-estudio" className="hover:text-white transition-colors">Foto de Produto sem Estúdio</a></li>
+            <li><a href="/foto-produto/como-colocar-produto-em-cenario-com-ia" className="hover:text-white transition-colors">Produto em Cenário com IA</a></li>
           </ul>
         </nav>
 
