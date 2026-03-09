@@ -137,10 +137,12 @@ export default function CalangoShowcase() {
           className="text-center mt-10 md:mt-14"
         >
           <a
-            href="#planos"
+            href="https://calango.studio/?utm_source=promptmaker&utm_medium=showcase_cta&utm_campaign=conhecer"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 btn-primary px-8 py-4 text-sm tracking-widest"
           >
-            Ver todos os planos
+            Conhecer Calango Studio
             <ArrowRight size={16} strokeWidth={2.5} />
           </a>
           <p className="text-xs text-txt-muted mt-4 uppercase tracking-wider font-bold">

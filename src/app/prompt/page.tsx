@@ -6,6 +6,7 @@ import PromptHero from "@/components/prompt/PromptHero";
 const CalangoShowcase = dynamic(
   () => import("@/components/prompt/CalangoShowcase")
 );
+const LeadForm = dynamic(() => import("@/components/prompt/LeadForm"));
 const Pricing = dynamic(() => import("@/components/Pricing"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -31,6 +32,8 @@ export default function PromptPage() {
         <PromptHero />
         <div className="section-divider" />
         <CalangoShowcase />
+        <div className="section-divider" />
+        <LeadForm />
         <div className="section-divider" />
         <Pricing />
       </main>
