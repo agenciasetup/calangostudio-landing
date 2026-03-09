@@ -1,0 +1,41 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Calango Studio — O Studio Completo para Designers e Social Media",
+  description:
+    "Gere imagens, crie copies, gerencie clientes e acelere todo o seu workflow. Sem trocar de aba, sem assinar várias ferramentas.",
+  openGraph: {
+    title: "Calango Studio — O Studio Completo para Designers e Social Media",
+    description:
+      "Gere imagens, crie copies, gerencie clientes e acelere todo o seu workflow.",
+    images: ["/images/og-image.png"],
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="pt-BR">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="font-inter bg-bg-primary text-txt-primary antialiased">
+        {children}
+      </body>
+    </html>
+  );
+}
