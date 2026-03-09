@@ -8,24 +8,21 @@ import {
   Clock,
   Layers,
   Brain,
-  CreditCard,
   Zap,
   Shield,
   Sparkles,
 } from "lucide-react";
 
 const before = [
-  { text: "ChatGPT + Freepik + Gemini + Photoshop", icon: Layers },
-  { text: "4 horas por post", icon: Clock },
-  { text: "Contexto refeito a cada cliente", icon: Brain },
-  { text: "Várias assinaturas fragmentadas", icon: CreditCard },
+  { text: "4 ferramentas abertas. 4 senhas. 4 assinaturas.", icon: Layers },
+  { text: "Você refaz o contexto do cliente toda vez.", icon: Clock },
+  { text: "O padrão visual muda. A entrega atrasa.", icon: Brain },
 ];
 
 const after = [
-  { text: "Tudo em uma única plataforma", icon: Layers, highlight: false },
-  { text: "Menos de 20 minutos por post", icon: Clock, highlight: true },
-  { text: "Briefing do cliente salvo, IA já entende o contexto", icon: Brain, highlight: false },
-  { text: "Uma única assinatura, todas as ferramentas", icon: CreditCard, highlight: false },
+  { text: "Uma plataforma. O briefing do cliente já está salvo.", icon: Layers, highlight: false },
+  { text: "Gere imagem, copy e entregável em menos de 20 minutos.", icon: Clock, highlight: true },
+  { text: "Mesmo padrão. Para qualquer cliente. Sempre.", icon: Brain, highlight: false },
 ];
 
 const advantages = [
@@ -71,7 +68,7 @@ export default function BeforeAfter() {
               </div>
               <div>
                 <h3 className="font-poppins font-bold text-lg md:text-xl text-white">Sem o Calango</h3>
-                <p className="text-[11px] text-txt-muted">O workflow fragmentado</p>
+                <p className="text-[11px] text-txt-muted">{" "}</p>
               </div>
             </div>
 
@@ -95,7 +92,7 @@ export default function BeforeAfter() {
 
             <div className="mt-6 md:mt-8 p-3 rounded-xl bg-red-500/[0.04] border border-red-500/10 text-center">
               <p className="text-xs text-red-400/80 font-semibold">
-                Resultado: 4h+ por post, sem padrão, sem escala
+                {" "}
               </p>
             </div>
           </motion.div>
@@ -122,7 +119,7 @@ export default function BeforeAfter() {
                   <h3 className="font-poppins font-bold text-lg md:text-xl text-white text-glow">
                     Com o Calango Studio
                   </h3>
-                  <p className="text-[11px] text-accent/70 font-semibold">A vantagem competitiva</p>
+                  <p className="text-[11px] text-accent/70 font-semibold">{" "}</p>
                 </div>
               </div>
 
@@ -184,6 +181,7 @@ export default function BeforeAfter() {
               Mais dinheiro no bolso.
             </span>
           </p>
+          {/* ^ This is the "Com o Calango" summary line */}
         </motion.div>
       </div>
     </section>

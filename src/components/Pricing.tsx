@@ -130,7 +130,7 @@ export default function Pricing() {
             <Sparkles size={14} className="text-accent" />
             <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">Planos flexíveis</span>
           </div>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">Escolha seu ritmo.</h2>
+          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">Um plano para onde você está. Outro para onde quer chegar.</h2>
           <p className="text-txt-secondary text-base md:text-lg">Sem fidelidade. Cancele quando quiser.</p>
         </motion.div>
 
@@ -168,13 +168,7 @@ export default function Pricing() {
               </div>
               <p className="text-sm text-txt-muted mb-5 md:mb-6 leading-relaxed">{plan.subtitle}</p>
 
-              <div className="flex items-center gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-5 md:mb-6 w-fit">
-                <Sparkles size={14} className="text-accent" />
-                <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
-                <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
-              </div>
-
-              <ul className="space-y-2.5 md:space-y-3 mb-6 md:mb-8">
+              <ul className="space-y-2.5 md:space-y-3 mb-5 md:mb-6">
                 {plan.features.map((f, j) => (
                   <li key={j} className="flex items-start gap-3 text-sm">
                     <Check size={14} className={`${plan.checkColor} flex-shrink-0 mt-0.5`} strokeWidth={3} />
@@ -182,6 +176,12 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
+
+              <div className="flex items-center gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6 md:mb-8 w-fit">
+                <Sparkles size={14} className="text-accent" />
+                <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
+                <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
+              </div>
 
               <a
                 href="#"

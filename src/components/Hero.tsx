@@ -101,10 +101,10 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 tracking-tight"
         >
-          O studio completo para{" "}
-          <span className="text-gradient-animated">Designers</span>{" "}
-          e{" "}
-          <span className="text-gradient-animated">Social Media.</span>
+          Gere imagens, copies e criativos{" "}
+          <span className="text-gradient-animated">profissionais</span>{" "}
+          em{" "}
+          <span className="text-gradient-animated">minutos.</span>
         </motion.h1>
 
         <motion.p
@@ -113,9 +113,9 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-12 leading-relaxed"
         >
-          Gere imagens, crie copies, gerencie clientes e acelere todo o seu
-          workflow — sem trocar de aba, sem assinar várias ferramentas, sem
-          perder horas no processo.
+          Uma plataforma com 12 ferramentas de IA para designers e social media
+          managers que precisam produzir mais — sem abrir mil abas ou reexplicar
+          o cliente pra IA toda semana.
         </motion.p>
 
         <motion.div

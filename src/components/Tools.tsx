@@ -414,13 +414,13 @@ export default function Tools() {
             </span>
           </div>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-5 tracking-tight">
-            Tudo que você precisa.{" "}
+            12 ferramentas. Uma assinatura.{" "}
             <span className="text-gradient-animated text-glow">
-              Em um único lugar.
+              Nenhuma aba extra.
             </span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto">
-            Clique em qualquer ferramenta para ver os detalhes, vantagens e exemplos de uso.
+            Cada ferramenta foi escolhida porque é parte do workflow real de um designer ou social media.
           </p>
         </motion.div>
 

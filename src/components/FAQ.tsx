@@ -86,9 +86,9 @@ export default function FAQ() {
             </span>
           </div>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
-            Respostas rápidas para quem{" "}
+            Antes de assinar, você{" "}
             <span className="text-gradient-animated">
-              pensa rápido.
+              provavelmente quer saber:
             </span>
           </h2>
         </motion.div>
