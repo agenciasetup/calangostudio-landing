@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
@@ -27,7 +28,9 @@ export const metadata: Metadata = {
 export default function PromptPage() {
   return (
     <>
-      <Navbar />
+      <Suspense fallback={null}>
+        <Navbar />
+      </Suspense>
       <main>
         <PromptHero />
         <div className="section-divider" />
@@ -35,7 +38,9 @@ export default function PromptPage() {
         <div className="section-divider" />
         <LeadForm />
         <div className="section-divider" />
-        <Pricing />
+        <Suspense fallback={null}>
+          <Pricing />
+        </Suspense>
       </main>
       <Footer />
     </>
