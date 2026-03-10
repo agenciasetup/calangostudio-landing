@@ -7,13 +7,13 @@ interface ResultadoItem {
   label: string;
 }
 
-const ITEM_W_DESKTOP = 220;
-const ITEM_W_MOBILE = 140;
-const GAP = 12;
+const ITEM_W_DESKTOP = 280;
+const ITEM_W_MOBILE = 180;
+const GAP = 14;
 
-// Duplicate items enough times for seamless loop (3x ensures no gaps)
-function tripleRow(row: ResultadoItem[]) {
-  return [...row, ...row, ...row];
+// Duplicate items 2x for seamless loop (fewer DOM nodes)
+function dupeRow(row: ResultadoItem[]) {
+  return [...row, ...row];
 }
 
 export default function ResultadosGallery({ items }: { items: ResultadoItem[] }) {
@@ -23,10 +23,9 @@ export default function ResultadosGallery({ items }: { items: ResultadoItem[] })
   const row1 = items.slice(0, half);
   const row2 = items.slice(half);
 
-  const row1Items = tripleRow(row1);
-  const row2Items = tripleRow(row2);
+  const row1Items = dupeRow(row1);
+  const row2Items = dupeRow(row2);
 
-  // Total width of one set (used for animation distance)
   const row1SetWidth = row1.length * (ITEM_W_DESKTOP + GAP);
   const row2SetWidth = row2.length * (ITEM_W_DESKTOP + GAP);
   const row1SetWidthMobile = row1.length * (ITEM_W_MOBILE + GAP);
@@ -57,10 +56,11 @@ export default function ResultadosGallery({ items }: { items: ResultadoItem[] })
       </div>
 
       {/* Row 1 - scrolls LEFT */}
-      <div className="overflow-hidden mb-3">
+      <div className="overflow-hidden mb-3.5">
         <div
-          className="flex gap-3 scroll-row-left"
+          className="flex scroll-row-left"
           style={{
+            gap: `${GAP}px`,
             "--set-width": `${row1SetWidth}px`,
             "--set-width-mobile": `${row1SetWidthMobile}px`,
           } as React.CSSProperties}
@@ -74,8 +74,9 @@ export default function ResultadosGallery({ items }: { items: ResultadoItem[] })
       {/* Row 2 - scrolls RIGHT */}
       <div className="overflow-hidden">
         <div
-          className="flex gap-3 scroll-row-right"
+          className="flex scroll-row-right"
           style={{
+            gap: `${GAP}px`,
             "--set-width": `${row2SetWidth}px`,
             "--set-width-mobile": `${row2SetWidthMobile}px`,
           } as React.CSSProperties}
@@ -91,7 +92,7 @@ export default function ResultadosGallery({ items }: { items: ResultadoItem[] })
 
 function ResultCard({ filename, label }: { filename: string; label: string }) {
   return (
-    <div className="flex-shrink-0 w-[140px] md:w-[220px] relative rounded-2xl overflow-hidden group">
+    <div className="flex-shrink-0 w-[180px] md:w-[280px] relative rounded-2xl overflow-hidden">
       <div className="absolute top-2 left-2 z-10">
         <span className="text-[9px] md:text-[10px] font-bold px-2.5 py-1 rounded-lg bg-black/70 text-zinc-200 backdrop-blur-sm border border-white/10">
           {label}
@@ -102,8 +103,9 @@ function ResultCard({ filename, label }: { filename: string; label: string }) {
           src={`/images/resultados/${filename}`}
           alt={`Resultado ${label}`}
           loading="lazy"
-          width={220}
-          height={275}
+          decoding="async"
+          width={280}
+          height={350}
           className="w-full h-full object-cover"
         />
       </div>
