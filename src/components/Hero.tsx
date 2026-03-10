@@ -87,13 +87,13 @@ export default function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  // Disable parallax on mobile — scroll-linked transforms cause jank on low-end devices
+  // Disable parallax on mobile. Scroll-linked transforms cause jank on low-end devices
   const mockupY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 150]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [1, 0]);
 
   return (
     <section ref={sectionRef} className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 pt-28 pb-24 overflow-hidden">
-      {/* Static background glow — no mouse tracking, no animated blobs on mobile */}
+      {/* Static background glow. No mouse tracking, no animated blobs on mobile */}
       <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] rounded-full bg-gradient-to-br from-accent/10 via-accent-end/6 to-transparent blur-[80px] md:blur-[140px]" />
       </motion.div>
@@ -118,7 +118,7 @@ export default function Hero() {
           className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           Uma plataforma com 12 ferramentas de IA para designers e social media
-          managers que precisam produzir mais — sem abrir mil abas ou reexplicar
+          managers que precisam produzir mais. Sem abrir mil abas ou reexplicar
           o cliente pra IA toda semana.
         </motion.p>
 

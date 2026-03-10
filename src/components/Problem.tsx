@@ -57,18 +57,20 @@ export default function Problem() {
           ))}
         </div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
-          className="font-poppins font-black text-2xl sm:text-3xl md:text-4xl text-center leading-snug"
+          className="text-center"
         >
-          4 horas. Um post.{" "}
-          <span className="text-gradient-animated">
-            Isso não é criatividade. É trabalho braçal disfarçado de produção.
-          </span>
-        </motion.p>
+          <h2 className="font-poppins font-black text-2xl sm:text-3xl md:text-4xl leading-snug mb-3">
+            4 horas de trabalho pra entregar um post.
+          </h2>
+          <p className="text-base md:text-lg text-accent font-semibold">
+            Não é falta de talento. É o processo errado te consumindo.
+          </p>
+        </motion.div>
       </div>
     </section>
   );

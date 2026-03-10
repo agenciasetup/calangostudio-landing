@@ -52,7 +52,7 @@ const schema = {
 const faqs = [
   {
     question: "Quantas variações de criativo devo testar por campanha?",
-    answer: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios para ter dados suficientes para comparação. Com o Remix Layout do Calango, criar essas variações leva minutos — não horas ou dias dependendo de agenda de designer.",
+    answer: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios para ter dados suficientes para comparação. Com o Remix Layout do Calango, criar essas variações leva minutos. não horas ou dias dependendo de agenda de designer.",
   },
   {
     question: "O que muda entre as variações de criativo?",
@@ -60,7 +60,7 @@ const faqs = [
   },
   {
     question: "Posso testar criativos sem saber design?",
-    answer: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Os estilos prontos eliminam a necessidade de criar do zero, e o Remix Layout permite gerar variações de um criativo existente sem edição manual — só trocando elementos.",
+    answer: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Os estilos prontos eliminam a necessidade de criar do zero, e o Remix Layout permite gerar variações de um criativo existente sem edição manual. só trocando elementos.",
   },
   {
     question: "Qual ferramenta usar para criar variações de criativo com IA?",
@@ -82,25 +82,25 @@ export default function ComoTestarCriativosSemDesignerPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Testar criativos é uma das práticas mais importantes em tráfego pago. A lógica é simples: você não sabe qual criativo vai performar até testar. O problema: cada variação exige uma rodada com o designer — briefing, produção, revisão, aprovação. Um ciclo que leva dias para cada variação. Para quem gerencia campanhas ativas, essa velocidade não serve. Com IA, esse ciclo colapsou. Você cria, varia e itera criativos em horas — sem depender de agenda de ninguém. O Calango Studio foi construído com essa velocidade em mente.
+        Testar criativos é uma das práticas mais importantes em tráfego pago. A lógica é simples: você não sabe qual criativo vai performar até testar. O problema: cada variação exige uma rodada com o designer. briefing, produção, revisão, aprovação. Um ciclo que leva dias para cada variação. Para quem gerencia campanhas ativas, essa velocidade não serve. Com IA, esse ciclo colapsou. Você cria, varia e itera criativos em horas. sem depender de agenda de ninguém. O Calango Studio foi construído com essa velocidade em mente.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: testar criativos com IA
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Crie o criativo base no Calango Studio</strong> — gere a imagem com a Imagem Criativa e a copy com o CopyMaker. Esse é o criativo &ldquo;controle&rdquo; do seu teste.</li>
-        <li><strong className="text-white">Use o Remix Layout para gerar variações</strong> — troque a imagem, o texto ou ambos. Mantenha a estrutura que funciona e mude uma variável por vez.</li>
-        <li><strong className="text-white">Exporte as variações e suba no gerenciador de anúncios</strong> — organize cada variação como um criativo separado dentro do mesmo conjunto de anúncios.</li>
-        <li><strong className="text-white">Analise qual performa melhor</strong> — CTR, CPA e conversão são as métricas que importam. Dê ao teste pelo menos 3-5 dias antes de concluir.</li>
-        <li><strong className="text-white">Volte ao Calango e itere sobre o vencedor</strong> — pegue o criativo que funcionou e crie novas variações a partir dele. Esse ciclo contínuo é o que separa campanhas boas de campanhas excelentes.</li>
+        <li><strong className="text-white">Crie o criativo base no Calango Studio</strong>. gere a imagem com a Imagem Criativa e a copy com o CopyMaker. Esse é o criativo &ldquo;controle&rdquo; do seu teste.</li>
+        <li><strong className="text-white">Use o Remix Layout para gerar variações</strong>. troque a imagem, o texto ou ambos. Mantenha a estrutura que funciona e mude uma variável por vez.</li>
+        <li><strong className="text-white">Exporte as variações e suba no gerenciador de anúncios</strong>. organize cada variação como um criativo separado dentro do mesmo conjunto de anúncios.</li>
+        <li><strong className="text-white">Analise qual performa melhor</strong>. CTR, CPA e conversão são as métricas que importam. Dê ao teste pelo menos 3-5 dias antes de concluir.</li>
+        <li><strong className="text-white">Volte ao Calango e itere sobre o vencedor</strong>. pegue o criativo que funcionou e crie novas variações a partir dele. Esse ciclo contínuo é o que separa campanhas boas de campanhas excelentes.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Por que testar criativos é essencial
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        Creative fatigue — o desgaste de um criativo com o público — é inevitável. Quanto mais vezes a mesma pessoa vê o mesmo anúncio, menos ela reage. A única forma de manter campanhas escalando é rotacionar criativos com frequência. E a única forma de rotacionar com frequência é ter velocidade de produção.
+        Creative fatigue. o desgaste de um criativo com o público. é inevitável. Quanto mais vezes a mesma pessoa vê o mesmo anúncio, menos ela reage. A única forma de manter campanhas escalando é rotacionar criativos com frequência. E a única forma de rotacionar com frequência é ter velocidade de produção.
       </p>
       <p className="text-txt-secondary leading-relaxed mb-8">
         A IA reduziu a barreira de entrada para esse processo. O que antes exigia equipe de design dedicada agora pode ser feito por um gestor de tráfego solo ou um social media manager com o Calango Studio. O volume de teste que antes era privilégio de grandes agências agora é acessível para qualquer profissional.

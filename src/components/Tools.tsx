@@ -42,7 +42,7 @@ const tools: Tool[] = [
     name: "Imagem Criativa",
     short: "Crie imagens cinematográficas com estilos prontos em poucos segundos",
     description:
-      "Gere imagens com estilos profissionais prontos — Animal Art, Car Design, Hero Style, Business, Craft e muito mais. Sem escrever prompt complexo. Só escolher o estilo, enviar a foto e gerar. A IA já entende o tom criativo e entrega em segundos.",
+      "Gere imagens com estilos profissionais prontos. Animal Art, Car Design, Hero Style, Business, Craft e muito mais. Sem escrever prompt complexo. Só escolher o estilo, enviar a foto e gerar. A IA já entende o tom criativo e entrega em segundos.",
     example:
       "Gere uma foto estilo Hero para o perfil do seu cliente em 10 segundos.",
     plan: "Base",
@@ -67,7 +67,7 @@ const tools: Tool[] = [
     color: "from-cyan-400 to-blue-500",
     glowColor: "rgba(34,211,238,0.15)",
     advantages: [
-      "Referência visual direta — envie qualquer imagem",
+      "Referência visual direta. Envie qualquer imagem",
       "Mantém estilo e iluminação da referência",
       "Perfeito para personal branding consistente",
     ],
@@ -76,7 +76,7 @@ const tools: Tool[] = [
   {
     icon: Smartphone,
     name: "UGC Build",
-    short: "Fotos ultra-realistas de pessoas com produtos — sem cara de IA",
+    short: "Fotos ultra-realistas de pessoas com produtos. Sem cara de IA",
     description:
       "Crie fotos realistas de pessoas usando produtos. Aparência de foto de iPhone, sem o aspecto artificial de IA. Ideal para e-commerce, unboxing e campanhas de produto com fidelidade máxima.",
     example:
@@ -165,7 +165,7 @@ const tools: Tool[] = [
   {
     icon: Briefcase,
     name: "Consultor de Perfil",
-    short: "Análise completa de perfil — entregável direto ao cliente",
+    short: "Análise completa de perfil. Entregável direto ao cliente",
     description:
       "Analisa o perfil do Instagram do seu cliente e gera um relatório completo com pontos de melhoria, oportunidades e estratégia. Entregável profissional pronto para apresentar.",
     example:
@@ -218,7 +218,7 @@ const tools: Tool[] = [
   {
     icon: Sparkles,
     name: "Criação Livre",
-    short: "Gere criativos com texto — modo experimental",
+    short: "Gere criativos com texto. Modo experimental",
     description:
       "Modo experimental para geração com imagem base, referência textual e geração refinável. Ideal para explorar estilos novos e testar ideias criativas fora dos padrões.",
     example:
@@ -407,20 +407,14 @@ export default function Tools() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-panel mb-6 md:mb-8">
-            <Sparkles size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-              12 Ferramentas integradas
-            </span>
-          </div>
+          <span className="text-xs text-zinc-400 font-semibold uppercase tracking-[0.2em] mb-4 md:mb-5 inline-block">
+            12 ferramentas integradas
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 md:mb-5 tracking-tight">
-            12 ferramentas. Uma assinatura.{" "}
-            <span className="text-gradient-animated text-glow">
-              Nenhuma aba extra.
-            </span>
+            Tudo que você precisa pra produzir,<br />em um lugar só.
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto">
-            Cada ferramenta foi escolhida porque é parte do workflow real de um designer ou social media.
+            Sem aba extra. Sem assinatura duplicada. Cada ferramenta existe porque faz parte do dia a dia real de quem atende clientes.
           </p>
         </motion.div>
 

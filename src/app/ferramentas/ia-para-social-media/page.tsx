@@ -103,7 +103,7 @@ const faqs = [
   {
     question: "Como gerenciar vários clientes com IA?",
     answer:
-      "Na seção Meus Clientes do Calango, você cadastra cada cliente com briefing completo — tom de voz, público-alvo, referências, informações do produto. Ao alternar entre clientes, o contexto carrega automaticamente em todas as ferramentas de geração.",
+      "Na seção Meus Clientes do Calango, você cadastra cada cliente com briefing completo. tom de voz, público-alvo, referências, informações do produto. Ao alternar entre clientes, o contexto carrega automaticamente em todas as ferramentas de geração.",
   },
 ];
 
@@ -141,7 +141,7 @@ export default function IaParaSocialMediaPage() {
         vai ao Freepik buscar imagens, passa pelo Canva para montar o
         criativo, usa o Gemini para revisar o texto e ainda precisa do
         Photoshop para ajustes finais. Esse processo pode consumir até quatro
-        horas por post — e quando você gerencia cinco, dez ou quinze clientes,
+        horas por post. e quando você gerencia cinco, dez ou quinze clientes,
         o tempo se torna o maior gargalo do negócio. Cada minuto gasto
         alternando entre ferramentas é um minuto que não está sendo usado para
         atender novos clientes, criar estratégias ou simplesmente viver. A
@@ -180,22 +180,22 @@ export default function IaParaSocialMediaPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
         <li>
-          <strong className="text-white">CopyMaker</strong> — gere copies
+          <strong className="text-white">CopyMaker</strong>. gere copies
           para posts, carrosséis, stories e reels com o tom de voz do cliente
           já configurado. Sem reexplicar nada.
         </li>
         <li>
-          <strong className="text-white">Imagem Criativa</strong> — gere
+          <strong className="text-white">Imagem Criativa</strong>. gere
           imagens profissionais com estilos prontos, sem precisar dominar
           prompts complexos.
         </li>
         <li>
-          <strong className="text-white">Remix Layout</strong> — replique
+          <strong className="text-white">Remix Layout</strong>. replique
           criativos de sucesso trocando foto e texto. Ideal para manter
           consistência visual na feed.
         </li>
         <li>
-          <strong className="text-white">Meus Clientes</strong> — cada
+          <strong className="text-white">Meus Clientes</strong>. cada
           cliente tem seu perfil com briefing, tom de voz e referências
           salvos. Alterne entre clientes em segundos.
         </li>

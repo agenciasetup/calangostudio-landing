@@ -76,11 +76,11 @@ const faqs = [
   },
   {
     question: "UGC gerado por IA funciona em anúncios pagos?",
-    answer: "Sim. O UGC Build do Calango gera imagens com aparência de foto orgânica — sem aspecto de IA — que performam bem em feeds de anúncio onde o usuário está acostumado a ver conteúdo real. Anúncios com aparência de UGC historicamente têm CTR maior que criativos com estética de propaganda tradicional.",
+    answer: "Sim. O UGC Build do Calango gera imagens com aparência de foto orgânica. sem aspecto de IA. que performam bem em feeds de anúncio onde o usuário está acostumado a ver conteúdo real. Anúncios com aparência de UGC historicamente têm CTR maior que criativos com estética de propaganda tradicional.",
   },
   {
     question: "Como reduzir o custo de produção de criativos para ads?",
-    answer: "Centralizando a produção em uma única plataforma com IA. Com o Calango Studio, você elimina Freepik, banco de imagens pago e horas de briefing de designer — produzindo criativos em minutos com uma assinatura. Para agências e gestores de tráfego com volume, a economia é significativa.",
+    answer: "Centralizando a produção em uma única plataforma com IA. Com o Calango Studio, você elimina Freepik, banco de imagens pago e horas de briefing de designer. produzindo criativos em minutos com uma assinatura. Para agências e gestores de tráfego com volume, a economia é significativa.",
   },
 ];
 
@@ -98,17 +98,17 @@ export default function CriativosParaFacebookAdsPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Performance de anúncio depende, em grande parte, do criativo. O problema para gestores de tráfego e agências: produzir volume de criativos com qualidade consistente é caro e lento quando depende de designer ou banco de imagens. Cada campanha precisa de pelo menos 3 a 5 variações para teste. Cada variação é um ciclo de briefing, produção e revisão. Multiplique isso por vários clientes e o gargalo fica claro. A IA resolveu esse gargalo. Com o Calango Studio, você gera imagens, copy e variações de criativo em minutos — sem precisar de uma equipe de produção dedicada.
+        Performance de anúncio depende, em grande parte, do criativo. O problema para gestores de tráfego e agências: produzir volume de criativos com qualidade consistente é caro e lento quando depende de designer ou banco de imagens. Cada campanha precisa de pelo menos 3 a 5 variações para teste. Cada variação é um ciclo de briefing, produção e revisão. Multiplique isso por vários clientes e o gargalo fica claro. A IA resolveu esse gargalo. Com o Calango Studio, você gera imagens, copy e variações de criativo em minutos. sem precisar de uma equipe de produção dedicada.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         O que faz um bom criativo para Facebook Ads
       </h2>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
-        <li><strong className="text-white">Imagem que para o scroll</strong> — contraste, rosto humano ou produto em destaque. O feed é competitivo; o criativo precisa chamar atenção em menos de 2 segundos.</li>
-        <li><strong className="text-white">Copy curta e direta</strong> — benefício claro na headline, CTA visível. Sem enrolação.</li>
-        <li><strong className="text-white">Consistência com a marca</strong> — o anúncio precisa parecer da marca, não de um banco de imagens genérico.</li>
-        <li><strong className="text-white">Volume de variações</strong> — ao menos 3 a 5 criativos por campanha para teste A/B eficiente.</li>
+        <li><strong className="text-white">Imagem que para o scroll</strong>. contraste, rosto humano ou produto em destaque. O feed é competitivo; o criativo precisa chamar atenção em menos de 2 segundos.</li>
+        <li><strong className="text-white">Copy curta e direta</strong>. benefício claro na headline, CTA visível. Sem enrolação.</li>
+        <li><strong className="text-white">Consistência com a marca</strong>. o anúncio precisa parecer da marca, não de um banco de imagens genérico.</li>
+        <li><strong className="text-white">Volume de variações</strong>. ao menos 3 a 5 criativos por campanha para teste A/B eficiente.</li>
       </ul>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
@@ -118,10 +118,10 @@ export default function CriativosParaFacebookAdsPage() {
         O Calango Studio reúne as ferramentas necessárias para produzir criativos para ads em uma única plataforma, com contexto do cliente salvo.
       </p>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
-        <li><strong className="text-white">Imagem Criativa</strong> — gera imagens de alto impacto visual com estilos prontos (Hero Style, Business Style, Animal Art e outros). Resultados cinematográficos sem dominar prompts complexos.</li>
-        <li><strong className="text-white">UGC Build</strong> — foto realista de pessoa com produto, com aparência de foto de iPhone. Formato que performa especialmente bem em anúncios de feed.</li>
-        <li><strong className="text-white">CopyMaker</strong> — copy para o criativo e legenda do anúncio, com tom de voz do cliente já aplicado.</li>
-        <li><strong className="text-white">Remix Layout</strong> — pega um criativo que funcionou e replica trocando imagem e texto. Variações em cliques, não em horas.</li>
+        <li><strong className="text-white">Imagem Criativa</strong>. gera imagens de alto impacto visual com estilos prontos (Hero Style, Business Style, Animal Art e outros). Resultados cinematográficos sem dominar prompts complexos.</li>
+        <li><strong className="text-white">UGC Build</strong>. foto realista de pessoa com produto, com aparência de foto de iPhone. Formato que performa especialmente bem em anúncios de feed.</li>
+        <li><strong className="text-white">CopyMaker</strong>. copy para o criativo e legenda do anúncio, com tom de voz do cliente já aplicado.</li>
+        <li><strong className="text-white">Remix Layout</strong>. pega um criativo que funcionou e replica trocando imagem e texto. Variações em cliques, não em horas.</li>
       </ul>
 
       <FaqSection faqs={faqs} />

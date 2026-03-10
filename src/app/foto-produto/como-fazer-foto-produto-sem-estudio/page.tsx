@@ -43,7 +43,7 @@ const schema = {
         { "@type": "Question", name: "A foto de produto gerada por IA parece profissional?", acceptedAnswer: { "@type": "Answer", text: "Sim, para a maioria dos usos digitais. Qualidade suficiente para e-commerce, anúncios e redes sociais." } },
         { "@type": "Question", name: "Preciso remover o fundo do produto antes?", acceptedAnswer: { "@type": "Answer", text: "Para melhores resultados, sim. Uma foto com fundo limpo facilita a inserção no cenário." } },
         { "@type": "Question", name: "Quantos cenários diferentes posso gerar para o mesmo produto?", acceptedAnswer: { "@type": "Answer", text: "Tantos quanto quiser. Cada geração é um cenário diferente." } },
-        { "@type": "Question", name: "Foto de produto com IA funciona para qualquer tipo de produto?", acceptedAnswer: { "@type": "Answer", text: "Para produtos físicos — embalagem, moda, acessório, alimento, eletrônico — sim." } },
+        { "@type": "Question", name: "Foto de produto com IA funciona para qualquer tipo de produto?", acceptedAnswer: { "@type": "Answer", text: "Para produtos físicos. embalagem, moda, acessório, alimento, eletrônico. sim." } },
       ],
     },
   ],
@@ -52,19 +52,19 @@ const schema = {
 const faqs = [
   {
     question: "A foto de produto gerada por IA parece profissional?",
-    answer: "Sim, para a maioria dos usos digitais. O Calango Studio gera imagens de produto em cenários realistas com qualidade suficiente para e-commerce, anúncios e redes sociais. Para catálogos impressos de alta resolução, a resolução pode precisar de upscale — mas para digital, o resultado é profissional.",
+    answer: "Sim, para a maioria dos usos digitais. O Calango Studio gera imagens de produto em cenários realistas com qualidade suficiente para e-commerce, anúncios e redes sociais. Para catálogos impressos de alta resolução, a resolução pode precisar de upscale. mas para digital, o resultado é profissional.",
   },
   {
     question: "Preciso remover o fundo do produto antes?",
-    answer: "Para melhores resultados, sim. Uma foto com fundo limpo facilita a inserção no cenário gerado pela IA. Mas não precisa ser perfeito — o Calango Studio lida bem com fotos em fundo branco ou neutro tiradas com celular.",
+    answer: "Para melhores resultados, sim. Uma foto com fundo limpo facilita a inserção no cenário gerado pela IA. Mas não precisa ser perfeito. o Calango Studio lida bem com fotos em fundo branco ou neutro tiradas com celular.",
   },
   {
     question: "Quantos cenários diferentes posso gerar para o mesmo produto?",
-    answer: "Tantos quanto quiser. Cada geração é um cenário diferente — você pode criar variações para Instagram, site, anúncio e apresentação na mesma sessão. Um único produto pode ter dezenas de fotos em contextos diferentes, sem custo adicional por geração.",
+    answer: "Tantos quanto quiser. Cada geração é um cenário diferente. você pode criar variações para Instagram, site, anúncio e apresentação na mesma sessão. Um único produto pode ter dezenas de fotos em contextos diferentes, sem custo adicional por geração.",
   },
   {
     question: "Foto de produto com IA funciona para qualquer tipo de produto?",
-    answer: "Para produtos físicos — embalagem, moda, acessório, alimento, eletrônico — sim. Produtos com formas muito complexas ou transparentes (como vidro) podem exigir mais iterações para resultados convincentes. Mas a maioria dos produtos de e-commerce funciona perfeitamente.",
+    answer: "Para produtos físicos. embalagem, moda, acessório, alimento, eletrônico. sim. Produtos com formas muito complexas ou transparentes (como vidro) podem exigir mais iterações para resultados convincentes. Mas a maioria dos produtos de e-commerce funciona perfeitamente.",
   },
 ];
 
@@ -82,18 +82,18 @@ export default function ComoFazerFotoProdutoSemEstudioPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Foto de produto profissional costumava exigir estúdio, luz, fundo e fotógrafo. Para e-commerce, marcas pequenas e freelancers, esse custo é proibitivo — especialmente quando o catálogo tem dezenas de SKUs e cada um precisa de múltiplas fotos. Com IA, você gera fotos de produto em cenários realistas com apenas a imagem do produto como referência. Uma foto simples tirada com celular se transforma em imagem de catálogo profissional em minutos, sem estúdio, sem fotógrafo, sem pós-produção manual.
+        Foto de produto profissional costumava exigir estúdio, luz, fundo e fotógrafo. Para e-commerce, marcas pequenas e freelancers, esse custo é proibitivo. especialmente quando o catálogo tem dezenas de SKUs e cada um precisa de múltiplas fotos. Com IA, você gera fotos de produto em cenários realistas com apenas a imagem do produto como referência. Uma foto simples tirada com celular se transforma em imagem de catálogo profissional em minutos, sem estúdio, sem fotógrafo, sem pós-produção manual.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: foto de produto com IA
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Fotografe o produto</strong> — em qualquer fundo (branco, neutro ou até caixa), com boa iluminação natural. Celular com câmera decente já resolve.</li>
-        <li><strong className="text-white">No Calango Studio, acesse Estúdio de Foto ou Mockup Produto</strong> — escolha a ferramenta conforme o resultado desejado: foto em cenário (Estúdio) ou mockup de apresentação (Mockup Produto).</li>
-        <li><strong className="text-white">Faça upload da imagem</strong> — suba a foto do produto que será usada como referência.</li>
-        <li><strong className="text-white">Escolha ou descreva o cenário</strong> — mesa de madeira, prateleira, natureza, fundo branco premium, lifestyle. Quanto mais específico, melhor.</li>
-        <li><strong className="text-white">Gere e exporte</strong> — a IA gera a imagem final com iluminação e composição realistas. Exporte e use.</li>
+        <li><strong className="text-white">Fotografe o produto</strong>. em qualquer fundo (branco, neutro ou até caixa), com boa iluminação natural. Celular com câmera decente já resolve.</li>
+        <li><strong className="text-white">No Calango Studio, acesse Estúdio de Foto ou Mockup Produto</strong>. escolha a ferramenta conforme o resultado desejado: foto em cenário (Estúdio) ou mockup de apresentação (Mockup Produto).</li>
+        <li><strong className="text-white">Faça upload da imagem</strong>. suba a foto do produto que será usada como referência.</li>
+        <li><strong className="text-white">Escolha ou descreva o cenário</strong>. mesa de madeira, prateleira, natureza, fundo branco premium, lifestyle. Quanto mais específico, melhor.</li>
+        <li><strong className="text-white">Gere e exporte</strong>. a IA gera a imagem final com iluminação e composição realistas. Exporte e use.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">

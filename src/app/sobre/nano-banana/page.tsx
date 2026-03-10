@@ -86,12 +86,12 @@ const faqs = [
   {
     question: "O que é o Nano Banana?",
     answer:
-      "É o modelo principal de geração de imagens integrado ao Calango Studio, calibrado para resultados cinematográficos e realistas. O Nano Banana foi otimizado especificamente para uso profissional — designers que atendem clientes, social media managers que precisam de consistência visual e criativos que precisam de velocidade.",
+      "É o modelo principal de geração de imagens integrado ao Calango Studio, calibrado para resultados cinematográficos e realistas. O Nano Banana foi otimizado especificamente para uso profissional: designers que atendem clientes, social media managers que precisam de consistência visual e criativos que precisam de velocidade.",
   },
   {
     question: "O Calango Studio usa qual IA para gerar imagens?",
     answer:
-      "O modelo principal é o Nano Banana, com integração de FLUX e OpenAI. A plataforma seleciona automaticamente o melhor modelo para cada tipo de geração — se a imagem pedida funciona melhor com FLUX, o Calango usa FLUX. Se funciona melhor com o Nano Banana, usa o Nano Banana. O usuário não precisa entender as diferenças técnicas.",
+      "O modelo principal é o Nano Banana, com integração de FLUX e OpenAI. A plataforma seleciona automaticamente o melhor modelo para cada tipo de geração: se a imagem pedida funciona melhor com FLUX, o Calango usa FLUX. Se funciona melhor com o Nano Banana, usa o Nano Banana. O usuário não precisa entender as diferenças técnicas.",
   },
   {
     question: "Preciso escolher qual modelo usar?",
@@ -136,7 +136,7 @@ export default function NanoBananaPage() {
       <p className="text-txt-secondary leading-relaxed mb-8">
         O Nano Banana é o modelo principal de geração de imagens do Calango
         Studio. Calibrado para resultados cinematográficos e realistas, ele
-        foi desenvolvido com foco em uso profissional — não em
+        foi desenvolvido com foco em uso profissional, não em
         experimentação artística genérica, mas em produção de conteúdo visual
         para clientes reais. O nome pode ser inusitado, mas o resultado é
         sério: imagens de alta qualidade geradas em segundos, com
@@ -155,7 +155,7 @@ export default function NanoBananaPage() {
         melhor modelo para cada tipo de geração. Isso significa que se uma
         geração específica funciona melhor com FLUX, o Calango usa FLUX. Se
         funciona melhor com o Nano Banana, usa o Nano Banana. O usuário não
-        precisa entender as diferenças técnicas entre os modelos — o sistema
+        precisa entender as diferenças técnicas entre os modelos, e o sistema
         faz essa escolha internamente. Essa automação de seleção é um
         diferencial significativo. Em outras plataformas, o usuário precisa
         testar modelos diferentes, entender quando usar cada um e lidar com
@@ -183,7 +183,7 @@ export default function NanoBananaPage() {
         A maioria das plataformas de IA para imagem foca em qualidade
         artística ou em volume de geração. O diferencial do Nano Banana e do
         Calango Studio está na integração: a geração de imagem não existe
-        isolada — ela faz parte de um workflow que inclui copy, mockup, UGC,
+        isolada, ela faz parte de um workflow que inclui copy, mockup, UGC,
         gestão de clientes e estilos prontos. Essa integração é o que
         transforma uma ferramenta de geração de imagem em uma plataforma de
         produção criativa completa.

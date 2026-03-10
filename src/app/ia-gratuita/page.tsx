@@ -139,15 +139,15 @@ export default function IaGratuitaHubPage() {
         </h2>
         <div className="text-txt-secondary leading-relaxed space-y-4">
           <p>
-            A busca por ferramentas de IA gratuitas é natural — todo profissional
+            A busca por ferramentas de IA gratuitas é natural. todo profissional
             quer testar antes de investir. ChatGPT, Bing Image Creator, Leonardo
-            AI, Playground AI — existem dezenas de opções gratuitas para gerar
+            AI, Playground AI. existem dezenas de opções gratuitas para gerar
             texto e imagens. O problema é que, para uso profissional, essas
             ferramentas têm limites que impactam diretamente a produtividade.
           </p>
           <p>
             Limites de geração por dia, falta de controle sobre estilo, ausência
-            de gestão por cliente, prompts genéricos sem contexto — tudo isso
+            de gestão por cliente, prompts genéricos sem contexto. tudo isso
             significa mais tempo ajustando resultados e menos tempo entregando
             para o cliente. Para quem produz conteúdo em volume, o custo real de
             uma ferramenta gratuita é o tempo perdido no processo.

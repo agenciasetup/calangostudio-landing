@@ -118,7 +118,7 @@ export default function FerramentasHubPage() {
     <SeoLayout schema={schema} slug="ferramentas">
       <ClusterHero
         title="Ferramentas de IA"
-        subtitle="Conheça todas as ferramentas de inteligência artificial do Calango Studio. De geração de imagens a mockups de produto — tudo em uma plataforma."
+        subtitle="Conheça todas as ferramentas de inteligência artificial do Calango Studio. De geração de imagens a mockups de produto. tudo em uma plataforma."
         icon="🛠️"
         contentCount={6}
         contentLabel="ferramentas"
@@ -167,7 +167,7 @@ export default function FerramentasHubPage() {
             especificamente para designers e social media managers que atendem
             clientes. Diferente de ferramentas genéricas como ChatGPT ou
             Midjourney, cada módulo do Calango Studio foi pensado para resolver
-            problemas reais do dia a dia criativo — com o contexto do cliente
+            problemas reais do dia a dia criativo. com o contexto do cliente
             sempre carregado.
           </p>
           <p>

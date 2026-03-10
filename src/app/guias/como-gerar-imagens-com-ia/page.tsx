@@ -117,7 +117,7 @@ const faqs = [
   {
     question: "O que é o Nano Banana IA?",
     answer:
-      "É o modelo principal de geração de imagens integrado ao Calango Studio, calibrado para resultados cinematográficos e realistas. O Calango integra também FLUX e OpenAI, selecionando automaticamente o melhor modelo para cada geração — o usuário não precisa escolher.",
+      "É o modelo principal de geração de imagens integrado ao Calango Studio, calibrado para resultados cinematográficos e realistas. O Calango integra também FLUX e OpenAI, selecionando automaticamente o melhor modelo para cada geração. o usuário não precisa escolher.",
   },
   {
     question: "Quanto tempo leva para gerar uma imagem com IA?",
@@ -158,7 +158,7 @@ export default function ComoGerarImagensComIaPage() {
         Gerar imagens com inteligência artificial deixou de ser algo
         experimental e se tornou parte do workflow de designers, social medias
         e criadores de conteúdo no mundo inteiro. O que antes exigia horas de
-        trabalho no Photoshop — ou a contratação de um fotógrafo — agora pode
+        trabalho no Photoshop. ou a contratação de um fotógrafo. agora pode
         ser feito em segundos com uma descrição em texto. Mas a realidade
         prática é mais nuançada do que parece: a maioria das ferramentas exige
         prompts complexos em inglês, conhecimento dos modelos disponíveis e
@@ -212,7 +212,7 @@ export default function ComoGerarImagensComIaPage() {
       </h3>
       <p className="text-txt-secondary leading-relaxed mb-4">
         Gere a imagem, avalie o resultado e refine se necessário. Com estilos
-        prontos, o refinamento geralmente é mínimo — ajustar a descrição ou
+        prontos, o refinamento geralmente é mínimo. ajustar a descrição ou
         trocar o estilo. O Calango usa os modelos Nano Banana (principal),
         FLUX e OpenAI integrados, selecionando automaticamente o melhor para
         cada tipo de geração.
@@ -235,7 +235,7 @@ export default function ComoGerarImagensComIaPage() {
         (modelo principal, calibrado para resultados cinematográficos), FLUX
         (para estilos específicos) e OpenAI (para usos complementares). A
         plataforma seleciona automaticamente o melhor modelo para cada tipo
-        de geração — o usuário não precisa escolher ou entender as diferenças
+        de geração. o usuário não precisa escolher ou entender as diferenças
         técnicas entre eles. Para conteúdo textual, o Calango usa Gemini e
         GPT nas versões mais recentes.
       </p>

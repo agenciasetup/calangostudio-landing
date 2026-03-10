@@ -40,15 +40,15 @@ const schema = {
 const faqs = [
   {
     question: "O que significa escalar uma agência de social media?",
-    answer: "Aumentar a receita sem aumentar os custos na mesma proporção. Na prática: atender mais clientes sem precisar contratar proporcionalmente. Uma agência que contrata uma pessoa para cada 3 clientes novos não está escalando — está crescendo linearmente. Escalar é fazer 10 clientes novos com a mesma equipe.",
+    answer: "Aumentar a receita sem aumentar os custos na mesma proporção. Na prática: atender mais clientes sem precisar contratar proporcionalmente. Uma agência que contrata uma pessoa para cada 3 clientes novos não está escalando. está crescendo linearmente. Escalar é fazer 10 clientes novos com a mesma equipe.",
   },
   {
     question: "IA substitui a equipe de uma agência?",
-    answer: "A parte operacional — produção de imagem, copy, variações de criativo — sim, em grande parte. A parte estratégica e de relacionamento é e continuará sendo humana. A IA não faz reunião com cliente, não decide posicionamento de marca, não analisa contexto competitivo. Ela faz a produção bruta, liberando a equipe para o que importa.",
+    answer: "A parte operacional. produção de imagem, copy, variações de criativo. sim, em grande parte. A parte estratégica e de relacionamento é e continuará sendo humana. A IA não faz reunião com cliente, não decide posicionamento de marca, não analisa contexto competitivo. Ela faz a produção bruta, liberando a equipe para o que importa.",
   },
   {
     question: "Como implementar IA na operação de uma agência?",
-    answer: "Comece pela produção de conteúdo — é onde o ganho é mais imediato e mensurável. Cadastre os clientes no Calango Studio, migre a geração de imagem e copy para a plataforma e meça o tempo economizado na primeira semana. O resultado geralmente é visível em dias, não em meses.",
+    answer: "Comece pela produção de conteúdo. é onde o ganho é mais imediato e mensurável. Cadastre os clientes no Calango Studio, migre a geração de imagem e copy para a plataforma e meça o tempo economizado na primeira semana. O resultado geralmente é visível em dias, não em meses.",
   },
   {
     question: "Qual o primeiro passo para escalar com IA?",
@@ -70,7 +70,7 @@ export default function ComoEscalarAgenciaSocialMediaPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Escalar uma agência de social media sem IA geralmente significa: contratar mais produtores, mais revisores, mais gestores. Cada pessoa nova aumenta custo fixo — salário, ferramentas, gestão. A margem corrói. Com IA, a lógica muda — o gargalo de produção deixa de crescer na mesma proporção que a carteira de clientes. O que antes exigia três produtores para 15 clientes agora pode ser feito por um profissional com as ferramentas certas.
+        Escalar uma agência de social media sem IA geralmente significa: contratar mais produtores, mais revisores, mais gestores. Cada pessoa nova aumenta custo fixo. salário, ferramentas, gestão. A margem corrói. Com IA, a lógica muda. o gargalo de produção deixa de crescer na mesma proporção que a carteira de clientes. O que antes exigia três produtores para 15 clientes agora pode ser feito por um profissional com as ferramentas certas.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
@@ -88,16 +88,16 @@ export default function ComoEscalarAgenciaSocialMediaPage() {
         O papel do Calango Studio na operação da agência
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        O Calango Studio funciona como a camada de produção da agência. A seção Meus Clientes serve como CRM básico de produção — com briefing, referências e contexto de cada cliente organizado e acessível. Toda geração de conteúdo parte desse perfil, garantindo consistência.
+        O Calango Studio funciona como a camada de produção da agência. A seção Meus Clientes serve como CRM básico de produção. com briefing, referências e contexto de cada cliente organizado e acessível. Toda geração de conteúdo parte desse perfil, garantindo consistência.
       </p>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-4">
-        <li><strong className="text-white">Meus Clientes</strong> — organização de briefing por cliente que não se perde entre sessões</li>
-        <li><strong className="text-white">CopyMaker + Imagem Criativa</strong> — produção de conteúdo com contexto do cliente já carregado</li>
-        <li><strong className="text-white">Remix Layout</strong> — variações rápidas para teste e rotação de criativos</li>
-        <li><strong className="text-white">UGC Build + Mockup Produto</strong> — produção especializada sem equipe dedicada</li>
+        <li><strong className="text-white">Meus Clientes</strong>. organização de briefing por cliente que não se perde entre sessões</li>
+        <li><strong className="text-white">CopyMaker + Imagem Criativa</strong>. produção de conteúdo com contexto do cliente já carregado</li>
+        <li><strong className="text-white">Remix Layout</strong>. variações rápidas para teste e rotação de criativos</li>
+        <li><strong className="text-white">UGC Build + Mockup Produto</strong>. produção especializada sem equipe dedicada</li>
       </ul>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        A evolução futura inclui contratos e cobranças integrados — o que completa a estrutura de agência dentro da plataforma. O objetivo é que toda a operação — do briefing à cobrança — viva em um único lugar.
+        A evolução futura inclui contratos e cobranças integrados. o que completa a estrutura de agência dentro da plataforma. O objetivo é que toda a operação. do briefing à cobrança. viva em um único lugar.
       </p>
 
       <FaqSection faqs={faqs} />

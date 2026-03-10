@@ -25,8 +25,8 @@ const schema = {
   "@graph": [{
     "@type": "FAQPage",
     mainEntity: [
-      { "@type": "Question", name: "Freepik tem geração de imagem por IA?", acceptedAnswer: { "@type": "Answer", text: "O Freepik lançou funcionalidades de IA, mas o modelo de negócio continua sendo banco de imagens — você busca no acervo. O Calango Studio é construído do zero para geração." } },
-      { "@type": "Question", name: "Qual a diferença entre banco de imagens e gerador de imagem com IA?", acceptedAnswer: { "@type": "Answer", text: "Banco de imagens é passivo — você depende do que já foi criado. Gerador com IA é ativo — você descreve o que precisa e a imagem é criada." } },
+      { "@type": "Question", name: "Freepik tem geração de imagem por IA?", acceptedAnswer: { "@type": "Answer", text: "O Freepik lançou funcionalidades de IA, mas o modelo de negócio continua sendo banco de imagens. você busca no acervo. O Calango Studio é construído do zero para geração." } },
+      { "@type": "Question", name: "Qual a diferença entre banco de imagens e gerador de imagem com IA?", acceptedAnswer: { "@type": "Answer", text: "Banco de imagens é passivo. você depende do que já foi criado. Gerador com IA é ativo. você descreve o que precisa e a imagem é criada." } },
       { "@type": "Question", name: "O Calango Studio substitui o Freepik completamente?", acceptedAnswer: { "@type": "Answer", text: "Para designers que atendem clientes e precisam de imagens personalizadas, sim. Para elementos genéricos como ícones e vetores técnicos, o Freepik ainda tem seu espaço." } },
       { "@type": "Question", name: "Qual é mais barato: Freepik Premium ou Calango Studio?", acceptedAnswer: { "@type": "Answer", text: "Os preços são comparáveis. A diferença é o que você recebe: o Freepik dá acesso a acervo. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas." } },
     ],
@@ -34,10 +34,10 @@ const schema = {
 };
 
 const faqs = [
-  { question: "Freepik tem geração de imagem por IA?", answer: "O Freepik lançou funcionalidades de IA, mas o modelo de negócio continua sendo banco de imagens — você busca no acervo. O Calango Studio é construído do zero para geração: você não procura, você cria. Essa é uma diferença estrutural, não apenas de recurso. A experiência de uso é completamente diferente." },
-  { question: "Qual a diferença entre banco de imagens e gerador de imagem com IA?", answer: "Banco de imagens é passivo — você depende do que já foi criado por fotógrafos e designers. Gerador de imagem com IA é ativo — você descreve o que precisa e a imagem é criada especificamente para aquela necessidade. Não depende de acervo, não depende de sorte na busca." },
-  { question: "O Calango Studio substitui o Freepik completamente?", answer: "Para designers que atendem clientes e precisam de imagens personalizadas, sim — o Calango gera exatamente o que você precisa sem depender de acervo. Para elementos genéricos como ícones e vetores técnicos, o Freepik ainda tem seu espaço como ferramenta complementar." },
-  { question: "Qual é mais barato: Freepik Premium ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Freepik dá acesso a acervo. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas — tudo em uma assinatura a partir de R$97,90/mês." },
+  { question: "Freepik tem geração de imagem por IA?", answer: "O Freepik lançou funcionalidades de IA, mas o modelo de negócio continua sendo banco de imagens. você busca no acervo. O Calango Studio é construído do zero para geração: você não procura, você cria. Essa é uma diferença estrutural, não apenas de recurso. A experiência de uso é completamente diferente." },
+  { question: "Qual a diferença entre banco de imagens e gerador de imagem com IA?", answer: "Banco de imagens é passivo. você depende do que já foi criado por fotógrafos e designers. Gerador de imagem com IA é ativo. você descreve o que precisa e a imagem é criada especificamente para aquela necessidade. Não depende de acervo, não depende de sorte na busca." },
+  { question: "O Calango Studio substitui o Freepik completamente?", answer: "Para designers que atendem clientes e precisam de imagens personalizadas, sim. o Calango gera exatamente o que você precisa sem depender de acervo. Para elementos genéricos como ícones e vetores técnicos, o Freepik ainda tem seu espaço como ferramenta complementar." },
+  { question: "Qual é mais barato: Freepik Premium ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Freepik dá acesso a acervo. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas. tudo em uma assinatura a partir de R$97,90/mês." },
 ];
 
 const relatedPages = [
@@ -52,17 +52,17 @@ export default function CalangoVsFreepikPage() {
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">Calango Studio vs Freepik</h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Freepik é uma das plataformas de recursos visuais mais usadas por designers no Brasil e no mundo. Milhões de imagens, vetores e templates disponíveis para download. O problema não é a quantidade — é o processo. Você abre o Freepik com uma imagem em mente, busca por palavras-chave, filtra estilo, licença, formato. Depois de 20 minutos, encontra algo &ldquo;quase certo&rdquo; — que ainda vai precisar de ajuste no Photoshop. E se precisar de algo específico para o estilo visual de um cliente? Provavelmente não existe no acervo. Porque não dá para ter tudo. O Calango Studio parte de uma lógica diferente: em vez de procurar, você gera. A imagem que você precisa, no estilo certo, com o contexto do cliente já carregado. É a diferença entre depender do que existe e criar o que você imaginou.
+        O Freepik é uma das plataformas de recursos visuais mais usadas por designers no Brasil e no mundo. Milhões de imagens, vetores e templates disponíveis para download. O problema não é a quantidade. é o processo. Você abre o Freepik com uma imagem em mente, busca por palavras-chave, filtra estilo, licença, formato. Depois de 20 minutos, encontra algo &ldquo;quase certo&rdquo;. que ainda vai precisar de ajuste no Photoshop. E se precisar de algo específico para o estilo visual de um cliente? Provavelmente não existe no acervo. Porque não dá para ter tudo. O Calango Studio parte de uma lógica diferente: em vez de procurar, você gera. A imagem que você precisa, no estilo certo, com o contexto do cliente já carregado. É a diferença entre depender do que existe e criar o que você imaginou.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O que o Freepik faz bem</h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Freepik tem um acervo imenso e é útil para elementos genéricos — ícones, texturas, fundos e vetores padronizados. Para quem precisa de algo padrão rapidamente, é uma solução consolidada e popular. A busca por palavras-chave funciona bem para necessidades genéricas, e a qualidade dos recursos melhorou bastante nos últimos anos. Para designers que trabalham com projetos internos ou materiais institucionais simples, o Freepik resolve boa parte das necessidades visuais.
+        O Freepik tem um acervo imenso e é útil para elementos genéricos. ícones, texturas, fundos e vetores padronizados. Para quem precisa de algo padrão rapidamente, é uma solução consolidada e popular. A busca por palavras-chave funciona bem para necessidades genéricas, e a qualidade dos recursos melhorou bastante nos últimos anos. Para designers que trabalham com projetos internos ou materiais institucionais simples, o Freepik resolve boa parte das necessidades visuais.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">Onde o Calango Studio vai além</h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        Quando você precisa de uma imagem específica — com o estilo do cliente, no cenário certo, com a pessoa ou produto exatos — o Freepik não consegue entregar porque depende do que já foi fotografado ou desenhado por alguém. O Calango gera. Você descreve ou escolhe o estilo e a imagem é criada para aquela necessidade exata. Não existe &ldquo;quase certo&rdquo; — existe exatamente o que você pediu.
+        Quando você precisa de uma imagem específica. com o estilo do cliente, no cenário certo, com a pessoa ou produto exatos. o Freepik não consegue entregar porque depende do que já foi fotografado ou desenhado por alguém. O Calango gera. Você descreve ou escolhe o estilo e a imagem é criada para aquela necessidade exata. Não existe &ldquo;quase certo&rdquo;. existe exatamente o que você pediu.
       </p>
 
       <div className="overflow-x-auto mb-8">

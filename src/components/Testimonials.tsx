@@ -13,7 +13,7 @@ const testimonials = [
   {
     name: "Matheus",
     role: "Social Media Manager",
-    text: "Surpreendeu em absolutamente tudo — layout, qualidade e agilidade, tudo com base no nosso serviço. Acelerou meu trampo em MUITOS %.",
+    text: "Surpreendeu em absolutamente tudo. Layout, qualidade e agilidade, tudo com base no nosso serviço. Acelerou meu trampo em MUITOS %.",
     gradient: "from-blue-500 to-cyan-500",
   },
   {

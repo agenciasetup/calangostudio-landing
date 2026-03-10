@@ -154,21 +154,21 @@ export default function CriativosHubPage() {
             A produção de criativos é uma das etapas mais repetitivas e demoradas
             no marketing digital. Designers e social media managers passam horas
             buscando referências, gerando variações e adaptando peças para
-            diferentes formatos — anúncios, stories, carrosséis, reels. Com o
+            diferentes formatos. anúncios, stories, carrosséis, reels. Com o
             avanço da inteligência artificial, esse processo mudou radicalmente.
           </p>
           <p>
             Hoje, é possível gerar imagens originais, criar copies contextualizadas
             e produzir variações de criativos em minutos. O segredo não está
             apenas na IA genérica, mas em plataformas que centralizam o contexto
-            do cliente — briefing, estilo visual, tom de voz — para que cada
+            do cliente. briefing, estilo visual, tom de voz. para que cada
             geração já saia alinhada com a marca. É exatamente isso que o Calango
             Studio faz: reunir todo o workflow criativo em um único lugar, eliminando
             a alternância entre ferramentas e o retrabalho de repassar briefings.
           </p>
           <p>
-            Nos guias desta seção, você vai aprender desde o básico — como criar
-            seu primeiro criativo com IA — até estratégias avançadas de produção
+            Nos guias desta seção, você vai aprender desde o básico. como criar
+            seu primeiro criativo com IA. até estratégias avançadas de produção
             em escala, testes A/B automatizados e soluções para creative fatigue.
             Cada guia foi escrito para profissionais que precisam de resultados
             práticos, não teoria.

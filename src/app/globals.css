@@ -171,7 +171,7 @@ body {
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Disable continuous gradient animation on mobile — static gradient instead */
+  /* Disable continuous gradient animation on mobile. Static gradient instead */
   .text-gradient-animated {
     animation: none;
     background-position: 50% 50%;
@@ -190,7 +190,7 @@ body {
     text-shadow: 0 0 20px rgba(255, 170, 0, 0.25);
   }
 
-  /* Disable hover transforms on mobile — prevents sticky hover states */
+  /* Disable hover transforms on mobile. Prevents sticky hover states */
   .btn-primary:hover {
     transform: none;
     filter: none;
@@ -200,6 +200,57 @@ body {
   .glass-card,
   .glass-panel {
     transform: translateZ(0);
+  }
+}
+
+/* ============================================================
+   INFINITE SCROLL GALLERY ANIMATIONS
+   ============================================================ */
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(var(--set-width) * -1)); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(calc(var(--set-width) * -1)); }
+  100% { transform: translateX(0); }
+}
+
+.scroll-row-left {
+  animation: scroll-left 40s linear infinite;
+  will-change: transform;
+}
+
+.scroll-row-right {
+  animation: scroll-right 40s linear infinite;
+  will-change: transform;
+}
+
+@media (max-width: 767px) {
+  @keyframes scroll-left-mobile {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(var(--set-width-mobile) * -1)); }
+  }
+
+  @keyframes scroll-right-mobile {
+    0% { transform: translateX(calc(var(--set-width-mobile) * -1)); }
+    100% { transform: translateX(0); }
+  }
+
+  .scroll-row-left {
+    animation: scroll-left-mobile 30s linear infinite;
+  }
+
+  .scroll-row-right {
+    animation: scroll-right-mobile 30s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-row-left,
+  .scroll-row-right {
+    animation: none;
   }
 }
 

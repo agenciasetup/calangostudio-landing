@@ -9,11 +9,11 @@ import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 export const metadata: Metadata = {
   title: "Foto de Produto com IA: sem estúdio, sem fotógrafo | Calango Studio",
   description:
-    "Guias para criar fotos profissionais de produto usando IA. Mockups, cenários, e-commerce e lifestyle — sem estúdio e sem fotógrafo.",
+    "Guias para criar fotos profissionais de produto usando IA. Mockups, cenários, e-commerce e lifestyle. sem estúdio e sem fotógrafo.",
   openGraph: {
     title: "Foto de Produto com IA: sem estúdio, sem fotógrafo | Calango Studio",
     description:
-      "Guias para criar fotos profissionais de produto usando IA. Mockups, cenários, e-commerce e lifestyle — sem estúdio e sem fotógrafo.",
+      "Guias para criar fotos profissionais de produto usando IA. Mockups, cenários, e-commerce e lifestyle. sem estúdio e sem fotógrafo.",
     url: "https://www.calangostudio.com.br/foto-produto",
     siteName: "Calango Studio",
     locale: "pt_BR",
@@ -94,7 +94,7 @@ export default function FotoProdutoHubPage() {
     <SeoLayout schema={schema} slug="foto-produto">
       <ClusterHero
         title="Foto de Produto com IA"
-        subtitle="Guias para criar fotos profissionais de produto sem estúdio e sem fotógrafo. Mockups, cenários realistas e imagens para e-commerce — tudo gerado com IA."
+        subtitle="Guias para criar fotos profissionais de produto sem estúdio e sem fotógrafo. Mockups, cenários realistas e imagens para e-commerce. tudo gerado com IA."
         icon="📸"
         contentCount={4}
         contentLabel="guias"
@@ -140,15 +140,15 @@ export default function FotoProdutoHubPage() {
         <div className="text-txt-secondary leading-relaxed space-y-4">
           <p>
             Fotografia de produto sempre foi uma das etapas mais caras e lentas
-            do marketing. Estúdio, iluminação, fotógrafo, pós-produção — cada
+            do marketing. Estúdio, iluminação, fotógrafo, pós-produção. cada
             sessão consome horas e centenas de reais. Para pequenos negócios e
             e-commerces com catálogos extensos, isso se torna um gargalo que
             atrasa lançamentos e limita a qualidade visual das lojas.
           </p>
           <p>
             Com inteligência artificial, o cenário mudou. Hoje é possível gerar
-            fotos de produto em cenários profissionais — praia, escritório,
-            lifestyle, fundo branco — em minutos. Ferramentas como o Mockup
+            fotos de produto em cenários profissionais. praia, escritório,
+            lifestyle, fundo branco. em minutos. Ferramentas como o Mockup
             Produto e o Estúdio de Foto do Calango Studio permitem inserir
             qualquer produto em ambientações realistas sem precisar de amostra
             física ou equipamento profissional.

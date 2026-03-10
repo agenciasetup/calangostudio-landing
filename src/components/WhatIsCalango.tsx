@@ -36,8 +36,7 @@ export default function WhatIsCalango() {
             </span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            É uma plataforma de produção criativa com IA — pensada do zero para
-            quem atende clientes.
+            É uma plataforma onde você cadastra seus clientes uma vez e produz para eles para sempre.
           </p>
         </motion.div>
 
@@ -205,22 +204,16 @@ export default function WhatIsCalango() {
         >
           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
             <div className="glass-card !rounded-2xl p-5 md:p-6">
+              <span className="text-xs text-accent font-bold uppercase tracking-wider mb-2 inline-block">Como funciona</span>
               <p className="text-sm md:text-base text-txt-secondary leading-relaxed">
-                Você cadastra seus clientes com briefing, fotos, estilo e
-                referências. A partir daí, gera imagens, copies e criativos
-                direto do perfil de cada cliente —{" "}
-                <span className="text-white font-semibold">
-                  sem dar contexto pra IA toda vez.
-                </span>
+                Você cadastra o cliente uma vez: briefing, estilo, fotos e referências. De lá pra frente, toda imagem e copy que você gerar já vem com o contexto carregado. Sem repetição. Sem retrabalho.
               </p>
             </div>
             <div className="glass-card !rounded-2xl p-5 md:p-6 !border-accent/15">
-              <p className="text-sm md:text-base text-txt-secondary leading-relaxed">
-                É a diferença entre{" "}
-                <span className="text-txt-muted">usar IA como ferramenta</span>{" "}
-                e{" "}
-                <span className="text-gradient-animated font-bold">
-                  usar IA como parte do seu processo.
+              <p className="text-sm md:text-base leading-relaxed">
+                <span className="text-white">Não é usar IA como ferramenta.</span>{" "}
+                <span className="text-accent font-bold">
+                  É ter IA operando dentro do seu processo.
                 </span>
               </p>
             </div>

@@ -52,7 +52,7 @@ const schema = {
 const faqs = [
   {
     question: "Qual a diferença entre usar o ChatGPT e o CopyMaker do Calango?",
-    answer: "No ChatGPT, você começa do zero toda vez. Precisa repassar nome do cliente, produto, tom de voz, público, diferenciais. Na maioria das sessões, o GPT mistura memórias de outros clientes ou perde consistência de tom. No CopyMaker, o briefing do cliente já está carregado — tom de voz, produto e público são considerados automaticamente em cada geração.",
+    answer: "No ChatGPT, você começa do zero toda vez. Precisa repassar nome do cliente, produto, tom de voz, público, diferenciais. Na maioria das sessões, o GPT mistura memórias de outros clientes ou perde consistência de tom. No CopyMaker, o briefing do cliente já está carregado. tom de voz, produto e público são considerados automaticamente em cada geração.",
   },
   {
     question: "IA consegue escrever no tom de voz do meu cliente?",
@@ -60,7 +60,7 @@ const faqs = [
   },
   {
     question: "Copy gerada por IA precisa de revisão?",
-    answer: "Uma revisão rápida é recomendada, especialmente para ajustes de personalidade e detalhes específicos da marca. Mas o volume de edição é muito menor do que escrever do zero. Na prática, a maioria dos profissionais faz ajustes em 2-3 minutos — não em 30 minutos escrevendo tudo.",
+    answer: "Uma revisão rápida é recomendada, especialmente para ajustes de personalidade e detalhes específicos da marca. Mas o volume de edição é muito menor do que escrever do zero. Na prática, a maioria dos profissionais faz ajustes em 2-3 minutos. não em 30 minutos escrevendo tudo.",
   },
   {
     question: "O CopyMaker cria hashtags também?",
@@ -82,29 +82,29 @@ export default function ComoCriarCopyParaPostPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Escrever copy para redes sociais parece simples até você estar fazendo isso para 10 clientes diferentes toda semana. O problema não é criatividade — é contexto. Cada cliente tem tom de voz, público e produto diferente. No GPT, você reexplica isso a cada sessão. No meio do caminho, o modelo mistura memórias de clientes anteriores e entrega algo genérico. No Calango Studio, o briefing do cliente está salvo e a IA já parte do ponto certo — sem reexplicações, sem contaminação de contexto entre clientes diferentes.
+        Escrever copy para redes sociais parece simples até você estar fazendo isso para 10 clientes diferentes toda semana. O problema não é criatividade. é contexto. Cada cliente tem tom de voz, público e produto diferente. No GPT, você reexplica isso a cada sessão. No meio do caminho, o modelo mistura memórias de clientes anteriores e entrega algo genérico. No Calango Studio, o briefing do cliente está salvo e a IA já parte do ponto certo. sem reexplicações, sem contaminação de contexto entre clientes diferentes.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: copy para post com IA
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Acesse o perfil do cliente no Calango Studio</strong> — briefing, tom de voz, público-alvo e referências estão salvos no perfil.</li>
-        <li><strong className="text-white">Abra o CopyMaker a partir do perfil</strong> — isso garante que a IA use o contexto daquele cliente específico.</li>
-        <li><strong className="text-white">Escolha o formato</strong> — post, carrossel, story ou reels. Cada formato tem estrutura e extensão diferentes.</li>
-        <li><strong className="text-white">Informe o tema ou objetivo da publicação</strong> — pode ser um lançamento, conteúdo educativo, bastidores, prova social.</li>
-        <li><strong className="text-white">A IA gera a copy com o tom de voz do cliente</strong> — headline, corpo, CTA e hashtags. Tudo calibrado para o formato escolhido.</li>
-        <li><strong className="text-white">Revise, ajuste mínimo, copie e use</strong> — a revisão é rápida quando o ponto de partida já está no tom certo.</li>
+        <li><strong className="text-white">Acesse o perfil do cliente no Calango Studio</strong>. briefing, tom de voz, público-alvo e referências estão salvos no perfil.</li>
+        <li><strong className="text-white">Abra o CopyMaker a partir do perfil</strong>. isso garante que a IA use o contexto daquele cliente específico.</li>
+        <li><strong className="text-white">Escolha o formato</strong>. post, carrossel, story ou reels. Cada formato tem estrutura e extensão diferentes.</li>
+        <li><strong className="text-white">Informe o tema ou objetivo da publicação</strong>. pode ser um lançamento, conteúdo educativo, bastidores, prova social.</li>
+        <li><strong className="text-white">A IA gera a copy com o tom de voz do cliente</strong>. headline, corpo, CTA e hashtags. Tudo calibrado para o formato escolhido.</li>
+        <li><strong className="text-white">Revise, ajuste mínimo, copie e use</strong>. a revisão é rápida quando o ponto de partida já está no tom certo.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         O problema do GPT para copy de cliente
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        Quando você usa o ChatGPT para criar copy de cliente, precisa repassar o briefing toda vez — nome, produto, tom de voz, público, diferenciais. Na maioria das sessões, o GPT mistura memórias de outros clientes ou perde consistência de tom. Resultado: a copy do Cliente A sai com o tom do Cliente B, e você gasta mais tempo revisando do que escrevendo do zero.
+        Quando você usa o ChatGPT para criar copy de cliente, precisa repassar o briefing toda vez. nome, produto, tom de voz, público, diferenciais. Na maioria das sessões, o GPT mistura memórias de outros clientes ou perde consistência de tom. Resultado: a copy do Cliente A sai com o tom do Cliente B, e você gasta mais tempo revisando do que escrevendo do zero.
       </p>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Calango Studio isola o contexto por cliente, eliminando esse problema estruturalmente. Cada cliente tem seu próprio perfil — e a IA só acessa o briefing daquele cliente quando você está produzindo para ele. Sem contaminação, sem confusão, sem retrabalho. Isso parece um detalhe, mas para quem produz conteúdo para 5, 10 ou 15 clientes por semana, é a diferença entre 2 horas e 20 minutos por cliente.
+        O Calango Studio isola o contexto por cliente, eliminando esse problema estruturalmente. Cada cliente tem seu próprio perfil. e a IA só acessa o briefing daquele cliente quando você está produzindo para ele. Sem contaminação, sem confusão, sem retrabalho. Isso parece um detalhe, mas para quem produz conteúdo para 5, 10 ou 15 clientes por semana, é a diferença entre 2 horas e 20 minutos por cliente.
       </p>
 
       <FaqSection faqs={faqs} />

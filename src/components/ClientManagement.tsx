@@ -48,7 +48,7 @@ export default function ClientManagement() {
           </h2>
           <p className="text-txt-secondary text-base md:text-lg mb-8 md:mb-10 leading-relaxed">
             Com o Calango, você cadastra o briefing uma vez. A partir daí, gera
-            qualquer conteúdo direto do perfil do cliente — com o contexto já
+            qualquer conteúdo direto do perfil do cliente. Com o contexto já
             carregado, sem cruzamento entre projetos.
           </p>
 

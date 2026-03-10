@@ -51,7 +51,7 @@ const schema = {
           name: "O que é UGC?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "User Generated Content — conteúdo visual que parece ter sido criado por um consumidor real, não por uma marca. Fotos casuais, com aparência de iPhone, mostrando produtos em uso no dia a dia.",
+            text: "User Generated Content. conteúdo visual que parece ter sido criado por um consumidor real, não por uma marca. Fotos casuais, com aparência de iPhone, mostrando produtos em uso no dia a dia.",
           },
         },
         {
@@ -75,7 +75,7 @@ const schema = {
           name: "A foto vai parecer artificial?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "O UGC Build é calibrado para gerar imagens com aparência de foto casual de iPhone — iluminação natural, poses orgânicas, cenários do dia a dia.",
+            text: "O UGC Build é calibrado para gerar imagens com aparência de foto casual de iPhone. iluminação natural, poses orgânicas, cenários do dia a dia.",
           },
         },
       ],
@@ -87,7 +87,7 @@ const faqs = [
   {
     question: "O que é UGC?",
     answer:
-      "User Generated Content — conteúdo visual que parece ter sido criado por um consumidor real, não por uma marca. São fotos casuais, com aparência de foto de iPhone, mostrando produtos em uso no dia a dia. Esse tipo de conteúdo gera mais confiança e identificação do que fotos de estúdio tradicionais.",
+      "User Generated Content. conteúdo visual que parece ter sido criado por um consumidor real, não por uma marca. São fotos casuais, com aparência de foto de iPhone, mostrando produtos em uso no dia a dia. Esse tipo de conteúdo gera mais confiança e identificação do que fotos de estúdio tradicionais.",
   },
   {
     question: "UGC gerado por IA funciona para anúncios?",
@@ -102,7 +102,7 @@ const faqs = [
   {
     question: "A foto vai parecer artificial?",
     answer:
-      "O UGC Build é calibrado para gerar imagens com aparência de foto casual de iPhone — iluminação natural, poses orgânicas, cenários do dia a dia. O objetivo é que a foto pareça ter sido tirada por um consumidor real, não por um estúdio de produção.",
+      "O UGC Build é calibrado para gerar imagens com aparência de foto casual de iPhone. iluminação natural, poses orgânicas, cenários do dia a dia. O objetivo é que a foto pareça ter sido tirada por um consumidor real, não por um estúdio de produção.",
   },
 ];
 
@@ -135,13 +135,13 @@ export default function UgcComIaPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        UGC — User Generated Content — se tornou um dos formatos mais eficazes
+        UGC. User Generated Content. se tornou um dos formatos mais eficazes
         para marketing digital. Fotos que parecem ter sido tiradas por
         consumidores reais, mostrando produtos em uso no dia a dia, geram mais
         confiança e engajamento do que fotos de estúdio polidas. Mas produzir
         UGC real tem seus custos: encontrar criadores de conteúdo, briefar,
         negociar, esperar a produção, revisar e aprovar. Para uma marca que
-        precisa de volume — muitas fotos para múltiplos produtos — o
+        precisa de volume. muitas fotos para múltiplos produtos. o
         investimento em tempo e dinheiro é significativo. A inteligência
         artificial chegou para mudar essa equação. Agora é possível gerar
         fotos de UGC com aparência completamente orgânica, com pessoas
@@ -180,20 +180,20 @@ export default function UgcComIaPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
         <li>
-          <strong className="text-white">Upload do produto</strong> —
+          <strong className="text-white">Upload do produto</strong>.
           forneça a imagem do produto que será apresentado.
         </li>
         <li>
-          <strong className="text-white">Descrição do cenário</strong> —
+          <strong className="text-white">Descrição do cenário</strong>.
           descreva a situação desejada (pessoa usando o produto no café,
           na academia, em casa).
         </li>
         <li>
-          <strong className="text-white">Aparência orgânica</strong> — a IA
+          <strong className="text-white">Aparência orgânica</strong>. a IA
           gera fotos com iluminação natural, poses casuais e cenários reais.
         </li>
         <li>
-          <strong className="text-white">Uso em anúncios</strong> — o
+          <strong className="text-white">Uso em anúncios</strong>. o
           resultado pode ser usado diretamente em campanhas de Meta Ads,
           Google Ads, posts orgânicos e e-commerce.
         </li>

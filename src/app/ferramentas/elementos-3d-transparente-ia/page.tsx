@@ -103,7 +103,7 @@ const faqs = [
   {
     question: "Que tipos de objetos 3D posso gerar?",
     answer:
-      "Esferas, cubos, objetos flutuantes, elementos abstratos, formas geométricas, ícones 3D, objetos temáticos (como frutas, gadgets, elementos de moda) e muito mais. A variedade depende apenas da sua descrição — a IA gera o que você pedir.",
+      "Esferas, cubos, objetos flutuantes, elementos abstratos, formas geométricas, ícones 3D, objetos temáticos (como frutas, gadgets, elementos de moda) e muito mais. A variedade depende apenas da sua descrição. a IA gera o que você pedir.",
   },
 ];
 
@@ -138,7 +138,7 @@ export default function Elementos3dTransparenteIaPage() {
       <p className="text-txt-secondary leading-relaxed mb-8">
         Assets 3D com fundo transparente são peças fundamentais no arsenal de
         qualquer designer. Eles adicionam profundidade, dimensão e sofisticação
-        a composições visuais — seja um post de Instagram, um banner
+        a composições visuais. seja um post de Instagram, um banner
         publicitário, uma apresentação corporativa ou um criativo para
         anúncios. Tradicionalmente, criar esses elementos exige softwares de
         modelagem 3D como Cinema 4D, Blender ou 3ds Max, além de conhecimento
@@ -156,7 +156,7 @@ export default function Elementos3dTransparenteIaPage() {
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
         Assets 3D transparentes são imagens de objetos tridimensionais
-        renderizados e exportados em formato PNG com canal alfa — ou seja, sem
+        renderizados e exportados em formato PNG com canal alfa. ou seja, sem
         fundo. Isso permite que o elemento seja sobreposto a qualquer imagem
         ou cenário sem bordas visíveis. São amplamente usados em design
         gráfico para criar composições com profundidade, posts com elementos
@@ -178,21 +178,21 @@ export default function Elementos3dTransparenteIaPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
         <li>
-          <strong className="text-white">Descrição em texto</strong> — você
+          <strong className="text-white">Descrição em texto</strong>. você
           descreve o elemento que precisa em linguagem natural (ex: &ldquo;esfera
           metálica dourada com reflexos&rdquo;).
         </li>
         <li>
-          <strong className="text-white">Geração instantânea</strong> — a IA
+          <strong className="text-white">Geração instantânea</strong>. a IA
           gera o objeto em 3D com fundo transparente em segundos.
         </li>
         <li>
-          <strong className="text-white">PNG pronto para uso</strong> — o
+          <strong className="text-white">PNG pronto para uso</strong>. o
           arquivo vem com canal alfa, pronto para arrastar e usar em
           qualquer editor.
         </li>
         <li>
-          <strong className="text-white">Casos de uso</strong> — posts de
+          <strong className="text-white">Casos de uso</strong>. posts de
           Instagram, banners, criativos publicitários, apresentações,
           composições visuais complexas.
         </li>
