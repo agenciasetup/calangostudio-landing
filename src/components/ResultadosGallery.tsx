@@ -1,24 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { resultados } from "@/data/resultados";
+
+interface ResultadoItem {
+  filename: string;
+  label: string;
+}
 
 const ITEM_W_DESKTOP = 220;
 const ITEM_W_MOBILE = 140;
 const GAP = 12;
 
-// Split images into two rows
-const half = Math.ceil(resultados.length / 2);
-const row1 = resultados.slice(0, half);
-const row2 = resultados.slice(half);
-
 // Duplicate items enough times for seamless loop (3x ensures no gaps)
-function tripleRow(row: typeof resultados) {
+function tripleRow(row: ResultadoItem[]) {
   return [...row, ...row, ...row];
 }
 
-export default function ResultadosGallery() {
-  if (resultados.length === 0) return null;
+export default function ResultadosGallery({ items }: { items: ResultadoItem[] }) {
+  if (items.length === 0) return null;
+
+  const half = Math.ceil(items.length / 2);
+  const row1 = items.slice(0, half);
+  const row2 = items.slice(half);
 
   const row1Items = tripleRow(row1);
   const row2Items = tripleRow(row2);
