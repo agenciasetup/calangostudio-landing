@@ -1,7 +1,20 @@
 import Image from "next/image";
 
-const resultados = Array.from({ length: 13 }, (_, i) => ({
-  src: `/images/resultados/resultado-${i + 1}.jpg`,
+const resultados = [
+  "animal_criativo.jpg",
+  "business_criativo.jpg",
+  "car_criativo.jpg",
+  "hero_criativo.jpg",
+  "classic_criativo.jpg",
+  "Kel_foto.jpg",
+  "vini_ugc.jpg",
+  "adam_manual.jpeg",
+  "animal5_criativo.jpg",
+  "raquel_foto_1.png",
+  "book_manual.jpg",
+  "business2_criativo.jpg",
+].map((filename, i) => ({
+  src: `/images/resultados/${filename}`,
   alt: `Resultado ${i + 1} criado com Calango Studio`,
 }));
 

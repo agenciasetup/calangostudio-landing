@@ -12,6 +12,7 @@
  *    _3D | _3d              → "Assets 3D"
  *    _Remix | _remix        → "Remix Layout"
  *    _Restaurador | _rest   → "Restaurador PRO"
+ *    _Manual | _manual      → "Personalizado"
  */
 
 export interface ResultadoItem {
@@ -28,23 +29,43 @@ function detectLabel(filename: string): string {
   if (/_3[Dd]/.test(name)) return "Assets 3D";
   if (/_[Rr]emix/.test(name)) return "Remix Layout";
   if (/_[Rr]estaurador|_[Rr]est/.test(name)) return "Restaurador PRO";
+  if (/_[Mm]anual/.test(name)) return "Personalizado";
   return "Imagem Criativa";
 }
 
 const filenames = [
-  "resultado-1.jpg",
-  "resultado-2.jpg",
-  "resultado-3.jpg",
-  "resultado-4.jpg",
-  "resultado-5.jpg",
-  "resultado-6.jpg",
-  "resultado-7.jpg",
-  "resultado-8.jpg",
-  "resultado-9.jpg",
-  "resultado-10.jpg",
-  "resultado-11.jpg",
-  "resultado-12.jpg",
-  "resultado-13.jpg",
+  "animal_criativo.jpg",
+  "animal2_criativo.jpg",
+  "animal3_criativo.jpg",
+  "animal4_criativo.jpg",
+  "animal5_criativo.jpg",
+  "animal6_criativo.jpg",
+  "animal7_criativo.jpg",
+  "animal8_criativo.jpg",
+  "animal9_criativo.jpg",
+  "animal10_criativo.jpg",
+  "animal11_criativo.jpg",
+  "business_criativo.jpg",
+  "business2_criativo.jpg",
+  "car_criativo.jpg",
+  "car2_criativo.jpg",
+  "classic_criativo.jpg",
+  "hero_criativo.jpg",
+  "hero3_criativo.jpg",
+  "Kel_foto.jpg",
+  "homem_foto.jpeg",
+  "raquel_foto_1.png",
+  "raquel_foto_2.png",
+  "raquel_foto_3.png",
+  "vini_ugc.jpg",
+  "vini2_ugc.jpg",
+  "vini3_ugc.jpg",
+  "adam_manual.jpeg",
+  "book_manual.jpg",
+  "personalizado_manual.jpg",
+  "personalizado2_manual.jpg",
+  "space_manual.jpeg",
+  "personalizado.jpeg",
 ];
 
 export const resultados: ResultadoItem[] = filenames.map((filename) => ({
