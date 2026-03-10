@@ -8,10 +8,10 @@ import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Como Fazer Foto para E-commerce sem Fotógrafo | Calango Studio",
-  description: "Crie fotos profissionais para e-commerce usando IA. Produto em cenários, fundo branco e lifestyle — sem estúdio nem fotógrafo.",
+  description: "Crie fotos profissionais para e-commerce usando IA. Produto em cenários, fundo branco e lifestyle. sem estúdio nem fotógrafo.",
   openGraph: {
     title: "Como Fazer Foto para E-commerce sem Fotógrafo | Calango Studio",
-    description: "Crie fotos profissionais para e-commerce usando IA. Produto em cenários, fundo branco e lifestyle — sem estúdio nem fotógrafo.",
+    description: "Crie fotos profissionais para e-commerce usando IA. Produto em cenários, fundo branco e lifestyle. sem estúdio nem fotógrafo.",
     url: "https://www.calangostudio.com.br/foto-produto/como-fazer-foto-ecommerce-sem-fotografo",
     siteName: "Calango Studio",
     locale: "pt_BR",
@@ -52,15 +52,15 @@ const schema = {
 const faqs = [
   {
     question: "Foto de produto com IA é aceita em marketplaces?",
-    answer: "Marketplaces exigem imagem real do produto, não imagem fictícia. A IA é usada para inserir o produto real em cenários — não para criar um produto que não existe. Desde que a foto represente fielmente o produto vendido, o uso de IA para cenários e composição é aceito nas principais plataformas.",
+    answer: "Marketplaces exigem imagem real do produto, não imagem fictícia. A IA é usada para inserir o produto real em cenários. não para criar um produto que não existe. Desde que a foto represente fielmente o produto vendido, o uso de IA para cenários e composição é aceito nas principais plataformas.",
   },
   {
     question: "Como gerar fundo branco com IA?",
-    answer: "No Calango Studio, você pode especificar fundo branco neutro como cenário na geração. O resultado é equivalente a uma foto de estúdio com fundo infinito — limpo, sem sombras indesejadas, pronto para uso em marketplaces que exigem esse padrão.",
+    answer: "No Calango Studio, você pode especificar fundo branco neutro como cenário na geração. O resultado é equivalente a uma foto de estúdio com fundo infinito. limpo, sem sombras indesejadas, pronto para uso em marketplaces que exigem esse padrão.",
   },
   {
     question: "Quantas fotos diferentes posso gerar para o mesmo produto?",
-    answer: "Sem limite prático. Você gera quantas variações quiser — diferentes cenários, ângulos e estilos para o mesmo produto. Isso é especialmente valioso para e-commerce, onde múltiplas fotos por produto aumentam a taxa de conversão.",
+    answer: "Sem limite prático. Você gera quantas variações quiser. diferentes cenários, ângulos e estilos para o mesmo produto. Isso é especialmente valioso para e-commerce, onde múltiplas fotos por produto aumentam a taxa de conversão.",
   },
   {
     question: "Preciso de câmera profissional para tirar a foto original do produto?",
@@ -82,27 +82,27 @@ export default function ComoFazerFotoEcommerceSemFotografoPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Foto de produto é um dos maiores custos de loja virtual. Cada SKU novo exige sessão fotográfica — ou banco de imagens que nunca tem exatamente o que você precisa. Para lojas com dezenas ou centenas de produtos, o custo acumula rápido: fotógrafo, estúdio, pós-produção, e depois a mesma coisa para cada produto novo. Com IA, você gera as fotos de produto a partir de uma imagem simples do item, em qualquer cenário — fundo branco, lifestyle, flat lay, cenário temático. Tudo sem estúdio e sem fotógrafo.
+        Foto de produto é um dos maiores custos de loja virtual. Cada SKU novo exige sessão fotográfica. ou banco de imagens que nunca tem exatamente o que você precisa. Para lojas com dezenas ou centenas de produtos, o custo acumula rápido: fotógrafo, estúdio, pós-produção, e depois a mesma coisa para cada produto novo. Com IA, você gera as fotos de produto a partir de uma imagem simples do item, em qualquer cenário. fundo branco, lifestyle, flat lay, cenário temático. Tudo sem estúdio e sem fotógrafo.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Tipos de foto para e-commerce
       </h2>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
-        <li><strong className="text-white">Fundo branco (padrão marketplace)</strong> — limpo, neutro, sem distração. Obrigatório em marketplaces como Mercado Livre e Amazon. O Calango Studio gera esse padrão com qualidade de estúdio.</li>
-        <li><strong className="text-white">Lifestyle (produto em uso)</strong> — contexto real que ajuda o consumidor a se imaginar usando. Gera mais conversão que fundo branco puro.</li>
-        <li><strong className="text-white">Flat lay</strong> — produto disposto em superfície com elementos complementares. Muito usado para moda, cosméticos e alimentos.</li>
-        <li><strong className="text-white">Cenário temático</strong> — produto em ambiente específico (cozinha, escritório, ao ar livre). Ideal para comunicar estilo de vida associado ao produto.</li>
+        <li><strong className="text-white">Fundo branco (padrão marketplace)</strong>. limpo, neutro, sem distração. Obrigatório em marketplaces como Mercado Livre e Amazon. O Calango Studio gera esse padrão com qualidade de estúdio.</li>
+        <li><strong className="text-white">Lifestyle (produto em uso)</strong>. contexto real que ajuda o consumidor a se imaginar usando. Gera mais conversão que fundo branco puro.</li>
+        <li><strong className="text-white">Flat lay</strong>. produto disposto em superfície com elementos complementares. Muito usado para moda, cosméticos e alimentos.</li>
+        <li><strong className="text-white">Cenário temático</strong>. produto em ambiente específico (cozinha, escritório, ao ar livre). Ideal para comunicar estilo de vida associado ao produto.</li>
       </ul>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Como o Calango Studio resolve cada tipo
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        O Mockup Produto e o Estúdio de Foto cobrem todos os formatos de foto para e-commerce. Você escolhe o tipo de imagem e gera — sem precisar montar set, contratar fotógrafo ou fazer pós-produção manual.
+        O Mockup Produto e o Estúdio de Foto cobrem todos os formatos de foto para e-commerce. Você escolhe o tipo de imagem e gera. sem precisar montar set, contratar fotógrafo ou fazer pós-produção manual.
       </p>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O processo é simples: tire uma foto do produto com celular (boa luz, fundo neutro), suba no Calango Studio, descreva o cenário desejado e gere. Em minutos, você tem fotos profissionais prontas para uso. Para catálogos com muitos SKUs, essa velocidade muda a dinâmica do negócio — cada produto novo pode ter fotos profissionais no mesmo dia em que chega ao estoque.
+        O processo é simples: tire uma foto do produto com celular (boa luz, fundo neutro), suba no Calango Studio, descreva o cenário desejado e gere. Em minutos, você tem fotos profissionais prontas para uso. Para catálogos com muitos SKUs, essa velocidade muda a dinâmica do negócio. cada produto novo pode ter fotos profissionais no mesmo dia em que chega ao estoque.
       </p>
 
       <FaqSection faqs={faqs} />

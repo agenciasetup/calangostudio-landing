@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "Como o Calango Studio funciona como agente?",
     answer:
-      "Através da seção Meus Clientes, você cadastra briefing completo de cada cliente — tom de voz, público-alvo, referências visuais, informações do negócio. A IA usa esse contexto em todas as gerações: CopyMaker, Imagem Criativa, Remix Layout. Não é preciso reexplicar nada a cada sessão.",
+      "Através da seção Meus Clientes, você cadastra briefing completo de cada cliente. tom de voz, público-alvo, referências visuais, informações do negócio. A IA usa esse contexto em todas as gerações: CopyMaker, Imagem Criativa, Remix Layout. Não é preciso reexplicar nada a cada sessão.",
   },
   {
     question: "Qual a diferença entre usar o ChatGPT e o Calango Studio?",
@@ -139,7 +139,7 @@ export default function AgenteParaSocialMediaPage() {
         A maioria das ferramentas de IA para redes sociais funciona como um
         bloco de notas inteligente: você escreve, ela responde, e no dia
         seguinte ela esqueceu tudo. Isso é uma ferramenta, não um agente. Um
-        agente de IA é diferente — ele lembra, aprende e mantém contexto
+        agente de IA é diferente. ele lembra, aprende e mantém contexto
         entre sessões. Quando um social media manager gerencia dez clientes,
         a diferença entre ferramenta e agente é brutal: com uma ferramenta,
         você reexplica cada cliente a cada sessão. Com um agente, o briefing
@@ -155,7 +155,7 @@ export default function AgenteParaSocialMediaPage() {
         Uma ferramenta de IA (como o ChatGPT usado diretamente) é reativa:
         responde ao que você pede, mas não lembra de sessões anteriores. Cada
         conversa é independente. Um agente de IA mantém contexto persistente
-        — ele sabe quem é o cliente, qual o tom de voz, quais referências
+       . ele sabe quem é o cliente, qual o tom de voz, quais referências
         foram aprovadas, o que já foi gerado antes. O GPT comum esquece o
         cliente entre sessões. O Calango Studio mantém o briefing sempre
         ativo. Essa persistência de contexto é o que transforma a IA de uma
@@ -176,23 +176,23 @@ export default function AgenteParaSocialMediaPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-4">
         <li>
-          <strong className="text-white">Meus Clientes</strong> — cadastre o
+          <strong className="text-white">Meus Clientes</strong>. cadastre o
           briefing completo de cada cliente: tom de voz, público-alvo,
           referências visuais, fotos, informações do negócio, estilo de
           comunicação.
         </li>
         <li>
-          <strong className="text-white">Contexto automático</strong> — ao
+          <strong className="text-white">Contexto automático</strong>. ao
           selecionar um cliente, todas as ferramentas (CopyMaker, Imagem
           Criativa, Remix Layout) já consideram o briefing automaticamente.
         </li>
         <li>
           <strong className="text-white">Consistência entre sessões</strong>
-          — diferente do ChatGPT, o contexto não se perde. O conteúdo gerado
+         . diferente do ChatGPT, o contexto não se perde. O conteúdo gerado
           hoje e daqui a um mês terá o mesmo tom e estilo.
         </li>
         <li>
-          <strong className="text-white">Evolução contínua</strong> — quanto
+          <strong className="text-white">Evolução contínua</strong>. quanto
           mais você refina o briefing, mais preciso fica o resultado.
         </li>
       </ul>
@@ -206,7 +206,7 @@ export default function AgenteParaSocialMediaPage() {
         cobranças integradas e notificações, transformando a plataforma em
         um hub completo para social media managers que atendem múltiplos
         clientes. O objetivo é que o profissional gerencie toda a operação
-        — do briefing à cobrança — em um único lugar.
+       . do briefing à cobrança. em um único lugar.
       </p>
 
       <FaqSection faqs={faqs} />

@@ -70,12 +70,12 @@ const faqs = [
   {
     question: "Calango Studio é melhor que Midjourney?",
     answer:
-      "Para quem trabalha com clientes e precisa de workflow completo, sim. O Calango centraliza geração de imagem, copy, mockups, UGC e gestão de clientes. O Midjourney é exclusivamente um gerador de imagens — poderoso, mas limitado a essa função. Se você precisa apenas gerar arte pura, o Midjourney é forte. Se você precisa produzir para clientes, o Calango é mais completo.",
+      "Para quem trabalha com clientes e precisa de workflow completo, sim. O Calango centraliza geração de imagem, copy, mockups, UGC e gestão de clientes. O Midjourney é exclusivamente um gerador de imagens, poderoso, mas limitado a essa função. Se você precisa apenas gerar arte pura, o Midjourney é forte. Se você precisa produzir para clientes, o Calango é mais completo.",
   },
   {
     question: "Qual gera imagens mais realistas?",
     answer:
-      "Midjourney tem vantagem em qualidade artística pura — especialmente em ilustrações e arte conceitual. O Calango tem vantagem em praticidade: estilos prontos que eliminam a curva de prompt, gestão de clientes integrada e ferramentas complementares (UGC, mockup, copy) que o Midjourney não oferece.",
+      "Midjourney tem vantagem em qualidade artística pura, especialmente em ilustrações e arte conceitual. O Calango tem vantagem em praticidade: estilos prontos que eliminam a curva de prompt, gestão de clientes integrada e ferramentas complementares (UGC, mockup, copy) que o Midjourney não oferece.",
   },
   {
     question: "Midjourney tem gestão de clientes?",
@@ -85,7 +85,7 @@ const faqs = [
   {
     question: "Qual é mais fácil de usar?",
     answer:
-      "O Calango Studio, com margem. Midjourney exige domínio de prompts complexos em inglês, via interface do Discord — que não foi projetada para produção criativa. O Calango tem interface web intuitiva, estilos prontos e toda operação em português.",
+      "O Calango Studio, com margem. Midjourney exige domínio de prompts complexos em inglês, via interface do Discord, que não foi projetada para produção criativa. O Calango tem interface web intuitiva, estilos prontos e toda operação em português.",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function CalangoVsMidjourneyPage() {
       <p className="text-txt-secondary leading-relaxed mb-8">
         Midjourney e Calango Studio são ferramentas de geração de imagem com
         IA, mas atendem públicos e necessidades diferentes. O Midjourney é
-        artisticamente poderoso — reconhecer isso é importante. Mas para
+        artisticamente poderoso. Reconhecer isso é importante. Mas para
         profissionais que atendem clientes e precisam de mais do que geração
         de imagem pura, as diferenças são significativas. Este comparativo é
         honesto e direto: cada plataforma tem seus pontos fortes.

@@ -265,7 +265,7 @@ export default function PromptExtractor() {
                 }`}
               >
                 {blocked ? (
-                  <>Limite atingido — Ver oferta</>
+                  <>Limite atingido. Ver oferta</>
                 ) : loading ? (
                   <>
                     <Wand2 className="animate-spin" size={16} />

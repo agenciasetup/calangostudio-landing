@@ -117,7 +117,7 @@ const faqs = [
   {
     question: "Qual IA é melhor para criar copy para redes sociais?",
     answer:
-      "O Calango usa Gemini e GPT integrados, escolhendo o melhor modelo para cada formato de conteúdo automaticamente. A vantagem sobre usar o ChatGPT diretamente é que o contexto do cliente já está salvo — você não precisa reexplicar nada.",
+      "O Calango usa Gemini e GPT integrados, escolhendo o melhor modelo para cada formato de conteúdo automaticamente. A vantagem sobre usar o ChatGPT diretamente é que o contexto do cliente já está salvo. você não precisa reexplicar nada.",
   },
   {
     question: "Posso criar conteúdo para vários clientes no mesmo dia?",
@@ -161,7 +161,7 @@ export default function ComoCriarConteudoComIaPage() {
         voz, o público, as referências, gera o conteúdo, fecha a aba, e no
         dia seguinte precisa explicar tudo de novo. Multiplique isso por dez
         clientes e você tem um workflow que desperdiça mais tempo do que
-        economiza. O problema não é a IA em si — é a falta de contexto
+        economiza. O problema não é a IA em si. é a falta de contexto
         persistente. Um social media que gerencia múltiplos clientes precisa
         de uma ferramenta que lembre quem é cada cliente, como falar com o
         público de cada um e o que já foi produzido. Este guia mostra como
@@ -199,7 +199,7 @@ export default function ComoCriarConteudoComIaPage() {
       <p className="text-txt-secondary leading-relaxed mb-4">
         Selecione entre post único, carrossel, story ou script para reels.
         Cada formato tem estrutura e tom específicos. O CopyMaker adapta a
-        geração ao formato escolhido — um carrossel tem slides estruturados,
+        geração ao formato escolhido. um carrossel tem slides estruturados,
         um reels tem gancho e CTA.
       </p>
 
@@ -231,7 +231,7 @@ export default function ComoCriarConteudoComIaPage() {
         novo. Isso gera inconsistência (cada sessão produz algo ligeiramente
         diferente) e desperdiça tempo. O Calango Studio resolve isso com a
         seção Meus Clientes, onde o briefing de cada cliente fica salvo e
-        acessível em qualquer ferramenta — CopyMaker, Imagem Criativa, Remix
+        acessível em qualquer ferramenta. CopyMaker, Imagem Criativa, Remix
         Layout. O contexto é sempre o mesmo, gerando consistência real.
       </p>
 

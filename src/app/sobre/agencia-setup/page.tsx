@@ -136,7 +136,7 @@ export default function AgenciaSetupPage() {
         simultaneamente expôs um problema que a maioria dos profissionais
         criativos conhece: o workflow fragmentado. Para produzir conteúdo
         para um único cliente, era necessário alternar entre cinco ou seis
-        ferramentas — uma para gerar imagem, outra para copy, outra para
+        ferramentas: uma para gerar imagem, outra para copy, outra para
         mockup, outra para remover fundo, e assim por diante. O contexto de
         cada cliente se perdia entre abas. A consistência visual dependia da
         memória do profissional. O tempo desperdiçado em tarefas operacionais
@@ -153,7 +153,7 @@ export default function AgenciaSetupPage() {
         cada cliente salvo e acessível em qualquer ferramenta. O que começou
         como solução interna se provou eficaz o suficiente para ser
         disponibilizado para outros profissionais. O Calango Studio é,
-        portanto, um produto que nasceu da prática — não de um pitch de
+        portanto, um produto que nasceu da prática, não de um pitch de
         startup, mas da necessidade real de uma agência que precisava
         produzir mais rápido sem sacrificar qualidade.
       </p>

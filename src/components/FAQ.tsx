@@ -7,11 +7,11 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 const faqs = [
   {
     q: "Qual IA vocês usam?",
-    a: "Nano Banana como motor principal, com FLUX e OpenAI integrados. Na prática, você não escolhe — o Calango seleciona automaticamente o melhor modelo para cada geração.",
+    a: "Nano Banana como motor principal, com FLUX e OpenAI integrados. Na prática, você não escolhe. O Calango seleciona automaticamente o melhor modelo para cada geração.",
   },
   {
     q: "Como funcionam os créditos?",
-    a: "Cada plano tem um volume mensal focado em assertividade, não volume. Em média, você gera mais de 100 imagens tranquilamente. Ainda tem o Incentivo Google — um programa que libera até U$300 em créditos extras (quase 3.000 gerações). Temos uma aula ensinando a ativar gratuitamente.",
+    a: "Cada plano tem um volume mensal focado em assertividade, não volume. Em média, você gera mais de 100 imagens tranquilamente. Ainda tem o Incentivo Google, um programa que libera até U$300 em créditos extras (quase 3.000 gerações). Temos uma aula ensinando a ativar gratuitamente.",
   },
   {
     q: "Tem recompensas e premiações?",
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "Tem programa de afiliados?",
-    a: "Sim — o CalangoPartner. Disponível para membros Elite, mediante aprovação da nossa equipe.",
+    a: "Sim. O CalangoPartner. Disponível para membros Elite, mediante aprovação da nossa equipe.",
   },
   {
     q: "Vai ter atualizações?",
@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Qual a vantagem do Calango Studio sobre outras IAs?",
-    a: "Tempo, organização e economia. O Calango não é só uma IA de imagem — é uma plataforma de workflow. Ele aprende o briefing de cada cliente seu, elimina o retrabalho de contexto e centraliza tudo que você usaria em 4 ou 5 ferramentas separadas.",
+    a: "Tempo, organização e economia. O Calango não é só uma IA de imagem. É uma plataforma de workflow. Ele aprende o briefing de cada cliente seu, elimina o retrabalho de contexto e centraliza tudo que você usaria em 4 ou 5 ferramentas separadas.",
   },
 ];
 

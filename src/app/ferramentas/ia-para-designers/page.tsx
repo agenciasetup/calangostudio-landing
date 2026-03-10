@@ -9,12 +9,12 @@ import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 export const metadata: Metadata = {
   title: "IA para Designers: ferramentas e workflow para 2025 | Calango Studio",
   description:
-    "Como usar inteligência artificial para acelerar o workflow de design. Gere imagens cinematográficas, mockups, assets 3D e muito mais — tudo em uma plataforma.",
+    "Como usar inteligência artificial para acelerar o workflow de design. Gere imagens cinematográficas, mockups, assets 3D e muito mais. tudo em uma plataforma.",
   openGraph: {
     title:
       "IA para Designers: ferramentas e workflow para 2025 | Calango Studio",
     description:
-      "Como usar inteligência artificial para acelerar o workflow de design. Gere imagens cinematográficas, mockups, assets 3D e muito mais — tudo em uma plataforma.",
+      "Como usar inteligência artificial para acelerar o workflow de design. Gere imagens cinematográficas, mockups, assets 3D e muito mais. tudo em uma plataforma.",
     url: "https://www.calangostudio.com.br/ferramentas/ia-para-designers",
     siteName: "Calango Studio",
     locale: "pt_BR",
@@ -123,7 +123,7 @@ const relatedPages = [
     href: "/guias/estilos-de-imagem-com-ia",
     title: "Estilos de Imagem com IA",
     description:
-      "Animal Art, Hero Style, Car Design e mais — conheça cada estilo.",
+      "Animal Art, Hero Style, Car Design e mais. conheça cada estilo.",
   },
 ];
 
@@ -136,8 +136,8 @@ export default function IaParaDesignersPage() {
 
       <p className="text-txt-secondary leading-relaxed mb-8">
         A inteligência artificial transformou o dia a dia dos designers. O que
-        antes exigia horas de trabalho manual — buscar referências, gerar
-        variações, criar mockups, remover fundos — agora pode ser feito em
+        antes exigia horas de trabalho manual. buscar referências, gerar
+        variações, criar mockups, remover fundos. agora pode ser feito em
         minutos. Mas a realidade de quem trabalha com múltiplos clientes ainda
         é fragmentada: uma ferramenta para gerar imagem, outra para criar
         copy, outra para mockups, outra para remover fundo. O contexto de
@@ -180,29 +180,29 @@ export default function IaParaDesignersPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
         <li>
-          <strong className="text-white">Imagem Criativa</strong> — estilos
+          <strong className="text-white">Imagem Criativa</strong>. estilos
           prontos como Animal Art, Hero Style, Car Design, Business Style,
           Craft Style e Classic Style. Sem prompts complexos.
         </li>
         <li>
-          <strong className="text-white">Assets 3D</strong> — elementos em
+          <strong className="text-white">Assets 3D</strong>. elementos em
           PNG transparente gerados por IA, prontos para composições.
         </li>
         <li>
-          <strong className="text-white">Mockup Produto</strong> — upload do
+          <strong className="text-white">Mockup Produto</strong>. upload do
           produto e geração de mockups com cenários por IA.
         </li>
         <li>
-          <strong className="text-white">UGC Build</strong> — fotos realistas
+          <strong className="text-white">UGC Build</strong>. fotos realistas
           de pessoas usando produtos, com aparência orgânica.
         </li>
         <li>
-          <strong className="text-white">Estúdio de Foto</strong> — sessões
+          <strong className="text-white">Estúdio de Foto</strong>. sessões
           fotográficas completas geradas por IA com referência de rosto ou
           produto.
         </li>
         <li>
-          <strong className="text-white">Meus Clientes</strong> — cadastro de
+          <strong className="text-white">Meus Clientes</strong>. cadastro de
           briefing por cliente, mantendo contexto e consistência entre
           gerações.
         </li>

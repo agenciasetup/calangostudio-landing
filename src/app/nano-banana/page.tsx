@@ -131,7 +131,7 @@ export default function NanoBananaHubPage() {
             imagens desenvolvido para o Calango Studio. Diferente de modelos
             genéricos como Midjourney ou DALL-E, o Nano Banana foi otimizado
             para o workflow de designers e social media managers que atendem
-            clientes — gerando imagens que já respeitam o contexto visual de
+            clientes. gerando imagens que já respeitam o contexto visual de
             cada marca.
           </p>
           <p>

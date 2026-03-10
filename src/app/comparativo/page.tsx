@@ -164,7 +164,7 @@ export default function ComparativoHubPage() {
         <div className="text-txt-secondary leading-relaxed space-y-4">
           <p>
             O mercado de ferramentas para designers e social media managers é
-            vasto e confuso. Canva, Freepik, Designi, Midjourney — cada uma
+            vasto e confuso. Canva, Freepik, Designi, Midjourney. cada uma
             resolve uma parte do problema, mas nenhuma centraliza todo o workflow
             criativo. Profissionais acabam assinando múltiplas plataformas,
             alternando entre elas e perdendo tempo com integrações manuais.
@@ -179,7 +179,7 @@ export default function ComparativoHubPage() {
           </p>
           <p>
             Cada análise foi feita do ponto de vista de quem trabalha com design
-            e social media profissionalmente — não para uso casual. Se você
+            e social media profissionalmente. não para uso casual. Se você
             atende clientes, produz em volume e precisa de consistência visual,
             esses comparativos vão te ajudar a tomar a decisão certa para o seu
             workflow.

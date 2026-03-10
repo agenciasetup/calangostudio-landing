@@ -34,10 +34,10 @@ const schema = {
 };
 
 const faqs = [
-  { question: "O Designi tem geração de imagem com IA?", answer: "Não. O Designi é um banco de recursos visuais — templates, fontes, mockups, vetores e fotos para download. Não gera imagens sob demanda. O Calango Studio é construído do zero para geração com IA: você descreve o que precisa e a imagem é criada. São modelos de negócio fundamentalmente diferentes." },
-  { question: "Qual a diferença entre Designi e Calango Studio?", answer: "O Designi oferece templates e recursos prontos para download e edição. O Calango Studio gera imagens, copies e mockups com IA, personalizados para cada cliente e briefing. No Designi, você adapta o que existe. No Calango, você cria o que precisa — do zero, em segundos." },
-  { question: "O Calango Studio substitui o Designi?", answer: "Para designers que atendem clientes e precisam de conteúdo original e personalizado, sim — o Calango gera exatamente o que você precisa sem depender de acervo. Para quem precisa de templates genéricos editáveis ou recursos como fontes e ícones, o Designi ainda tem seu espaço como ferramenta complementar." },
-  { question: "Qual é mais barato: Designi ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Designi dá acesso a acervo de templates e recursos. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas — tudo em uma assinatura a partir de R$97,90/mês." },
+  { question: "O Designi tem geração de imagem com IA?", answer: "Não. O Designi é um banco de recursos visuais. templates, fontes, mockups, vetores e fotos para download. Não gera imagens sob demanda. O Calango Studio é construído do zero para geração com IA: você descreve o que precisa e a imagem é criada. São modelos de negócio fundamentalmente diferentes." },
+  { question: "Qual a diferença entre Designi e Calango Studio?", answer: "O Designi oferece templates e recursos prontos para download e edição. O Calango Studio gera imagens, copies e mockups com IA, personalizados para cada cliente e briefing. No Designi, você adapta o que existe. No Calango, você cria o que precisa. do zero, em segundos." },
+  { question: "O Calango Studio substitui o Designi?", answer: "Para designers que atendem clientes e precisam de conteúdo original e personalizado, sim. o Calango gera exatamente o que você precisa sem depender de acervo. Para quem precisa de templates genéricos editáveis ou recursos como fontes e ícones, o Designi ainda tem seu espaço como ferramenta complementar." },
+  { question: "Qual é mais barato: Designi ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Designi dá acesso a acervo de templates e recursos. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas. tudo em uma assinatura a partir de R$97,90/mês." },
 ];
 
 const relatedPages = [
@@ -52,17 +52,17 @@ export default function CalangoVsDesigniPage() {
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">Calango Studio vs Designi</h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Designi é uma plataforma brasileira muito popular entre designers. Milhares de templates, fontes, mockups, vetores e fotos disponíveis por assinatura. Para quem trabalha com design gráfico, é um recurso valioso — especialmente pelo acervo em português e com estética adaptada ao mercado brasileiro. Mas o modelo é o mesmo de todo banco de recursos: você busca, filtra, baixa e adapta. Se o template não existe no acervo, você não tem. Se o estilo visual do cliente é específico, você precisa editar pesado para chegar no resultado. O Calango Studio parte de uma premissa diferente: em vez de procurar e adaptar, você descreve e gera. A imagem é criada sob demanda, no estilo que você precisa, com o contexto do cliente já carregado. Não depende de acervo. Não depende de sorte na busca. É a diferença entre trabalhar com o que existe e criar o que você imaginou.
+        O Designi é uma plataforma brasileira muito popular entre designers. Milhares de templates, fontes, mockups, vetores e fotos disponíveis por assinatura. Para quem trabalha com design gráfico, é um recurso valioso. especialmente pelo acervo em português e com estética adaptada ao mercado brasileiro. Mas o modelo é o mesmo de todo banco de recursos: você busca, filtra, baixa e adapta. Se o template não existe no acervo, você não tem. Se o estilo visual do cliente é específico, você precisa editar pesado para chegar no resultado. O Calango Studio parte de uma premissa diferente: em vez de procurar e adaptar, você descreve e gera. A imagem é criada sob demanda, no estilo que você precisa, com o contexto do cliente já carregado. Não depende de acervo. Não depende de sorte na busca. É a diferença entre trabalhar com o que existe e criar o que você imaginou.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O que o Designi faz bem</h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Designi tem um acervo robusto de templates para redes sociais, apresentações, materiais impressos e muito mais. As fontes e mockups são de boa qualidade, e o fato de ser brasileiro significa que o conteúdo é adaptado para o mercado local — datas comemorativas, formatos de post populares no Brasil, estética que faz sentido para o público brasileiro. Para designers que trabalham com projetos padronizados e precisam de recursos editáveis rapidamente, o Designi é uma ferramenta sólida e com bom custo-benefício.
+        O Designi tem um acervo robusto de templates para redes sociais, apresentações, materiais impressos e muito mais. As fontes e mockups são de boa qualidade, e o fato de ser brasileiro significa que o conteúdo é adaptado para o mercado local. datas comemorativas, formatos de post populares no Brasil, estética que faz sentido para o público brasileiro. Para designers que trabalham com projetos padronizados e precisam de recursos editáveis rapidamente, o Designi é uma ferramenta sólida e com bom custo-benefício.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">Onde o Calango Studio vai além</h2>
       <p className="text-txt-secondary leading-relaxed mb-4">
-        Quando você precisa de algo que não existe em nenhum banco — uma imagem específica para o estilo de um cliente, um mockup de produto no cenário exato, uma sessão de fotos com referência visual — o Calango Studio gera. Você não depende de acervo. Não precisa gastar tempo adaptando templates que &ldquo;quase servem&rdquo;. A imagem é criada sob demanda, no estilo certo, em segundos.
+        Quando você precisa de algo que não existe em nenhum banco. uma imagem específica para o estilo de um cliente, um mockup de produto no cenário exato, uma sessão de fotos com referência visual. o Calango Studio gera. Você não depende de acervo. Não precisa gastar tempo adaptando templates que &ldquo;quase servem&rdquo;. A imagem é criada sob demanda, no estilo certo, em segundos.
       </p>
 
       <div className="overflow-x-auto mb-8">

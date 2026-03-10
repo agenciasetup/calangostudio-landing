@@ -52,11 +52,11 @@ const schema = {
 const faqs = [
   {
     question: "O que é automação de conteúdo?",
-    answer: "É o uso de sistemas e ferramentas para executar etapas repetitivas da produção de conteúdo sem intervenção manual a cada vez. Não significa tirar o humano do processo — significa eliminar o trabalho que não agrega valor criativo: repassar briefing, procurar imagem, testar prompts. O que sobra é curadoria, estratégia e refinamento.",
+    answer: "É o uso de sistemas e ferramentas para executar etapas repetitivas da produção de conteúdo sem intervenção manual a cada vez. Não significa tirar o humano do processo. Significa eliminar o trabalho que não agrega valor criativo: repassar briefing, procurar imagem, testar prompts. O que sobra é curadoria, estratégia e refinamento.",
   },
   {
     question: "Automação de conteúdo reduz a qualidade?",
-    answer: "Quando bem implementada, não. A IA mantém padrão constante — o que muitas vezes é superior à variação de qualidade humana em dias de alta demanda ou bloqueio criativo. A chave é ter o briefing bem preenchido: quanto mais detalhado o contexto, mais preciso o resultado automático.",
+    answer: "Quando bem implementada, não. A IA mantém padrão constante, o que muitas vezes é superior à variação de qualidade humana em dias de alta demanda ou bloqueio criativo. A chave é ter o briefing bem preenchido: quanto mais detalhado o contexto, mais preciso o resultado automático.",
   },
   {
     question: "Qual parte da produção de conteúdo dá para automatizar?",
@@ -82,25 +82,25 @@ export default function ComoAutomatizarProducaoDeConteudoPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Automatizar não significa tirar o humano do processo — significa eliminar o trabalho repetitivo que não agrega valor criativo. Repassar briefing, procurar imagem, testar prompt, ajustar formato. Essas etapas podem e devem ser automatizadas. O que sobra — curadoria, estratégia, relacionamento — é onde o profissional entrega valor real. O Calango Studio automatiza a camada operacional da produção de conteúdo, permitindo que o profissional foque no que realmente diferencia o trabalho.
+        Automatizar não significa tirar o humano do processo. Significa eliminar o trabalho repetitivo que não agrega valor criativo. Repassar briefing, procurar imagem, testar prompt, ajustar formato. Essas etapas podem e devem ser automatizadas. O que sobra, curadoria, estratégia, relacionamento, é onde o profissional entrega valor real. O Calango Studio automatiza a camada operacional da produção de conteúdo, permitindo que o profissional foque no que realmente diferencia o trabalho.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: automatizar produção de conteúdo
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Cadastre todos os clientes ativos no Calango Studio</strong> — cada um com briefing completo: produto, público, tom de voz, referências visuais, exemplos de conteúdo aprovado.</li>
-        <li><strong className="text-white">Defina os formatos de entrega padrão</strong> — quais formatos cada cliente recebe (posts, carrosséis, stories, reels) e com que frequência.</li>
-        <li><strong className="text-white">Crie um fluxo padronizado</strong> — toda produção começa pelo perfil do cliente no Calango. Isso garante que o contexto está carregado antes de gerar qualquer coisa.</li>
-        <li><strong className="text-white">Use CopyMaker + Imagem Criativa em sequência</strong> — primeiro gere a copy (para definir a mensagem), depois a imagem (para complementar visualmente). Ou o inverso, conforme seu fluxo criativo.</li>
-        <li><strong className="text-white">Exporte, revise rapidamente e envie para aprovação</strong> — a revisão é rápida quando o ponto de partida já está no tom e no estilo certos.</li>
+        <li><strong className="text-white">Cadastre todos os clientes ativos no Calango Studio</strong>, cada um com briefing completo: produto, público, tom de voz, referências visuais, exemplos de conteúdo aprovado.</li>
+        <li><strong className="text-white">Defina os formatos de entrega padrão</strong>: quais formatos cada cliente recebe (posts, carrosséis, stories, reels) e com que frequência.</li>
+        <li><strong className="text-white">Crie um fluxo padronizado</strong>: toda produção começa pelo perfil do cliente no Calango. Isso garante que o contexto está carregado antes de gerar qualquer coisa.</li>
+        <li><strong className="text-white">Use CopyMaker + Imagem Criativa em sequência</strong>: primeiro gere a copy (para definir a mensagem), depois a imagem (para complementar visualmente). Ou o inverso, conforme seu fluxo criativo.</li>
+        <li><strong className="text-white">Exporte, revise rapidamente e envie para aprovação</strong>. A revisão é rápida quando o ponto de partida já está no tom e no estilo certos.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         O que muda na prática
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Sem automação, a produção de conteúdo para 10 clientes consome a semana inteira. Com automação via Calango Studio, a mesma produção cabe em 2-3 dias. Os outros dias ficam livres para estratégia, captação de novos clientes ou simplesmente trabalhar menos horas. A automação não é sobre fazer mais — é sobre fazer o necessário em menos tempo, com consistência. É o que separa o freelancer que trabalha 60 horas por semana do que trabalha 30 e fatura mais.
+        Sem automação, a produção de conteúdo para 10 clientes consome a semana inteira. Com automação via Calango Studio, a mesma produção cabe em 2-3 dias. Os outros dias ficam livres para estratégia, captação de novos clientes ou simplesmente trabalhar menos horas. A automação não é sobre fazer mais. É sobre fazer o necessário em menos tempo, com consistência. É o que separa o freelancer que trabalha 60 horas por semana do que trabalha 30 e fatura mais.
       </p>
 
       <FaqSection faqs={faqs} />

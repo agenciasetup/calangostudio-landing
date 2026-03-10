@@ -14,15 +14,15 @@ import {
 } from "lucide-react";
 
 const before = [
-  { text: "4 ferramentas abertas. 4 senhas. 4 assinaturas.", icon: Layers },
-  { text: "Você refaz o contexto do cliente toda vez.", icon: Clock },
-  { text: "O padrão visual muda. A entrega atrasa.", icon: Brain },
+  { text: "Quatro ferramentas abertas. Quatro senhas. Quatro assinaturas.", icon: Layers },
+  { text: "Toda semana você reconstrói o contexto do cliente do zero.", icon: Clock },
+  { text: "O visual muda de entrega pra entrega. O cliente percebe.", icon: Brain },
 ];
 
 const after = [
-  { text: "Uma plataforma. O briefing do cliente já está salvo.", icon: Layers, highlight: false },
-  { text: "Gere imagem, copy e entregável em menos de 20 minutos.", icon: Clock, highlight: true },
-  { text: "Mesmo padrão. Para qualquer cliente. Sempre.", icon: Brain, highlight: false },
+  { text: "Uma plataforma. O briefing do cliente já está esperando por você.", icon: Layers, highlight: false },
+  { text: "Imagem, copy e entregável em menos de 20 minutos.", icon: Clock, highlight: true },
+  { text: "O mesmo padrão visual, para qualquer cliente, toda vez.", icon: Brain, highlight: false },
 ];
 
 const advantages = [

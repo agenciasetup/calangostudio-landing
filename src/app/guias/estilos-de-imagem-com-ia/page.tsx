@@ -126,7 +126,7 @@ export default function EstilosDeImagemComIaPage() {
         estilos prontos do Calango Studio eliminam essa barreira. Em vez de
         escrever um prompt de 200 palavras, você seleciona um estilo com um
         clique e descreve apenas o que quer ver na imagem. O estilo cuida de
-        toda a calibragem técnica — iluminação, composição, paleta de cores,
+        toda a calibragem técnica. iluminação, composição, paleta de cores,
         nível de realismo. O resultado é profissional e consistente, sem
         exigir conhecimento técnico de geração de imagem.
       </p>
@@ -139,7 +139,7 @@ export default function EstilosDeImagemComIaPage() {
         estética visual automaticamente. Cada estilo tem parâmetros de
         iluminação, composição, paleta de cores e nível de detalhe já
         calibrados para um tipo específico de resultado. O usuário precisa
-        apenas escolher o estilo e descrever o conteúdo da imagem — a parte
+        apenas escolher o estilo e descrever o conteúdo da imagem. a parte
         técnica fica por conta da IA.
       </p>
 
@@ -163,7 +163,7 @@ export default function EstilosDeImagemComIaPage() {
         impacto, iluminação dramática, composição épica. Ideal para marcas
         com posicionamento forte, perfis de liderança, campanhas
         motivacionais, material para coaches e mentores. O resultado tem
-        visual de pôster de cinema — grandioso, impactante e profissional.
+        visual de pôster de cinema. grandioso, impactante e profissional.
       </p>
 
       <h3 className="text-lg font-semibold text-white mb-2 mt-8">

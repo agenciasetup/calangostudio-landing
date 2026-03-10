@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Calango Studio — Plataforma de IA para Designers e Social Media Managers",
+  title: "Calango Studio. Plataforma de IA para Designers e Social Media Managers",
   description:
     "Gere imagens, copies e criativos com IA. Gerencie seus clientes, salve briefings e produza 10x mais rápido. 12 ferramentas em uma única plataforma.",
   openGraph: {
-    title: "Calango Studio — Plataforma de IA para Designers e Social Media Managers",
+    title: "Calango Studio. Plataforma de IA para Designers e Social Media Managers",
     description:
       "Gere imagens, copies e criativos com IA. Gerencie seus clientes, salve briefings e produza 10x mais rápido. 12 ferramentas em uma única plataforma.",
     images: ["/images/og-image.png"],

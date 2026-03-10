@@ -6,10 +6,12 @@ import CouponBar from "@/components/CouponBar";
 
 const Problem = dynamic(() => import("@/components/Problem"));
 const BeforeAfter = dynamic(() => import("@/components/BeforeAfter"));
+const ResultadosGallery = dynamic(() => import("@/components/ResultadosGallery"));
 const WhatIsCalango = dynamic(() => import("@/components/WhatIsCalango"));
 const Tools = dynamic(() => import("@/components/Tools"));
 const ClientManagement = dynamic(() => import("@/components/ClientManagement"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const ArtesGallery = dynamic(() => import("@/components/ArtesGallery"));
 const Pricing = dynamic(() => import("@/components/Pricing"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/CTAFinal"));
@@ -28,10 +30,12 @@ export default function Home() {
         <Hero />
         <Problem />
         <BeforeAfter />
+        <ResultadosGallery />
         <WhatIsCalango />
         <Tools />
         <ClientManagement />
         <Testimonials />
+        <ArtesGallery />
         <Suspense fallback={null}>
           <Pricing />
         </Suspense>

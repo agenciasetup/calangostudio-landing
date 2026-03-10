@@ -160,8 +160,8 @@ export default function SessaoDeFotosComIaPage() {
         cria variações em diferentes cenários, iluminações e estilos. O
         resultado são imagens prontas para uso profissional, com qualidade
         comparável à de uma sessão fotográfica tradicional. Essa abordagem é
-        especialmente útil para quem precisa de volume — muitas fotos em pouco
-        tempo — ou para quem não tem acesso a estúdios e fotógrafos.
+        especialmente útil para quem precisa de volume, muitas fotos em pouco
+        tempo, ou para quem não tem acesso a estúdios e fotógrafos.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
@@ -177,19 +177,19 @@ export default function SessaoDeFotosComIaPage() {
       </h3>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
         <li>
-          <strong className="text-white">Upload de referência</strong> — suba
+          <strong className="text-white">Upload de referência</strong>: suba
           uma foto do rosto ou produto que será a base da sessão.
         </li>
         <li>
-          <strong className="text-white">Escolha de cenário</strong> —
+          <strong className="text-white">Escolha de cenário</strong>:
           selecione o ambiente e estilo desejado para a sessão.
         </li>
         <li>
-          <strong className="text-white">Geração por IA</strong> — a
+          <strong className="text-white">Geração por IA</strong>: a
           plataforma gera múltiplas variações com qualidade cinematográfica.
         </li>
         <li>
-          <strong className="text-white">Casos de uso</strong> — perfil
+          <strong className="text-white">Casos de uso</strong>: perfil
           pessoal, fotos para LinkedIn, catálogo de e-commerce, conteúdo para
           redes sociais, materiais de marketing para clientes.
         </li>

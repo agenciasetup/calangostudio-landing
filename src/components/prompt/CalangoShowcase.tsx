@@ -85,7 +85,7 @@ export default function CalangoShowcase() {
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-3xl mx-auto">
             Uma plataforma completa com geradores de imagem por IA. Crie fotos
-            de produto, UGC, criativos para ads e muito mais — tudo em um só
+            de produto, UGC, criativos para ads e muito mais. Tudo em um só
             lugar.
           </p>
         </motion.div>

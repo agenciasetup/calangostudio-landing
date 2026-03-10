@@ -152,7 +152,7 @@ export default function FreelancerHubPage() {
         <div className="text-txt-secondary leading-relaxed space-y-4">
           <p>
             Freelancers de design e social media vivem um paradoxo: para ganhar
-            mais, precisam atender mais clientes — mas cada cliente adicional
+            mais, precisam atender mais clientes. mas cada cliente adicional
             consome mais horas de produção. Sem automação, o teto de crescimento
             é limitado pela capacidade individual. A inteligência artificial
             quebra esse teto.

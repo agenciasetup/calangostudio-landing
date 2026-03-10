@@ -160,7 +160,7 @@ export default function SocialMediaHubPage() {
           <p>
             A inteligência artificial mudou esse cenário. Hoje é possível gerar
             copies contextualizadas, criar imagens originais no estilo de cada
-            marca e planejar o conteúdo de um mês inteiro em horas — não semanas.
+            marca e planejar o conteúdo de um mês inteiro em horas. não semanas.
             A diferença está em usar uma plataforma que entenda o contexto de cada
             cliente, como o Calango Studio, em vez de ferramentas genéricas que
             exigem reexplicar tudo a cada sessão.

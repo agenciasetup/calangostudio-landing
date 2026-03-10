@@ -52,7 +52,7 @@ const schema = {
 const faqs = [
   {
     question: "Como evitar misturar o conteúdo de clientes diferentes?",
-    answer: "No Calango Studio, cada cliente tem perfil próprio. Você acessa o perfil do cliente antes de gerar qualquer conteúdo — o contexto é isolado por design. A IA só acessa o briefing daquele cliente específico, sem contaminação com dados de outros. Isso é estruturalmente diferente do ChatGPT, onde a memória mistura conversas.",
+    answer: "No Calango Studio, cada cliente tem perfil próprio. Você acessa o perfil do cliente antes de gerar qualquer conteúdo. o contexto é isolado por design. A IA só acessa o briefing daquele cliente específico, sem contaminação com dados de outros. Isso é estruturalmente diferente do ChatGPT, onde a memória mistura conversas.",
   },
   {
     question: "Quantos clientes posso gerenciar no Calango Studio?",
@@ -64,7 +64,7 @@ const faqs = [
   },
   {
     question: "Como cobrar mais atendendo mais clientes sem aumentar a equipe?",
-    answer: "Com o Calango Studio, o tempo de produção por cliente cai drasticamente. Isso permite atender mais clientes com a mesma carga horária — o que aumenta o faturamento sem aumentar custo fixo de equipe. O caminho é cobrar pelo resultado entregue, não pela hora trabalhada.",
+    answer: "Com o Calango Studio, o tempo de produção por cliente cai drasticamente. Isso permite atender mais clientes com a mesma carga horária. o que aumenta o faturamento sem aumentar custo fixo de equipe. O caminho é cobrar pelo resultado entregue, não pela hora trabalhada.",
   },
 ];
 
@@ -82,25 +82,25 @@ export default function ComoCriarPostsParaMultiplosClientesPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O grande desafio de quem atende múltiplos clientes não é criatividade — é organização e contexto. Cada cliente tem identidade visual, tom de voz e produto diferente. Misturar isso é o caminho para entregar o post errado para o cliente errado. Quando você gerencia 5, 10 ou 15 clientes, manter cada um isolado mentalmente é impossível sem sistema. O Calango Studio resolve isso estruturalmente: cada cliente tem seu próprio perfil, isolado, com todo o contexto salvo e separado.
+        O grande desafio de quem atende múltiplos clientes não é criatividade. é organização e contexto. Cada cliente tem identidade visual, tom de voz e produto diferente. Misturar isso é o caminho para entregar o post errado para o cliente errado. Quando você gerencia 5, 10 ou 15 clientes, manter cada um isolado mentalmente é impossível sem sistema. O Calango Studio resolve isso estruturalmente: cada cliente tem seu próprio perfil, isolado, com todo o contexto salvo e separado.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         O problema do GPT para quem tem vários clientes
       </h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        No ChatGPT, memória e contexto se cruzam entre conversas. Você pede uma copy para o Cliente A e o GPT contamina com memória do Cliente B. Começa escrevendo no tom formal do cliente de consultoria e no meio do texto muda para o tom descontraído do cliente de moda. No Calango Studio, cada cliente é um ambiente isolado — briefing, fotos, estilo e referências separados por perfil. A IA só acessa o que pertence àquele cliente, eliminando contaminação.
+        No ChatGPT, memória e contexto se cruzam entre conversas. Você pede uma copy para o Cliente A e o GPT contamina com memória do Cliente B. Começa escrevendo no tom formal do cliente de consultoria e no meio do texto muda para o tom descontraído do cliente de moda. No Calango Studio, cada cliente é um ambiente isolado. briefing, fotos, estilo e referências separados por perfil. A IA só acessa o que pertence àquele cliente, eliminando contaminação.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: produzir para múltiplos clientes
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Cadastre cada cliente na seção Meus Clientes</strong> — cada cliente recebe um perfil independente no Calango Studio.</li>
-        <li><strong className="text-white">Preencha o briefing completo</strong> — produto, público-alvo, tom de voz, cores, referências visuais, exemplos de conteúdo aprovado.</li>
-        <li><strong className="text-white">Acesse o perfil do cliente antes de produzir</strong> — todas as ferramentas (CopyMaker, Imagem Criativa, Remix Layout) usam o contexto daquele perfil.</li>
-        <li><strong className="text-white">Gere imagem e copy a partir do perfil</strong> — contexto já carregado. Sem reexplicar nada.</li>
-        <li><strong className="text-white">Alterne para outro cliente</strong> — contexto muda automaticamente. Sem mistura, sem confusão.</li>
+        <li><strong className="text-white">Cadastre cada cliente na seção Meus Clientes</strong>. cada cliente recebe um perfil independente no Calango Studio.</li>
+        <li><strong className="text-white">Preencha o briefing completo</strong>. produto, público-alvo, tom de voz, cores, referências visuais, exemplos de conteúdo aprovado.</li>
+        <li><strong className="text-white">Acesse o perfil do cliente antes de produzir</strong>. todas as ferramentas (CopyMaker, Imagem Criativa, Remix Layout) usam o contexto daquele perfil.</li>
+        <li><strong className="text-white">Gere imagem e copy a partir do perfil</strong>. contexto já carregado. Sem reexplicar nada.</li>
+        <li><strong className="text-white">Alterne para outro cliente</strong>. contexto muda automaticamente. Sem mistura, sem confusão.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">

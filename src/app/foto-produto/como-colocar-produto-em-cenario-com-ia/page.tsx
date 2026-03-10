@@ -8,10 +8,10 @@ import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 
 export const metadata: Metadata = {
   title: "Como Colocar Produto em Cenário com IA | Calango Studio",
-  description: "Insira qualquer produto em cenários profissionais usando IA. Praia, escritório, natureza, lifestyle — gerados em minutos no Calango Studio.",
+  description: "Insira qualquer produto em cenários profissionais usando IA. Praia, escritório, natureza, lifestyle. gerados em minutos no Calango Studio.",
   openGraph: {
     title: "Como Colocar Produto em Cenário com IA | Calango Studio",
-    description: "Insira qualquer produto em cenários profissionais usando IA. Praia, escritório, natureza, lifestyle — gerados em minutos no Calango Studio.",
+    description: "Insira qualquer produto em cenários profissionais usando IA. Praia, escritório, natureza, lifestyle. gerados em minutos no Calango Studio.",
     url: "https://www.calangostudio.com.br/foto-produto/como-colocar-produto-em-cenario-com-ia",
     siteName: "Calango Studio",
     locale: "pt_BR",
@@ -52,7 +52,7 @@ const schema = {
 const faqs = [
   {
     question: "A IA consegue colocar qualquer produto em qualquer cenário?",
-    answer: "Para a maioria dos produtos físicos, sim. Produtos com formas simples e reconhecíveis — garrafas, caixas, embalagens, roupas, eletrônicos — funcionam perfeitamente. Produtos com formas muito irregulares ou transparências complexas podem exigir mais iterações para ficarem convincentes, mas o resultado final geralmente compensa o esforço.",
+    answer: "Para a maioria dos produtos físicos, sim. Produtos com formas simples e reconhecíveis. garrafas, caixas, embalagens, roupas, eletrônicos. funcionam perfeitamente. Produtos com formas muito irregulares ou transparências complexas podem exigir mais iterações para ficarem convincentes, mas o resultado final geralmente compensa o esforço.",
   },
   {
     question: "Como descrever o cenário para conseguir o melhor resultado?",
@@ -60,11 +60,11 @@ const faqs = [
   },
   {
     question: "Preciso saber usar Photoshop para isso?",
-    answer: "Não. O processo inteiro acontece dentro do Calango Studio — upload, descrição do cenário e geração. Não precisa recortar, compor ou ajustar manualmente. A IA faz a composição completa, incluindo iluminação e sombras consistentes com o cenário.",
+    answer: "Não. O processo inteiro acontece dentro do Calango Studio. upload, descrição do cenário e geração. Não precisa recortar, compor ou ajustar manualmente. A IA faz a composição completa, incluindo iluminação e sombras consistentes com o cenário.",
   },
   {
     question: "Quantas gerações preciso fazer até ter o resultado certo?",
-    answer: "Em média 2 a 4 gerações. A primeira geração já dá uma boa indicação da direção. Refinar a descrição do cenário entre as gerações — adicionando ou removendo detalhes — acelera a convergência para o resultado ideal. Com prática, muitos usuários acertam na primeira ou segunda tentativa.",
+    answer: "Em média 2 a 4 gerações. A primeira geração já dá uma boa indicação da direção. Refinar a descrição do cenário entre as gerações. adicionando ou removendo detalhes. acelera a convergência para o resultado ideal. Com prática, muitos usuários acertam na primeira ou segunda tentativa.",
   },
 ];
 
@@ -82,29 +82,29 @@ export default function ComoColocarProdutoEmCenarioComIaPage() {
       </h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Colocar um produto em um cenário específico exigia, antes da IA, produção fotográfica no local ou composição manual no Photoshop — o que consome horas de trabalho especializado. Alinhar iluminação, perspectiva, sombras e reflexos entre o produto e o cenário era trabalho de profissional experiente. Com IA, você descreve o cenário e gera a imagem em segundos. O produto é inserido com iluminação e sombras consistentes automaticamente. Para e-commerce, redes sociais e anúncios, o resultado é indistinguível de uma foto produzida — e leva uma fração do tempo e do custo.
+        Colocar um produto em um cenário específico exigia, antes da IA, produção fotográfica no local ou composição manual no Photoshop. o que consome horas de trabalho especializado. Alinhar iluminação, perspectiva, sombras e reflexos entre o produto e o cenário era trabalho de profissional experiente. Com IA, você descreve o cenário e gera a imagem em segundos. O produto é inserido com iluminação e sombras consistentes automaticamente. Para e-commerce, redes sociais e anúncios, o resultado é indistinguível de uma foto produzida. e leva uma fração do tempo e do custo.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Passo a passo: produto em cenário com IA
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
-        <li><strong className="text-white">Tenha a imagem do produto com fundo limpo</strong> — preferencialmente fundo branco ou transparente. Isso facilita a inserção natural no cenário gerado.</li>
-        <li><strong className="text-white">No Calango Studio, acesse Mockup Produto</strong> — a ferramenta é projetada para esse tipo de composição.</li>
-        <li><strong className="text-white">Faça upload da imagem do produto</strong> — suba a foto que será inserida no cenário.</li>
-        <li><strong className="text-white">Descreva o cenário com detalhes</strong> — ex: &ldquo;mesa de madeira rústica com luz natural suave, xícara de café ao lado, estilo café aconchegante&rdquo;. Quanto mais específico, mais preciso.</li>
-        <li><strong className="text-white">Gere e refine</strong> — a primeira geração mostra a direção. Ajuste a descrição e gere novamente se necessário.</li>
+        <li><strong className="text-white">Tenha a imagem do produto com fundo limpo</strong>. preferencialmente fundo branco ou transparente. Isso facilita a inserção natural no cenário gerado.</li>
+        <li><strong className="text-white">No Calango Studio, acesse Mockup Produto</strong>. a ferramenta é projetada para esse tipo de composição.</li>
+        <li><strong className="text-white">Faça upload da imagem do produto</strong>. suba a foto que será inserida no cenário.</li>
+        <li><strong className="text-white">Descreva o cenário com detalhes</strong>. ex: &ldquo;mesa de madeira rústica com luz natural suave, xícara de café ao lado, estilo café aconchegante&rdquo;. Quanto mais específico, mais preciso.</li>
+        <li><strong className="text-white">Gere e refine</strong>. a primeira geração mostra a direção. Ajuste a descrição e gere novamente se necessário.</li>
       </ol>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">
         Exemplos de cenários e quando usar cada um
       </h2>
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-8">
-        <li><strong className="text-white">Natureza/ar livre</strong> — produtos de bem-estar, alimentos naturais, cosméticos orgânicos. Transmite frescor e naturalidade.</li>
-        <li><strong className="text-white">Escritório moderno</strong> — produtos de tecnologia, papelaria, ergonomia. Comunica profissionalismo e produtividade.</li>
-        <li><strong className="text-white">Cozinha</strong> — alimentos, utensílios, eletrodomésticos. Contexto de uso imediato que facilita a identificação do consumidor.</li>
-        <li><strong className="text-white">Mesa de café</strong> — bebidas, livros, produtos lifestyle. Transmite momento de pausa, conforto, lifestyle aspiracional.</li>
-        <li><strong className="text-white">Fundo neutro premium</strong> — joias, perfumes, produtos de luxo. Minimalismo que destaca o produto sem distrações.</li>
+        <li><strong className="text-white">Natureza/ar livre</strong>. produtos de bem-estar, alimentos naturais, cosméticos orgânicos. Transmite frescor e naturalidade.</li>
+        <li><strong className="text-white">Escritório moderno</strong>. produtos de tecnologia, papelaria, ergonomia. Comunica profissionalismo e produtividade.</li>
+        <li><strong className="text-white">Cozinha</strong>. alimentos, utensílios, eletrodomésticos. Contexto de uso imediato que facilita a identificação do consumidor.</li>
+        <li><strong className="text-white">Mesa de café</strong>. bebidas, livros, produtos lifestyle. Transmite momento de pausa, conforto, lifestyle aspiracional.</li>
+        <li><strong className="text-white">Fundo neutro premium</strong>. joias, perfumes, produtos de luxo. Minimalismo que destaca o produto sem distrações.</li>
       </ul>
 
       <FaqSection faqs={faqs} />
