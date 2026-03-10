@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import CouponBar from "@/components/CouponBar";
+import { getImageFilenames, detectLabel } from "@/lib/getImages";
 
 const Problem = dynamic(() => import("@/components/Problem"));
 const BeforeAfter = dynamic(() => import("@/components/BeforeAfter"));
@@ -18,6 +19,12 @@ const CTAFinal = dynamic(() => import("@/components/CTAFinal"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
+  const resultadosItems = getImageFilenames("resultados").map((f) => ({
+    filename: f,
+    label: detectLabel(f),
+  }));
+  const artesFilenames = getImageFilenames("artes");
+
   return (
     <>
       <Suspense fallback={null}>
@@ -30,12 +37,12 @@ export default function Home() {
         <Hero />
         <Problem />
         <BeforeAfter />
-        <ResultadosGallery />
+        <ResultadosGallery items={resultadosItems} />
         <WhatIsCalango />
         <Tools />
         <ClientManagement />
         <Testimonials />
-        <ArtesGallery />
+        <ArtesGallery filenames={artesFilenames} />
         <Suspense fallback={null}>
           <Pricing />
         </Suspense>

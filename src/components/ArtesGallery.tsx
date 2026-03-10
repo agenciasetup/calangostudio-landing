@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { artes } from "@/data/artes";
 
 const ITEM_W_DESKTOP = 220;
 const ITEM_W_MOBILE = 140;
@@ -12,13 +11,12 @@ function tripleRow(row: string[]) {
   return [...row, ...row, ...row];
 }
 
-export default function ArtesGallery() {
-  // Adicione imagens 4:5 em /public/images/artes/ para aparecerem na galeria
-  if (artes.length === 0) return null;
+export default function ArtesGallery({ filenames }: { filenames: string[] }) {
+  if (filenames.length === 0) return null;
 
-  const items = tripleRow(artes);
-  const setWidth = artes.length * (ITEM_W_DESKTOP + GAP);
-  const setWidthMobile = artes.length * (ITEM_W_MOBILE + GAP);
+  const items = tripleRow(filenames);
+  const setWidth = filenames.length * (ITEM_W_DESKTOP + GAP);
+  const setWidthMobile = filenames.length * (ITEM_W_MOBILE + GAP);
 
   return (
     <section className="py-16 md:py-20 px-4 relative overflow-hidden">

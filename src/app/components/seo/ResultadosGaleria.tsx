@@ -1,27 +1,21 @@
 import Image from "next/image";
+import { getImageFilenames } from "@/lib/getImages";
 
-const resultados = [
-  "animal_criativo.jpg",
-  "business_criativo.jpg",
-  "car_criativo.jpg",
-  "hero_criativo.jpg",
-  "classic_criativo.jpg",
-  "Kel_foto.jpg",
-  "vini_ugc.jpg",
-  "adam_manual.jpeg",
-  "animal5_criativo.jpg",
-  "raquel_foto_1.png",
-  "book_manual.jpg",
-  "business2_criativo.jpg",
-].map((filename, i) => ({
-  src: `/images/resultados/${filename}`,
-  alt: `Resultado ${i + 1} criado com Calango Studio`,
-}));
+const MAX_SEO_IMAGES = 12;
 
 const ctaUrl =
   "https://calangostudio.com.br/?utm_source=site&utm_medium=seo&utm_campaign=resultados-galeria";
 
 export default function ResultadosGaleria() {
+  const resultados = getImageFilenames("resultados")
+    .slice(0, MAX_SEO_IMAGES)
+    .map((filename, i) => ({
+      src: `/images/resultados/${filename}`,
+      alt: `Resultado ${i + 1} criado com Calango Studio`,
+    }));
+
+  if (resultados.length === 0) return null;
+
   return (
     <section className="mt-12">
       <div className="text-center mb-8">
