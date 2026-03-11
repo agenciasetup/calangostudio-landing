@@ -267,3 +267,49 @@ body {
     animation: none;
   }
 }
+
+/* ============================================================
+   BONUS SECTION – Fábrica de Clientes
+   ============================================================ */
+
+.bonus-text-gradient {
+  background: linear-gradient(135deg, #34d399, #06b6d4, #34d399);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: bonus-gradient-shift 4s ease infinite;
+}
+
+@keyframes bonus-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bonus-badge-glow {
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.12), 0 0 60px rgba(52, 211, 153, 0.06);
+}
+
+.bonus-card-glow {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 0 40px rgba(52, 211, 153, 0.04);
+}
+
+.bonus-payment-pulse {
+  animation: bonus-pulse 3s ease-in-out infinite;
+}
+
+@keyframes bonus-pulse {
+  0%, 100% { box-shadow: 0 8px 40px rgba(16, 185, 129, 0.15); }
+  50% { box-shadow: 0 8px 40px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.1); }
+}
+
+@media (max-width: 767px) {
+  .bonus-text-gradient {
+    animation: none;
+    background-position: 50% 50%;
+  }
+  .bonus-payment-pulse {
+    animation: none;
+  }
+}

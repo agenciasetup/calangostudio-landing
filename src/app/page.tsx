@@ -13,6 +13,7 @@ const Tools = dynamic(() => import("@/components/Tools"));
 const ClientManagement = dynamic(() => import("@/components/ClientManagement"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const ArtesGallery = dynamic(() => import("@/components/ArtesGallery"));
+const BonusFabrica = dynamic(() => import("@/components/BonusFabrica"));
 const Pricing = dynamic(() => import("@/components/Pricing"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/CTAFinal"));
@@ -44,6 +45,7 @@ export default function Home() {
         <ClientManagement />
         <Testimonials />
         <ArtesGallery filenames={artesFilenames} />
+        <BonusFabrica />
         <Suspense fallback={null}>
           <Pricing />
         </Suspense>
