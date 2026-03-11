@@ -58,6 +58,12 @@ const schema = {
         name: "Como Colocar Produto em Cenário com IA",
         url: "https://www.calangostudio.com.br/foto-produto/como-colocar-produto-em-cenario-com-ia",
       },
+      {
+        "@type": "ListItem",
+        position: 5,
+        name: "Como Fazer uma Sessão de Fotos Completa Usando IA",
+        url: "https://www.calangostudio.com.br/foto-produto/como-fazer-sessao-de-fotos-com-ia",
+      },
     ],
   },
 };
@@ -87,6 +93,12 @@ const subpages = [
     description:
       "Insira qualquer produto em cenários profissionais usando IA. Praia, escritório, natureza, lifestyle.",
   },
+  {
+    href: "/foto-produto/como-fazer-sessao-de-fotos-com-ia",
+    title: "Sessão de Fotos Completa com IA",
+    description:
+      "Como simular uma sessão de fotos profissional completa usando IA. Produto, moda, retrato e lifestyle.",
+  },
 ];
 
 export default function FotoProdutoHubPage() {
@@ -96,7 +108,7 @@ export default function FotoProdutoHubPage() {
         title="Foto de Produto com IA"
         subtitle="Guias para criar fotos profissionais de produto sem estúdio e sem fotógrafo. Mockups, cenários realistas e imagens para e-commerce. tudo gerado com IA."
         icon="📸"
-        contentCount={4}
+        contentCount={5}
         contentLabel="guias"
         ctaUtmCampaign="foto-produto"
       />

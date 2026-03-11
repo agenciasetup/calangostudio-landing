@@ -64,6 +64,12 @@ const schema = {
         name: "Como Criar UGC para Anúncios com IA",
         url: "https://www.calangostudio.com.br/criativos/como-criar-ugc-para-anuncios",
       },
+      {
+        "@type": "ListItem",
+        position: 6,
+        name: "25 Prompts Poderosos para Designers",
+        url: "https://www.calangostudio.com.br/criativos/prompts-poderosos-para-designers",
+      },
     ],
   },
 };
@@ -99,6 +105,12 @@ const subpages = [
     description:
       "Como produzir UGC para Facebook Ads e Instagram Ads usando IA. Fotos realistas de pessoas com produtos sem contratar criador.",
   },
+  {
+    href: "/criativos/prompts-poderosos-para-designers",
+    title: "25 Prompts Poderosos para Designers",
+    description:
+      "Prompts prontos para criar posts, anúncios, thumbnails e imagens com IA. Guia completo com exemplos e dicas de customização.",
+  },
 ];
 
 export default function CriativosHubPage() {
@@ -108,7 +120,7 @@ export default function CriativosHubPage() {
         title="Criativos com IA"
         subtitle="Guias práticos para criar criativos profissionais usando inteligência artificial. De anúncios a UGC, tudo o que você precisa para escalar sua produção visual."
         icon="🎨"
-        contentCount={5}
+        contentCount={6}
         contentLabel="guias"
         ctaUtmCampaign="criativos"
       />
