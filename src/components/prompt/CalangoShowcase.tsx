@@ -137,7 +137,7 @@ export default function CalangoShowcase() {
           className="text-center mt-10 md:mt-14"
         >
           <a
-            href="https://calango.studio/?utm_source=promptmaker&utm_medium=showcase_cta&utm_campaign=conhecer"
+            href="https://calangostudio.com.br/?utm_source=promptmaker&utm_medium=showcase_cta&utm_campaign=conhecer"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2.5 btn-primary px-8 py-4 text-sm tracking-widest"
