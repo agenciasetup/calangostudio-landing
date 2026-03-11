@@ -8,7 +8,6 @@ import {
   MessageCircle,
   Send,
   DollarSign,
-  Check,
   ChevronRight,
   Star,
   Flame,
