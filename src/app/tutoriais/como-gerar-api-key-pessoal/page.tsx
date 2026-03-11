@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import SeoLayout from "@/app/components/seo/SeoLayout";
 import FaqSection from "@/app/components/seo/FaqSection";
 import CtaBanner from "@/app/components/seo/CtaBanner";
