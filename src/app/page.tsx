@@ -16,6 +16,7 @@ const ArtesGallery = dynamic(() => import("@/components/ArtesGallery"));
 const Pricing = dynamic(() => import("@/components/Pricing"));
 const FAQ = dynamic(() => import("@/components/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/CTAFinal"));
+const Founder = dynamic(() => import("@/components/Founder"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
 export default function Home() {
@@ -48,6 +49,8 @@ export default function Home() {
         </Suspense>
         <FAQ />
         <CTAFinal />
+        <div className="section-divider" />
+        <Founder />
       </main>
       <Footer />
     </>
