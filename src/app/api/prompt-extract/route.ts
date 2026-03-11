@@ -2,10 +2,52 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI, Type } from "@google/genai";
 import OpenAI from "openai";
 
+/* ── Route segment config ── */
+export const maxDuration = 60; // allow up to 60s for queued requests
+export const dynamic = "force-dynamic";
+
+/* ── Constants ── */
+const OPENAI_TIMEOUT_MS = 30_000;
 const GEMINI_TIMEOUT_MS = 30_000;
 const DAILY_LIMIT = 3;
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024; // 10 MB
 const BURST_WINDOW_MS = 5_000; // 5s between requests per identity
+
+/* ── Concurrency queue (invisible to user) ── */
+const MAX_CONCURRENT = 15; // max simultaneous AI calls
+const MAX_QUEUE_WAIT_MS = 20_000; // max time waiting in queue before 503
+let activeRequests = 0;
+const waitQueue: Array<() => void> = [];
+
+function acquireSlot(): Promise<void> {
+  if (activeRequests < MAX_CONCURRENT) {
+    activeRequests++;
+    return Promise.resolve();
+  }
+  // Queue the request — resolves when a slot frees up
+  return new Promise<void>((resolve, reject) => {
+    const timer = setTimeout(() => {
+      const idx = waitQueue.indexOf(release);
+      if (idx !== -1) waitQueue.splice(idx, 1);
+      reject(new Error("QUEUE_TIMEOUT"));
+    }, MAX_QUEUE_WAIT_MS);
+
+    const release = () => {
+      clearTimeout(timer);
+      activeRequests++;
+      resolve();
+    };
+    waitQueue.push(release);
+  });
+}
+
+function releaseSlot() {
+  activeRequests--;
+  if (waitQueue.length > 0) {
+    const next = waitQueue.shift();
+    next?.();
+  }
+}
 
 const UNIVERSAL_HEADER =
   "#Aplique as instruções acima e estilize com o prompt abaixo";
@@ -112,7 +154,47 @@ OUTPUT FORMAT:
 
 The "prompt" value must be highly detailed, structured, and production-ready for image generation.`;
 
-/* ── Gemini (primary) with 30s timeout ── */
+/* ── OpenAI GPT (primary) ── */
+async function callOpenAI(mimeType: string, base64Data: string): Promise<string> {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) throw new Error("OPENAI_API_KEY not set");
+
+  const model = process.env.OPENAI_FALLBACK_MODEL || "gpt-5.2";
+  const openai = new OpenAI({ apiKey, timeout: OPENAI_TIMEOUT_MS });
+
+  const dataUrl = `data:${mimeType};base64,${base64Data}`;
+
+  const response = await openai.responses.create({
+    model,
+    input: [
+      {
+        role: "user",
+        content: [
+          { type: "input_text", text: instruction },
+          { type: "input_image", image_url: dataUrl, detail: "high" },
+        ],
+      },
+    ],
+    text: {
+      format: {
+        type: "json_schema",
+        name: "prompt_maker_result",
+        schema: openaiJsonSchema,
+        strict: true,
+      },
+    },
+  });
+
+  const text = (response.output_text || "")
+    .replace(/```json/gi, "")
+    .replace(/```/g, "")
+    .trim();
+
+  JSON.parse(text);
+  return text;
+}
+
+/* ── Gemini (fallback) with 30s timeout ── */
 async function callGemini(mimeType: string, base64Data: string): Promise<string> {
   const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
   if (!apiKey) throw new Error("GOOGLE_GEMINI_API_KEY not set");
@@ -152,46 +234,6 @@ async function callGemini(mimeType: string, base64Data: string): Promise<string>
   } finally {
     clearTimeout(timeout);
   }
-}
-
-/* ── OpenAI GPT fallback ── */
-async function callOpenAIFallback(mimeType: string, base64Data: string): Promise<string> {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error("OPENAI_API_KEY not set for fallback");
-
-  const model = process.env.OPENAI_FALLBACK_MODEL || "gpt-5.2";
-  const openai = new OpenAI({ apiKey });
-
-  const dataUrl = `data:${mimeType};base64,${base64Data}`;
-
-  const response = await openai.responses.create({
-    model,
-    input: [
-      {
-        role: "user",
-        content: [
-          { type: "input_text", text: instruction },
-          { type: "input_image", image_url: dataUrl, detail: "high" },
-        ],
-      },
-    ],
-    text: {
-      format: {
-        type: "json_schema",
-        name: "prompt_maker_result",
-        schema: openaiJsonSchema,
-        strict: true,
-      },
-    },
-  });
-
-  const text = (response.output_text || "")
-    .replace(/```json/gi, "")
-    .replace(/```/g, "")
-    .trim();
-
-  JSON.parse(text);
-  return text;
 }
 
 /* ── Helpers ── */
@@ -257,19 +299,33 @@ export async function POST(request: NextRequest) {
     const mimeType = match[1];
     const base64Data = match[2];
 
+    // Acquire concurrency slot (waits in queue if at capacity)
+    try {
+      await acquireSlot();
+    } catch {
+      return NextResponse.json(
+        { error: "Servidor ocupado. Tente novamente em instantes." },
+        { status: 503 }
+      );
+    }
+
     let text: string;
     let provider: string;
 
-    // Primary: Gemini → Fallback: OpenAI GPT-5.2
     try {
-      text = await callGemini(mimeType, base64Data);
-      provider = "gemini";
-    } catch (geminiError: unknown) {
-      const reason = geminiError instanceof Error ? geminiError.message : "unknown";
-      console.warn(`Gemini failed (${reason}), falling back to OpenAI…`);
+      // Primary: OpenAI → Fallback: Gemini
+      try {
+        text = await callOpenAI(mimeType, base64Data);
+        provider = "openai";
+      } catch (openaiError: unknown) {
+        const reason = openaiError instanceof Error ? openaiError.message : "unknown";
+        console.warn(`OpenAI failed (${reason}), falling back to Gemini…`);
 
-      text = await callOpenAIFallback(mimeType, base64Data);
-      provider = "openai";
+        text = await callGemini(mimeType, base64Data);
+        provider = "gemini";
+      }
+    } finally {
+      releaseSlot();
     }
 
     const parsed = JSON.parse(text);
