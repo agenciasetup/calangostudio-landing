@@ -5,6 +5,58 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Upload, X, Search, Wand2, Copy, Check } from "lucide-react";
 import UsageLimitPopup from "./UsageLimitPopup";
 
+/* ── Client-side image compression via canvas ── */
+function compressImage(
+  dataUrl: string,
+  maxWidth = 2048,
+  maxHeight = 2048,
+  quality = 0.8
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+
+      // Scale down if exceeds max dimensions
+      if (width > maxWidth || height > maxHeight) {
+        const ratio = Math.min(maxWidth / width, maxHeight / height);
+        width = Math.round(width * ratio);
+        height = Math.round(height * ratio);
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return reject(new Error("Canvas not supported"));
+
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Try JPEG first (smaller), fallback to PNG for transparency
+      let compressed = canvas.toDataURL("image/jpeg", quality);
+
+      // If still too large, reduce quality progressively
+      let currentQuality = quality;
+      while (compressed.length > 10 * 1024 * 1024 * 1.4 && currentQuality > 0.2) {
+        currentQuality -= 0.15;
+        compressed = canvas.toDataURL("image/jpeg", currentQuality);
+      }
+
+      // If STILL too large, reduce dimensions further
+      if (compressed.length > 10 * 1024 * 1024 * 1.4) {
+        canvas.width = Math.round(width * 0.5);
+        canvas.height = Math.round(height * 0.5);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        compressed = canvas.toDataURL("image/jpeg", 0.7);
+      }
+
+      resolve(compressed);
+    };
+    img.onerror = () => reject(new Error("Falha ao processar imagem."));
+    img.src = dataUrl;
+  });
+}
+
 /* ── Fingerprint: canvas + screen + timezone + webgl ── */
 function generateFingerprint(): string {
   const parts: string[] = [];
@@ -86,10 +138,18 @@ export default function PromptExtractor() {
     [image, loading, blocked]
   );
 
-  const handleFile = useCallback((file: File) => {
+  const handleFile = useCallback(async (file: File) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target?.result) setImage(e.target.result as string);
+    reader.onload = async (e) => {
+      if (e.target?.result) {
+        try {
+          const compressed = await compressImage(e.target.result as string);
+          setImage(compressed);
+        } catch {
+          // Fallback to original if compression fails
+          setImage(e.target.result as string);
+        }
+      }
     };
     reader.readAsDataURL(file);
   }, []);
@@ -126,7 +186,20 @@ export default function PromptExtractor() {
         body: JSON.stringify({ image }),
       });
 
-      const data = await res.json();
+      // Handle non-JSON responses (e.g. "Request Entity Too Large")
+      const contentType = res.headers.get("content-type") || "";
+      let data;
+      if (contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        if (!res.ok) throw new Error(
+          res.status === 413
+            ? "Imagem muito grande. Tente uma imagem menor."
+            : text || "Falha ao extrair prompt."
+        );
+        data = JSON.parse(text);
+      }
 
       // Rate limited
       if (res.status === 429) {
@@ -333,6 +406,16 @@ export default function PromptExtractor() {
                 {result ||
                   '{\n  "universal_instruction": "...",\n  "prompt": "..."\n}'}
               </pre>
+
+              {/* Instruction */}
+              {result && (
+                <div className="px-4 py-3 border-t border-white/10 bg-white/[0.02]">
+                  <p className="text-[11px] text-txt-muted leading-relaxed">
+                    <span className="text-accent font-bold">Como usar:</span>{" "}
+                    O Prompt Maker extrai o estilo visual, textura, iluminação, lente, ângulo de câmera, paleta de cores e acabamento da imagem de referência. Copie o prompt, abra seu gerador de imagem favorito, anexe a imagem de referência, escreva qualquer instrução e cole o prompt logo abaixo.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
