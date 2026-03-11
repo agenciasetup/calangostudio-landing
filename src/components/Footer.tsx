@@ -53,6 +53,8 @@ export default function Footer() {
             <li><a href="/comparativo/calango-vs-canva" className="hover:text-white transition-colors">Calango vs Canva</a></li>
             <li><a href="/comparativo/calango-vs-midjourney" className="hover:text-white transition-colors">Calango vs Midjourney</a></li>
             <li><a href="/sobre/agencia-setup" className="hover:text-white transition-colors">Agência Setup</a></li>
+            <li><a href="/filipe-lourenco" className="hover:text-white transition-colors">Filipe Lourenço</a></li>
+            <li><a href="/prompt" className="hover:text-white transition-colors">Prompt Maker</a></li>
             <li><a href="/sobre/nano-banana" className="hover:text-white transition-colors">Nano Banana</a></li>
             <li><a href="/criativos/como-criar-criativos-com-ia" className="hover:text-white transition-colors">Como Criar Criativos com IA</a></li>
             <li><a href="/criativos/criativos-para-facebook-ads" className="hover:text-white transition-colors">Criativos para Facebook Ads</a></li>

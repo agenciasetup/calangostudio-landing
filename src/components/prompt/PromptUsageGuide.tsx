@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Wand2, Image, MousePointerClick, ArrowRight } from "lucide-react";
+import { Wand2, Image as ImageIcon, MousePointerClick, ArrowRight } from "lucide-react";
 
 export default function PromptUsageGuide() {
   return (
@@ -78,7 +78,7 @@ export default function PromptUsageGuide() {
             className="glass-card rounded-2xl p-6 md:p-8"
           >
             <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent/20 to-accent-end/10 flex items-center justify-center mb-5">
-              <Image size={20} className="text-accent" />
+              <ImageIcon size={20} className="text-accent" />
             </div>
             <h3 className="font-poppins font-bold text-xl md:text-2xl mb-3">
               Ou use a Imagem Criativa

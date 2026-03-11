@@ -54,6 +54,62 @@ export default function RootLayout({
         />
       </head>
       <body className="font-inter bg-bg-primary text-txt-primary antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://www.calangostudio.com.br/#organization",
+                  name: "Agência Setup",
+                  url: "https://www.calangostudio.com.br",
+                  logo: "https://www.calangostudio.com.br/images/og-image.png",
+                  sameAs: [
+                    "https://instagram.com/agenciasetup",
+                    "https://instagram.com/calango.studio",
+                  ],
+                  founder: {
+                    "@type": "Person",
+                    "@id": "https://www.calangostudio.com.br/#founder",
+                    name: "Filipe Lourenço",
+                    url: "https://www.calangostudio.com.br/filipe-lourenco",
+                    sameAs: ["https://instagram.com/lipeslourenco"],
+                  },
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "@id": "https://www.calangostudio.com.br/#software",
+                  name: "Calango Studio",
+                  applicationCategory: "DesignApplication",
+                  operatingSystem: "Web",
+                  url: "https://www.calangostudio.com.br",
+                  description:
+                    "Plataforma de IA para Designers e Social Media criada por Filipe Lourenço e Agência Setup.",
+                  creator: {
+                    "@id": "https://www.calangostudio.com.br/#organization",
+                  },
+                  offers: {
+                    "@type": "AggregateOffer",
+                    priceCurrency: "BRL",
+                    lowPrice: "0",
+                    offerCount: "3",
+                  },
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://www.calangostudio.com.br/#website",
+                  name: "Calango Studio",
+                  url: "https://www.calangostudio.com.br",
+                  publisher: {
+                    "@id": "https://www.calangostudio.com.br/#organization",
+                  },
+                },
+              ],
+            }),
+          }}
+        />
         {children}
       </body>
     </html>
