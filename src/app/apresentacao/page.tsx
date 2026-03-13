@@ -36,6 +36,9 @@ import {
   CheckCircle2,
   ImagePlus,
   CircleDollarSign,
+  Quote,
+  MessageSquare,
+  Heart,
 } from "lucide-react";
 import {
   FloatingIcon,
@@ -48,6 +51,7 @@ import {
 } from "@/components/apresentacao/shared";
 import MockProspects from "@/components/apresentacao/MockProspects";
 import MockDashboard from "@/components/apresentacao/MockDashboard";
+import FeedbackGrid from "@/components/apresentacao/FeedbackGrid";
 
 type UserType = "agencia" | "freelancer" | null;
 
@@ -55,7 +59,7 @@ export default function Apresentacao() {
   const [step, setStep] = useState(0);
   const [userType, setUserType] = useState<UserType>(null);
   const [direction, setDirection] = useState(1);
-  const totalSteps = 16;
+  const totalSteps = 18;
   const touchStart = useRef<number | null>(null);
 
   const goNext = useCallback(() => {
@@ -1032,8 +1036,121 @@ export default function Apresentacao() {
           </SlideCentered>
         );
 
-      /* ═══ STEP 15 – CTA / Plano PRO ═══ */
+      /* ═══ STEP 15 – Feedbacks de quem usou (Grid infinito) ═══ */
       case 15:
+        return (
+          <div className="flex flex-col items-center justify-center h-full px-6 relative overflow-hidden">
+            <FloatingIcon icon={MessageSquare} className="top-[6%] left-[6%]" size={36} delay={0} />
+            <FloatingIcon icon={Heart} className="top-[8%] right-[8%]" size={30} delay={0.6} />
+            <FloatingIcon icon={Star} className="bottom-[14%] left-[10%]" size={28} delay={1.2} />
+            <FloatingIcon icon={Sparkles} className="bottom-[12%] right-[6%]" size={32} delay={0.3} />
+            <GlowOrb className="top-1/4 left-1/3" />
+
+            <Badge icon={MessageSquare} text="Feedbacks reais" />
+
+            <h2 className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 tracking-tight leading-[1.08] text-center">
+              Quem usa, <span className="text-gradient-animated">não volta atrás</span>
+            </h2>
+            <p className="text-txt-secondary text-lg md:text-xl mb-10 text-center max-w-2xl">
+              Prints reais de designers e social medias que usam o Calango Studio no dia a dia.
+            </p>
+
+            <FeedbackGrid />
+
+            <PopupToast icon={Heart} text="Melhor investimento que fiz!" className="bottom-[16%] right-[8%]" delay={1.2} bgColor="bg-pink-500/10" borderColor="border-pink-500/20" color="text-pink-400" />
+          </div>
+        );
+
+      /* ═══ STEP 16 – Depoimentos em destaque ═══ */
+      case 16:
+        return (
+          <SlideCentered maxW="max-w-[1300px]">
+            <FloatingIcon icon={Quote} className="top-[5%] left-[6%]" size={40} delay={0} color="text-accent/15" />
+            <FloatingIcon icon={Star} className="top-[8%] right-[8%]" size={32} delay={0.7} />
+            <FloatingIcon icon={Heart} className="bottom-[12%] left-[8%]" size={28} delay={1.4} color="text-pink-400/15" />
+            <FloatingIcon icon={Sparkles} className="bottom-[10%] right-[6%]" size={30} delay={0.4} />
+            <GlowOrb className="top-1/3 left-1/2 -translate-x-1/2" />
+
+            <Badge icon={Star} text="Depoimentos em destaque" />
+
+            <h2 className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl mb-12 tracking-tight text-center">
+              Resultados que <span className="text-gradient-animated">falam por si</span>
+            </h2>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+              {/* Depoimento 1 – Gabriel Castro */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="relative glass-card p-8 lg:p-10 rounded-2xl text-left overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/[0.06] to-transparent rounded-bl-full pointer-events-none" />
+                <Quote size={32} className="text-accent/20 mb-5" />
+
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">
+                    G
+                  </div>
+                  <div>
+                    <p className="font-poppins font-bold text-white text-lg">Gabriel Castro</p>
+                    <p className="text-sm text-txt-muted">Designer & Social Media</p>
+                  </div>
+                  <div className="ml-auto flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} className="text-accent fill-accent" />
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-lg md:text-xl text-txt-secondary leading-relaxed">
+                  &ldquo;Reuniram <span className="text-white font-bold">tudo que eu precisava</span> e até mais em um lugar só.
+                  Meu fluxo de produção ficou <span className="text-gradient-animated font-bold">1000x mais rápido</span>,
+                  sem contar a facilidade de usar para o resultado que entrega.&rdquo;
+                </p>
+
+                <PopupToast icon={Zap} text="Produção acelerada em 1000%" className="absolute -bottom-2 -right-2" delay={0.8} />
+              </motion.div>
+
+              {/* Depoimento 2 – David */}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, duration: 0.5 }}
+                className="relative glass-card p-8 lg:p-10 rounded-2xl text-left overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-purple-500/[0.06] to-transparent rounded-bl-full pointer-events-none" />
+                <Quote size={32} className="text-purple-400/20 mb-5" />
+
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center text-xl font-bold text-white shadow-lg">
+                    D
+                  </div>
+                  <div>
+                    <p className="font-poppins font-bold text-white text-lg">David</p>
+                    <p className="text-sm text-txt-muted">Designer Freelancer</p>
+                  </div>
+                  <div className="ml-auto flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} className="text-accent fill-accent" />
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-lg md:text-xl text-txt-secondary leading-relaxed">
+                  &ldquo;Várias funcionalidades em <span className="text-white font-bold">um só lugar</span>,
+                  tirando a necessidade de assinar várias IAs.{" "}
+                  <span className="text-gradient-animated font-bold">Melhor investimento que fiz em 2026!</span>&rdquo;
+                </p>
+
+                <PopupToast icon={CircleDollarSign} text="ROI positivo no primeiro mês" className="absolute -bottom-2 -right-2" delay={1.1} bgColor="bg-emerald-500/10" borderColor="border-emerald-500/20" color="text-emerald-400" />
+              </motion.div>
+            </div>
+          </SlideCentered>
+        );
+
+      /* ═══ STEP 17 – CTA / Plano PRO ═══ */
+      case 17:
         return (
           <div className="flex flex-col items-center justify-center h-full text-center px-6 relative">
             <FloatingIcon icon={Rocket} className="top-[6%] left-[5%]" size={40} delay={0} />
