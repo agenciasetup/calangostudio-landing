@@ -274,7 +274,7 @@ export default function ObrigadoPage() {
                         pronto — você já pode usar o Calango Studio!
                       </p>
 
-                      <div className="flex items-center gap-3 bg-emerald-500/8 border border-emerald-500/20 rounded-xl px-4 py-3.5">
+                      <div className="flex items-center gap-3 bg-emerald-500/5 border border-emerald-500/20 rounded-xl px-4 py-3.5">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                         <p className="text-sm md:text-base font-semibold text-emerald-300">
                           Pronto! Seu acesso está liberado.
