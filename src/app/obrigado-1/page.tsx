@@ -28,35 +28,6 @@ const fadeUp = {
   }),
 };
 
-const steps = [
-  {
-    number: 1,
-    label: "Primeiro Passo",
-    icon: LogIn,
-    title: "Acesse a página de Login",
-    description:
-      "Clique no botão abaixo para abrir a página de login do Calango Studio. Ele vai abrir em uma nova aba.",
-    hasButton: true,
-  },
-  {
-    number: 2,
-    label: "Segundo Passo",
-    icon: Mail,
-    title: 'Clique em "Primeiro Login"',
-    description: null,
-    hasButton: false,
-  },
-  {
-    number: 3,
-    label: "Terceiro Passo",
-    icon: KeyRound,
-    title: "Acesse o e-mail e crie sua senha",
-    description:
-      "Abra o link que chegou no seu e-mail, crie uma senha e pronto — seu acesso está liberado!",
-    hasButton: false,
-  },
-];
-
 export default function ObrigadoPage() {
   return (
     <main className="min-h-screen bg-[#030303] text-[#e5e5e5] relative overflow-hidden">
