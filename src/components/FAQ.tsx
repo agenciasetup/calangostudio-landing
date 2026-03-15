@@ -79,12 +79,10 @@ export default function FAQ() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
-            <HelpCircle size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-              Perguntas frequentes
-            </span>
-          </div>
+          <span className="badge-pill mb-6 inline-flex">
+            <HelpCircle size={12} />
+            Perguntas frequentes
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
             Antes de assinar, você{" "}
             <span className="text-gradient-animated">

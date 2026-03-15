@@ -149,11 +149,199 @@ body {
   animation: gradient-shift 8s ease infinite;
 }
 
-/* Selection color */
+/* ============================================================
+   iOS-STYLE TEXT SELECTION EFFECT
+   ============================================================ */
+
 ::selection {
-  background: rgba(255, 170, 0, 0.3);
+  background: rgba(0, 122, 255, 0.35);
   color: #fff;
 }
+
+.ios-selection {
+  position: relative;
+  display: inline;
+}
+
+.ios-selection-handle {
+  position: absolute;
+  width: 2px;
+  background: #007AFF;
+  border-radius: 1px;
+}
+
+.ios-selection-handle::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #007AFF;
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ios-selection-handle--start::before {
+  top: -6px;
+}
+
+.ios-selection-handle--end::before {
+  bottom: -6px;
+}
+
+/* ============================================================
+   ANIMATED BACKGROUND GRID FOR HERO
+   ============================================================ */
+
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 170, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 170, 0, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 20%, transparent 80%);
+}
+
+@keyframes grid-move {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(60px, 60px, 0); }
+}
+
+.hero-grid-animated {
+  animation: grid-move 8s linear infinite;
+  will-change: transform;
+}
+
+/* ============================================================
+   FLOATING PARTICLES (CSS-only for performance)
+   ============================================================ */
+
+@keyframes particle-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  50% { transform: translate3d(var(--px, 30px), var(--py, -80px), 0) scale(1.5); }
+}
+
+.particle {
+  position: absolute;
+  width: var(--size, 3px);
+  height: var(--size, 3px);
+  background: radial-gradient(circle, var(--color, rgba(255,170,0,0.5)), transparent);
+  border-radius: 50%;
+  animation: particle-float var(--duration, 6s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  pointer-events: none;
+}
+
+/* ============================================================
+   PULSING GLOW SECTION BACKGROUND
+   ============================================================ */
+
+@keyframes section-glow-pulse {
+  0%, 100% {
+    opacity: 0.03;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.08;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+.section-glow-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: section-glow-pulse 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes section-glow-pulse-alt {
+  0%, 100% {
+    opacity: 0.02;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  50% {
+    opacity: 0.06;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+.section-glow-pulse-alt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: section-glow-pulse-alt 8s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* ============================================================
+   SECTION VARIANT: ELEVATED / HIGHLIGHTED
+   ============================================================ */
+
+.section-elevated {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,170,0,0.015) 0%, rgba(10,10,12,1) 15%, rgba(10,10,12,1) 85%, rgba(255,170,0,0.015) 100%);
+}
+
+.section-elevated::before,
+.section-elevated::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 170, 0, 0.15), transparent);
+}
+
+.section-elevated::before { top: 0; }
+.section-elevated::after { bottom: 0; }
+
+/* ============================================================
+   SECTION VARIANT: DARK INSET
+   ============================================================ */
+
+.section-inset {
+  position: relative;
+  background: linear-gradient(180deg, #030303 0%, #060608 10%, #060608 90%, #030303 100%);
+}
+
+/* ============================================================
+   TAG / BADGE PILL
+   ============================================================ */
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 170, 0, 0.06);
+  border: 1px solid rgba(255, 170, 0, 0.15);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ffaa00;
+}
+
+/* ============================================================
+   STAGGER ANIMATION DELAYS (for card grids)
+   ============================================================ */
+
+.stagger-1 { --stagger: 0.05s; }
+.stagger-2 { --stagger: 0.1s; }
+.stagger-3 { --stagger: 0.15s; }
+.stagger-4 { --stagger: 0.2s; }
+.stagger-5 { --stagger: 0.25s; }
+.stagger-6 { --stagger: 0.3s; }
 
 /* ============================================================
    MOBILE PERFORMANCE OPTIMIZATIONS
@@ -200,6 +388,23 @@ body {
   .glass-card,
   .glass-panel {
     transform: translateZ(0);
+  }
+
+  /* Disable pulsing glow on mobile for perf */
+  .section-glow-pulse,
+  .section-glow-pulse-alt {
+    animation: none;
+    opacity: 0.04;
+  }
+
+  /* Simplify hero grid on mobile */
+  .hero-grid-animated {
+    animation: none;
+  }
+
+  /* Reduce particle count effect on mobile */
+  .particle:nth-child(n+5) {
+    display: none;
   }
 }
 
@@ -265,6 +470,17 @@ body {
   }
   .animate-gradient-shift {
     animation: none;
+  }
+  .section-glow-pulse,
+  .section-glow-pulse-alt {
+    animation: none;
+  }
+  .hero-grid-animated {
+    animation: none;
+  }
+  .particle {
+    animation: none;
+    display: none;
   }
 }
 

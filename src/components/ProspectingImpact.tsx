@@ -10,6 +10,7 @@ import {
   CheckCircle,
   Star,
   Quote,
+  Crosshair,
 } from "lucide-react";
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -67,8 +68,9 @@ const testimonials = [
 
 export default function ProspectingImpact() {
   return (
-    <section className="py-20 md:py-28 px-4 relative overflow-hidden">
-      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
+    <section className="section-elevated py-20 md:py-28 px-4 relative overflow-hidden">
+      {/* Pulsing glow */}
+      <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-blue-500/15 blur-[100px] md:blur-[180px]" />
 
       {/* Floating icons */}
       <motion.div
@@ -79,7 +81,7 @@ export default function ProspectingImpact() {
         <Target size={70} />
       </motion.div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,6 +89,10 @@ export default function ProspectingImpact() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <Crosshair size={12} />
+            Prospecção ativa
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             Vamos te lembrar{" "}
             <span className="text-gradient-animated">de prospectar.</span>
@@ -105,7 +111,7 @@ export default function ProspectingImpact() {
           transition={{ duration: 0.5 }}
           className="relative mx-auto max-w-4xl mb-12 md:mb-16"
         >
-          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] ring-1 ring-white/[0.06]">
             {/* Browser bar */}
             <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
               <div className="flex gap-1.5 md:gap-2">
@@ -198,7 +204,7 @@ export default function ProspectingImpact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="text-center p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+            className="text-center p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-300"
           >
             <p className="font-poppins font-black text-2xl md:text-3xl text-white text-glow mb-1">
               <AnimatedCounter target={5} />
@@ -212,7 +218,7 @@ export default function ProspectingImpact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.4 }}
-            className="text-center p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06]"
+            className="text-center p-4 md:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-colors duration-300"
           >
             <p className="font-poppins font-black text-2xl md:text-3xl text-white text-glow mb-1">
               <AnimatedCounter target={150} />
@@ -226,7 +232,7 @@ export default function ProspectingImpact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.4 }}
-            className="text-center p-4 md:p-5 rounded-2xl bg-accent/[0.04] border border-accent/15"
+            className="text-center p-4 md:p-5 rounded-2xl bg-accent/[0.04] border border-accent/15 hover:border-accent/25 transition-colors duration-300"
           >
             <p className="font-poppins font-black text-2xl md:text-3xl text-gradient-animated text-glow mb-1">
               $$$
@@ -245,13 +251,16 @@ export default function ProspectingImpact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="glass-card p-5 md:p-7 hover:!border-accent/15 transition-all duration-300"
+              className="glass-card p-5 md:p-7 hover:!border-accent/15 transition-all duration-300 relative overflow-hidden"
             >
-              <Quote size={18} className="text-accent/20 mb-3" />
-              <p className="text-sm md:text-[15px] text-txt-secondary leading-relaxed mb-5">
+              {/* Subtle glow */}
+              <div className="absolute -top-10 -right-10 w-24 h-24 bg-accent/5 rounded-full blur-[40px] pointer-events-none" />
+
+              <Quote size={18} className="text-accent/20 mb-3 relative z-10" />
+              <p className="text-sm md:text-[15px] text-txt-secondary leading-relaxed mb-5 relative z-10">
                 &ldquo;{t.text}&rdquo;
               </p>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 relative z-10">
                 <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-black text-black shadow-lg`}>
                   {t.initials}
                 </div>
