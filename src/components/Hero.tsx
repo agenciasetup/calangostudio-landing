@@ -335,9 +335,14 @@ function VSLPlayer({ onError }: { onError?: () => void }) {
               loop={isMuted}
               autoPlay
               playsInline
-              preload="metadata"
-              crossOrigin="anonymous"
-              onError={() => onError?.()}
+              preload="auto"
+              onError={(e) => {
+                const video = e.currentTarget;
+                // Only fallback if the video truly can't load (network error / src not found)
+                if (video.networkState === 3 || video.error) {
+                  onError?.();
+                }
+              }}
               className="w-full aspect-video object-cover"
             />
 
