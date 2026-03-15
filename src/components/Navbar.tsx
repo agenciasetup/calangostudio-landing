@@ -17,7 +17,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
@@ -28,8 +27,8 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const links = [
+    { label: "Como funciona", href: "#como-funciona" },
     { label: "Ferramentas", href: "#ferramentas" },
-    { label: "Clientes", href: "#clientes" },
     { label: "Planos", href: "#planos" },
     { label: "FAQ", href: "#faq" },
   ];
@@ -45,7 +44,6 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14 md:h-20">
-          {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-end flex items-center justify-center group-hover:shadow-glow transition-shadow duration-300">
               <Sparkles size={16} className="text-black" strokeWidth={2.5} />
@@ -56,7 +54,6 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
               <a
@@ -72,11 +69,10 @@ export default function Navbar() {
               href="#planos"
               className="btn-primary px-5 py-2.5 text-xs tracking-widest"
             >
-              Assinar agora
+              Entrar no Studio
             </a>
           </div>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
@@ -86,7 +82,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -111,7 +106,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="block w-full text-center btn-primary px-5 py-3 text-xs tracking-widest mt-3"
               >
-                Assinar agora
+                Entrar no Studio
               </a>
             </motion.div>
           )}
