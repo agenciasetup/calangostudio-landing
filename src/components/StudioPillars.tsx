@@ -9,6 +9,7 @@ import {
   ScanSearch,
   LayoutDashboard,
   ChevronRight,
+  Layers,
 } from "lucide-react";
 
 const pillars = [
@@ -58,13 +59,12 @@ const pillars = [
 
 export default function StudioPillars() {
   return (
-    <section id="ferramentas" className="py-20 md:py-28 px-4 relative overflow-hidden">
-      <div className="absolute top-1/4 left-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-purple-500/3 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] bg-accent/3 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
+    <section id="ferramentas" className="section-elevated py-20 md:py-28 px-4 relative overflow-hidden">
+      {/* Pulsing glow */}
+      <div className="section-glow-pulse w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-purple-500/15 blur-[100px] md:blur-[180px]" />
+      <div className="section-glow-pulse-alt w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-accent/10 blur-[80px] md:blur-[150px]" style={{ top: "60%", left: "30%" }} />
 
-      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
-
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,6 +72,10 @@ export default function StudioPillars() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <Layers size={12} />
+            6 pilares
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             Tudo o que você precisa para operar
             <br className="hidden sm:block" />
@@ -89,15 +93,18 @@ export default function StudioPillars() {
               viewport={{ once: true, margin: "-30px" }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -4 }}
-              className="group relative rounded-2xl md:rounded-3xl bg-black/50 border border-white/[0.08] hover:border-white/[0.15] transition-all duration-500 overflow-hidden"
+              className="group relative rounded-2xl md:rounded-3xl bg-black/50 border border-white/[0.08] hover:border-white/[0.15] transition-all duration-500 overflow-hidden hover:shadow-card-hover"
             >
               {/* Top gradient bar */}
               <div className={`h-1 md:h-1.5 bg-gradient-to-r ${pillar.color} opacity-60 group-hover:opacity-100 transition-opacity duration-300`} />
 
-              <div className="p-5 md:p-7">
+              {/* Inner glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative z-10 p-5 md:p-7">
                 {/* Icon + Title */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-11 h-11 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${pillar.color} flex items-center justify-center shadow-lg`}>
+                  <div className={`w-11 h-11 md:w-12 md:h-12 rounded-xl bg-gradient-to-br ${pillar.color} flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300`}>
                     <pillar.icon size={20} className="text-white" strokeWidth={2} />
                   </div>
                   <h3 className="font-poppins font-black text-lg md:text-xl text-white">{pillar.title}</h3>

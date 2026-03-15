@@ -39,7 +39,7 @@ export default function MissionsRanking() {
         <Target size={50} />
       </motion.div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,6 +47,10 @@ export default function MissionsRanking() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <Trophy size={12} />
+            Gamificação
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             Nós destacamos quem{" "}
             <span className="text-gradient-animated">prospecta mais!</span>
@@ -65,7 +69,7 @@ export default function MissionsRanking() {
           transition={{ duration: 0.5 }}
           className="relative mx-auto max-w-2xl"
         >
-          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] ring-1 ring-white/[0.06]">
             {/* Browser bar */}
             <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
               <div className="flex gap-1.5 md:gap-2">

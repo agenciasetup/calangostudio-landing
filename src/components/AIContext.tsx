@@ -10,6 +10,7 @@ import {
   PenTool,
   Users,
   Briefcase,
+  Brain,
 } from "lucide-react";
 
 const actions = [
@@ -30,11 +31,11 @@ const engines = [
 export default function AIContext() {
   return (
     <section className="py-16 md:py-20 px-4 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-accent/4 rounded-full blur-[80px] md:blur-[150px] pointer-events-none" />
+      <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/15 blur-[100px] md:blur-[180px]" />
 
       <div className="section-divider max-w-5xl mx-auto mb-12 md:mb-16" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,6 +43,10 @@ export default function AIContext() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-14"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <Brain size={12} />
+            Inteligência artificial
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             As melhores IAs, com{" "}
             <span className="text-gradient-animated">contexto pronto</span>{" "}
@@ -61,7 +66,7 @@ export default function AIContext() {
           transition={{ duration: 0.5 }}
           className="relative mx-auto max-w-4xl mb-10 md:mb-14"
         >
-          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] ring-1 ring-white/[0.06]">
             {/* Browser bar */}
             <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
               <div className="flex gap-1.5 md:gap-2">
@@ -152,15 +157,16 @@ export default function AIContext() {
           <p className="text-[10px] md:text-xs text-zinc-500 uppercase tracking-[0.18em] font-bold mb-4 md:mb-5">IAs integradas</p>
           <div className="flex items-center justify-center gap-3 md:gap-5 flex-wrap">
             {engines.map((engine) => (
-              <div
+              <motion.div
                 key={engine.name}
+                whileHover={{ y: -2, scale: 1.03 }}
                 className="flex items-center gap-2 px-4 md:px-5 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:border-accent/20 transition-colors duration-300"
               >
                 <div className="w-6 h-6 md:w-7 md:h-7 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center">
                   <span className="text-[10px] md:text-xs font-black text-accent">{engine.letter}</span>
                 </div>
                 <span className="text-xs md:text-sm font-semibold text-zinc-300">{engine.name}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
           <p className="text-sm text-txt-secondary mt-4 md:mt-5">

@@ -11,6 +11,7 @@ import {
   Image,
   ScanSearch,
   AlertCircle,
+  ArrowRight,
 } from "lucide-react";
 
 const salesPains = [
@@ -91,7 +92,7 @@ function PainCard({
           </p>
         </div>
 
-        {/* Answer */}
+        {/* Answer with arrow indicator */}
         <div className="flex items-start gap-3 pl-0 md:pl-[52px]">
           <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/15 transition-colors duration-300 md:hidden">
             <item.icon size={13} className="text-accent" strokeWidth={2} />
@@ -99,10 +100,15 @@ function PainCard({
           <div className="hidden md:flex w-8 h-8 rounded-lg bg-accent/8 border border-accent/15 items-center justify-center flex-shrink-0 group-hover:bg-accent/15 transition-colors duration-300">
             <item.icon size={14} className="text-accent" strokeWidth={2} />
           </div>
-          <p className="text-xs md:text-sm text-txt-secondary leading-relaxed pt-1">
+          <p className="text-xs md:text-sm text-txt-secondary leading-relaxed pt-1 group-hover:text-txt-primary transition-colors duration-300">
             {item.answer}
           </p>
         </div>
+      </div>
+
+      {/* Hover arrow */}
+      <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+        <ArrowRight size={14} className="text-accent/50" />
       </div>
     </motion.div>
   );
@@ -110,8 +116,9 @@ function PainCard({
 
 export default function PainPoints() {
   return (
-    <section className="py-20 md:py-28 px-4 relative">
-      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
+    <section className="section-elevated py-20 md:py-28 px-4 relative overflow-hidden">
+      {/* Pulsing glow BG */}
+      <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-red-500/20 blur-[100px] md:blur-[180px]" />
 
       {/* Floating decorative icons */}
       <motion.div
@@ -129,7 +136,7 @@ export default function PainPoints() {
         <Sparkles size={60} />
       </motion.div>
 
-      <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -137,6 +144,10 @@ export default function PainPoints() {
           transition={{ duration: 0.5 }}
           className="text-center mb-14 md:mb-20"
         >
+          <span className="badge-pill mb-6 inline-flex" style={{ background: "rgba(239,68,68,0.08)", borderColor: "rgba(239,68,68,0.2)", color: "#f87171" }}>
+            <AlertCircle size={12} />
+            Travas do designer
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight leading-tight">
             Travou em alguma parte
             <br />

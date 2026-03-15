@@ -5,10 +5,10 @@ import { ArrowRight, Instagram } from "lucide-react";
 
 export default function CTAFinal() {
   return (
-    <section className="py-16 md:py-20 px-4 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-accent/8 rounded-full blur-[80px] md:blur-[150px]" />
-      </div>
+    <section className="section-elevated py-16 md:py-20 px-4 relative overflow-hidden">
+      {/* Pulsing glow */}
+      <div className="section-glow-pulse w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-accent/25 blur-[80px] md:blur-[150px]" />
+      <div className="section-glow-pulse-alt w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent-end/15 blur-[60px] md:blur-[120px]" style={{ top: "60%", left: "60%" }} />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <motion.h2

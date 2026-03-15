@@ -43,6 +43,7 @@ const config: Config = {
         "glow-xl": "0 0 80px rgba(255, 170, 0, 0.25)",
         glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
         "glass-lg": "0 20px 60px rgba(0, 0, 0, 0.35)",
+        "card-hover": "0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(255,170,0,0.06)",
       },
       keyframes: {
         float: {
@@ -82,6 +83,18 @@ const config: Config = {
           "0%, 100%": { transform: "rotate(-1deg)" },
           "50%": { transform: "rotate(1deg)" },
         },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "glow-ring": {
+          "0%, 100%": { boxShadow: "0 0 20px rgba(255,170,0,0.1), inset 0 0 20px rgba(255,170,0,0.05)" },
+          "50%": { boxShadow: "0 0 40px rgba(255,170,0,0.2), inset 0 0 30px rgba(255,170,0,0.1)" },
+        },
       },
       animation: {
         float: "float 6s ease-in-out infinite",
@@ -93,6 +106,9 @@ const config: Config = {
         "spin-slow": "spin-slow 20s linear infinite",
         orbit: "orbit 15s linear infinite",
         wiggle: "wiggle 2s ease-in-out infinite",
+        "fade-up": "fade-up 0.5s ease-out forwards",
+        "scale-in": "scale-in 0.4s ease-out forwards",
+        "glow-ring": "glow-ring 4s ease-in-out infinite",
       },
     },
   },

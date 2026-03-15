@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import {
   Target,
   MessageCircle,
@@ -24,6 +24,92 @@ function useIsMobile() {
     setIsMobile(window.innerWidth < 768);
   }, []);
   return isMobile;
+}
+
+/* iOS-style text selection highlight */
+function IOSHighlight({ children, delay = 0 }: { children: string; delay?: number }) {
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setActive(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <span className="relative inline">
+      <motion.span
+        className="absolute inset-0 rounded-md bg-[#007AFF]/25"
+        initial={{ scaleX: 0 }}
+        animate={active ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{ originX: 0 }}
+      />
+      {/* Left handle */}
+      <motion.span
+        className="absolute -left-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        initial={{ scaleY: 0, opacity: 0 }}
+        animate={active ? { scaleY: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.3, delay: 0.5 }}
+      >
+        <span className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+      </motion.span>
+      {/* Right handle */}
+      <motion.span
+        className="absolute -right-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        initial={{ scaleY: 0, opacity: 0 }}
+        animate={active ? { scaleY: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.3, delay: 0.55 }}
+      >
+        <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+      </motion.span>
+      <span className="relative z-10 text-gradient-animated">{children}</span>
+    </span>
+  );
+}
+
+/* CSS-only floating particles for hero BG */
+function HeroParticles() {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 12 }, (_, i) => ({
+        id: i,
+        left: `${8 + (i * 7.5) % 85}%`,
+        top: `${10 + (i * 11) % 75}%`,
+        size: `${2 + (i % 3)}px`,
+        duration: `${5 + (i % 4) * 2}s`,
+        delay: `${(i * 0.7) % 4}s`,
+        px: `${(i % 2 === 0 ? 1 : -1) * (15 + (i % 5) * 10)}px`,
+        py: `${-40 - (i % 4) * 25}px`,
+        color:
+          i % 3 === 0
+            ? "rgba(255,170,0,0.5)"
+            : i % 3 === 1
+            ? "rgba(255,123,71,0.4)"
+            : "rgba(255,255,255,0.2)",
+      })),
+    []
+  );
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="particle"
+          style={{
+            left: p.left,
+            top: p.top,
+            "--size": p.size,
+            "--duration": p.duration,
+            "--delay": p.delay,
+            "--px": p.px,
+            "--py": p.py,
+            "--color": p.color,
+          } as React.CSSProperties}
+        />
+      ))}
+    </div>
+  );
 }
 
 const flowSteps = [
@@ -55,10 +141,19 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-[90vh] md:min-h-[95vh] flex flex-col items-center justify-start px-4 pt-32 md:pt-40 pb-24 overflow-hidden">
-      {/* Background glow */}
+      {/* Animated grid background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="hero-grid-bg hero-grid-animated absolute inset-0 opacity-100" />
+      </div>
+
+      {/* Pulsing radial glow */}
       <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] rounded-full bg-gradient-to-br from-accent/10 via-accent-end/6 to-transparent blur-[80px] md:blur-[140px]" />
+        <div className="section-glow-pulse w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] bg-gradient-to-br from-accent/20 via-accent-end/10 to-transparent blur-[80px] md:blur-[140px]" />
+        <div className="section-glow-pulse-alt w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-gradient-to-tl from-purple-500/8 via-blue-500/5 to-transparent blur-[60px] md:blur-[120px]" style={{ top: "30%", left: "60%" }} />
       </motion.div>
+
+      {/* Floating particles */}
+      <HeroParticles />
 
       {/* Floating decorative icons */}
       <motion.div
@@ -84,7 +179,20 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Headline */}
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0 }}
+          className="mb-6 md:mb-8"
+        >
+          <span className="badge-pill">
+            <Sparkles size={12} />
+            Plataforma de operação do designer
+          </span>
+        </motion.div>
+
+        {/* Headline with iOS selection effect */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +204,7 @@ export default function Hero() {
           seu trabalho e entregue{" "}
           <br className="hidden sm:block" />
           conteúdo{" "}
-          <span className="text-gradient-animated">em um só lugar.</span>
+          <IOSHighlight delay={1200}>em um só lugar.</IOSHighlight>
         </motion.h1>
 
         {/* Subheadline */}
@@ -116,9 +224,9 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.18 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 md:mb-20"
         >
-          <a href="#planos" className="btn-primary px-10 py-4 text-sm tracking-widest flex items-center gap-2">
+          <a href="#planos" className="btn-primary px-10 py-4 text-sm tracking-widest flex items-center gap-2 group">
             Entrar no Calango Studio
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a href="#como-funciona" className="btn-secondary px-7 py-3.5 flex items-center gap-2 text-sm">
             Ver como funciona <ArrowDown size={14} className="animate-float" />
@@ -133,7 +241,7 @@ export default function Hero() {
           style={{ y: mockupY }}
           className="relative mx-auto max-w-4xl"
         >
-          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
+          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06]">
             {/* Browser bar */}
             <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
               <div className="flex gap-1.5 md:gap-2">

@@ -26,7 +26,7 @@ export default function TargetAudience() {
         <Users size={60} />
       </motion.div>
 
-      <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,12 +34,10 @@ export default function TargetAudience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
-            <Users size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-              Pra quem é
-            </span>
-          </div>
+          <span className="badge-pill mb-6 inline-flex">
+            <Users size={12} />
+            Pra quem é
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight mb-4 leading-tight">
             Feito para quem quer viver de design
             <br className="hidden sm:block" />

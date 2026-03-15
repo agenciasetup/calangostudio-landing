@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Zap, Sparkles, Crown, Check } from "lucide-react";
+import { Zap, Sparkles, Crown, Check, CreditCard } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Plan {
@@ -141,12 +141,11 @@ export default function Pricing() {
   const coupon = searchParams.get("coupon");
 
   return (
-    <section id="planos" className="py-16 md:py-20 px-4 relative">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/3 rounded-full blur-[100px] md:blur-[200px] pointer-events-none" />
+    <section id="planos" className="section-elevated py-16 md:py-20 px-4 relative">
+      {/* Pulsing glow */}
+      <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/15 blur-[100px] md:blur-[200px]" />
 
-      <div className="section-divider max-w-6xl mx-auto mb-12 md:mb-16" />
-
-      <div className="relative max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -154,6 +153,10 @@ export default function Pricing() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-14"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <CreditCard size={12} />
+            Planos e preços
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             Escolha o plano ideal para a operação{" "}
             <span className="text-gradient-animated">que você quer construir.</span>
@@ -169,9 +172,10 @@ export default function Pricing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
+              whileHover={{ y: -4 }}
               className={`relative rounded-[24px] md:rounded-[28px] bg-black/40 border p-6 md:p-8 transition-all duration-300 group hover:border-white/15 ${plan.borderColor} ${
                 plan.popular
-                  ? "shadow-[0_20px_80px_rgba(0,0,0,0.4),0_0_60px_rgba(255,170,0,0.06)] md:scale-[1.03]"
+                  ? "shadow-[0_20px_80px_rgba(0,0,0,0.4),0_0_60px_rgba(255,170,0,0.06)] md:scale-[1.03] ring-1 ring-accent/10"
                   : "shadow-[0_15px_40px_rgba(0,0,0,0.3)] md:shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
               }`}
             >
@@ -181,51 +185,56 @@ export default function Pricing() {
                 </span>
               )}
 
-              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mb-4 md:mb-5 shadow-lg`}>
-                <plan.icon size={22} className="text-white" strokeWidth={2} />
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 rounded-[24px] md:rounded-[28px] bg-gradient-to-b from-white/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <div className="relative z-10">
+                <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${plan.iconGradient} flex items-center justify-center mb-4 md:mb-5 shadow-lg`}>
+                  <plan.icon size={22} className="text-white" strokeWidth={2} />
+                </div>
+
+                <h3 className="font-poppins font-black text-xl md:text-2xl mb-1">{plan.name}</h3>
+
+                {/* Capacity badge */}
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] mb-2">
+                  <span className="text-[9px] md:text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Até {plan.capacity}</span>
+                </div>
+
+                <div className="flex items-baseline gap-0.5 mb-2">
+                  <span className="text-sm text-txt-muted">R$</span>
+                  <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
+                    <AnimatedPrice price={plan.price} />
+                  </span>
+                  <span className="text-sm text-txt-muted">/mês</span>
+                </div>
+                <p className="text-sm text-txt-muted mb-5 md:mb-6 leading-relaxed">{plan.subtitle}</p>
+
+                <ul className="space-y-2.5 md:space-y-3 mb-5 md:mb-6">
+                  {plan.features.map((f, j) => (
+                    <li key={j} className="flex items-start gap-3 text-sm">
+                      <Check size={14} className={`${plan.checkColor} flex-shrink-0 mt-0.5`} strokeWidth={3} />
+                      <span className="text-txt-secondary">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex items-center gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6 md:mb-8 w-fit">
+                  <Sparkles size={14} className="text-accent" />
+                  <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
+                  <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
+                </div>
+
+                <a
+                  href={withCoupon(plan.checkoutUrl, coupon)}
+                  className={`block w-full text-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
+                    plan.popular
+                      ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5"
+                      : "border border-white/10 text-txt-secondary hover:text-white hover:border-accent/30 hover:bg-accent/[0.03]"
+                  }`}
+                >
+                  {plan.cta}
+                </a>
               </div>
-
-              <h3 className="font-poppins font-black text-xl md:text-2xl mb-1">{plan.name}</h3>
-
-              {/* Capacity badge */}
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] mb-2">
-                <span className="text-[9px] md:text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Até {plan.capacity}</span>
-              </div>
-
-              <div className="flex items-baseline gap-0.5 mb-2">
-                <span className="text-sm text-txt-muted">R$</span>
-                <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
-                  <AnimatedPrice price={plan.price} />
-                </span>
-                <span className="text-sm text-txt-muted">/mês</span>
-              </div>
-              <p className="text-sm text-txt-muted mb-5 md:mb-6 leading-relaxed">{plan.subtitle}</p>
-
-              <ul className="space-y-2.5 md:space-y-3 mb-5 md:mb-6">
-                {plan.features.map((f, j) => (
-                  <li key={j} className="flex items-start gap-3 text-sm">
-                    <Check size={14} className={`${plan.checkColor} flex-shrink-0 mt-0.5`} strokeWidth={3} />
-                    <span className="text-txt-secondary">{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="flex items-center gap-2.5 px-3 md:px-4 py-2 md:py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] mb-6 md:mb-8 w-fit">
-                <Sparkles size={14} className="text-accent" />
-                <span className="font-poppins font-black text-sm text-white">{plan.coins}</span>
-                <span className="text-[9px] text-txt-muted font-bold uppercase tracking-wider">Calangocoins / mês</span>
-              </div>
-
-              <a
-                href={withCoupon(plan.checkoutUrl, coupon)}
-                className={`block w-full text-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
-                  plan.popular
-                    ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5"
-                    : "border border-white/10 text-txt-secondary hover:text-white hover:border-accent/30 hover:bg-accent/[0.03]"
-                }`}
-              >
-                {plan.cta}
-              </a>
             </motion.div>
           ))}
         </div>

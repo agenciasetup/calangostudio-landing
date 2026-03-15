@@ -42,10 +42,10 @@ function StarRating() {
 
 export default function Testimonials() {
   return (
-    <section className="py-16 md:py-20 px-4">
+    <section className="section-inset py-16 md:py-20 px-4">
       <div className="section-divider max-w-5xl mx-auto mb-12 md:mb-16" />
 
-      <div className="max-w-6xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,12 +53,10 @@ export default function Testimonials() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
-            <MessageSquare size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">
-              Depoimentos reais
-            </span>
-          </div>
+          <span className="badge-pill mb-6 inline-flex">
+            <MessageSquare size={12} />
+            Depoimentos reais
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
             Quem usa,{" "}
             <span className="text-gradient-animated">
@@ -75,8 +73,12 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: Math.min(i * 0.06, 0.2), duration: 0.4 }}
+              whileHover={{ y: -3 }}
               className="group glass-card p-5 md:p-7 hover:!border-white/15 transition-all duration-300 relative overflow-hidden"
             >
+              {/* Subtle glow on hover */}
+              <div className="absolute -top-10 -right-10 w-24 h-24 bg-accent/3 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
               <div className="relative">
                 <Quote size={20} className="text-accent/20 mb-3 md:mb-4" />
 

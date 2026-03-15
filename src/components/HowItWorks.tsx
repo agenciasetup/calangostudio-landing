@@ -10,6 +10,7 @@ import {
   ClipboardList,
   Sparkles,
   Rocket,
+  Workflow,
 } from "lucide-react";
 
 const steps = [
@@ -38,6 +39,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
+          <span className="badge-pill mb-6 inline-flex">
+            <Workflow size={12} />
+            Fluxo completo
+          </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
             Do primeiro contato{" "}
             <span className="text-gradient-animated">até a entrega.</span>
@@ -67,9 +72,9 @@ export default function HowItWorks() {
                   {String(i + 1).padStart(2, "0")}
                 </div>
 
-                {/* Icon circle */}
+                {/* Icon circle with glow on hover */}
                 <div className="relative mb-3">
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:shadow-xl transition-all duration-300`}>
                     <step.icon size={20} className="text-white md:hidden" strokeWidth={2} />
                     <step.icon size={22} className="text-white hidden md:block" strokeWidth={2} />
                   </div>
@@ -78,7 +83,7 @@ export default function HowItWorks() {
                 </div>
 
                 {/* Title */}
-                <p className="font-poppins font-bold text-[11px] md:text-xs text-white leading-tight mt-2 lg:mt-5">
+                <p className="font-poppins font-bold text-[11px] md:text-xs text-white leading-tight mt-2 lg:mt-5 group-hover:text-accent transition-colors duration-300">
                   {step.title}
                 </p>
               </motion.div>
