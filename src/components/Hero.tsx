@@ -330,7 +330,7 @@ function VSLPlayer() {
           <div className="relative bg-black">
             <video
               ref={videoRef}
-              src="/video/vsl.mp4"
+              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4"
               muted={isMuted}
               loop={isMuted}
               autoPlay
@@ -503,7 +503,7 @@ function HeroMedia() {
   const [videoExists, setVideoExists] = useState<boolean | null>(null);
 
   useEffect(() => {
-    fetch("/video/vsl.mp4", { method: "HEAD" })
+    fetch("https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4", { method: "HEAD" })
       .then((res) => setVideoExists(res.ok))
       .catch(() => setVideoExists(false));
   }, []);
