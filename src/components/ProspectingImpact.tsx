@@ -5,7 +5,6 @@ import { useRef, useEffect, useState } from "react";
 import {
   Target,
   MessageCircle,
-  Users,
   TrendingUp,
   BarChart3,
   CheckCircle,
@@ -48,40 +47,6 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
 
   return <span ref={ref}>{count}{suffix}</span>;
 }
-
-const impactCards = [
-  {
-    label: "Contatos por dia",
-    value: 5,
-    suffix: "",
-    detail: "Uma meta leve o suficiente para manter.",
-    icon: Target,
-    color: "text-blue-400",
-    bg: "bg-blue-500/10",
-    border: "border-blue-500/20",
-  },
-  {
-    label: "Contatos no mês",
-    value: 150,
-    suffix: "",
-    detail: "Consistência muda o jogo.",
-    icon: MessageCircle,
-    color: "text-amber-400",
-    bg: "bg-amber-500/10",
-    border: "border-amber-500/20",
-  },
-  {
-    label: "Novos clientes",
-    value: 0,
-    suffix: "",
-    detail: "Mesmo poucos fechamentos já mudam seu faturamento.",
-    icon: Users,
-    color: "text-emerald-400",
-    bg: "bg-emerald-500/10",
-    border: "border-emerald-500/20",
-    custom: true,
-  },
-];
 
 export default function ProspectingImpact() {
   return (

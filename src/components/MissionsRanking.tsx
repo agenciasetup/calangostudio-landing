@@ -11,7 +11,6 @@ import {
   Star,
   Crown,
   User,
-  TrendingUp,
 } from "lucide-react";
 
 const missions = [
