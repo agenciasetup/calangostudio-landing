@@ -154,7 +154,7 @@ body {
    ============================================================ */
 
 ::selection {
-  background: rgba(0, 122, 255, 0.35);
+  background: rgba(255, 170, 0, 0.30);
   color: #fff;
 }
 
@@ -166,7 +166,7 @@ body {
 .ios-selection-handle {
   position: absolute;
   width: 2px;
-  background: #007AFF;
+  background: #ffaa00;
   border-radius: 1px;
 }
 
@@ -175,7 +175,7 @@ body {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: #007AFF;
+  background: #ffaa00;
   border-radius: 50%;
   left: 50%;
   transform: translateX(-50%);

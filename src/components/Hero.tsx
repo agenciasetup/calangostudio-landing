@@ -38,7 +38,7 @@ function IOSHighlight({ children, delay = 0 }: { children: string; delay?: numbe
   return (
     <span className="relative inline">
       <motion.span
-        className="absolute inset-0 rounded-md bg-[#007AFF]/25"
+        className="absolute inset-0 rounded-md bg-accent/25"
         initial={{ scaleX: 0 }}
         animate={active ? { scaleX: 1 } : {}}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -46,21 +46,21 @@ function IOSHighlight({ children, delay = 0 }: { children: string; delay?: numbe
       />
       {/* Left handle */}
       <motion.span
-        className="absolute -left-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        className="absolute -left-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-accent"
         initial={{ scaleY: 0, opacity: 0 }}
         animate={active ? { scaleY: 1, opacity: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.5 }}
       >
-        <span className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+        <span className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-accent" />
       </motion.span>
       {/* Right handle */}
       <motion.span
-        className="absolute -right-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        className="absolute -right-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-accent"
         initial={{ scaleY: 0, opacity: 0 }}
         animate={active ? { scaleY: 1, opacity: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.55 }}
       >
-        <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+        <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-accent" />
       </motion.span>
       <span className="relative z-10 text-gradient-animated">{children}</span>
     </span>
