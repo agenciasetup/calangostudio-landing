@@ -19,6 +19,7 @@ const FAQ = dynamic(() => import("@/components/FAQ"));
 const CTAFinal = dynamic(() => import("@/components/CTAFinal"));
 const Founder = dynamic(() => import("@/components/Founder"));
 const Footer = dynamic(() => import("@/components/Footer"));
+const ProspectPopup = dynamic(() => import("@/components/ProspectPopup"));
 
 export default function Home() {
   return (
@@ -65,6 +66,7 @@ export default function Home() {
         <Founder />
       </main>
       <Footer />
+      <ProspectPopup />
     </>
   );
 }

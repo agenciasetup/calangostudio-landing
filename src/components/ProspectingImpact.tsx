@@ -8,6 +8,8 @@ import {
   TrendingUp,
   BarChart3,
   CheckCircle,
+  Star,
+  Quote,
 } from "lucide-react";
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -48,10 +50,34 @@ function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: str
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+const testimonials = [
+  {
+    name: "Fábio Pontes",
+    initials: "FP",
+    gradient: "from-emerald-400 to-cyan-400",
+    text: "No primeiro dia de uso coloquei 16 prospectos, enviei as mensagens e só aguardei as respostas. Dos 16, no primeiro dia, fechei um contrato de Social Media. Já paguei um ano da assinatura hahaha",
+  },
+  {
+    name: "Amanda Amaral",
+    initials: "AA",
+    gradient: "from-pink-400 to-rose-400",
+    text: "Eu tenho TDAH e prospectar sempre foi um desafio pra mim, porque eu esquecia, focava nas funções do trabalho. Só o fato de eu abrir o Calango.Studio pra gerar imagens e ver o botão de prospectar e fazer isso em menos de 5 minutos, me ajudou muito! Hoje tenho o hábito de prospectar 5 novos contatos todos os dias.",
+  },
+];
+
 export default function ProspectingImpact() {
   return (
-    <section className="py-16 md:py-20 px-4 relative overflow-hidden">
-      <div className="section-divider max-w-5xl mx-auto mb-12 md:mb-16" />
+    <section className="py-20 md:py-28 px-4 relative overflow-hidden">
+      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
+
+      {/* Floating icons */}
+      <motion.div
+        animate={{ y: [0, -18, 0], rotate: [0, 10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-24 right-[8%] hidden lg:block opacity-[0.05]"
+      >
+        <Target size={70} />
+      </motion.div>
 
       <div className="max-w-5xl mx-auto">
         <motion.div
@@ -59,15 +85,15 @@ export default function ProspectingImpact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-12 md:mb-16"
         >
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            E se sua prospecção{" "}
-            <span className="text-gradient-animated">virasse rotina?</span>
+            Vamos te lembrar{" "}
+            <span className="text-gradient-animated">de prospectar.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             Com missões diárias, lembretes e fluxo de abordagem pronto, fica muito mais fácil manter consistência.
-            Você não precisa acertar tudo. Só precisa parar de depender do acaso.
+            Você não precisa pensar muito. Só executar com um clique e repetir o processo.
           </p>
         </motion.div>
 
@@ -77,7 +103,7 @@ export default function ProspectingImpact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
-          className="relative mx-auto max-w-4xl mb-10"
+          className="relative mx-auto max-w-4xl mb-12 md:mb-16"
         >
           <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
             {/* Browser bar */}
@@ -165,8 +191,8 @@ export default function ProspectingImpact() {
           </div>
         </motion.div>
 
-        {/* Impact text blocks */}
-        <div className="grid sm:grid-cols-3 gap-4 md:gap-5 max-w-3xl mx-auto">
+        {/* Impact counters */}
+        <div className="grid sm:grid-cols-3 gap-4 md:gap-5 max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -208,6 +234,38 @@ export default function ProspectingImpact() {
             <p className="text-[10px] md:text-xs text-accent/70 uppercase tracking-wider font-bold mb-2">impacto no caixa</p>
             <p className="text-xs text-txt-secondary">Poucos fechamentos já fazem diferença real.</p>
           </motion.div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="grid md:grid-cols-2 gap-4 md:gap-5">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="glass-card p-5 md:p-7 hover:!border-accent/15 transition-all duration-300"
+            >
+              <Quote size={18} className="text-accent/20 mb-3" />
+              <p className="text-sm md:text-[15px] text-txt-secondary leading-relaxed mb-5">
+                &ldquo;{t.text}&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-black text-black shadow-lg`}>
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white">{t.name}</p>
+                  <div className="flex gap-0.5 mt-0.5">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} size={11} className="text-accent fill-accent" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

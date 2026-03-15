@@ -54,57 +54,67 @@ export default function Hero() {
   const bgOpacity = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [1, 0]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 pt-28 pb-24 overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-[90vh] md:min-h-[95vh] flex flex-col items-center justify-start px-4 pt-32 md:pt-40 pb-24 overflow-hidden">
+      {/* Background glow */}
       <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] rounded-full bg-gradient-to-br from-accent/10 via-accent-end/6 to-transparent blur-[80px] md:blur-[140px]" />
       </motion.div>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      {/* Floating decorative icons */}
+      <motion.div
+        animate={{ y: [0, -20, 0], rotate: [0, 8, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-32 left-[8%] hidden lg:block opacity-[0.06]"
+      >
+        <Target size={60} />
+      </motion.div>
+      <motion.div
+        animate={{ y: [0, 16, 0], rotate: [0, -6, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="absolute top-48 right-[6%] hidden lg:block opacity-[0.06]"
+      >
+        <Sparkles size={50} />
+      </motion.div>
+      <motion.div
+        animate={{ y: [0, -12, 0], rotate: [0, 5, -5, 0] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute bottom-[35%] left-[4%] hidden lg:block opacity-[0.05]"
+      >
+        <Handshake size={45} />
+      </motion.div>
+
+      <div className="relative z-10 max-w-4xl mx-auto text-center">
+        {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.05 }}
-          className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 tracking-tight"
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="font-poppins font-black text-[2.2rem] sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.08] mb-6 md:mb-8 tracking-tight"
         >
-          Feche clientes, organize seu trabalho e entregue conteúdo{" "}
+          Feche clientes, organize{" "}
+          <br className="hidden sm:block" />
+          seu trabalho e entregue{" "}
+          <br className="hidden sm:block" />
+          conteúdo{" "}
           <span className="text-gradient-animated">em um só lugar.</span>
         </motion.h1>
 
+        {/* Subheadline */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-8 leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.12 }}
+          className="text-base md:text-lg text-txt-secondary max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed"
         >
           O Calango Studio é a operação do designer: prospecte empresas, feche serviços, organize briefing e contrato, e produza posts, copies e imagens com base no contexto real de cada cliente.
         </motion.p>
 
-        {/* Bullets */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.13 }}
-          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-10 text-sm text-txt-secondary"
-        >
-          {[
-            "Captação de clientes",
-            "Fechamento e contrato",
-            "Produção com IA",
-            "Tudo integrado",
-          ].map((item) => (
-            <div key={item} className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span>{item}</span>
-            </div>
-          ))}
-        </motion.div>
-
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 md:mb-20"
         >
           <a href="#planos" className="btn-primary px-10 py-4 text-sm tracking-widest flex items-center gap-2">
             Entrar no Calango Studio
@@ -117,9 +127,9 @@ export default function Hero() {
 
         {/* ===== DASHBOARD MOCKUP ===== */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
           style={{ y: mockupY }}
           className="relative mx-auto max-w-4xl"
         >
@@ -138,7 +148,6 @@ export default function Hero() {
             </div>
 
             <div className="bg-bg-primary p-3.5 md:p-6">
-              {/* Sidebar + Content layout */}
               <div className="flex gap-3 md:gap-4">
                 {/* Mini sidebar */}
                 <div className="hidden sm:flex flex-col gap-2 w-12 md:w-14 flex-shrink-0">
@@ -163,7 +172,6 @@ export default function Hero() {
                   ))}
                 </div>
 
-                {/* Main content */}
                 <div className="flex-1 min-w-0">
                   {/* Welcome header */}
                   <div className="flex items-center justify-between mb-3 md:mb-4">
@@ -176,18 +184,12 @@ export default function Hero() {
                         <h2 className="font-poppins font-bold text-xs md:text-sm text-white">Painel do dia</h2>
                       </div>
                     </div>
-                    <div className="hidden sm:flex items-center gap-1.5">
-                      <span className="text-[8px] text-zinc-500 uppercase tracking-wider font-bold">Março 2026</span>
-                    </div>
                   </div>
 
-                  {/* Dashboard cards grid */}
+                  {/* Dashboard cards */}
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2 mb-3 md:mb-4">
                     {dashboardCards.map((card) => (
-                      <div
-                        key={card.label}
-                        className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}
-                      >
+                      <div key={card.label} className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}>
                         <div className="flex items-center gap-1.5 mb-1">
                           <card.icon size={10} className={card.accent} />
                           <span className="text-[7px] md:text-[8px] text-zinc-400 uppercase tracking-wider font-bold truncate">{card.label}</span>
