@@ -7,27 +7,27 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 const faqs = [
   {
     q: "Qual IA vocês usam?",
-    a: "Nano Banana como motor principal, com FLUX e OpenAI integrados. Na prática, você não escolhe. O Calango seleciona automaticamente o melhor modelo para cada geração.",
+    a: "Integramos modelos da OpenAI, Google Gemini, FLUX e Claude. Na prática, o Calango seleciona automaticamente o melhor modelo para cada tipo de geração. Você não precisa se preocupar com isso.",
   },
   {
-    q: "Como funcionam os créditos?",
-    a: "Cada plano tem um volume mensal focado em assertividade, não volume. Em média, você gera mais de 100 imagens tranquilamente. Ainda tem o Incentivo Google, um programa que libera até U$300 em créditos extras (quase 3.000 gerações). Temos uma aula ensinando a ativar gratuitamente.",
+    q: "O Calango Studio é só um gerador de imagem?",
+    a: "Não. O Calango Studio é a operação completa do designer. Você prospecta clientes, acompanha o funil de vendas, organiza briefing e contrato, gera conteúdo e imagens com base no cliente, e acompanha toda sua rotina em um só lugar.",
   },
   {
-    q: "Tem recompensas e premiações?",
-    a: "Sim. Conforme você usa a plataforma, sobe de nível e desbloqueia funções e prêmios exclusivos.",
+    q: "Como funciona a prospecção dentro do Studio?",
+    a: "Você cadastra prospectos, recebe missões diárias para abordar empresas, usa mensagens prontas e acompanha quem respondeu. É um funil comercial integrado ao sistema de produção.",
   },
   {
-    q: "Tem programa de afiliados?",
-    a: "Sim. O CalangoPartner. Disponível para membros Elite, mediante aprovação da nossa equipe.",
+    q: "Como funcionam os créditos (CalangoCoins)?",
+    a: "Cada plano tem um volume mensal de CalangoCoins. Em média, você gera mais de 100 imagens tranquilamente. Os créditos renovam mensalmente. Ainda tem o Incentivo Google, um programa que libera até U$300 em créditos extras.",
   },
   {
-    q: "Vai ter atualizações?",
-    a: "Sempre. Já vêm por aí: geração de arquivo editável no Figma, gestão de cobranças e contratos, e muito mais.",
+    q: "Tem ranking e recompensas?",
+    a: "Sim. Quanto mais você prospecta, conversa e fecha clientes, mais sobe no ranking. Seu perfil ganha destaque e visibilidade dentro da plataforma. Conforme você usa o Studio, desbloqueia funções e prêmios exclusivos.",
   },
   {
-    q: "Qual a vantagem do Calango Studio sobre outras IAs?",
-    a: "Tempo, organização e economia. O Calango não é só uma IA de imagem. É uma plataforma de workflow. Ele aprende o briefing de cada cliente seu, elimina o retrabalho de contexto e centraliza tudo que você usaria em 4 ou 5 ferramentas separadas.",
+    q: "Qual a vantagem do Calango sobre outras ferramentas?",
+    a: "O Calango não é só uma IA. É um sistema de operação. Ele centraliza prospecção, vendas, gestão de clientes, briefing, produção de conteúdo e análise. Você para de pagar 5 assinaturas separadas e trabalha em um lugar só.",
   },
 ];
 

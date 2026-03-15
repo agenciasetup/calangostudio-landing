@@ -3,19 +3,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import {
-  Palette,
-  Camera,
-  Smartphone,
-  Package,
-  Shapes,
-  PencilRuler,
-  Sparkles,
-  ScanLine,
-  History,
-  FileText,
+  Target,
+  MessageCircle,
+  Handshake,
   Users,
-  Briefcase,
+  FileText,
+  Image,
   ArrowDown,
+  ArrowRight,
+  Sparkles,
+  LayoutDashboard,
+  Bell,
+  DollarSign,
   ChevronRight,
 } from "lucide-react";
 
@@ -27,57 +26,21 @@ function useIsMobile() {
   return isMobile;
 }
 
-function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
+const flowSteps = [
+  { label: "Prospectar", icon: Target, color: "from-blue-400 to-cyan-500" },
+  { label: "Abordar", icon: MessageCircle, color: "from-amber-400 to-orange-500" },
+  { label: "Fechar", icon: Handshake, color: "from-emerald-400 to-green-500" },
+  { label: "Cadastrar", icon: Users, color: "from-purple-400 to-violet-500" },
+  { label: "Produzir", icon: Image, color: "from-rose-400 to-pink-500" },
+];
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          observer.disconnect();
-          const duration = 1200;
-          const start = performance.now();
-          let lastValue = -1;
-          const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const value = Math.floor(eased * target);
-            if (value !== lastValue) {
-              lastValue = value;
-              setCount(value);
-            }
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target]);
-
-  return <span ref={ref}>{count.toLocaleString("pt-BR")}{suffix}</span>;
-}
-
-const dashboardModules = [
-  { label: "Imagem Criativa", icon: Palette, color: "from-rose-500 to-pink-600", hero: true },
-  { label: "Estúdio de Foto", icon: Camera, color: "from-cyan-400 to-blue-500" },
-  { label: "Restaurador Pro", icon: History, color: "from-amber-400 to-amber-700" },
-  { label: "Mockup Produto", icon: Package, color: "from-emerald-400 to-teal-700" },
-  { label: "Assets 3D", icon: Shapes, color: "from-red-500 to-rose-700" },
-  { label: "Consultor de Perfil", icon: Briefcase, color: "from-blue-400 to-indigo-600" },
-  { label: "UGC Build", icon: Smartphone, color: "from-orange-500 to-amber-600" },
-  { label: "CopyMaker", icon: FileText, color: "from-green-400 to-emerald-700" },
-  { label: "Meus Clientes", icon: Users, color: "from-sky-400 to-cyan-700" },
-  { label: "Remix Layout", icon: ScanLine, color: "from-purple-500 to-fuchsia-700" },
-  { label: "Modo Manual", icon: PencilRuler, color: "from-lime-400 to-green-600" },
-  { label: "Criação Livre", icon: Sparkles, color: "from-yellow-400 to-orange-600" },
+const dashboardCards = [
+  { label: "Missões do dia", value: "5 prospecções", icon: Target, accent: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { label: "Prospectos", value: "32 ativos", icon: Users, accent: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+  { label: "Clientes ativos", value: "8 projetos", icon: LayoutDashboard, accent: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+  { label: "Produção pendente", value: "3 entregas", icon: FileText, accent: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { label: "Lembretes", value: "2 follow-ups", icon: Bell, accent: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
+  { label: "Cobranças", value: "R$ 2.400", icon: DollarSign, accent: "text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
 ];
 
 export default function Hero() {
@@ -87,13 +50,11 @@ export default function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  // Disable parallax on mobile. Scroll-linked transforms cause jank on low-end devices
   const mockupY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 150]);
   const bgOpacity = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [1, 0]);
 
   return (
     <section ref={sectionRef} className="relative min-h-[100vh] flex flex-col items-center justify-center px-4 pt-28 pb-24 overflow-hidden">
-      {/* Static background glow. No mouse tracking, no animated blobs on mobile */}
       <motion.div style={{ opacity: bgOpacity }} className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] rounded-full bg-gradient-to-br from-accent/10 via-accent-end/6 to-transparent blur-[80px] md:blur-[140px]" />
       </motion.div>
@@ -105,53 +66,53 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="font-poppins font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-6 tracking-tight"
         >
-          Gere imagens, copies e criativos{" "}
-          <span className="text-gradient-animated">profissionais</span>{" "}
-          em{" "}
-          <span className="text-gradient-animated">minutos.</span>
+          Feche clientes, organize seu trabalho e entregue conteúdo{" "}
+          <span className="text-gradient-animated">em um só lugar.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-12 leading-relaxed"
+          className="text-base md:text-lg text-txt-secondary max-w-3xl mx-auto mb-8 leading-relaxed"
         >
-          Uma plataforma com 12 ferramentas de IA para designers e social media
-          managers que precisam produzir mais. Sem abrir mil abas ou reexplicar
-          o cliente pra IA toda semana.
+          O Calango Studio é a operação do designer: prospecte empresas, feche serviços, organize briefing e contrato, e produza posts, copies e imagens com base no contexto real de cada cliente.
         </motion.p>
 
+        {/* Bullets */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.13 }}
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-10 text-sm text-txt-secondary"
+        >
+          {[
+            "Captação de clientes",
+            "Fechamento e contrato",
+            "Produção com IA",
+            "Tudo integrado",
+          ].map((item) => (
+            <div key={item} className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          <a href="#planos" className="btn-primary px-10 py-4 text-sm tracking-widest">Assinar agora</a>
-          <a href="#ferramentas" className="btn-secondary px-7 py-3.5 flex items-center gap-2 text-sm">
-            Ver ferramentas <ArrowDown size={14} className="animate-float" />
+          <a href="#planos" className="btn-primary px-10 py-4 text-sm tracking-widest flex items-center gap-2">
+            Entrar no Calango Studio
+            <ArrowRight size={16} />
           </a>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="flex flex-wrap items-center justify-center gap-10 mb-16 text-center"
-        >
-          {[
-            { value: 12, suffix: "+", label: "Ferramentas" },
-            { value: 500, suffix: "+", label: "Designers ativos" },
-            { value: 20, suffix: "min", label: "Tempo por post" },
-          ].map((stat, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <span className="font-poppins font-black text-2xl md:text-3xl text-white text-glow">
-                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-              </span>
-              <span className="text-[10px] text-txt-muted uppercase tracking-[0.18em] mt-1 font-bold">{stat.label}</span>
-            </div>
-          ))}
+          <a href="#como-funciona" className="btn-secondary px-7 py-3.5 flex items-center gap-2 text-sm">
+            Ver como funciona <ArrowDown size={14} className="animate-float" />
+          </a>
         </motion.div>
 
         {/* ===== DASHBOARD MOCKUP ===== */}
@@ -176,67 +137,87 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="bg-bg-primary p-3.5 md:p-7">
-              {/* Welcome header */}
-              <div className="flex items-center justify-between mb-4 md:mb-6">
-                <div className="flex items-center gap-2.5 md:gap-3">
-                  <div className="relative w-9 h-9 md:w-11 md:h-11 rounded-full flex-shrink-0">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400 to-green-600 md:animate-[spin_8s_linear_infinite] p-[2px]">
-                      <div className="w-full h-full rounded-full bg-bg-primary" />
-                    </div>
-                    <div className="absolute inset-[3px] rounded-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
-                      <Sparkles size={12} className="text-accent md:hidden" />
-                      <Sparkles size={14} className="text-accent hidden md:block" />
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[8px] md:text-[9px] text-zinc-500 uppercase tracking-[0.18em] font-bold">Seja bem vindo,</p>
-                    <h2 className="font-poppins font-black text-base md:text-xl">
-                      Mestre<span className="text-gradient-animated">lango</span>
-                    </h2>
-                  </div>
-                </div>
-                <div className="hidden sm:grid grid-cols-3 gap-2">
-                  {[{ label: "Projetos", value: "14" }, { label: "Artes", value: "1" }, { label: "Favs", value: "0" }].map((s, i) => (
-                    <div key={i} className="w-14 h-14 rounded-xl bg-white/[0.03] border border-white/[0.08] flex flex-col items-center justify-center">
-                      <span className="font-poppins font-black text-sm text-white">{s.value}</span>
-                      <span className="text-[6px] text-zinc-500 uppercase tracking-[0.18em] font-bold">{s.label}</span>
+            <div className="bg-bg-primary p-3.5 md:p-6">
+              {/* Sidebar + Content layout */}
+              <div className="flex gap-3 md:gap-4">
+                {/* Mini sidebar */}
+                <div className="hidden sm:flex flex-col gap-2 w-12 md:w-14 flex-shrink-0">
+                  {[
+                    { icon: LayoutDashboard, active: true },
+                    { icon: Target, active: false },
+                    { icon: Users, active: false },
+                    { icon: FileText, active: false },
+                    { icon: Image, active: false },
+                    { icon: Sparkles, active: false },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className={`w-full aspect-square rounded-xl flex items-center justify-center transition-colors ${
+                        item.active
+                          ? "bg-accent/15 border border-accent/30"
+                          : "bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05]"
+                      }`}
+                    >
+                      <item.icon size={14} className={item.active ? "text-accent" : "text-zinc-500"} />
                     </div>
                   ))}
                 </div>
-              </div>
 
-              {/* Compact tool grid */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-1.5 md:gap-2.5">
-                {dashboardModules.map((tool) => (
-                  <div
-                    key={tool.label}
-                    className={`group relative rounded-xl md:rounded-2xl bg-black/40 border border-white/[0.08] overflow-hidden transition-colors duration-300 hover:border-white/[0.18] ${
-                      tool.hero ? "sm:col-span-2 sm:row-span-2" : ""
-                    }`}
-                  >
-                    <div className={`absolute top-0 inset-x-0 h-[2px] md:h-[3px] rounded-t-2xl bg-gradient-to-r ${tool.color} opacity-50`} />
-
-                    <div className={`relative z-10 flex flex-col items-start ${tool.hero ? "p-2.5 sm:p-5" : "p-2 md:p-3"} h-full`}>
-                      <div className={`${tool.hero ? "w-8 h-8 sm:w-12 sm:h-12" : "w-6 h-6 md:w-8 md:h-8"} rounded-lg md:rounded-xl flex items-center justify-center border shadow-lg mb-1 md:mb-2 bg-white/10 text-white border-white/15`}>
-                        <tool.icon size={tool.hero ? 16 : 11} className="md:hidden" strokeWidth={2} />
-                        <tool.icon size={tool.hero ? 20 : 14} className="hidden md:block" strokeWidth={2} />
+                {/* Main content */}
+                <div className="flex-1 min-w-0">
+                  {/* Welcome header */}
+                  <div className="flex items-center justify-between mb-3 md:mb-4">
+                    <div className="flex items-center gap-2 md:gap-2.5">
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-accent/20 to-accent-end/20 flex items-center justify-center border border-accent/20">
+                        <Sparkles size={12} className="text-accent" />
                       </div>
-                      <h3 className={`font-poppins font-bold text-white ${tool.hero ? "text-xs sm:text-lg mt-auto" : "text-[8px] sm:text-xs mt-auto"} leading-tight`}>
-                        {tool.label}
-                      </h3>
-                      {tool.hero && (
-                        <div className="flex items-center justify-between w-full mt-2 md:mt-3">
-                          <span className="text-[6px] md:text-[7px] font-black text-white/70 uppercase tracking-[0.20em] hidden sm:block">Acessar Estúdio</span>
-                          <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-white text-black flex items-center justify-center shadow-xl">
-                            <ChevronRight size={10} strokeWidth={3} className="md:hidden" />
-                            <ChevronRight size={12} strokeWidth={3} className="hidden md:block" />
-                          </div>
-                        </div>
-                      )}
+                      <div>
+                        <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold">Sua operação</p>
+                        <h2 className="font-poppins font-bold text-xs md:text-sm text-white">Painel do dia</h2>
+                      </div>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-1.5">
+                      <span className="text-[8px] text-zinc-500 uppercase tracking-wider font-bold">Março 2026</span>
                     </div>
                   </div>
-                ))}
+
+                  {/* Dashboard cards grid */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2 mb-3 md:mb-4">
+                    {dashboardCards.map((card) => (
+                      <div
+                        key={card.label}
+                        className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}
+                      >
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <card.icon size={10} className={card.accent} />
+                          <span className="text-[7px] md:text-[8px] text-zinc-400 uppercase tracking-wider font-bold truncate">{card.label}</span>
+                        </div>
+                        <p className={`text-[10px] md:text-xs font-bold ${card.accent}`}>{card.value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Flow steps */}
+                  <div className="rounded-xl md:rounded-2xl bg-white/[0.02] border border-white/[0.06] p-2.5 md:p-4">
+                    <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold mb-2 md:mb-3">Fluxo de trabalho</p>
+                    <div className="flex items-center justify-between gap-1 md:gap-2">
+                      {flowSteps.map((step, i) => (
+                        <div key={step.label} className="flex items-center gap-1 md:gap-2 flex-1 min-w-0">
+                          <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                            <div className={`w-7 h-7 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
+                              <step.icon size={12} className="text-white md:hidden" strokeWidth={2} />
+                              <step.icon size={14} className="text-white hidden md:block" strokeWidth={2} />
+                            </div>
+                            <span className="text-[6px] md:text-[8px] text-zinc-400 font-bold text-center leading-tight">{step.label}</span>
+                          </div>
+                          {i < flowSteps.length - 1 && (
+                            <ChevronRight size={10} className="text-zinc-600 flex-shrink-0 hidden sm:block" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -245,7 +226,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator - desktop only */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

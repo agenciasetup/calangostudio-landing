@@ -11,6 +11,7 @@ interface Plan {
   icon: LucideIcon;
   price: string;
   subtitle: string;
+  capacity: string;
   features: string[];
   cta: string;
   popular: boolean;
@@ -21,7 +22,6 @@ interface Plan {
   checkoutUrl: string;
 }
 
-/** Append offDiscount to a Hotmart URL respecting ? vs & */
 function withCoupon(url: string, coupon: string | null): string {
   if (!coupon || url === "#") return url;
   const separator = url.includes("?") ? "&" : "?";
@@ -33,12 +33,14 @@ const plans: Plan[] = [
     name: "Base",
     icon: Zap,
     price: "97,90",
-    subtitle: "Acesso aos geradores de imagem e ferramentas essenciais.",
+    subtitle: "Para quem quer começar com estrutura e operar até 5 clientes.",
+    capacity: "5 clientes",
     features: [
       "Geradores de Imagem (todos)",
+      "Prospecção e mensagens prontas",
+      "Gestão de clientes e briefing",
       "Extrator de Prompt",
       "Vínculo ao Google Drive",
-      "4 Clientes cadastrados",
       "1 Personagem por cliente",
     ],
     cta: "Assinar Base",
@@ -53,13 +55,14 @@ const plans: Plan[] = [
     name: "Pro",
     icon: Sparkles,
     price: "169,90",
-    subtitle: "Todas as ferramentas do Base + Copy, Análise e Remix.",
+    subtitle: "Para quem já quer ganhar volume com mais controle.",
+    capacity: "12 clientes",
     features: [
       "Tudo do plano Base",
       "CopyMaker",
       "Análise de Perfil",
       "Remix de Layout",
-      "10 Clientes cadastrados",
+      "Contrato e onboarding avançado",
       "2 Personagens por cliente",
     ],
     cta: "Assinar Pro",
@@ -74,10 +77,11 @@ const plans: Plan[] = [
     name: "Elite",
     icon: Crown,
     price: "319,90",
-    subtitle: "Acesso total + comunidade, mentorias e cursos.",
+    subtitle: "Para quem quer rodar como operação forte e escalar.",
+    capacity: "25 clientes",
     features: [
       "Tudo do plano Pro",
-      "30 Clientes cadastrados",
+      "25 Clientes cadastrados",
       "3 Personagens por cliente",
       "Acesso antecipado às features",
       "Comunidade Calango PRO com mentorias ao vivo",
@@ -140,6 +144,8 @@ export default function Pricing() {
     <section id="planos" className="py-16 md:py-20 px-4 relative">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/3 rounded-full blur-[100px] md:blur-[200px] pointer-events-none" />
 
+      <div className="section-divider max-w-6xl mx-auto mb-12 md:mb-16" />
+
       <div className="relative max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -148,11 +154,10 @@ export default function Pricing() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel mb-6">
-            <Sparkles size={14} className="text-accent" />
-            <span className="text-xs text-txt-secondary font-semibold uppercase tracking-wider">Planos flexíveis</span>
-          </div>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">Um plano para onde você está. Outro para onde quer chegar.</h2>
+          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
+            Escolha o plano ideal para a operação{" "}
+            <span className="text-gradient-animated">que você quer construir.</span>
+          </h2>
           <p className="text-txt-secondary text-base md:text-lg">Sem fidelidade. Cancele quando quiser.</p>
         </motion.div>
 
@@ -181,6 +186,12 @@ export default function Pricing() {
               </div>
 
               <h3 className="font-poppins font-black text-xl md:text-2xl mb-1">{plan.name}</h3>
+
+              {/* Capacity badge */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] mb-2">
+                <span className="text-[9px] md:text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Até {plan.capacity}</span>
+              </div>
+
               <div className="flex items-baseline gap-0.5 mb-2">
                 <span className="text-sm text-txt-muted">R$</span>
                 <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
