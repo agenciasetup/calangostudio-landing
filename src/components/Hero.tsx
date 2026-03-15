@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import {
   Target,
   MessageCircle,
@@ -16,6 +16,10 @@ import {
   Bell,
   DollarSign,
   ChevronRight,
+  Volume2,
+  X,
+  Gift,
+  Clock,
 } from "lucide-react";
 
 function useIsMobile() {
@@ -38,7 +42,7 @@ function IOSHighlight({ children, delay = 0 }: { children: string; delay?: numbe
   return (
     <span className="relative inline">
       <motion.span
-        className="absolute inset-0 rounded-md bg-[#007AFF]/25"
+        className="absolute inset-0 rounded-md bg-accent/25"
         initial={{ scaleX: 0 }}
         animate={active ? { scaleX: 1 } : {}}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -46,21 +50,21 @@ function IOSHighlight({ children, delay = 0 }: { children: string; delay?: numbe
       />
       {/* Left handle */}
       <motion.span
-        className="absolute -left-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        className="absolute -left-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-accent"
         initial={{ scaleY: 0, opacity: 0 }}
         animate={active ? { scaleY: 1, opacity: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.5 }}
       >
-        <span className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+        <span className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-accent" />
       </motion.span>
       {/* Right handle */}
       <motion.span
-        className="absolute -right-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-[#007AFF]"
+        className="absolute -right-[3px] top-0 bottom-0 w-[2.5px] rounded-full bg-accent"
         initial={{ scaleY: 0, opacity: 0 }}
         animate={active ? { scaleY: 1, opacity: 1 } : {}}
         transition={{ duration: 0.3, delay: 0.55 }}
       >
-        <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-[#007AFF]" />
+        <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-[9px] h-[9px] rounded-full bg-accent" />
       </motion.span>
       <span className="relative z-10 text-gradient-animated">{children}</span>
     </span>
@@ -112,6 +116,271 @@ function HeroParticles() {
   );
 }
 
+/* ─── Smart Progress Bar ─── */
+function SmartProgressBar({ progress }: { progress: number }) {
+  // Transform real progress into perceived progress (faster early, slower late)
+  const getSmartProgress = (real: number): number => {
+    if (real <= 0) return 0;
+    if (real >= 1) return 100;
+    if (real <= 0.5) {
+      // 0-50% real → 0-70% visual (faster)
+      return (real / 0.5) * 70;
+    } else if (real <= 0.75) {
+      // 50-75% real → 70-85% visual
+      return 70 + ((real - 0.5) / 0.25) * 15;
+    } else if (real <= 0.9) {
+      // 75-90% real → 85-93% visual
+      return 85 + ((real - 0.75) / 0.15) * 8;
+    } else if (real <= 0.99) {
+      // 90-99% real → 93-99% visual
+      return 93 + ((real - 0.9) / 0.09) * 6;
+    } else {
+      return 99 + (real - 0.99) * 100;
+    }
+  };
+
+  const visual = getSmartProgress(progress);
+
+  return (
+    <div className="w-full h-1.5 md:h-2 rounded-full bg-white/[0.08] overflow-hidden">
+      <div
+        className="h-full rounded-full bg-gradient-to-r from-accent to-accent-end transition-[width] duration-300 ease-linear"
+        style={{ width: `${Math.min(visual, 100)}%` }}
+      />
+    </div>
+  );
+}
+
+/* ─── VSL Offer Popup ─── */
+function OfferPopup({ onClose }: { onClose: () => void }) {
+  const [seconds, setSeconds] = useState(60);
+  const proUrl = "https://pay.hotmart.com/F104772530K?off=y2uzyv4s&offDiscount=10LANGOS";
+
+  useEffect(() => {
+    if (seconds <= 0) return;
+    const timer = setInterval(() => setSeconds((s) => s - 1), 1000);
+    return () => clearInterval(timer);
+  }, [seconds]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center px-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md rounded-3xl overflow-hidden"
+        style={{
+          background: "rgba(10, 10, 12, 0.95)",
+          border: "1px solid rgba(255, 170, 0, 0.25)",
+          boxShadow: "0 30px 100px rgba(0,0,0,0.6), 0 0 80px rgba(255,170,0,0.08)",
+        }}
+      >
+        {/* Top accent */}
+        <div className="h-1.5 bg-gradient-to-r from-accent via-accent-end to-accent" />
+
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center hover:bg-white/[0.1] transition-colors z-10"
+        >
+          <X size={14} className="text-zinc-400" />
+        </button>
+
+        <div className="p-6 md:p-8 text-center">
+          {/* Gift icon */}
+          <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-accent-end/20 border border-accent/25 flex items-center justify-center mb-5 animate-glow-ring">
+            <Gift size={28} className="text-accent" />
+          </div>
+
+          <h3 className="font-poppins font-black text-2xl md:text-3xl text-white mb-2">
+            Parabéns por assistir!
+          </h3>
+          <p className="text-txt-secondary text-sm md:text-base mb-6 leading-relaxed">
+            Você ganhou um cupom exclusivo de{" "}
+            <span className="font-black text-accent text-lg">10% OFF</span>{" "}
+            no plano Pro.
+          </p>
+
+          {/* Timer */}
+          {seconds > 0 ? (
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <Clock size={14} className="text-accent/70" />
+              <span className="text-sm text-zinc-400">
+                Expira em{" "}
+                <span className="font-poppins font-black text-white text-lg tabular-nums">
+                  {seconds}s
+                </span>
+              </span>
+            </div>
+          ) : (
+            <p className="text-red-400 text-sm font-semibold mb-6">Cupom expirado</p>
+          )}
+
+          {/* CTA */}
+          <a
+            href={seconds > 0 ? proUrl : "#planos"}
+            className={`block w-full py-4 rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
+              seconds > 0
+                ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_30px_rgba(249,115,22,0.25)] hover:shadow-[0_0_50px_rgba(249,115,22,0.4)] hover:-translate-y-0.5"
+                : "bg-zinc-800 text-zinc-500 cursor-not-allowed"
+            }`}
+          >
+            {seconds > 0 ? "Assinar Pro com 10% OFF" : "Ver planos"}
+          </a>
+
+          {seconds > 0 && (
+            <p className="text-[10px] text-zinc-500 mt-3 uppercase tracking-wider font-bold">
+              De R$ 169,90 por R$ 152,91/mês
+            </p>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/* ─── VSL Video Player ─── */
+function VSLPlayer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [showOffer, setShowOffer] = useState(false);
+  const hasShownOffer = useRef(false);
+  const rafRef = useRef<number>();
+
+  // Track progress
+  const updateProgress = useCallback(() => {
+    const video = videoRef.current;
+    if (video && video.duration > 0) {
+      setProgress(video.currentTime / video.duration);
+    }
+    rafRef.current = requestAnimationFrame(updateProgress);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handlePlay = () => {
+      rafRef.current = requestAnimationFrame(updateProgress);
+    };
+    const handlePause = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+    const handleEnded = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      setProgress(1);
+      if (!hasShownOffer.current && !isMuted) {
+        hasShownOffer.current = true;
+        setShowOffer(true);
+      }
+    };
+
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+    video.addEventListener("ended", handleEnded);
+
+    return () => {
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+      video.removeEventListener("ended", handleEnded);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [updateProgress, isMuted]);
+
+  const handleActivateSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    setIsMuted(false);
+    video.muted = false;
+    video.loop = false;
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  };
+
+  return (
+    <>
+      <div className="relative">
+        <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06]">
+          {/* Browser bar */}
+          <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
+            <div className="flex gap-1.5 md:gap-2">
+              <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ff5f57]" />
+              <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#febc2e]" />
+              <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#28c840]" />
+            </div>
+            <div className="flex-1 mx-3 md:mx-6 h-6 md:h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[10px] md:text-xs text-txt-muted font-medium tracking-wide">
+              <span className="w-2 h-2 md:w-2.5 md:h-2.5 mr-1.5 md:mr-2 rounded-full bg-green-400/60" />
+              calango.studio
+            </div>
+          </div>
+
+          {/* Video area */}
+          <div className="relative bg-black">
+            <video
+              ref={videoRef}
+              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4"
+              muted={isMuted}
+              loop={isMuted}
+              autoPlay
+              playsInline
+              preload="metadata"
+              className="w-full aspect-video object-cover"
+            />
+
+            {/* "Clique para ativar o som" overlay */}
+            {isMuted && (
+              <button
+                onClick={handleActivateSound}
+                className="absolute inset-0 flex items-center justify-center cursor-pointer group"
+              >
+                {/* Dark scrim */}
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+
+                {/* Blinking CTA */}
+                <div className="relative z-10 flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-black/60 border border-white/15 backdrop-blur-sm animate-pulse-cta">
+                  <div className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center">
+                    <Volume2 size={18} className="text-accent" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm md:text-base font-bold text-white">Clique aqui para ativar o som</p>
+                    <p className="text-[10px] md:text-xs text-zinc-400">Assista a apresentação completa</p>
+                  </div>
+                </div>
+              </button>
+            )}
+          </div>
+
+          {/* Smart progress bar */}
+          {!isMuted && (
+            <div className="px-4 md:px-5 py-2 md:py-2.5 bg-white/[0.02] border-t border-white/[0.06]">
+              <SmartProgressBar progress={progress} />
+            </div>
+          )}
+        </div>
+
+        <div className="absolute -bottom-10 md:-bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-20 md:h-32 bg-accent/12 blur-[40px] md:blur-[100px] rounded-full" />
+      </div>
+
+      {/* Offer popup */}
+      <AnimatePresence>
+        {showOffer && <OfferPopup onClose={() => setShowOffer(false)} />}
+      </AnimatePresence>
+    </>
+  );
+}
+
 const flowSteps = [
   { label: "Prospectar", icon: Target, color: "from-blue-400 to-cyan-500" },
   { label: "Abordar", icon: MessageCircle, color: "from-amber-400 to-orange-500" },
@@ -128,6 +397,124 @@ const dashboardCards = [
   { label: "Lembretes", value: "2 follow-ups", icon: Bell, accent: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
   { label: "Cobranças", value: "R$ 2.400", icon: DollarSign, accent: "text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
 ];
+
+/* ─── Dashboard Mockup (fallback) ─── */
+function DashboardMockup() {
+  return (
+    <div className="relative">
+      <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06]">
+        {/* Browser bar */}
+        <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
+          <div className="flex gap-1.5 md:gap-2">
+            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ff5f57]" />
+            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#febc2e]" />
+            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 mx-3 md:mx-6 h-6 md:h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[10px] md:text-xs text-txt-muted font-medium tracking-wide">
+            <span className="w-2 h-2 md:w-2.5 md:h-2.5 mr-1.5 md:mr-2 rounded-full bg-green-400/60" />
+            calango.studio
+          </div>
+        </div>
+
+        <div className="bg-bg-primary p-3.5 md:p-6">
+          <div className="flex gap-3 md:gap-4">
+            {/* Mini sidebar */}
+            <div className="hidden sm:flex flex-col gap-2 w-12 md:w-14 flex-shrink-0">
+              {[
+                { icon: LayoutDashboard, active: true },
+                { icon: Target, active: false },
+                { icon: Users, active: false },
+                { icon: FileText, active: false },
+                { icon: Image, active: false },
+                { icon: Sparkles, active: false },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`w-full aspect-square rounded-xl flex items-center justify-center transition-colors ${
+                    item.active
+                      ? "bg-accent/15 border border-accent/30"
+                      : "bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05]"
+                  }`}
+                >
+                  <item.icon size={14} className={item.active ? "text-accent" : "text-zinc-500"} />
+                </div>
+              ))}
+            </div>
+
+            <div className="flex-1 min-w-0">
+              {/* Welcome header */}
+              <div className="flex items-center justify-between mb-3 md:mb-4">
+                <div className="flex items-center gap-2 md:gap-2.5">
+                  <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-accent/20 to-accent-end/20 flex items-center justify-center border border-accent/20">
+                    <Sparkles size={12} className="text-accent" />
+                  </div>
+                  <div>
+                    <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold">Sua operação</p>
+                    <h2 className="font-poppins font-bold text-xs md:text-sm text-white">Painel do dia</h2>
+                  </div>
+                </div>
+              </div>
+
+              {/* Dashboard cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2 mb-3 md:mb-4">
+                {dashboardCards.map((card) => (
+                  <div key={card.label} className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <card.icon size={10} className={card.accent} />
+                      <span className="text-[7px] md:text-[8px] text-zinc-400 uppercase tracking-wider font-bold truncate">{card.label}</span>
+                    </div>
+                    <p className={`text-[10px] md:text-xs font-bold ${card.accent}`}>{card.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Flow steps */}
+              <div className="rounded-xl md:rounded-2xl bg-white/[0.02] border border-white/[0.06] p-2.5 md:p-4">
+                <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold mb-2 md:mb-3">Fluxo de trabalho</p>
+                <div className="flex items-center justify-between gap-1 md:gap-2">
+                  {flowSteps.map((step, i) => (
+                    <div key={step.label} className="flex items-center gap-1 md:gap-2 flex-1 min-w-0">
+                      <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                        <div className={`w-7 h-7 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
+                          <step.icon size={12} className="text-white md:hidden" strokeWidth={2} />
+                          <step.icon size={14} className="text-white hidden md:block" strokeWidth={2} />
+                        </div>
+                        <span className="text-[6px] md:text-[8px] text-zinc-400 font-bold text-center leading-tight">{step.label}</span>
+                      </div>
+                      {i < flowSteps.length - 1 && (
+                        <ChevronRight size={10} className="text-zinc-600 flex-shrink-0 hidden sm:block" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute -bottom-10 md:-bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-20 md:h-32 bg-accent/12 blur-[40px] md:blur-[100px] rounded-full" />
+    </div>
+  );
+}
+
+/* ─── HeroMedia: VSL if video exists, otherwise Dashboard Mockup ─── */
+function HeroMedia() {
+  const [videoExists, setVideoExists] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    fetch("https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4", { method: "HEAD" })
+      .then((res) => setVideoExists(res.ok))
+      .catch(() => setVideoExists(false));
+  }, []);
+
+  // Still checking
+  if (videoExists === null) return <DashboardMockup />;
+  // No video → show mockup
+  if (videoExists === false) return <DashboardMockup />;
+  // Video exists → show player
+  return <VSLPlayer />;
+}
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -233,7 +620,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* ===== DASHBOARD MOCKUP ===== */}
+        {/* ===== VSL VIDEO / DASHBOARD MOCKUP ===== */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -241,98 +628,7 @@ export default function Hero() {
           style={{ y: mockupY }}
           className="relative mx-auto max-w-4xl"
         >
-          <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06]">
-            {/* Browser bar */}
-            <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
-              <div className="flex gap-1.5 md:gap-2">
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#febc2e]" />
-                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#28c840]" />
-              </div>
-              <div className="flex-1 mx-3 md:mx-6 h-6 md:h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[10px] md:text-xs text-txt-muted font-medium tracking-wide">
-                <span className="w-2 h-2 md:w-2.5 md:h-2.5 mr-1.5 md:mr-2 rounded-full bg-green-400/60" />
-                calango.studio
-              </div>
-            </div>
-
-            <div className="bg-bg-primary p-3.5 md:p-6">
-              <div className="flex gap-3 md:gap-4">
-                {/* Mini sidebar */}
-                <div className="hidden sm:flex flex-col gap-2 w-12 md:w-14 flex-shrink-0">
-                  {[
-                    { icon: LayoutDashboard, active: true },
-                    { icon: Target, active: false },
-                    { icon: Users, active: false },
-                    { icon: FileText, active: false },
-                    { icon: Image, active: false },
-                    { icon: Sparkles, active: false },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className={`w-full aspect-square rounded-xl flex items-center justify-center transition-colors ${
-                        item.active
-                          ? "bg-accent/15 border border-accent/30"
-                          : "bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05]"
-                      }`}
-                    >
-                      <item.icon size={14} className={item.active ? "text-accent" : "text-zinc-500"} />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  {/* Welcome header */}
-                  <div className="flex items-center justify-between mb-3 md:mb-4">
-                    <div className="flex items-center gap-2 md:gap-2.5">
-                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-accent/20 to-accent-end/20 flex items-center justify-center border border-accent/20">
-                        <Sparkles size={12} className="text-accent" />
-                      </div>
-                      <div>
-                        <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold">Sua operação</p>
-                        <h2 className="font-poppins font-bold text-xs md:text-sm text-white">Painel do dia</h2>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Dashboard cards */}
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2 mb-3 md:mb-4">
-                    {dashboardCards.map((card) => (
-                      <div key={card.label} className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}>
-                        <div className="flex items-center gap-1.5 mb-1">
-                          <card.icon size={10} className={card.accent} />
-                          <span className="text-[7px] md:text-[8px] text-zinc-400 uppercase tracking-wider font-bold truncate">{card.label}</span>
-                        </div>
-                        <p className={`text-[10px] md:text-xs font-bold ${card.accent}`}>{card.value}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Flow steps */}
-                  <div className="rounded-xl md:rounded-2xl bg-white/[0.02] border border-white/[0.06] p-2.5 md:p-4">
-                    <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold mb-2 md:mb-3">Fluxo de trabalho</p>
-                    <div className="flex items-center justify-between gap-1 md:gap-2">
-                      {flowSteps.map((step, i) => (
-                        <div key={step.label} className="flex items-center gap-1 md:gap-2 flex-1 min-w-0">
-                          <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                            <div className={`w-7 h-7 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
-                              <step.icon size={12} className="text-white md:hidden" strokeWidth={2} />
-                              <step.icon size={14} className="text-white hidden md:block" strokeWidth={2} />
-                            </div>
-                            <span className="text-[6px] md:text-[8px] text-zinc-400 font-bold text-center leading-tight">{step.label}</span>
-                          </div>
-                          {i < flowSteps.length - 1 && (
-                            <ChevronRight size={10} className="text-zinc-600 flex-shrink-0 hidden sm:block" />
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute -bottom-10 md:-bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-20 md:h-32 bg-accent/12 blur-[40px] md:blur-[100px] rounded-full" />
+          <HeroMedia />
         </motion.div>
       </div>
 

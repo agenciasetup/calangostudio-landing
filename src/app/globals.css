@@ -154,7 +154,7 @@ body {
    ============================================================ */
 
 ::selection {
-  background: rgba(0, 122, 255, 0.35);
+  background: rgba(255, 170, 0, 0.30);
   color: #fff;
 }
 
@@ -166,7 +166,7 @@ body {
 .ios-selection-handle {
   position: absolute;
   width: 2px;
-  background: #007AFF;
+  background: #ffaa00;
   border-radius: 1px;
 }
 
@@ -175,7 +175,7 @@ body {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: #007AFF;
+  background: #ffaa00;
   border-radius: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -342,6 +342,25 @@ body {
 .stagger-4 { --stagger: 0.2s; }
 .stagger-5 { --stagger: 0.25s; }
 .stagger-6 { --stagger: 0.3s; }
+
+/* ============================================================
+   VSL PLAYER – Blinking "activate sound" CTA
+   ============================================================ */
+
+@keyframes pulse-cta {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.03); }
+}
+
+.animate-pulse-cta {
+  animation: pulse-cta 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-cta {
+    animation: none;
+  }
+}
 
 /* ============================================================
    MOBILE PERFORMANCE OPTIMIZATIONS

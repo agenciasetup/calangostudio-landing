@@ -8,6 +8,7 @@ const PainPoints = dynamic(() => import("@/components/PainPoints"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const StudioPillars = dynamic(() => import("@/components/StudioPillars"));
 const AIContext = dynamic(() => import("@/components/AIContext"));
+const ToolsShowcase = dynamic(() => import("@/components/ToolsShowcase"));
 const ReplaceTools = dynamic(() => import("@/components/ReplaceTools"));
 const ProspectingImpact = dynamic(() => import("@/components/ProspectingImpact"));
 const MissionsRanking = dynamic(() => import("@/components/MissionsRanking"));
@@ -41,6 +42,8 @@ export default function Home() {
         <StudioPillars />
         {/* Seção 5 — IA com contexto real */}
         <AIContext />
+        {/* Seção 5.5 — Galeria + Ferramentas */}
+        <ToolsShowcase />
         {/* Seção 6 — Pare de pagar ferramentas soltas */}
         <ReplaceTools />
         {/* Seção 7 — Visualize o impacto */}
