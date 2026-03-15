@@ -251,7 +251,7 @@ function OfferPopup({ onClose }: { onClose: () => void }) {
 }
 
 /* ─── VSL Video Player ─── */
-function VSLPlayer() {
+function VSLPlayer({ onError }: { onError?: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -336,6 +336,8 @@ function VSLPlayer() {
               autoPlay
               playsInline
               preload="metadata"
+              crossOrigin="anonymous"
+              onError={() => onError?.()}
               className="w-full aspect-video object-cover"
             />
 
@@ -498,22 +500,12 @@ function DashboardMockup() {
   );
 }
 
-/* ─── HeroMedia: VSL if video exists, otherwise Dashboard Mockup ─── */
+/* ─── HeroMedia: VSL with fallback to Dashboard Mockup on error ─── */
 function HeroMedia() {
-  const [videoExists, setVideoExists] = useState<boolean | null>(null);
+  const [videoFailed, setVideoFailed] = useState(false);
 
-  useEffect(() => {
-    fetch("https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4", { method: "HEAD" })
-      .then((res) => setVideoExists(res.ok))
-      .catch(() => setVideoExists(false));
-  }, []);
-
-  // Still checking
-  if (videoExists === null) return <DashboardMockup />;
-  // No video → show mockup
-  if (videoExists === false) return <DashboardMockup />;
-  // Video exists → show player
-  return <VSLPlayer />;
+  if (videoFailed) return <DashboardMockup />;
+  return <VSLPlayer onError={() => setVideoFailed(true)} />;
 }
 
 export default function Hero() {
