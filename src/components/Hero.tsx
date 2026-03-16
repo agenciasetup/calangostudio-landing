@@ -4,18 +4,10 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useEffect, useState, useMemo, useCallback } from "react";
 import {
   Target,
-  MessageCircle,
   Handshake,
-  Users,
-  FileText,
-  Image,
   ArrowDown,
   ArrowRight,
   Sparkles,
-  LayoutDashboard,
-  Bell,
-  DollarSign,
-  ChevronRight,
   Volume2,
   X,
   Gift,
@@ -330,12 +322,12 @@ function VSLPlayer() {
           <div className="relative bg-black">
             <video
               ref={videoRef}
-              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4"
+              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d12.r2.dev/vsl-720.mp4"
               muted={isMuted}
               loop={isMuted}
               autoPlay
               playsInline
-              preload="metadata"
+              preload="auto"
               className="w-full aspect-video object-cover"
             />
 
@@ -379,141 +371,6 @@ function VSLPlayer() {
       </AnimatePresence>
     </>
   );
-}
-
-const flowSteps = [
-  { label: "Prospectar", icon: Target, color: "from-blue-400 to-cyan-500" },
-  { label: "Abordar", icon: MessageCircle, color: "from-amber-400 to-orange-500" },
-  { label: "Fechar", icon: Handshake, color: "from-emerald-400 to-green-500" },
-  { label: "Cadastrar", icon: Users, color: "from-purple-400 to-violet-500" },
-  { label: "Produzir", icon: Image, color: "from-rose-400 to-pink-500" },
-];
-
-const dashboardCards = [
-  { label: "Missões do dia", value: "5 prospecções", icon: Target, accent: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
-  { label: "Prospectos", value: "32 ativos", icon: Users, accent: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/20" },
-  { label: "Clientes ativos", value: "8 projetos", icon: LayoutDashboard, accent: "text-emerald-400", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
-  { label: "Produção pendente", value: "3 entregas", icon: FileText, accent: "text-purple-400", bg: "bg-purple-500/10", border: "border-purple-500/20" },
-  { label: "Lembretes", value: "2 follow-ups", icon: Bell, accent: "text-cyan-400", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
-  { label: "Cobranças", value: "R$ 2.400", icon: DollarSign, accent: "text-green-400", bg: "bg-green-500/10", border: "border-green-500/20" },
-];
-
-/* ─── Dashboard Mockup (fallback) ─── */
-function DashboardMockup() {
-  return (
-    <div className="relative">
-      <div className="glass-card overflow-hidden !rounded-[20px] md:!rounded-[28px] !shadow-[0_20px_60px_rgba(0,0,0,0.4)] md:!shadow-[0_30px_100px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.06]">
-        {/* Browser bar */}
-        <div className="flex items-center gap-2 px-4 md:px-5 py-2.5 md:py-3 border-b border-white/[0.06] bg-white/[0.02]">
-          <div className="flex gap-1.5 md:gap-2">
-            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#ff5f57]" />
-            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#febc2e]" />
-            <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#28c840]" />
-          </div>
-          <div className="flex-1 mx-3 md:mx-6 h-6 md:h-7 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[10px] md:text-xs text-txt-muted font-medium tracking-wide">
-            <span className="w-2 h-2 md:w-2.5 md:h-2.5 mr-1.5 md:mr-2 rounded-full bg-green-400/60" />
-            calango.studio
-          </div>
-        </div>
-
-        <div className="bg-bg-primary p-3.5 md:p-6">
-          <div className="flex gap-3 md:gap-4">
-            {/* Mini sidebar */}
-            <div className="hidden sm:flex flex-col gap-2 w-12 md:w-14 flex-shrink-0">
-              {[
-                { icon: LayoutDashboard, active: true },
-                { icon: Target, active: false },
-                { icon: Users, active: false },
-                { icon: FileText, active: false },
-                { icon: Image, active: false },
-                { icon: Sparkles, active: false },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className={`w-full aspect-square rounded-xl flex items-center justify-center transition-colors ${
-                    item.active
-                      ? "bg-accent/15 border border-accent/30"
-                      : "bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.05]"
-                  }`}
-                >
-                  <item.icon size={14} className={item.active ? "text-accent" : "text-zinc-500"} />
-                </div>
-              ))}
-            </div>
-
-            <div className="flex-1 min-w-0">
-              {/* Welcome header */}
-              <div className="flex items-center justify-between mb-3 md:mb-4">
-                <div className="flex items-center gap-2 md:gap-2.5">
-                  <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-accent/20 to-accent-end/20 flex items-center justify-center border border-accent/20">
-                    <Sparkles size={12} className="text-accent" />
-                  </div>
-                  <div>
-                    <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold">Sua operação</p>
-                    <h2 className="font-poppins font-bold text-xs md:text-sm text-white">Painel do dia</h2>
-                  </div>
-                </div>
-              </div>
-
-              {/* Dashboard cards */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 md:gap-2 mb-3 md:mb-4">
-                {dashboardCards.map((card) => (
-                  <div key={card.label} className={`rounded-lg md:rounded-xl ${card.bg} border ${card.border} p-2 md:p-3`}>
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <card.icon size={10} className={card.accent} />
-                      <span className="text-[7px] md:text-[8px] text-zinc-400 uppercase tracking-wider font-bold truncate">{card.label}</span>
-                    </div>
-                    <p className={`text-[10px] md:text-xs font-bold ${card.accent}`}>{card.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Flow steps */}
-              <div className="rounded-xl md:rounded-2xl bg-white/[0.02] border border-white/[0.06] p-2.5 md:p-4">
-                <p className="text-[7px] md:text-[8px] text-zinc-500 uppercase tracking-[0.18em] font-bold mb-2 md:mb-3">Fluxo de trabalho</p>
-                <div className="flex items-center justify-between gap-1 md:gap-2">
-                  {flowSteps.map((step, i) => (
-                    <div key={step.label} className="flex items-center gap-1 md:gap-2 flex-1 min-w-0">
-                      <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                        <div className={`w-7 h-7 md:w-9 md:h-9 rounded-lg md:rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}>
-                          <step.icon size={12} className="text-white md:hidden" strokeWidth={2} />
-                          <step.icon size={14} className="text-white hidden md:block" strokeWidth={2} />
-                        </div>
-                        <span className="text-[6px] md:text-[8px] text-zinc-400 font-bold text-center leading-tight">{step.label}</span>
-                      </div>
-                      {i < flowSteps.length - 1 && (
-                        <ChevronRight size={10} className="text-zinc-600 flex-shrink-0 hidden sm:block" />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute -bottom-10 md:-bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-20 md:h-32 bg-accent/12 blur-[40px] md:blur-[100px] rounded-full" />
-    </div>
-  );
-}
-
-/* ─── HeroMedia: VSL if video exists, otherwise Dashboard Mockup ─── */
-function HeroMedia() {
-  const [videoExists, setVideoExists] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    fetch("https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4", { method: "HEAD" })
-      .then((res) => setVideoExists(res.ok))
-      .catch(() => setVideoExists(false));
-  }, []);
-
-  // Still checking
-  if (videoExists === null) return <DashboardMockup />;
-  // No video → show mockup
-  if (videoExists === false) return <DashboardMockup />;
-  // Video exists → show player
-  return <VSLPlayer />;
 }
 
 export default function Hero() {
@@ -628,7 +485,7 @@ export default function Hero() {
           style={{ y: mockupY }}
           className="relative mx-auto max-w-4xl"
         >
-          <HeroMedia />
+          <VSLPlayer />
         </motion.div>
       </div>
 
