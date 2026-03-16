@@ -322,7 +322,7 @@ function VSLPlayer() {
           <div className="relative bg-black">
             <video
               ref={videoRef}
-              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d1.r2.dev/vsl-720.mp4"
+              src="https://pub-1c2eab8e243f42fcb91e2869bdc29d12.r2.dev/vsl-720.mp4"
               muted={isMuted}
               loop={isMuted}
               autoPlay
