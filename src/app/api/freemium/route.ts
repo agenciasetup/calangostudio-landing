@@ -99,6 +99,55 @@ function generateSecureCode(): string {
   return String(100000 + (array[0] % 900000));
 }
 
+const META_TOKEN = process.env.TOKEN_META_WPP;
+const PHONE_NUMBER_ID = "722543397606526";
+
+async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
+  if (!META_TOKEN) {
+    console.error("[WhatsApp] TOKEN_META_WPP not configured");
+    return false;
+  }
+
+  // Garantir formato internacional: 5511999999999
+  const cleanDigits = phone.replace(/\D/g, "");
+  const internationalPhone = cleanDigits.startsWith("55") ? cleanDigits : `55${cleanDigits}`;
+
+  try {
+    const res = await fetch(
+      `https://graph.facebook.com/v22.0/${PHONE_NUMBER_ID}/messages`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${META_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          recipient_type: "individual",
+          to: internationalPhone,
+          type: "text",
+          text: {
+            body: `🎨 *Calango Studio*\n\nSeu código de verificação é: *${code}*\n\nEsse código expira em 15 minutos.`,
+          },
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.error) {
+      console.error("[WhatsApp] API error:", data.error);
+      return false;
+    }
+
+    console.log("[WhatsApp] Code sent to", phone);
+    return true;
+  } catch (err) {
+    console.error("[WhatsApp] Send failed:", err);
+    return false;
+  }
+}
+
 // Rate limit simples em memória (por IP)
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 const RATE_LIMIT_MAX = 5;
@@ -263,8 +312,11 @@ export async function POST(request: NextRequest) {
             })
             .eq("id", existingRecord.id);
 
-          // TODO: Enviar código via WhatsApp Business API
-          // await sendWhatsAppCode(cleanPhone, newCode);
+          // Enviar código via WhatsApp
+          const resentOk = await sendWhatsAppCode(cleanPhone, newCode);
+          if (!resentOk) {
+            console.warn("[Freemium] WhatsApp send failed for re-registration, proceeding anyway");
+          }
 
           return NextResponse.json({
             success: true,
@@ -323,8 +375,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Enviar código via WhatsApp Business API
-    // await sendWhatsAppCode(cleanPhone, whatsappCode);
+    // Enviar código via WhatsApp
+    const sentOk = await sendWhatsAppCode(cleanPhone, whatsappCode);
+    if (!sentOk) {
+      console.warn("[Freemium] WhatsApp send failed for new registration, proceeding anyway");
+    }
 
     // Salvar também na tabela leads para tracking (fire-and-forget)
     try {
