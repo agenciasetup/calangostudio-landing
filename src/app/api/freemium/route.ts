@@ -59,39 +59,6 @@ function normalizeEmail(email: string): string {
   return `${withoutTag}@${domain}`;
 }
 
-/**
- * Validação de CPF via consulta externa (Brasil API).
- * Retorna true se o CPF é real, false se não encontrado.
- * Em caso de erro na API (instabilidade), retorna true (fail-open para não travar o cadastro).
- */
-async function validateCPFExternal(cpf: string): Promise<{ valid: boolean; name?: string }> {
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-    const res = await fetch(`https://brasilapi.com.br/api/cpf/v1/${cpf}`, {
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
-
-    if (res.status === 404) {
-      return { valid: false }; // CPF não encontrado na base
-    }
-
-    if (!res.ok) {
-      // API instável — fail-open
-      console.warn(`[CPF Validation] Brasil API returned ${res.status}`);
-      return { valid: true };
-    }
-
-    const data = await res.json();
-    return { valid: true, name: data.nome };
-  } catch (err) {
-    // Timeout ou erro de rede — fail-open
-    console.warn("[CPF Validation] External check failed, proceeding:", err);
-    return { valid: true };
-  }
-}
 
 function generateSecureCode(): string {
   const array = new Uint32Array(1);
@@ -208,15 +175,6 @@ export async function POST(request: NextRequest) {
     const cleanCpf = cpf.replace(/\D/g, "");
     if (!validateCPF(cleanCpf)) {
       return NextResponse.json({ error: "CPF inválido." }, { status: 400 });
-    }
-
-    // Validação externa do CPF (consulta API)
-    const cpfCheck = await validateCPFExternal(cleanCpf);
-    if (!cpfCheck.valid) {
-      return NextResponse.json(
-        { error: "CPF não encontrado na base da Receita Federal." },
-        { status: 400 }
-      );
     }
 
     const cleanPhone = phone.replace(/\D/g, "");
