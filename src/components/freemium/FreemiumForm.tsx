@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 function formatCPF(value: string): string {
@@ -14,13 +14,17 @@ function formatCPF(value: string): string {
 
 function formatPhone(value: string): string {
   const digits = value.replace(/\D/g, "").slice(0, 11);
-  if (digits.length <= 2) return `(${digits}`;
-  if (digits.length <= 7)
+  if (digits.length <= 2) return digits.length > 0 ? `(${digits}` : "";
+  if (digits.length <= 6)
     return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10)
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
 }
 
 type Step = "form" | "verify" | "success";
+
+const STORAGE_KEY = "freemium_registration";
 
 export default function FreemiumForm() {
   const [step, setStep] = useState<Step>("form");
@@ -32,10 +36,37 @@ export default function FreemiumForm() {
   });
   const [verifyCode, setVerifyCode] = useState("");
   const [freemiumId, setFreemiumId] = useState("");
-  const [whatsappCode, setWhatsappCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [trialEndsAt, setTrialEndsAt] = useState("");
+
+  // Restaurar estado do sessionStorage (caso refresh durante verify)
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.freemiumId && parsed.step === "verify") {
+          setFreemiumId(parsed.freemiumId);
+          setStep("verify");
+        }
+      }
+    } catch {
+      // Ignora
+    }
+  }, []);
+
+  // Salvar estado no sessionStorage
+  useEffect(() => {
+    if (step === "verify" && freemiumId) {
+      sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ freemiumId, step: "verify" })
+      );
+    } else if (step === "success") {
+      sessionStorage.removeItem(STORAGE_KEY);
+    }
+  }, [step, freemiumId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +88,6 @@ export default function FreemiumForm() {
       }
 
       setFreemiumId(data.freemiumId);
-      setWhatsappCode(data.whatsappCode);
       setStep("verify");
     } catch {
       setError("Erro de conexão. Tente novamente.");
@@ -82,6 +112,14 @@ export default function FreemiumForm() {
 
       if (!res.ok) {
         setError(data.error || "Erro na verificação.");
+        if (data.blocked) {
+          // Limpar storage e voltar ao form para re-registro
+          sessionStorage.removeItem(STORAGE_KEY);
+          setTimeout(() => {
+            setStep("form");
+            setError("Limite de tentativas atingido. Cadastre-se novamente.");
+          }, 2000);
+        }
         return;
       }
 
@@ -120,6 +158,8 @@ export default function FreemiumForm() {
                 }
                 className={inputClass}
                 required
+                minLength={3}
+                maxLength={120}
               />
             </div>
 
@@ -147,6 +187,7 @@ export default function FreemiumForm() {
                 className={inputClass}
                 required
                 maxLength={14}
+                inputMode="numeric"
               />
             </div>
 
@@ -156,11 +197,15 @@ export default function FreemiumForm() {
                 placeholder="WhatsApp (00) 00000-0000"
                 value={formData.phone}
                 onChange={(e) =>
-                  setFormData({ ...formData, phone: formatPhone(e.target.value) })
+                  setFormData({
+                    ...formData,
+                    phone: formatPhone(e.target.value),
+                  })
                 }
                 className={inputClass}
                 required
                 maxLength={15}
+                inputMode="tel"
               />
             </div>
 
@@ -181,9 +226,24 @@ export default function FreemiumForm() {
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  <svg
+                    className="animate-spin h-4 w-4"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                   Cadastrando...
                 </span>
@@ -197,7 +257,8 @@ export default function FreemiumForm() {
               <a href="/termos" className="text-zinc-400 underline">
                 Termos de Uso
               </a>
-              . Seus dados são protegidos e usados apenas para validação do teste gratuito.
+              . Seus dados são protegidos e usados apenas para validação do
+              teste gratuito.
             </p>
           </motion.form>
         )}
@@ -212,7 +273,16 @@ export default function FreemiumForm() {
           >
             <div className="text-center mb-6">
               <div className="w-16 h-16 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#22c55e"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
                 </svg>
               </div>
@@ -221,25 +291,27 @@ export default function FreemiumForm() {
               </h3>
               <p className="text-zinc-400 text-sm">
                 Enviamos um código de 6 dígitos para seu WhatsApp.
+                <br />
+                <span className="text-zinc-600 text-xs">
+                  O código expira em 15 minutos.
+                </span>
               </p>
-              {/* Em dev, mostra o código para teste */}
-              {whatsappCode && (
-                <p className="text-green-400 text-xs mt-2 bg-green-500/10 border border-green-500/20 rounded-lg px-3 py-2 inline-block">
-                  Código de verificação: <strong>{whatsappCode}</strong>
-                </p>
-              )}
             </div>
 
             <form onSubmit={handleVerify} className="space-y-4">
               <input
                 type="text"
-                placeholder="Código de 6 dígitos"
+                placeholder="000000"
                 value={verifyCode}
                 onChange={(e) =>
-                  setVerifyCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+                  setVerifyCode(
+                    e.target.value.replace(/\D/g, "").slice(0, 6)
+                  )
                 }
                 className={`${inputClass} text-center text-2xl tracking-[0.5em] font-mono`}
                 maxLength={6}
+                inputMode="numeric"
+                autoComplete="one-time-code"
                 required
               />
 
@@ -260,6 +332,19 @@ export default function FreemiumForm() {
               >
                 {loading ? "Verificando..." : "Verificar e Criar Conta"}
               </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  sessionStorage.removeItem(STORAGE_KEY);
+                  setStep("form");
+                  setError("");
+                  setVerifyCode("");
+                }}
+                className="w-full text-zinc-600 hover:text-zinc-400 text-xs font-medium py-2 transition-colors"
+              >
+                Voltar e corrigir dados
+              </button>
             </form>
           </motion.div>
         )}
@@ -273,7 +358,16 @@ export default function FreemiumForm() {
             className="text-center space-y-6"
           >
             <div className="w-20 h-20 bg-green-500/10 border border-green-500/20 rounded-full flex items-center justify-center mx-auto">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#22c55e"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
@@ -285,7 +379,8 @@ export default function FreemiumForm() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 Enviamos um link de acesso para o seu e-mail.
                 <br />
-                Clique nele para acessar o <strong className="text-white">Calango Studio</strong>.
+                Clique nele para acessar o{" "}
+                <strong className="text-white">Calango Studio</strong>.
               </p>
             </div>
 
