@@ -95,14 +95,6 @@ async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
             { type: "text", text: code },
           ],
         },
-        {
-          type: "button",
-          sub_type: "url",
-          index: "0",
-          parameters: [
-            { type: "text", text: code },
-          ],
-        },
       ],
     },
   };
