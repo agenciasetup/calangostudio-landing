@@ -149,13 +149,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Salvar também na tabela leads para tracking
-    await supabase.from("leads").insert({
-      name: name.trim(),
-      email: email.toLowerCase().trim(),
-      whatsapp: cleanPhone,
-      source: "freemium",
-    }).then(() => {}).catch(() => {});
+    // Salvar também na tabela leads para tracking (fire-and-forget)
+    try {
+      await supabase.from("leads").insert({
+        name: name.trim(),
+        email: email.toLowerCase().trim(),
+        whatsapp: cleanPhone,
+        source: "freemium",
+      });
+    } catch {
+      // Ignora erro — lead é secundário
+    }
 
     return NextResponse.json({
       success: true,
