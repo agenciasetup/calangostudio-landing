@@ -71,7 +71,7 @@ const PHONE_NUMBER_ID = "722543397606526";
 
 async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
   if (!META_TOKEN) {
-    console.error("[WhatsApp] TOKEN_META_WPP not configured");
+    console.error("[WhatsApp] TOKEN_META_WPP not configured — env var missing");
     return false;
   }
 
@@ -79,7 +79,37 @@ async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
   const cleanDigits = phone.replace(/\D/g, "");
   const internationalPhone = cleanDigits.startsWith("55") ? cleanDigits : `55${cleanDigits}`;
 
+  // Usar template aprovado (obrigatório para mensagens business-initiated)
+  const payload = {
+    messaging_product: "whatsapp",
+    recipient_type: "individual",
+    to: internationalPhone,
+    type: "template",
+    template: {
+      name: "verification_code",
+      language: { code: "pt_BR" },
+      components: [
+        {
+          type: "body",
+          parameters: [
+            { type: "text", text: code },
+          ],
+        },
+        {
+          type: "button",
+          sub_type: "url",
+          index: "0",
+          parameters: [
+            { type: "text", text: code },
+          ],
+        },
+      ],
+    },
+  };
+
   try {
+    console.log("[WhatsApp] Sending code to", internationalPhone, "using template verification_code");
+
     const res = await fetch(
       `https://graph.facebook.com/v22.0/${PHONE_NUMBER_ID}/messages`,
       {
@@ -88,26 +118,18 @@ async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
           Authorization: `Bearer ${META_TOKEN}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          messaging_product: "whatsapp",
-          recipient_type: "individual",
-          to: internationalPhone,
-          type: "text",
-          text: {
-            body: `🎨 *Calango Studio*\n\nSeu código de verificação é: *${code}*\n\nEsse código expira em 15 minutos.`,
-          },
-        }),
+        body: JSON.stringify(payload),
       }
     );
 
     const data = await res.json();
 
     if (data.error) {
-      console.error("[WhatsApp] API error:", data.error);
+      console.error("[WhatsApp] API error:", JSON.stringify(data.error));
       return false;
     }
 
-    console.log("[WhatsApp] Code sent to", phone);
+    console.log("[WhatsApp] Code sent successfully. Message ID:", data.messages?.[0]?.id);
     return true;
   } catch (err) {
     console.error("[WhatsApp] Send failed:", err);
