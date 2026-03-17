@@ -3,21 +3,11 @@ import { createClient } from "@supabase/supabase-js";
 
 export const runtime = "nodejs";
 
-const MAX_VERIFY_ATTEMPTS = 5;
-
 function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error("Supabase env vars not configured");
   return createClient(url, key);
-}
-
-function generateRandomPassword(len = 24) {
-  const chars =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-  const array = new Uint32Array(len);
-  crypto.getRandomValues(array);
-  return Array.from(array, (v) => chars[v % chars.length]).join("");
 }
 
 export async function POST(request: NextRequest) {
@@ -60,74 +50,44 @@ export async function POST(request: NextRequest) {
     if (freemium.whatsapp_verified) {
       return NextResponse.json(
         {
-          error: "WhatsApp já verificado. Verifique seu e-mail para acessar.",
+          error: "E-mail já verificado. Verifique seu e-mail para acessar.",
           alreadyVerified: true,
         },
         { status: 400 }
       );
     }
 
-    // Brute-force protection
-    const attempts = (freemium.whatsapp_code_attempts || 0) + 1;
+    // Verificar código via Supabase Auth OTP
+    const { data: authData, error: authError } = await supabase.auth.verifyOtp({
+      email: freemium.email,
+      token: cleanCode,
+      type: "email",
+    });
 
-    if (attempts > MAX_VERIFY_ATTEMPTS) {
+    if (authError || !authData?.user) {
+      console.error("[Verify] OTP error:", authError?.message);
       return NextResponse.json(
-        {
-          error:
-            "Muitas tentativas incorretas. Cadastre-se novamente para receber um novo código.",
-          blocked: true,
+        { error: authError?.message === "Token has expired or is invalid"
+            ? "Código inválido ou expirado. Volte e solicite um novo."
+            : "Código incorreto. Tente novamente."
         },
-        { status: 429 }
+        { status: 400 }
       );
     }
 
-    // Incrementar contador de tentativas ANTES de verificar (previne race condition)
+    const userId = authData.user.id;
+
+    // Marcar como verificado
     await supabase
       .from("freemium_users")
       .update({
-        whatsapp_code_attempts: attempts,
+        whatsapp_verified: true,
+        whatsapp_code: null,
         updated_at: new Date().toISOString(),
       })
       .eq("id", freemiumId);
 
-    // Verificar código
-    if (freemium.whatsapp_code !== cleanCode) {
-      const remaining = MAX_VERIFY_ATTEMPTS - attempts;
-      return NextResponse.json(
-        {
-          error: `Código incorreto. ${remaining > 0 ? `${remaining} tentativa(s) restante(s).` : "Limite atingido."}`,
-        },
-        { status: 400 }
-      );
-    }
-
-    // Verificar expiração
-    if (new Date() > new Date(freemium.whatsapp_code_expires_at)) {
-      return NextResponse.json(
-        { error: "Código expirado. Volte e cadastre-se novamente para receber um novo." },
-        { status: 400 }
-      );
-    }
-
-    // Marcar como verificado PRIMEIRO (previne replay)
-    const { error: verifyUpdateError } = await supabase
-      .from("freemium_users")
-      .update({
-        whatsapp_verified: true,
-        whatsapp_code: null, // Limpar código após uso
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", freemiumId)
-      .eq("whatsapp_verified", false); // Condição extra para idempotência
-
-    if (verifyUpdateError) {
-      return NextResponse.json(
-        { error: "Erro ao verificar. Tente novamente." },
-        { status: 500 }
-      );
-    }
-
-    // Verificar se já existe conta paga no Calango.studio
+    // Verificar se já existe perfil (conta paga ou freemium anterior)
     const { data: existingProfile } = await supabase
       .from("profiles")
       .select("id, plan_key, status, enabled_tools")
@@ -135,7 +95,7 @@ export async function POST(request: NextRequest) {
       .maybeSingle();
 
     if (existingProfile) {
-      // Se já tem plano pago, apenas vincular e não sobrescrever
+      // Se já tem plano pago, apenas vincular
       if (
         existingProfile.plan_key &&
         existingProfile.plan_key !== "freemium"
@@ -144,7 +104,7 @@ export async function POST(request: NextRequest) {
           .from("freemium_users")
           .update({
             user_id: existingProfile.id,
-            status: "converted", // Já tem conta paga
+            status: "converted",
             converted_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
           })
@@ -213,37 +173,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Criar novo usuário no Supabase Auth
-    const { data: authData, error: authError } =
-      await supabase.auth.admin.createUser({
-        email: freemium.email,
-        password: generateRandomPassword(),
-        email_confirm: true,
-        user_metadata: { name: freemium.name },
-      });
-
-    if (authError || !authData?.user) {
-      console.error("Auth create error:", authError);
-      // Reverter verificação
-      await supabase
-        .from("freemium_users")
-        .update({
-          whatsapp_verified: false,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", freemiumId);
-
-      return NextResponse.json(
-        { error: "Erro ao criar conta. Tente novamente." },
-        { status: 500 }
-      );
-    }
-
-    const userId = authData.user.id;
+    // Usuário criado pelo signInWithOtp — configurar perfil e wallet
     const now = new Date();
     const trialEnds = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000); // 3 dias
 
-    // Criar perfil com plano freemium
     const freemiumTools = [
       "post_analyzer", "modo_manual", "meus_clientes", "prompt_maker",
       "copy_maker", "mockup_3d", "estudio_de_foto", "consultor_visual",
@@ -265,7 +198,6 @@ export async function POST(request: NextRequest) {
       updated_at: now.toISOString(),
     });
 
-    // Criar wallet de créditos
     await supabase.from("credit_wallets").upsert(
       {
         user_id: userId,

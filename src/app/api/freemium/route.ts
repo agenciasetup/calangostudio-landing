@@ -59,72 +59,32 @@ function normalizeEmail(email: string): string {
   return `${withoutTag}@${domain}`;
 }
 
+// TODO: Reativar verificação WhatsApp quando Meta aprovar o app
+// function generateSecureCode(): string { ... }
+// const META_TOKEN = process.env.TOKEN_META_WPP;
+// const PHONE_NUMBER_ID = "722543397606526";
+// async function sendWhatsAppCode(...) { ... }
 
-function generateSecureCode(): string {
-  const array = new Uint32Array(1);
-  crypto.getRandomValues(array);
-  return String(100000 + (array[0] % 900000));
-}
-
-const META_TOKEN = process.env.TOKEN_META_WPP;
-const PHONE_NUMBER_ID = "722543397606526";
-
-async function sendWhatsAppCode(phone: string, code: string): Promise<boolean> {
-  if (!META_TOKEN) {
-    console.error("[WhatsApp] TOKEN_META_WPP not configured — env var missing");
-    return false;
-  }
-
-  // Garantir formato internacional: 5511999999999
-  const cleanDigits = phone.replace(/\D/g, "");
-  const internationalPhone = cleanDigits.startsWith("55") ? cleanDigits : `55${cleanDigits}`;
-
-  // Usar template aprovado (obrigatório para mensagens business-initiated)
-  const payload = {
-    messaging_product: "whatsapp",
-    recipient_type: "individual",
-    to: internationalPhone,
-    type: "template",
-    template: {
-      name: "verification_code",
-      language: { code: "pt_BR" },
-      components: [
-        {
-          type: "body",
-          parameters: [
-            { type: "text", text: code },
-          ],
-        },
-      ],
-    },
-  };
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function sendEmailOtp(supabase: ReturnType<typeof createClient<any>>, email: string, name: string): Promise<boolean> {
   try {
-    console.log("[WhatsApp] Sending code to", internationalPhone, "using template verification_code");
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        shouldCreateUser: true,
+        data: { name },
+      },
+    });
 
-    const res = await fetch(
-      `https://graph.facebook.com/v22.0/${PHONE_NUMBER_ID}/messages`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${META_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    const data = await res.json();
-
-    if (data.error) {
-      console.error("[WhatsApp] API error:", JSON.stringify(data.error));
+    if (error) {
+      console.error("[Email OTP] Send failed:", error.message);
       return false;
     }
 
-    console.log("[WhatsApp] Code sent successfully. Message ID:", data.messages?.[0]?.id);
+    console.log("[Email OTP] Code sent to", email);
     return true;
   } catch (err) {
-    console.error("[WhatsApp] Send failed:", err);
+    console.error("[Email OTP] Send failed:", err);
     return false;
   }
 }
@@ -258,62 +218,33 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Se pendente com código expirado, permite re-registro (atualiza o registro)
+      // Se pendente, permite re-registro e reenvia OTP por e-mail
       if (existingRecord.status === "pending") {
-        const codeExpired =
-          existingRecord.whatsapp_code_expires_at &&
-          new Date() > new Date(existingRecord.whatsapp_code_expires_at);
+        // Atualizar dados do registro
+        await supabase
+          .from("freemium_users")
+          .update({
+            name: safeName,
+            email: normalizedEmail,
+            cpf: cleanCpf,
+            phone: cleanPhone,
+            ip_address: ip,
+            updated_at: new Date().toISOString(),
+          })
+          .eq("id", existingRecord.id);
 
-        if (codeExpired) {
-          // Re-registrar: atualizar dados e gerar novo código
-          const newCode = generateSecureCode();
-          const newExpiry = new Date();
-          newExpiry.setMinutes(newExpiry.getMinutes() + 15);
+        // Reenviar OTP por e-mail (Supabase controla rate limit)
+        await sendEmailOtp(supabase, normalizedEmail, safeName);
 
-          await supabase
-            .from("freemium_users")
-            .update({
-              name: safeName,
-              email: normalizedEmail,
-              cpf: cleanCpf,
-              phone: cleanPhone,
-              ip_address: ip,
-              whatsapp_code: newCode,
-              whatsapp_code_expires_at: newExpiry.toISOString(),
-              updated_at: new Date().toISOString(),
-            })
-            .eq("id", existingRecord.id);
-
-          // Enviar código via WhatsApp
-          const resentOk = await sendWhatsAppCode(cleanPhone, newCode);
-          if (!resentOk) {
-            console.warn("[Freemium] WhatsApp send failed for re-registration, proceeding anyway");
-          }
-
-          return NextResponse.json({
-            success: true,
-            freemiumId: existingRecord.id,
-            message:
-              "Código reenviado! Verifique seu WhatsApp.",
-          });
-        }
-
-        // Pendente com código ainda válido — reenviar
         return NextResponse.json({
           success: true,
           freemiumId: existingRecord.id,
-          message:
-            "Você já tem um cadastro pendente. Verifique seu WhatsApp para o código.",
+          message: "Código reenviado! Verifique seu e-mail.",
         });
       }
     }
 
-    // Gerar código de verificação WhatsApp (criptograficamente seguro)
-    const whatsappCode = generateSecureCode();
-    const codeExpires = new Date();
-    codeExpires.setMinutes(codeExpires.getMinutes() + 15);
-
-    // Inserir registro freemium
+    // Inserir registro freemium (OTP gerenciado pelo Supabase Auth)
     const { data: freemiumUser, error: insertError } = await supabase
       .from("freemium_users")
       .insert({
@@ -323,8 +254,6 @@ export async function POST(request: NextRequest) {
         phone: cleanPhone,
         ip_address: ip,
         status: "pending",
-        whatsapp_code: whatsappCode,
-        whatsapp_code_expires_at: codeExpires.toISOString(),
       })
       .select("id")
       .single();
@@ -347,10 +276,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Enviar código via WhatsApp
-    const sentOk = await sendWhatsAppCode(cleanPhone, whatsappCode);
+    // Enviar OTP por e-mail via Supabase Auth
+    const sentOk = await sendEmailOtp(supabase, normalizedEmail, safeName);
     if (!sentOk) {
-      console.warn("[Freemium] WhatsApp send failed for new registration, proceeding anyway");
+      console.warn("[Freemium] Email OTP send failed for new registration");
     }
 
     // Salvar também na tabela leads para tracking (fire-and-forget)
@@ -368,7 +297,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       freemiumId: freemiumUser.id,
-      message: "Cadastro realizado! Verifique seu WhatsApp para o código.",
+      message: "Cadastro realizado! Verifique seu e-mail para o código.",
     });
   } catch (e: unknown) {
     console.error("Freemium registration error:", e);
