@@ -39,11 +39,20 @@ function validateBrazilianPhone(phone: string): boolean {
 }
 
 /**
- * Normaliza email para prevenir aliases:
- * - Gmail: remove pontos e +tags do local part
- * - Outros: lowercase + trim
+ * Limpa o email: lowercase + trim (preserva pontos).
+ * Usar para auth, profiles e armazenamento.
  */
-function normalizeEmail(email: string): string {
+function cleanEmail(email: string): string {
+  return email.toLowerCase().trim();
+}
+
+/**
+ * Canonicaliza email para checagem anti-fraude/duplicidade:
+ * - Gmail: remove pontos e +tags do local part
+ * - Outros: apenas remove +tags
+ * NÃO usar para criar usuários — apenas para buscar duplicatas.
+ */
+function canonicalizeEmail(email: string): string {
   const raw = email.toLowerCase().trim();
   const [local, domain] = raw.split("@");
   if (!local || !domain) return raw;
@@ -144,7 +153,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "E-mail inválido." }, { status: 400 });
     }
 
-    const normalizedEmail = normalizeEmail(email);
+    const safeEmail = cleanEmail(email);
+    const canonicalEmail = canonicalizeEmail(email);
 
     const cleanCpf = cpf.replace(/\D/g, "");
     if (!validateCPF(cleanCpf)) {
@@ -161,11 +171,11 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabase();
 
-    // Verificar se já existe conta paga no Calango.studio
+    // Verificar se já existe conta paga no Calango.studio (busca canônica para pegar aliases)
     const { data: existingPaidProfile } = await supabase
       .from("profiles")
-      .select("id, plan_key, status")
-      .eq("email", normalizedEmail)
+      .select("id, plan_key, status, email")
+      .or(`email.eq.${safeEmail},email.eq.${canonicalEmail}`)
       .maybeSingle();
 
     if (
@@ -182,12 +192,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verificar duplicidade — se pendente com código expirado, permite re-registro (UPDATE)
+    // Verificar duplicidade — busca por email real E canônico (anti-fraude)
     const { data: existingRecord } = await supabase
       .from("freemium_users")
       .select("id, status, email, cpf, phone, whatsapp_code_expires_at")
       .or(
-        `email.eq.${normalizedEmail},cpf.eq.${cleanCpf},phone.eq.${cleanPhone}`
+        `email.eq.${safeEmail},email.eq.${canonicalEmail},cpf.eq.${cleanCpf},phone.eq.${cleanPhone}`
       )
       .limit(1)
       .maybeSingle();
@@ -225,7 +235,7 @@ export async function POST(request: NextRequest) {
           .from("freemium_users")
           .update({
             name: safeName,
-            email: normalizedEmail,
+            email: safeEmail,
             cpf: cleanCpf,
             phone: cleanPhone,
             ip_address: ip,
@@ -234,7 +244,7 @@ export async function POST(request: NextRequest) {
           .eq("id", existingRecord.id);
 
         // Reenviar OTP por e-mail (Supabase controla rate limit)
-        await sendEmailOtp(supabase, normalizedEmail, safeName);
+        await sendEmailOtp(supabase, safeEmail, safeName);
 
         return NextResponse.json({
           success: true,
@@ -249,7 +259,7 @@ export async function POST(request: NextRequest) {
       .from("freemium_users")
       .insert({
         name: safeName,
-        email: normalizedEmail,
+        email: safeEmail,
         cpf: cleanCpf,
         phone: cleanPhone,
         ip_address: ip,
@@ -277,7 +287,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Enviar OTP por e-mail via Supabase Auth
-    const sentOk = await sendEmailOtp(supabase, normalizedEmail, safeName);
+    const sentOk = await sendEmailOtp(supabase, safeEmail, safeName);
     if (!sentOk) {
       console.warn("[Freemium] Email OTP send failed for new registration");
     }
@@ -286,7 +296,7 @@ export async function POST(request: NextRequest) {
     try {
       await supabase.from("leads").insert({
         name: safeName,
-        email: normalizedEmail,
+        email: safeEmail,
         whatsapp: cleanPhone,
         source: "freemium",
       });
