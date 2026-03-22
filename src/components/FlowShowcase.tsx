@@ -11,10 +11,11 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-const heroImages = [
-  "/images/resultados/hero_criativo.jpg",
-  "/images/resultados/hero3_criativo.jpg",
-  "/images/funcoes/hero-imagem-criativa.jpg",
+/* Adicione imagens *_flow.png / *_flow.jpg em public/images/resultados/ */
+const flowImages = [
+  "/images/resultados/filipe_flow.png",
+  "/images/resultados/advocacia_flow.png",
+  "/images/resultados/studio_flow.png",
 ];
 
 /* ─── Dashed connector (horizontal on lg, vertical on mobile) ─── */
@@ -187,7 +188,7 @@ function ImageNode() {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setCurrent((c) => (c + 1) % heroImages.length), 3500);
+    const timer = setInterval(() => setCurrent((c) => (c + 1) % flowImages.length), 3500);
     return () => clearInterval(timer);
   }, []);
 
@@ -200,7 +201,7 @@ function ImageNode() {
           <AnimatePresence mode="wait">
             <motion.img
               key={current}
-              src={heroImages[current]}
+              src={flowImages[current]}
               alt="Imagem gerada"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ opacity: 0, scale: 1.05 }}
@@ -211,7 +212,7 @@ function ImageNode() {
           </AnimatePresence>
           {/* Dots indicator */}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
-            {heroImages.map((_, i) => (
+            {flowImages.map((_, i) => (
               <div
                 key={i}
                 className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
