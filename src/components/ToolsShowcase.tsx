@@ -148,7 +148,7 @@ export default function ToolsShowcase() {
             <span className="text-gradient-animated">seu painel.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto">
-            Sem aba extra. Sem assinatura duplicada. Cada ferramenta existe porque faz parte do dia a dia real de quem atende clientes.
+            Sem aba extra. Sem assinatura duplicada. Cada ferramenta se conecta às outras — e ao contexto do seu cliente.
           </p>
         </motion.div>
 
