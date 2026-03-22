@@ -11,11 +11,16 @@ import {
   RefreshCw,
 } from "lucide-react";
 
-/* Adicione imagens *_flow.png / *_flow.jpg em public/images/resultados/ */
+/* Imagens *_flow.png.webp em public/images/resultados/ */
 const flowImages = [
-  "/images/resultados/filipe_flow.png",
-  "/images/resultados/advocacia_flow.png",
-  "/images/resultados/studio_flow.png",
+  "/images/resultados/lipe2_flow.png.webp",
+  "/images/resultados/lipe3_flow.png.webp",
+  "/images/resultados/lipe4_flow.png.webp",
+  "/images/resultados/lipe5_flow.png.webp",
+  "/images/resultados/lipe6_flow.png.webp",
+  "/images/resultados/lipe7_flow.png.webp",
+  "/images/resultados/lipe8_flow.png.webp",
+  "/images/resultados/lipe9_flow.png.webp",
 ];
 
 /* ─── Dashed connector (horizontal on lg, vertical on mobile) ─── */
