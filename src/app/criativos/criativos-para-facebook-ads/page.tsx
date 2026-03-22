@@ -32,7 +32,7 @@ const schema = {
       step: [
         { "@type": "HowToStep", position: 1, name: "Defina o formato do anúncio", text: "Escolha entre imagem única, carrossel ou vídeo estático para o Facebook Ads." },
         { "@type": "HowToStep", position: 2, name: "Gere a imagem de alto impacto", text: "Use a Imagem Criativa do Calango Studio com estilos prontos para gerar imagens que param o scroll." },
-        { "@type": "HowToStep", position: 3, name: "Crie variações com Remix Layout", text: "Replique o layout do criativo base trocando imagem e texto para testes A/B." },
+        { "@type": "HowToStep", position: 3, name: "Crie variações com Design Studio", text: "Monte variações do criativo no editor visual trocando imagem e texto para testes A/B." },
         { "@type": "HowToStep", position: 4, name: "Gere a copy do anúncio", text: "Use o CopyMaker para gerar headline e texto do anúncio com contexto do cliente." },
         { "@type": "HowToStep", position: 5, name: "Exporte e suba no gerenciador", text: "Exporte as variações e suba no Meta Ads Manager para teste." },
       ],
@@ -48,7 +48,7 @@ const schema = {
         {
           "@type": "Question",
           name: "Como criar variações de criativo para teste A/B com IA?",
-          acceptedAnswer: { "@type": "Answer", text: "No Calango Studio, use o Remix Layout: ele replica o layout de um criativo existente trocando a imagem e o texto. Em poucos cliques você tem 3, 5 ou 10 variações." },
+          acceptedAnswer: { "@type": "Answer", text: "No Calango Studio, use o Design Studio: monte variações do criativo no editor visual trocando imagem e texto. Em poucos cliques você tem 3, 5 ou 10 variações." },
         },
         {
           "@type": "Question",
@@ -72,7 +72,7 @@ const faqs = [
   },
   {
     question: "Como criar variações de criativo para teste A/B com IA?",
-    answer: "No Calango Studio, use o Remix Layout: ele replica o layout de um criativo existente trocando a imagem e o texto. Em poucos cliques você tem 3, 5 ou 10 variações do mesmo criativo, prontas para teste A/B no gerenciador de anúncios. Isso elimina o ciclo de briefing-designer-revisão para cada variação.",
+    answer: "No Calango Studio, use o Design Studio: monte variações do criativo no editor visual trocando imagem e texto. Em poucos cliques você tem 3, 5 ou 10 variações do mesmo criativo, prontas para teste A/B no gerenciador de anúncios. Isso elimina o ciclo de briefing-designer-revisão para cada variação.",
   },
   {
     question: "UGC gerado por IA funciona em anúncios pagos?",
@@ -121,7 +121,7 @@ export default function CriativosParaFacebookAdsPage() {
         <li><strong className="text-white">Imagem Criativa</strong>. gera imagens de alto impacto visual com estilos prontos (Hero Style, Business Style, Animal Art e outros). Resultados cinematográficos sem dominar prompts complexos.</li>
         <li><strong className="text-white">UGC Build</strong>. foto realista de pessoa com produto, com aparência de foto de iPhone. Formato que performa especialmente bem em anúncios de feed.</li>
         <li><strong className="text-white">CopyMaker</strong>. copy para o criativo e legenda do anúncio, com tom de voz do cliente já aplicado.</li>
-        <li><strong className="text-white">Remix Layout</strong>. pega um criativo que funcionou e replica trocando imagem e texto. Variações em cliques, não em horas.</li>
+        <li><strong className="text-white">Design Studio</strong>. editor visual para montar variações de criativos trocando imagem e texto. Variações em cliques, não em horas.</li>
       </ul>
 
       <FaqSection faqs={faqs} />

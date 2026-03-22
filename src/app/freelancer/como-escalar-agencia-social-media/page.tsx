@@ -93,7 +93,7 @@ export default function ComoEscalarAgenciaSocialMediaPage() {
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-4">
         <li><strong className="text-white">Meus Clientes</strong>. organização de briefing por cliente que não se perde entre sessões</li>
         <li><strong className="text-white">CopyMaker + Imagem Criativa</strong>. produção de conteúdo com contexto do cliente já carregado</li>
-        <li><strong className="text-white">Remix Layout</strong>. variações rápidas para teste e rotação de criativos</li>
+        <li><strong className="text-white">Flow</strong>. automatize a produção de conteúdo com fluxos visuais</li>
         <li><strong className="text-white">UGC Build + Mockup Produto</strong>. produção especializada sem equipe dedicada</li>
       </ul>
       <p className="text-txt-secondary leading-relaxed mb-8">

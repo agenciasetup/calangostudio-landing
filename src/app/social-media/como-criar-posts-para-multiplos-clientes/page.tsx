@@ -98,7 +98,7 @@ export default function ComoCriarPostsParaMultiplosClientesPage() {
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
         <li><strong className="text-white">Cadastre cada cliente na seção Meus Clientes</strong>. cada cliente recebe um perfil independente no Calango Studio.</li>
         <li><strong className="text-white">Preencha o briefing completo</strong>. produto, público-alvo, tom de voz, cores, referências visuais, exemplos de conteúdo aprovado.</li>
-        <li><strong className="text-white">Acesse o perfil do cliente antes de produzir</strong>. todas as ferramentas (CopyMaker, Imagem Criativa, Remix Layout) usam o contexto daquele perfil.</li>
+        <li><strong className="text-white">Acesse o perfil do cliente antes de produzir</strong>. todas as ferramentas (CopyMaker, Imagem Criativa, Design Studio) usam o contexto daquele perfil.</li>
         <li><strong className="text-white">Gere imagem e copy a partir do perfil</strong>. contexto já carregado. Sem reexplicar nada.</li>
         <li><strong className="text-white">Alterne para outro cliente</strong>. contexto muda automaticamente. Sem mistura, sem confusão.</li>
       </ol>

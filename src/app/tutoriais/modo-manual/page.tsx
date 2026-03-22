@@ -35,14 +35,14 @@ const schema = {
 };
 
 const faqs = [
-  { question: "Qual a diferença para a Criação Livre?", answer: "O Modo Manual é focado em edição precisa via prompt de texto. A Criação Livre foca em composições com textos visuais integrados." },
+  { question: "Qual a diferença para o Design Studio?", answer: "O Modo Manual é focado em edição precisa via prompt de texto. O Design Studio oferece um editor visual drag-and-drop para montar composições." },
   { question: "Posso usar até 6 referências?", answer: "Sim. Cada referência tem um código de cor para você referenciar no prompt (ex: 'use a cor da imagem vermelha')." },
   { question: "O que são os tokens rápidos?", answer: "São tags predefinidas que você insere no prompt com um clique para melhorias comuns (ex: 'mais contraste', 'remover fundo')." },
   { question: "Quais formatos estão disponíveis?", answer: "Story (9:16), Feed (4:5) e Banner (16:9). A proporção é aplicada automaticamente." },
 ];
 
 const relatedPages = [
-  { href: "/tutoriais/criacao-livre", title: "Criação Livre", description: "Para composições visuais com texto." },
+  { href: "/tutoriais/design-studio", title: "Design Studio", description: "Editor visual para montar composições." },
   { href: "/tutoriais/prompt-maker", title: "Prompt Maker", description: "Extraia prompts de imagens de referência." },
   { href: "/tutoriais/imagem-criativa", title: "Imagem Criativa", description: "Estilos prontos sem precisar de prompt." },
 ];

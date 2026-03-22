@@ -45,7 +45,7 @@ const productionPains = [
   },
   {
     question: "Não sabe como produzir rápido?",
-    answer: "O Calango gera conteúdo, copy e imagem com base no contexto do cliente.",
+    answer: "O Calango gera conteúdo, copy e imagem com base no contexto do cliente — e o Flow automatiza o fluxo inteiro.",
     icon: Sparkles,
   },
   {

@@ -67,12 +67,12 @@ const dashboardTools = [
   { name: "UGC Build", icon: Smartphone, desc: "Fotos ultra-realistas", color: "from-orange-500 to-amber-600" },
   { name: "Mockup Produto", icon: Package, desc: "Cenários automáticos", color: "from-emerald-400 to-teal-700" },
   { name: "Assets 3D", icon: Shapes, desc: "PNG transparente", color: "from-red-500 to-rose-700" },
-  { name: "Remix Layout", icon: ScanLine, desc: "Replique criativos", color: "from-purple-500 to-fuchsia-700" },
+  { name: "Design Studio", icon: ScanLine, desc: "Editor visual", color: "from-purple-500 to-fuchsia-700" },
   { name: "CopyMaker", icon: FileText, desc: "Copies com contexto", color: "from-green-400 to-emerald-700" },
   { name: "Consultor de Perfil", icon: Briefcase, desc: "Análise completa", color: "from-blue-400 to-indigo-600" },
   { name: "Restaurador PRO", icon: History, desc: "Upscale e restauração", color: "from-amber-400 to-amber-700" },
   { name: "Modo Manual", icon: PencilRuler, desc: "Edição precisa", color: "from-lime-400 to-green-600" },
-  { name: "Criação Livre", icon: Sparkles, desc: "Modo experimental", color: "from-yellow-400 to-orange-600" },
+  { name: "Flow", icon: Sparkles, desc: "Automação visual", color: "from-violet-400 to-purple-600" },
   { name: "Meus Clientes", icon: Users, desc: "Gestão completa", color: "from-sky-400 to-cyan-700" },
 ];
 
@@ -148,7 +148,7 @@ export default function ToolsShowcase() {
             <span className="text-gradient-animated">seu painel.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto">
-            Sem aba extra. Sem assinatura duplicada. Cada ferramenta existe porque faz parte do dia a dia real de quem atende clientes.
+            Sem aba extra. Sem assinatura duplicada. Cada ferramenta se conecta às outras — e ao contexto do seu cliente.
           </p>
         </motion.div>
 

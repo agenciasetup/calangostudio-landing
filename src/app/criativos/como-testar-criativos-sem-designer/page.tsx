@@ -31,7 +31,7 @@ const schema = {
       description: "Guia para produzir e testar variações de criativos usando IA.",
       step: [
         { "@type": "HowToStep", position: 1, name: "Crie o criativo base", text: "No Calango Studio, gere a imagem e copy do criativo base." },
-        { "@type": "HowToStep", position: 2, name: "Gere variações", text: "Use o Remix Layout para gerar variações trocando imagem ou texto." },
+        { "@type": "HowToStep", position: 2, name: "Gere variações", text: "Use o Design Studio para montar variações trocando imagem ou texto no editor visual." },
         { "@type": "HowToStep", position: 3, name: "Exporte as variações", text: "Exporte e suba no gerenciador de anúncios." },
         { "@type": "HowToStep", position: 4, name: "Analise performance", text: "Analise qual criativo performa melhor nos dados." },
         { "@type": "HowToStep", position: 5, name: "Itere sobre o vencedor", text: "Volte ao Calango e crie novas variações do criativo vencedor." },
@@ -40,10 +40,10 @@ const schema = {
     {
       "@type": "FAQPage",
       mainEntity: [
-        { "@type": "Question", name: "Quantas variações de criativo devo testar por campanha?", acceptedAnswer: { "@type": "Answer", text: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios. Com o Remix Layout do Calango, criar essas variações leva minutos." } },
+        { "@type": "Question", name: "Quantas variações de criativo devo testar por campanha?", acceptedAnswer: { "@type": "Answer", text: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios. Com o Design Studio do Calango, montar essas variações leva minutos." } },
         { "@type": "Question", name: "O que muda entre as variações de criativo?", acceptedAnswer: { "@type": "Answer", text: "Imagem, headline, copy, cor de fundo ou CTA. Testar uma variável por vez dá mais clareza sobre o que gera resultado." } },
-        { "@type": "Question", name: "Posso testar criativos sem saber design?", acceptedAnswer: { "@type": "Answer", text: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Estilos prontos e Remix Layout eliminam edição manual." } },
-        { "@type": "Question", name: "Qual ferramenta usar para criar variações de criativo com IA?", acceptedAnswer: { "@type": "Answer", text: "O Remix Layout do Calango Studio foi feito para isso: replique um layout funcional e troque os elementos com poucos cliques." } },
+        { "@type": "Question", name: "Posso testar criativos sem saber design?", acceptedAnswer: { "@type": "Answer", text: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Estilos prontos e o editor visual do Design Studio simplificam tudo." } },
+        { "@type": "Question", name: "Qual ferramenta usar para criar variações de criativo com IA?", acceptedAnswer: { "@type": "Answer", text: "O Design Studio do Calango Studio foi feito para isso: monte variações no editor visual e troque os elementos com poucos cliques." } },
       ],
     },
   ],
@@ -52,7 +52,7 @@ const schema = {
 const faqs = [
   {
     question: "Quantas variações de criativo devo testar por campanha?",
-    answer: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios para ter dados suficientes para comparação. Com o Remix Layout do Calango, criar essas variações leva minutos. não horas ou dias dependendo de agenda de designer.",
+    answer: "O recomendado é ao menos 3 a 5 variações por conjunto de anúncios para ter dados suficientes para comparação. Com o Design Studio do Calango, montar essas variações leva minutos. não horas ou dias dependendo de agenda de designer.",
   },
   {
     question: "O que muda entre as variações de criativo?",
@@ -60,11 +60,11 @@ const faqs = [
   },
   {
     question: "Posso testar criativos sem saber design?",
-    answer: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Os estilos prontos eliminam a necessidade de criar do zero, e o Remix Layout permite gerar variações de um criativo existente sem edição manual. só trocando elementos.",
+    answer: "Sim. O Calango Studio foi pensado para quem não é designer de formação. Os estilos prontos eliminam a necessidade de criar do zero, e o Design Studio permite montar variações de um criativo no editor visual. só trocando elementos.",
   },
   {
     question: "Qual ferramenta usar para criar variações de criativo com IA?",
-    answer: "O Remix Layout do Calango Studio foi feito exatamente para isso: você pega um layout que já funciona e replica trocando os elementos visuais e textuais com poucos cliques. O resultado mantém a estrutura que converte, mas com variação suficiente para teste A/B.",
+    answer: "O Design Studio do Calango Studio foi feito exatamente para isso: monte variações no editor visual trocando os elementos visuais e textuais com poucos cliques. O resultado mantém a estrutura que converte, mas com variação suficiente para teste A/B.",
   },
 ];
 
@@ -90,7 +90,7 @@ export default function ComoTestarCriativosSemDesignerPage() {
       </h2>
       <ol className="list-decimal list-inside text-txt-secondary space-y-3 mb-8">
         <li><strong className="text-white">Crie o criativo base no Calango Studio</strong>. gere a imagem com a Imagem Criativa e a copy com o CopyMaker. Esse é o criativo &ldquo;controle&rdquo; do seu teste.</li>
-        <li><strong className="text-white">Use o Remix Layout para gerar variações</strong>. troque a imagem, o texto ou ambos. Mantenha a estrutura que funciona e mude uma variável por vez.</li>
+        <li><strong className="text-white">Use o Design Studio para montar variações</strong>. troque a imagem, o texto ou ambos no editor visual. Mantenha a estrutura que funciona e mude uma variável por vez.</li>
         <li><strong className="text-white">Exporte as variações e suba no gerenciador de anúncios</strong>. organize cada variação como um criativo separado dentro do mesmo conjunto de anúncios.</li>
         <li><strong className="text-white">Analise qual performa melhor</strong>. CTR, CPA e conversão são as métricas que importam. Dê ao teste pelo menos 3-5 dias antes de concluir.</li>
         <li><strong className="text-white">Volte ao Calango e itere sobre o vencedor</strong>. pegue o criativo que funcionou e crie novas variações a partir dele. Esse ciclo contínuo é o que separa campanhas boas de campanhas excelentes.</li>

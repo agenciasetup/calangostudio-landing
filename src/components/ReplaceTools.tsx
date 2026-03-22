@@ -18,8 +18,8 @@ const scattered = [
 const calango = [
   "Prospecte, feche e gerencie clientes",
   "Organize briefings e contratos",
-  "Gere conteúdos e imagens",
-  "Faça análise de perfis",
+  "Gere conteúdos e imagens com IA",
+  "Automatize fluxos com o Flow",
 ];
 
 export default function ReplaceTools() {

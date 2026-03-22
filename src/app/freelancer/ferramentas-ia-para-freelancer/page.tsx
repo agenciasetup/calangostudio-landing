@@ -106,7 +106,7 @@ export default function FerramentasIaParaFreelancerPage() {
         <li><strong className="text-white">UGC Build</strong>. fotos realistas de pessoas com produtos</li>
         <li><strong className="text-white">Estúdio de Foto</strong>. sessão de fotos com IA usando referência</li>
         <li><strong className="text-white">Assets 3D</strong>. elementos PNG transparente para composições</li>
-        <li><strong className="text-white">Remix Layout</strong>. variações de criativos existentes</li>
+        <li><strong className="text-white">Design Studio</strong>. editor visual para montar composições</li>
         <li><strong className="text-white">Meus Clientes</strong>. briefing e contexto salvo por cliente</li>
       </ul>
       <p className="text-txt-secondary leading-relaxed mb-8">

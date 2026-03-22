@@ -9,6 +9,7 @@ const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
 const StudioPillars = dynamic(() => import("@/components/StudioPillars"));
 const AIContext = dynamic(() => import("@/components/AIContext"));
 const ToolsShowcase = dynamic(() => import("@/components/ToolsShowcase"));
+const FlowShowcase = dynamic(() => import("@/components/FlowShowcase"));
 const ReplaceTools = dynamic(() => import("@/components/ReplaceTools"));
 const ProspectingImpact = dynamic(() => import("@/components/ProspectingImpact"));
 const MissionsRanking = dynamic(() => import("@/components/MissionsRanking"));
@@ -44,6 +45,8 @@ export default function Home() {
         <AIContext />
         {/* Seção 5.5 — Galeria + Ferramentas */}
         <ToolsShowcase />
+        {/* Seção 5.6 — Flow: automação visual */}
+        <FlowShowcase />
         {/* Seção 6 — Pare de pagar ferramentas soltas */}
         <ReplaceTools />
         {/* Seção 7 — Visualize o impacto */}

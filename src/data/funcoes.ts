@@ -115,15 +115,15 @@ export const funcoes: Funcao[] = [
     ],
   },
   {
-    slug: "remix-layout",
-    name: "Remix Layout",
+    slug: "design-studio",
+    name: "Design Studio",
     description:
-      "Replique layouts trocando fotos, cores e texto mantendo a estrutura",
+      "Editor visual profissional para montar layouts e composições criativas",
     imageSrc: "/images/funcoes/dashboard.jpg",
     bullets: [
-      "Adapte qualquer layout com sua identidade",
-      "Mantém proporções e hierarquia visual",
-      "Produção em escala sem perder qualidade",
+      "Interface drag-and-drop intuitiva",
+      "Biblioteca de templates prontos",
+      "Integração direta com dados do cliente",
     ],
   },
   {
@@ -139,15 +139,15 @@ export const funcoes: Funcao[] = [
     ],
   },
   {
-    slug: "criacao-livre",
-    name: "Criação Livre",
+    slug: "flow",
+    name: "Flow",
     description:
-      "Componha peças com imagem base, referência textual e geração refinável",
+      "Automação visual de fluxos de trabalho para criação de conteúdo em escala",
     imageSrc: "/images/funcoes/dashboard.jpg",
     bullets: [
-      "Máxima liberdade criativa",
-      "Combina imagem base com prompt textual",
-      "Resultado refinável até chegar no ideal",
+      "Construtor de workflows baseado em nós visuais",
+      "Encadeie ferramentas e automatize entregas",
+      "Produção em escala com contexto inteligente",
     ],
   },
 ];

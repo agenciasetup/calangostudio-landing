@@ -458,7 +458,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.12 }}
           className="text-base md:text-lg text-txt-secondary max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed"
         >
-          O Calango Studio é a operação do designer: prospecte empresas, feche serviços, organize briefing e contrato, e produza posts, copies e imagens com base no contexto real de cada cliente.
+          O Calango Studio é a operação do designer: prospecte empresas, feche serviços, organize briefings e contratos, e produza posts, copies e imagens — tudo com o contexto real de cada cliente, em um único fluxo.
         </motion.p>
 
         {/* CTAs */}

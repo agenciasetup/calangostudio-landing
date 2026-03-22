@@ -190,8 +190,8 @@ export default function IaParaSocialMediaPage() {
           prompts complexos.
         </li>
         <li>
-          <strong className="text-white">Remix Layout</strong>. replique
-          criativos de sucesso trocando foto e texto. Ideal para manter
+          <strong className="text-white">Design Studio</strong>. monte
+          composições visuais com editor drag-and-drop. Ideal para manter
           consistência visual na feed.
         </li>
         <li>

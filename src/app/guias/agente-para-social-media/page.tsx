@@ -93,7 +93,7 @@ const faqs = [
   {
     question: "Como o Calango Studio funciona como agente?",
     answer:
-      "Através da seção Meus Clientes, você cadastra briefing completo de cada cliente. tom de voz, público-alvo, referências visuais, informações do negócio. A IA usa esse contexto em todas as gerações: CopyMaker, Imagem Criativa, Remix Layout. Não é preciso reexplicar nada a cada sessão.",
+      "Através da seção Meus Clientes, você cadastra briefing completo de cada cliente. tom de voz, público-alvo, referências visuais, informações do negócio. A IA usa esse contexto em todas as gerações: CopyMaker, Imagem Criativa, Design Studio. Não é preciso reexplicar nada a cada sessão.",
   },
   {
     question: "Qual a diferença entre usar o ChatGPT e o Calango Studio?",
@@ -184,7 +184,7 @@ export default function AgenteParaSocialMediaPage() {
         <li>
           <strong className="text-white">Contexto automático</strong>. ao
           selecionar um cliente, todas as ferramentas (CopyMaker, Imagem
-          Criativa, Remix Layout) já consideram o briefing automaticamente.
+          Criativa, Design Studio) já consideram o briefing automaticamente.
         </li>
         <li>
           <strong className="text-white">Consistência entre sessões</strong>

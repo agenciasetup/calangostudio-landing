@@ -41,7 +41,7 @@ const faqs = [
 
 const relatedPages = [
   { href: "/tutoriais/modo-manual", title: "Modo Manual", description: "Use o prompt extraído para gerar imagens." },
-  { href: "/tutoriais/criacao-livre", title: "Criação Livre", description: "Composições livres com referência de estilo." },
+  { href: "/tutoriais/flow", title: "Flow", description: "Automatize fluxos usando prompts extraídos." },
   { href: "/tutoriais/imagem-criativa", title: "Imagem Criativa", description: "Estilos prontos sem precisar de prompt." },
 ];
 

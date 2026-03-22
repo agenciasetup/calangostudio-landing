@@ -95,29 +95,29 @@ const geradoresDeImagem = [
     icon: "🔧",
   },
   {
-    href: "/tutoriais/criacao-livre",
-    title: "Criação Livre",
-    description:
-      "Componha peças com imagem base, referência e geração refinável.",
-    icon: "✨",
-  },
-  {
     href: "/tutoriais/modo-manual",
     title: "Modo Manual",
     description:
       "Edite com controle total usando múltiplas referências visuais.",
     icon: "🎛️",
   },
-  {
-    href: "/tutoriais/remix-layout",
-    title: "Remix Layout",
-    description:
-      "Replique layouts trocando fotos, cores e texto mantendo a estrutura.",
-    icon: "🔄",
-  },
 ];
 
 const outrasFerramentas = [
+  {
+    href: "/tutoriais/flow",
+    title: "Flow",
+    description:
+      "Automatize fluxos de trabalho conectando ferramentas em um workflow visual.",
+    icon: "⚡",
+  },
+  {
+    href: "/tutoriais/design-studio",
+    title: "Design Studio",
+    description:
+      "Editor visual drag-and-drop para montar layouts e composições.",
+    icon: "🎨",
+  },
   {
     href: "/tutoriais/copymaker",
     title: "CopyMaker",

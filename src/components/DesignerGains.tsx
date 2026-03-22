@@ -31,7 +31,7 @@ const gains = [
   },
   {
     title: "Mais tempo livre",
-    description: "Menos bagunça, menos retrabalho, menos troca de ferramenta.",
+    description: "Automatize o repetitivo com o Flow e foque no que só você faz.",
     icon: Clock,
     color: "from-purple-400 to-violet-500",
   },
