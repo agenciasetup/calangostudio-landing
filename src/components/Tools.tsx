@@ -128,21 +128,21 @@ const tools: Tool[] = [
   },
   {
     icon: ScanLine,
-    name: "Remix Layout",
-    short: "Replique layouts trocando foto e texto com poucos cliques",
+    name: "Design Studio",
+    short: "Editor visual drag-and-drop para montar composições",
     description:
-      "Tem um criativo que funcionou? Replique ele para outros clientes ou datas trocando só a imagem e o texto. Consistência visual sem retrabalho manual.",
+      "Monte layouts e composições visuais com um editor profissional integrado. Arraste elementos, aplique templates e use os dados do cliente para manter a identidade visual consistente.",
     example:
-      "Adapte um post que viralizou para 5 clientes diferentes em 2 minutos.",
+      "Monte um carrossel inteiro arrastando elementos e textos direto no editor.",
     plan: "Pro",
     color: "from-purple-500 to-fuchsia-700",
     glowColor: "rgba(168,85,247,0.15)",
     advantages: [
-      "Replique criativos de sucesso instantaneamente",
-      "Mantenha consistência visual entre clientes",
-      "Escale sua produção sem perder qualidade",
+      "Interface drag-and-drop intuitiva",
+      "Biblioteca de templates prontos",
+      "Integração com dados e assets do cliente",
     ],
-    feedback: { name: "Matheus", text: "Ganho incrível de produtividade. Um post que viralizou vira template." },
+    feedback: { name: "Matheus", text: "Ganho incrível de produtividade. Montar peças ficou muito mais rápido." },
   },
   {
     icon: FileText,
@@ -217,21 +217,21 @@ const tools: Tool[] = [
   },
   {
     icon: Sparkles,
-    name: "Criação Livre",
-    short: "Gere criativos com texto. Modo experimental",
+    name: "Flow",
+    short: "Automatize fluxos de trabalho com nós visuais",
     description:
-      "Modo experimental para geração com imagem base, referência textual e geração refinável. Ideal para explorar estilos novos e testar ideias criativas fora dos padrões.",
+      "Conecte ferramentas, dados de clientes e entregas em um workflow visual. Arraste nós, defina gatilhos e deixe a IA executar o fluxo de produção de conteúdo de ponta a ponta.",
     example:
-      "Explore um conceito criativo totalmente novo para uma campanha.",
+      "Crie um fluxo que gera copy + imagem + agendamento para 5 clientes de uma vez.",
     plan: "Base",
-    color: "from-yellow-400 to-orange-600",
-    glowColor: "rgba(250,204,21,0.15)",
+    color: "from-violet-400 to-purple-600",
+    glowColor: "rgba(167,139,250,0.15)",
     advantages: [
-      "Liberdade criativa total",
-      "Combine texto + imagem + referência",
-      "Ideal para brainstorming visual",
+      "Construtor de workflows baseado em nós",
+      "Encadeie ferramentas e automatize entregas",
+      "Produção em escala com contexto inteligente",
     ],
-    feedback: { name: "Matheus", text: "Uso quando quero algo completamente diferente. Sempre surpreende." },
+    feedback: { name: "Matheus", text: "Automatizei a produção semanal inteira. Nunca mais fiz tarefa repetitiva." },
   },
   {
     icon: Users,

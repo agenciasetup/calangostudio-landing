@@ -43,7 +43,7 @@ const faqs = [
 
 const relatedPages = [
   { href: "/tutoriais/mockup-produto", title: "Mockup Produto", description: "Coloque seu produto em cenários realistas." },
-  { href: "/tutoriais/criacao-livre", title: "Criação Livre", description: "Componha artes usando assets como referência." },
+  { href: "/tutoriais/design-studio", title: "Design Studio", description: "Monte composições usando assets no editor visual." },
   { href: "/tutoriais/imagem-criativa", title: "Imagem Criativa", description: "Imagens cinematográficas com estilos prontos." },
 ];
 

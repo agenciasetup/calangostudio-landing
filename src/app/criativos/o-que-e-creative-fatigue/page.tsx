@@ -98,7 +98,7 @@ export default function OQueECreativeFatiguePage() {
       <ul className="list-disc list-inside text-txt-secondary space-y-2 mb-4">
         <li><strong className="text-white">Gere novas variações de imagem</strong>: a Imagem Criativa produz variações visuais do mesmo conceito com estilos diferentes em segundos.</li>
         <li><strong className="text-white">Atualize a copy</strong>: o CopyMaker gera novas headlines e textos mantendo o contexto do cliente.</li>
-        <li><strong className="text-white">Replique layouts que funcionaram</strong>: o Remix Layout pega o criativo vencedor e gera variações estruturais com poucos cliques.</li>
+        <li><strong className="text-white">Monte variações no editor</strong>: o Design Studio permite criar variações visuais do criativo vencedor com poucos cliques.</li>
       </ul>
       <p className="text-txt-secondary leading-relaxed mb-8">
         O resultado: você tem um criativo novo pronto para subir antes que a campanha perca escala. A produção deixa de ser reativa (esperando a fadiga aparecer) e passa a ser proativa (tendo sempre criativos novos no pipeline).

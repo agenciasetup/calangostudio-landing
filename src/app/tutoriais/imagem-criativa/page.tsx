@@ -47,7 +47,7 @@ const faqs = [
 
 const relatedPages = [
   { href: "/tutoriais/estudio-de-foto", title: "Estúdio de Foto", description: "Gere fotos realistas com seu rosto." },
-  { href: "/tutoriais/criacao-livre", title: "Criação Livre", description: "Para quem quer liberdade total na criação." },
+  { href: "/tutoriais/flow", title: "Flow", description: "Automatize a produção conectando ferramentas." },
   { href: "/tutoriais/modo-manual", title: "Modo Manual", description: "Controle total com múltiplas referências." },
 ];
 

@@ -19,7 +19,7 @@ const LABEL_RULES: [RegExp, string][] = [
   [/_[Uu][Gg][Cc]/, "UGC Build"],
   [/_[Mm]ockup/, "Mockup Produto"],
   [/_3[Dd]/, "Assets 3D"],
-  [/_[Rr]emix/, "Remix Layout"],
+  [/_[Dd]esign/, "Design Studio"],
   [/_[Rr]estaurador|_[Rr]est/, "Restaurador PRO"],
   [/_[Mm]anual/, "Personalizado"],
 ];
