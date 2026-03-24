@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Volume2 } from "lucide-react";
 
 const VIDEO_SRC =
-  "https://pub-1c2eab8e243f42fcb91e2869bdc29d12.r2.dev/vsl2-web-720p.webm";
+  "https://pub-1c2eab8e243f42fcb91e2869bdc29d12.r2.dev/vsl2-fallback-720p.mp4";
 const UNLOCK_TIME = 580; // 9:40 in seconds
 const STORAGE_KEY = "freemium_vsl_progress";
 const COOKIE_NAME = "freemium_vsl";
