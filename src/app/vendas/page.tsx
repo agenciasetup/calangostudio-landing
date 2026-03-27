@@ -2141,20 +2141,23 @@ export default function Vendas() {
                   </div>
                 </div>
                 {[
-                  { name: "Comunidade VIP", value: "R$ 997,00", icon: Crown },
-                  { name: "Calango Studio", value: "R$ 169,90/mês", icon: Zap },
-                  { name: "Designer Criador", value: "R$ 697,00", icon: Sparkles },
-                ].map(({ name, value, icon: Icon }, i) => (
+                  { name: "Comunidade Calangos PRO", value: "R$ 997,00", icon: Crown },
+                  { name: "Designer Expert", value: "R$ 97,00", icon: Sparkles },
+                  { name: "Formação Design", value: "R$ 249,00", icon: Star },
+                  { name: "Designer Criador", value: "R$ 597,00", icon: Monitor },
+                  { name: "Landing Page Expert", value: "R$ 149,00", icon: ExternalLink },
+                  { name: "Calango Studio PRO — 1 mês", value: "R$ 169,90/mês", icon: Zap, highlight: true },
+                ].map(({ name, value, icon: Icon, highlight }, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 + i * 0.1 }}
-                    className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.04]"
+                    className={`flex items-center justify-between px-5 py-3 border-b border-white/[0.04] ${highlight ? "bg-accent/[0.06] border-accent/20" : ""}`}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon size={14} className="text-accent" />
-                      <span className="text-sm text-white font-bold">{name}</span>
+                      <Icon size={14} className={highlight ? "text-accent" : "text-accent"} />
+                      <span className={`text-sm font-bold ${highlight ? "text-accent" : "text-white"}`}>{name}</span>
                     </div>
                     <span className="text-sm text-txt-secondary line-through">{value}</span>
                   </motion.div>
@@ -2168,7 +2171,7 @@ export default function Vendas() {
                 >
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-txt-muted font-bold">Total separado</span>
-                    <span className="text-lg text-red-400 font-bold line-through">R$ 1.863,90</span>
+                    <span className="text-lg text-red-400 font-bold line-through">R$ 2.258,90</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -2186,12 +2189,12 @@ export default function Vendas() {
                 </span>
 
                 <p className="text-sm text-txt-secondary mb-4 mt-2">
-                  Comunidade VIP + Designer Criador + 1 mês gratuito de Calango Studio
+                  Comunidade Calangos PRO + Designer Expert + Formação Design + Designer Criador + Landing Page Expert + 1 mês de Calango Studio PRO
                 </p>
 
                 <div className="flex items-baseline gap-1 mb-2 justify-center">
                   <span className="text-base text-txt-muted">R$</span>
-                  <span className="font-poppins font-black text-6xl text-gradient-animated">597</span>
+                  <span className="font-poppins font-black text-6xl text-gradient-animated">697</span>
                   <span className="text-base text-txt-muted">,00</span>
                 </div>
 
@@ -2203,10 +2206,10 @@ export default function Vendas() {
                   className="p-3 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 mb-4"
                 >
                   <p className="text-sm text-emerald-400 font-bold">
-                    Economia de R$ 1.266,90
+                    Economia de R$ 1.561,90
                   </p>
                   <p className="text-[10px] text-emerald-400/60">
-                    68% de desconto no pacote completo
+                    69% de desconto no pacote completo
                   </p>
                 </motion.div>
 
@@ -2240,7 +2243,7 @@ export default function Vendas() {
 
             <RevenueCalculator />
 
-            <PopupToast icon={CircleDollarSign} text="O único risco é não tentar" className="bottom-[5%] right-[8%]" delay={1} bgColor="bg-emerald-500/10" borderColor="border-emerald-500/20" color="text-emerald-400" />
+            <PopupToast icon={CircleDollarSign} text="O único risco é não tentar" className="bottom-[1%] left-[5%] lg:bottom-[5%] lg:right-[8%] lg:left-auto" delay={1} bgColor="bg-emerald-500/10" borderColor="border-emerald-500/20" color="text-emerald-400" />
           </div>
         );
 
@@ -2410,13 +2413,13 @@ export default function Vendas() {
                 <div className="flex items-baseline gap-1 mb-4 mt-2 justify-center">
                   <span className="text-base text-txt-muted">R$</span>
                   <span className="font-poppins font-black text-5xl text-gradient-animated">
-                    597
+                    697
                   </span>
                   <span className="text-base text-txt-muted">,00</span>
                 </div>
 
                 <p className="text-sm text-txt-secondary mb-6">
-                  Comunidade VIP + Designer Criador + 1 mês de Calango Studio
+                  Comunidade Calangos PRO + Designer Expert + Formação Design + Designer Criador + Landing Page Expert + 1 mês de Calango Studio PRO
                 </p>
 
                 <motion.button
