@@ -16,7 +16,6 @@ import {
   TrendingUp,
   Crown,
   CheckCircle2,
-  CircleDollarSign,
   AlertTriangle,
   Search,
   Clock,
@@ -314,34 +313,34 @@ function RevenueCalculator() {
   const sixMonthRevenue = monthlyRevenue * 6;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-4xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-4 w-full max-w-4xl mx-auto">
       {/* Lado esquerdo — Sem prospecção */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
-        className="flex-1 rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-6"
+        className="flex-1 rounded-2xl border border-red-500/20 bg-red-500/[0.03] p-5"
         style={{ backdropFilter: "blur(12px)" }}
       >
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center">
-            <XCircle size={20} className="text-red-400" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-xl bg-red-500/20 flex items-center justify-center">
+            <XCircle size={18} className="text-red-400" />
           </div>
           <h3 className="font-poppins font-bold text-base text-red-400">0 Prospecção</h3>
         </div>
-        <div className="text-center py-6">
-          <p className="font-poppins font-black text-5xl text-red-400 mb-2">R$ 0</p>
+        <div className="text-center py-4">
+          <p className="font-poppins font-black text-4xl text-red-400 mb-1">R$ 0</p>
           <p className="text-sm text-txt-muted">por mês</p>
         </div>
-        <div className="space-y-3 mt-4">
+        <div className="space-y-2 mt-3">
           {["Daqui 1 mês: igual", "Daqui 3 meses: igual", "Daqui 6 meses: igual", "Daqui 2 anos: igual"].map((t, i) => (
             <div key={i} className="flex items-center gap-2 text-sm text-red-400/70">
-              <div className="w-1.5 h-1.5 rounded-full bg-red-400/40" />
+              <div className="w-1.5 h-1.5 rounded-full bg-red-400/40 flex-shrink-0" />
               {t}
             </div>
           ))}
         </div>
-        <p className="text-xs text-red-400/50 mt-6 text-center font-bold uppercase tracking-wider">
+        <p className="text-xs text-red-400/50 mt-4 text-center font-bold uppercase tracking-wider">
           Igual você está hoje.
         </p>
       </motion.div>
@@ -351,25 +350,25 @@ function RevenueCalculator() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}
-        className="flex-1 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6"
+        className="flex-1 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] p-5"
         style={{ backdropFilter: "blur(12px)" }}
       >
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-            <Calculator size={20} className="text-emerald-400" />
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+            <Calculator size={18} className="text-emerald-400" />
           </div>
           <h3 className="font-poppins font-bold text-base text-emerald-400">Com Prospecção</h3>
         </div>
 
         {/* Contatos fixos */}
-        <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-3">
+        <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-2">
           <span className="text-xs text-txt-secondary">Contatos/dia</span>
           <span className="text-sm font-bold text-white">5 → <span className="text-emerald-400">{contactsPerMonth}/mês</span></span>
         </div>
 
         {/* Slider: % fechamento */}
-        <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-3">
-          <div className="flex items-center justify-between mb-2">
+        <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-2">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-xs text-txt-secondary flex items-center gap-1"><Percent size={10} /> Fechamento</span>
             <span className="text-sm font-bold text-emerald-400">{conversionRate}%</span>
           </div>
@@ -384,8 +383,8 @@ function RevenueCalculator() {
         </div>
 
         {/* Input: Ticket médio */}
-        <div className="p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-4">
-          <div className="flex items-center justify-between mb-2">
+        <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] mb-3">
+          <div className="flex items-center justify-between mb-1.5">
             <span className="text-xs text-txt-secondary flex items-center gap-1"><Banknote size={10} /> Ticket médio</span>
           </div>
           <div className="flex items-center gap-2">
@@ -403,21 +402,21 @@ function RevenueCalculator() {
         </div>
 
         {/* Resultado */}
-        <div className="p-4 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 text-center mb-3">
-          <p className="text-xs text-emerald-400/60 uppercase tracking-wider font-bold mb-1">Clientes fechados</p>
-          <p className="font-poppins font-black text-2xl text-emerald-400">{closedClients} clientes</p>
+        <div className="p-3 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 text-center mb-2">
+          <p className="text-[10px] text-emerald-400/60 uppercase tracking-wider font-bold mb-0.5">Clientes fechados</p>
+          <p className="font-poppins font-black text-xl text-emerald-400">{closedClients} clientes</p>
         </div>
 
-        <div className="p-4 rounded-xl bg-emerald-500/[0.12] border border-emerald-500/30 text-center mb-3">
-          <p className="text-xs text-emerald-400/60 uppercase tracking-wider font-bold mb-1">Resultado mensal</p>
-          <p className="font-poppins font-black text-3xl text-gradient-animated">
+        <div className="p-3 rounded-xl bg-emerald-500/[0.12] border border-emerald-500/30 text-center mb-2">
+          <p className="text-[10px] text-emerald-400/60 uppercase tracking-wider font-bold mb-0.5">Resultado mensal</p>
+          <p className="font-poppins font-black text-2xl text-gradient-animated">
             R$ {monthlyRevenue.toLocaleString("pt-BR")}
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-r from-emerald-500/[0.08] to-accent/[0.08] border border-accent/20 text-center">
-          <p className="text-xs text-accent/60 uppercase tracking-wider font-bold mb-1">Em 6 meses mantendo o ritmo</p>
-          <p className="font-poppins font-black text-3xl text-gradient-animated">
+        <div className="p-3 rounded-xl bg-gradient-to-r from-emerald-500/[0.08] to-accent/[0.08] border border-accent/20 text-center">
+          <p className="text-[10px] text-accent/60 uppercase tracking-wider font-bold mb-0.5">Em 6 meses mantendo o ritmo</p>
+          <p className="font-poppins font-black text-2xl text-gradient-animated">
             R$ {sixMonthRevenue.toLocaleString("pt-BR")}
           </p>
         </div>
@@ -1341,7 +1340,7 @@ export default function Vendas() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="space-y-3 max-w-2xl mx-auto"
+                className="space-y-3 inline-flex flex-col items-start mx-auto"
               >
                 {[
                   "Ele abriu sua mensagem no ônibus...",
@@ -2233,17 +2232,17 @@ export default function Vendas() {
 
             <Badge icon={Calculator} text="Calculadora de Resultado" color="text-emerald-400" />
 
-            <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-3 tracking-tight leading-[1.08]">
+            <h2 className="font-poppins font-black text-2xl sm:text-3xl md:text-4xl mb-2 tracking-tight leading-[1.08]">
               Para e{" "}
               <span className="text-gradient-animated">pensa comigo</span>.
             </h2>
-            <p className="text-base text-txt-secondary mb-8 max-w-xl">
+            <p className="text-sm text-txt-secondary mb-4 max-w-xl">
               5 contatos por dia. Ajuste os valores e veja o resultado.
             </p>
 
             <RevenueCalculator />
 
-            <PopupToast icon={CircleDollarSign} text="O único risco é não tentar" className="bottom-[1%] left-[5%] lg:bottom-[5%] lg:right-[8%] lg:left-auto" delay={1} bgColor="bg-emerald-500/10" borderColor="border-emerald-500/20" color="text-emerald-400" />
+{/* PopupToast removed — was overlapping calculator results */}
           </div>
         );
 
