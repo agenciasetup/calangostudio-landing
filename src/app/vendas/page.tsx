@@ -16,7 +16,6 @@ import {
   TrendingUp,
   Crown,
   CheckCircle2,
-  CircleDollarSign,
   AlertTriangle,
   Search,
   Clock,
