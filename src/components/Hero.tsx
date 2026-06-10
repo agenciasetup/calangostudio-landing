@@ -147,7 +147,7 @@ function SmartProgressBar({ progress }: { progress: number }) {
 /* ─── VSL Offer Popup ─── */
 function OfferPopup({ onClose }: { onClose: () => void }) {
   const [seconds, setSeconds] = useState(60);
-  const proUrl = PAY_URL;
+  const proUrl = `${PAY_URL}?plan=pro`;
 
   useEffect(() => {
     if (seconds <= 0) return;

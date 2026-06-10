@@ -1215,7 +1215,7 @@ export default function Apresentacao() {
                 </ul>
 
                 <a
-                  href={PAY_URL}
+                  href={`${PAY_URL}?plan=pro`}
                   className="block w-full text-center py-5 rounded-2xl font-black text-lg tracking-[0.14em] uppercase bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_30px_rgba(249,115,22,0.25)] hover:shadow-[0_0_60px_rgba(249,115,22,0.4)] hover:-translate-y-1 transition-all duration-300"
                 >
                   Quero Automatizar Minha Operação

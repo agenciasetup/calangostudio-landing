@@ -43,7 +43,7 @@ const plans: Plan[] = [
     checkColor: "text-blue-400",
     coins: "9k",
     borderColor: "border-white/[0.08]",
-    checkoutUrl: PAY_URL,
+    checkoutUrl: `${PAY_URL}?plan=base`,
   },
   {
     name: "Pro",
@@ -65,7 +65,7 @@ const plans: Plan[] = [
     checkColor: "text-accent",
     coins: "12k",
     borderColor: "border-accent/30",
-    checkoutUrl: PAY_URL,
+    checkoutUrl: `${PAY_URL}?plan=pro`,
   },
   {
     name: "Elite",
@@ -87,7 +87,7 @@ const plans: Plan[] = [
     checkColor: "text-purple-400",
     coins: "17,5k",
     borderColor: "border-purple-500/20",
-    checkoutUrl: PAY_URL,
+    checkoutUrl: `${PAY_URL}?plan=elite`,
   },
 ];
 
