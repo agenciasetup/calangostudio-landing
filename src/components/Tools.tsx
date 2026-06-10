@@ -22,6 +22,7 @@ import {
   ImageIcon,
   type LucideIcon,
 } from "lucide-react";
+import { PAY_URL } from "@/lib/links";
 
 interface Tool {
   icon: LucideIcon;
@@ -373,7 +374,7 @@ function ToolModal({ tool, onClose }: { tool: Tool; onClose: () => void }) {
                 Plano {tool.plan}
               </span>
               <a
-                href="#planos"
+                href={PAY_URL}
                 onClick={onClose}
                 className="btn-primary px-6 md:px-8 py-3 text-xs tracking-widest flex items-center gap-2"
               >
