@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import { Zap, Sparkles, Crown, Check, CreditCard } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { PAY_URL } from "@/lib/links";
 
 interface Plan {
   name: string;
@@ -20,12 +20,6 @@ interface Plan {
   coins: string;
   borderColor: string;
   checkoutUrl: string;
-}
-
-function withCoupon(url: string, coupon: string | null): string {
-  if (!coupon || url === "#") return url;
-  const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}offDiscount=${coupon}`;
 }
 
 const plans: Plan[] = [
@@ -49,7 +43,7 @@ const plans: Plan[] = [
     checkColor: "text-blue-400",
     coins: "9k",
     borderColor: "border-white/[0.08]",
-    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=wat2yhev",
+    checkoutUrl: PAY_URL,
   },
   {
     name: "Pro",
@@ -71,7 +65,7 @@ const plans: Plan[] = [
     checkColor: "text-accent",
     coins: "12k",
     borderColor: "border-accent/30",
-    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=y2uzyv4s",
+    checkoutUrl: PAY_URL,
   },
   {
     name: "Elite",
@@ -93,7 +87,7 @@ const plans: Plan[] = [
     checkColor: "text-purple-400",
     coins: "17,5k",
     borderColor: "border-purple-500/20",
-    checkoutUrl: "https://pay.hotmart.com/F104772530K?off=owgp5cz5",
+    checkoutUrl: PAY_URL,
   },
 ];
 
@@ -137,9 +131,6 @@ function AnimatedPrice({ price }: { price: string }) {
 }
 
 export default function Pricing() {
-  const searchParams = useSearchParams();
-  const coupon = searchParams.get("coupon");
-
   return (
     <section id="planos" className="section-elevated py-16 md:py-20 px-4 relative">
       {/* Pulsing glow */}
@@ -225,7 +216,7 @@ export default function Pricing() {
                 </div>
 
                 <a
-                  href={withCoupon(plan.checkoutUrl, coupon)}
+                  href={plan.checkoutUrl}
                   className={`block w-full text-center py-3.5 md:py-4 rounded-xl md:rounded-2xl font-black text-sm tracking-[0.14em] uppercase transition-all duration-300 ${
                     plan.popular
                       ? "bg-gradient-to-r from-accent to-accent-end text-black shadow-[0_0_24px_rgba(249,115,22,0.22)] hover:shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:-translate-y-0.5"

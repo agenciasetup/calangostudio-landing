@@ -13,6 +13,7 @@ import {
   Gift,
   Clock,
 } from "lucide-react";
+import { PAY_URL } from "@/lib/links";
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
@@ -146,7 +147,7 @@ function SmartProgressBar({ progress }: { progress: number }) {
 /* ─── VSL Offer Popup ─── */
 function OfferPopup({ onClose }: { onClose: () => void }) {
   const [seconds, setSeconds] = useState(60);
-  const proUrl = "https://pay.hotmart.com/F104772530K?off=y2uzyv4s&offDiscount=10LANGOS";
+  const proUrl = PAY_URL;
 
   useEffect(() => {
     if (seconds <= 0) return;
