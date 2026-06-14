@@ -2,14 +2,18 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Zap, Sparkles, Crown, Check, CreditCard } from "lucide-react";
+import { Zap, Sparkles, Crown, Check, CreditCard, BadgePercent } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PAY_URL } from "@/lib/links";
+import { affiliateSavings } from "@/lib/affiliate";
+import { useAffiliate } from "@/lib/useAffiliate";
 
 interface Plan {
   name: string;
   icon: LucideIcon;
   price: string;
+  /** Preço exibido para quem chega por link de afiliado (valor estratégico). */
+  priceAffiliate: string;
   subtitle: string;
   capacity: string;
   features: string[];
@@ -26,7 +30,8 @@ const plans: Plan[] = [
   {
     name: "Base",
     icon: Zap,
-    price: "97,90",
+    price: "119,90",
+    priceAffiliate: "97,90",
     subtitle: "Para quem quer começar com estrutura e operar até 5 clientes.",
     capacity: "5 clientes",
     features: [
@@ -48,7 +53,8 @@ const plans: Plan[] = [
   {
     name: "Pro",
     icon: Sparkles,
-    price: "169,90",
+    price: "199,90",
+    priceAffiliate: "169,90",
     subtitle: "Para quem já quer ganhar volume com mais controle.",
     capacity: "12 clientes",
     features: [
@@ -70,7 +76,8 @@ const plans: Plan[] = [
   {
     name: "Elite",
     icon: Crown,
-    price: "319,90",
+    price: "399,90",
+    priceAffiliate: "319,90",
     subtitle: "Para quem quer rodar como operação forte e escalar.",
     capacity: "25 clientes",
     features: [
@@ -94,43 +101,48 @@ const plans: Plan[] = [
 function AnimatedPrice({ price }: { price: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [displayed, setDisplayed] = useState(price);
-  const hasAnimated = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let raf = 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          observer.disconnect();
-          const target = parseFloat(price.replace(",", "."));
-          const duration = 1000;
-          const start = performance.now();
-          let lastDisplay = "";
-          const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const display = (eased * target).toFixed(2).replace(".", ",");
-            if (display !== lastDisplay) {
-              lastDisplay = display;
-              setDisplayed(display);
-            }
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        const target = parseFloat(price.replace(",", "."));
+        const duration = 1000;
+        const start = performance.now();
+        let lastDisplay = "";
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const display = (eased * target).toFixed(2).replace(".", ",");
+          if (display !== lastDisplay) {
+            lastDisplay = display;
+            setDisplayed(display);
+          }
+          if (progress < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
       },
       { threshold: 0.3 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
+    // Re-anima quando o preço muda (ex.: desconto de afiliado aplicado após o mount).
   }, [price]);
 
   return <span ref={ref}>{displayed}</span>;
 }
 
 export default function Pricing() {
+  const affiliate = useAffiliate();
+  const isAffiliate = !!affiliate;
+
   return (
     <section id="planos" className="section-elevated py-16 md:py-20 px-4 relative">
       {/* Pulsing glow */}
@@ -153,6 +165,14 @@ export default function Pricing() {
             <span className="text-gradient-animated">que você quer construir.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg">Sem fidelidade. Cancele quando quiser.</p>
+          {isAffiliate && (
+            <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/25 shadow-[0_0_24px_rgba(249,115,22,0.12)]">
+              <BadgePercent size={15} className="text-accent" />
+              <span className="font-poppins font-bold text-sm text-accent">
+                Desconto de afiliado aplicado nos planos
+              </span>
+            </div>
+          )}
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5 items-start">
@@ -194,10 +214,18 @@ export default function Pricing() {
                 <div className="flex items-baseline gap-0.5 mb-2">
                   <span className="text-sm text-txt-muted">R$</span>
                   <span className={`font-poppins font-black text-3xl md:text-4xl ${plan.popular ? "text-gradient-animated" : "text-white"}`}>
-                    <AnimatedPrice price={plan.price} />
+                    <AnimatedPrice price={isAffiliate ? plan.priceAffiliate : plan.price} />
                   </span>
                   <span className="text-sm text-txt-muted">/mês</span>
                 </div>
+                {isAffiliate && (
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-txt-muted line-through">R$ {plan.price}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-accent/15 border border-accent/20 text-accent text-[10px] font-black uppercase tracking-wider">
+                      Economize R$ {affiliateSavings(plan.price, plan.priceAffiliate)}
+                    </span>
+                  </div>
+                )}
                 <p className="text-sm text-txt-muted mb-5 md:mb-6 leading-relaxed">{plan.subtitle}</p>
 
                 <ul className="space-y-2.5 md:space-y-3 mb-5 md:mb-6">

@@ -2145,7 +2145,7 @@ export default function Vendas() {
                   { name: "Formação Design", value: "R$ 249,00", icon: Star },
                   { name: "Designer Criador", value: "R$ 597,00", icon: Monitor },
                   { name: "Landing Page Expert", value: "R$ 149,00", icon: ExternalLink },
-                  { name: "Calango Studio PRO — 1 mês", value: "R$ 169,90/mês", icon: Zap, highlight: true },
+                  { name: "Calango Studio PRO — 1 mês", value: "R$ 199,90/mês", icon: Zap, highlight: true },
                 ].map(({ name, value, icon: Icon, highlight }, i) => (
                   <motion.div
                     key={i}

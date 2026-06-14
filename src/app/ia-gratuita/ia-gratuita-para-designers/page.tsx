@@ -26,7 +26,7 @@ const schema = {
     "@type": "FAQPage",
     mainEntity: [
       { "@type": "Question", name: "Existe IA realmente gratuita para gerar imagens profissionais?", acceptedAnswer: { "@type": "Answer", text: "Existem planos gratuitos com créditos limitados (Adobe Firefly, Leonardo.ai). Para uso profissional e volume, esses planos se esgotam rápido e a qualidade é menor. A alternativa mais inteligente é uma plataforma paga que justifica o custo pelo tempo economizado." } },
-      { "@type": "Question", name: "O Calango Studio tem versão gratuita?", acceptedAnswer: { "@type": "Answer", text: "Não tem plano gratuito, mas tem uma aula exclusiva ensinando como resgatar U$300 em créditos Google. o que equivale a quase 3.000 gerações extras na plataforma. Os planos começam em R$97,90/mês." } },
+      { "@type": "Question", name: "O Calango Studio tem versão gratuita?", acceptedAnswer: { "@type": "Answer", text: "Não tem plano gratuito, mas tem uma aula exclusiva ensinando como resgatar U$300 em créditos Google. o que equivale a quase 3.000 gerações extras na plataforma. Os planos começam em R$119,90/mês." } },
       { "@type": "Question", name: "Vale a pena pagar por IA sendo designer freelancer?", acceptedAnswer: { "@type": "Answer", text: "Sim, quando o retorno em tempo compensa. Se você economiza 2 horas por dia com o Calango Studio, isso é mais de 40 horas por mês. tempo que você pode converter em mais clientes ou mais descanso." } },
       { "@type": "Question", name: "Qual a IA gratuita mais completa para designers?", acceptedAnswer: { "@type": "Answer", text: "Para uso esporádico, Adobe Firefly ou Canva IA são as opções mais completas no gratuito. Para uso profissional diário, o custo do tempo supera qualquer economia com plano gratuito." } },
     ],
@@ -35,8 +35,8 @@ const schema = {
 
 const faqs = [
   { question: "Existe IA realmente gratuita para gerar imagens profissionais?", answer: "Existem planos gratuitos com créditos limitados. Adobe Firefly, Leonardo.ai, Ideogram. Para uso esporádico ou testes, funcionam. Para uso profissional com volume, esses planos se esgotam rápido e a qualidade costuma ser inferior aos planos pagos. A alternativa mais inteligente é uma plataforma paga que justifica o custo pelo tempo economizado. o que no caso de designers profissionais acontece já na primeira semana de uso." },
-  { question: "O Calango Studio tem versão gratuita?", answer: "Não tem plano gratuito. Os planos começam em R$97,90/mês. Mas dentro da plataforma existe uma aula exclusiva ensinando como resgatar U$300 em créditos do Google Cloud. o que equivale a aproximadamente 125.000 créditos adicionais, ou quase 3.000 gerações extras. É a forma mais inteligente de maximizar o uso com o menor custo possível." },
-  { question: "Vale a pena pagar por IA sendo designer freelancer?", answer: "Sim, quando o retorno em tempo compensa. e para a maioria dos freelancers, compensa rápido. Se você economiza 2 horas por dia com o Calango Studio, isso é mais de 40 horas por mês. Se sua hora vale R$50, são R$2.000 em tempo recuperado contra R$97,90 de assinatura. Esse tempo pode ser convertido em mais clientes, mais entregas ou mais descanso." },
+  { question: "O Calango Studio tem versão gratuita?", answer: "Não tem plano gratuito. Os planos começam em R$119,90/mês. Mas dentro da plataforma existe uma aula exclusiva ensinando como resgatar U$300 em créditos do Google Cloud. o que equivale a aproximadamente 125.000 créditos adicionais, ou quase 3.000 gerações extras. É a forma mais inteligente de maximizar o uso com o menor custo possível." },
+  { question: "Vale a pena pagar por IA sendo designer freelancer?", answer: "Sim, quando o retorno em tempo compensa. e para a maioria dos freelancers, compensa rápido. Se você economiza 2 horas por dia com o Calango Studio, isso é mais de 40 horas por mês. Se sua hora vale R$50, são R$2.000 em tempo recuperado contra R$119,90 de assinatura. Esse tempo pode ser convertido em mais clientes, mais entregas ou mais descanso." },
   { question: "Qual a IA gratuita mais completa para designers?", answer: "Para uso esporádico, Adobe Firefly é a opção mais completa no gratuito. boa qualidade de imagem, integração com o ecossistema Adobe. O Canva IA também oferece recursos básicos no plano gratuito. Para uso profissional diário com múltiplos clientes, nenhuma opção gratuita oferece gestão de clientes, copy integrada ou workflow completo. O custo do tempo perdido com ferramentas limitadas supera qualquer economia com plano gratuito." },
 ];
 
@@ -69,18 +69,18 @@ export default function IaGratuitaParaDesignersPage() {
         Ferramentas gratuitas têm limite de gerações, qualidade reduzida, suporte limitado a português e nenhuma integração de workflow. Para quem usa profissionalmente. atendendo clientes, produzindo volume. o gratuito vira gargalo rápido. Você alterna entre 3 ou 4 ferramentas, reexplica o contexto do cliente em cada uma, perde tempo testando prompts e depois ainda precisa ajustar o resultado.
       </p>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Faça a conta: se você cobra R$50 por post e perde 3 horas procurando imagem e testando prompts em ferramentas gratuitas, você perdeu R$150 em tempo. Uma assinatura do Calango Studio por R$97,90 se paga em dois posts. Em um mês inteiro, a economia em tempo é de dezenas de horas. tempo que pode ser convertido em mais clientes, mais entregas ou simplesmente mais descanso.
+        Faça a conta: se você cobra R$50 por post e perde 3 horas procurando imagem e testando prompts em ferramentas gratuitas, você perdeu R$150 em tempo. Uma assinatura do Calango Studio por R$119,90 se paga em dois posts. Em um mês inteiro, a economia em tempo é de dezenas de horas. tempo que pode ser convertido em mais clientes, mais entregas ou simplesmente mais descanso.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O incentivo que muda a conta</h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Google oferece U$300 em créditos para novas contas Google Cloud. O Calango Studio tem uma aula dentro da plataforma ensinando como resgatar esse incentivo. que equivale a aproximadamente 125.000 créditos na plataforma, ou quase 3.000 gerações. Isso não é gratuito, mas é o mais próximo de gratuito que existe com qualidade profissional. Para designers que estão começando e precisam de volume, esse incentivo faz a diferença: você paga a assinatura de R$97,90/mês e tem acesso a milhares de gerações adicionais sem custo extra.
+        O Google oferece U$300 em créditos para novas contas Google Cloud. O Calango Studio tem uma aula dentro da plataforma ensinando como resgatar esse incentivo. que equivale a aproximadamente 125.000 créditos na plataforma, ou quase 3.000 gerações. Isso não é gratuito, mas é o mais próximo de gratuito que existe com qualidade profissional. Para designers que estão começando e precisam de volume, esse incentivo faz a diferença: você paga a assinatura de R$119,90/mês e tem acesso a milhares de gerações adicionais sem custo extra.
       </p>
 
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="ia-gratuita/ia-gratuita-para-designers" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="ia-gratuita/ia-gratuita-para-designers" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

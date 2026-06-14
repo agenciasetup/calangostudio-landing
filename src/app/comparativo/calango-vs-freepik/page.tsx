@@ -37,7 +37,7 @@ const faqs = [
   { question: "Freepik tem geração de imagem por IA?", answer: "O Freepik lançou funcionalidades de IA, mas o modelo de negócio continua sendo banco de imagens. você busca no acervo. O Calango Studio é construído do zero para geração: você não procura, você cria. Essa é uma diferença estrutural, não apenas de recurso. A experiência de uso é completamente diferente." },
   { question: "Qual a diferença entre banco de imagens e gerador de imagem com IA?", answer: "Banco de imagens é passivo. você depende do que já foi criado por fotógrafos e designers. Gerador de imagem com IA é ativo. você descreve o que precisa e a imagem é criada especificamente para aquela necessidade. Não depende de acervo, não depende de sorte na busca." },
   { question: "O Calango Studio substitui o Freepik completamente?", answer: "Para designers que atendem clientes e precisam de imagens personalizadas, sim. o Calango gera exatamente o que você precisa sem depender de acervo. Para elementos genéricos como ícones e vetores técnicos, o Freepik ainda tem seu espaço como ferramenta complementar." },
-  { question: "Qual é mais barato: Freepik Premium ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Freepik dá acesso a acervo. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas. tudo em uma assinatura a partir de R$97,90/mês." },
+  { question: "Qual é mais barato: Freepik Premium ou Calango Studio?", answer: "Os preços são comparáveis. A diferença é o que você recebe: o Freepik dá acesso a acervo. O Calango dá acesso a geração de imagem, copy, gestão de clientes e 12 ferramentas integradas. tudo em uma assinatura a partir de R$119,90/mês." },
 ];
 
 const relatedPages = [

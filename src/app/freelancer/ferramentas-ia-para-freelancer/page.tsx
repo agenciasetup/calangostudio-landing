@@ -41,7 +41,7 @@ const schema = {
       operatingSystem: "Web",
       url: "https://www.calangostudio.com.br",
       description: "Plataforma de IA para freelancers de design e social media.",
-      offers: { "@type": "Offer", price: "97.90", priceCurrency: "BRL" },
+      offers: { "@type": "Offer", price: "119.90", priceCurrency: "BRL" },
     },
   ],
 };
@@ -53,7 +53,7 @@ const faqs = [
   },
   {
     question: "Vale a pena pagar por plataforma de IA sendo freelancer?",
-    answer: "Sim, quando o retorno em tempo economizado justifica. Com o Calango Studio, uma hora economizada por dia equivale a mais de 20 horas por mês. tempo que pode ser convertido em mais clientes (mais receita) ou mais descanso (mais qualidade de vida). O plano Base começa em R$97,90/mês.",
+    answer: "Sim, quando o retorno em tempo economizado justifica. Com o Calango Studio, uma hora economizada por dia equivale a mais de 20 horas por mês. tempo que pode ser convertido em mais clientes (mais receita) ou mais descanso (mais qualidade de vida). O plano Base começa em R$119,90/mês.",
   },
   {
     question: "Preciso de todas as ferramentas ou só de algumas?",
@@ -110,7 +110,7 @@ export default function FerramentasIaParaFreelancerPage() {
         <li><strong className="text-white">Meus Clientes</strong>. briefing e contexto salvo por cliente</li>
       </ul>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O plano Base (R$97,90/mês) já inclui acesso a todas as ferramentas com 4 clientes cadastrados. Para quem atende mais clientes, os planos Pro e Elite escalam até 30 clientes. Para freelancers em início de carreira, o plano Base é o ponto de entrada acessível que já resolve a maioria das necessidades.
+        O plano Base (R$119,90/mês) já inclui acesso a todas as ferramentas com 4 clientes cadastrados. Para quem atende mais clientes, os planos Pro e Elite escalam até 30 clientes. Para freelancers em início de carreira, o plano Base é o ponto de entrada acessível que já resolve a maioria das necessidades.
       </p>
 
       <FaqSection faqs={faqs} />

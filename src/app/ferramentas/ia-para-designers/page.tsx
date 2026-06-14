@@ -39,7 +39,7 @@ const schema = {
         "Plataforma de IA para designers. Gere imagens, mockups, assets 3D e gerencie clientes.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

@@ -29,7 +29,7 @@ const schema = {
       applicationCategory: "DesignApplication",
       operatingSystem: "Web",
       description: "Versão avançada do modelo de geração de imagens com IA do Calango Studio, otimizado para produção profissional com estilos pré-treinados.",
-      offers: { "@type": "Offer", price: "97.90", priceCurrency: "BRL", description: "Disponível nos planos do Calango Studio" },
+      offers: { "@type": "Offer", price: "119.90", priceCurrency: "BRL", description: "Disponível nos planos do Calango Studio" },
     },
     {
       "@type": "FAQPage",
@@ -45,7 +45,7 @@ const schema = {
 
 const faqs = [
   { question: "Qual a diferença entre Nano Banana e Nano Banana Pro?", answer: "O Nano Banana Pro é a versão do modelo otimizada para produção profissional, com maior precisão em estilos específicos e melhor consistência entre gerações. É o modelo padrão nos planos Pro e Elite do Calango Studio, com acesso ampliado a todas as capacidades de geração e maior volume de créditos mensais." },
-  { question: "O Nano Banana Pro está disponível no plano Base?", answer: "O plano Base (R$97,90/mês) já inclui acesso aos geradores de imagem com o Nano Banana. Os planos Pro e Elite têm acesso ampliado a todas as ferramentas, maior volume de créditos mensais e capacidades adicionais do Nano Banana Pro. Todos os planos podem ser ampliados com o incentivo de U$300 do Google Cloud." },
+  { question: "O Nano Banana Pro está disponível no plano Base?", answer: "O plano Base (R$119,90/mês) já inclui acesso aos geradores de imagem com o Nano Banana. Os planos Pro e Elite têm acesso ampliado a todas as ferramentas, maior volume de créditos mensais e capacidades adicionais do Nano Banana Pro. Todos os planos podem ser ampliados com o incentivo de U$300 do Google Cloud." },
   { question: "Como o Nano Banana Pro compara com o FLUX?", answer: "São complementares. O FLUX é usado pelo Calango Studio para determinados tipos de geração onde performa melhor. a plataforma seleciona automaticamente qual modelo usar para cada solicitação. Você nunca precisa escolher entre eles; recebe o melhor resultado independente de qual modelo foi usado nos bastidores." },
   { question: "O Nano Banana Pro gera texto dentro da imagem?", answer: "A geração de texto dentro de imagem é um dos desafios técnicos de todos os modelos de IA atuais. incluindo Midjourney, DALL-E e Stable Diffusion. Para texto em criativos, o fluxo recomendado é gerar a imagem no Calango Studio e inserir o texto na composição final no Photoshop, Figma ou Canva." },
 ];
@@ -87,7 +87,7 @@ export default function NanoBananaProPage() {
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="nano-banana/nano-banana-pro" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="nano-banana/nano-banana-pro" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

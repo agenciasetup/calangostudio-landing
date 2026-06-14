@@ -37,7 +37,7 @@ const faqs = [
   { question: "GPT gratuito consegue criar copy para Instagram?", answer: "Sim, com limitações. O plano gratuito do ChatGPT usa o GPT-3.5, que é menos preciso e criativo que o GPT-4. Ele gera legendas e textos razoáveis, mas sem memória de cliente. você reexplica o briefing, tom de voz, produto e público toda vez que inicia uma nova sessão. Para um post pontual resolve. Para produção profissional contínua, o tempo perdido reexplicando contexto se acumula." },
   { question: "Qual a diferença entre usar o ChatGPT e o CopyMaker do Calango Studio?", answer: "No ChatGPT, cada sessão começa do zero. Você precisa explicar quem é o cliente, qual o produto, qual o tom de voz, qual o público. No CopyMaker do Calango Studio, o briefing de cada cliente está salvo. tom de voz, produto, público e preferências são considerados automaticamente em cada geração. Além disso, o CopyMaker já integra os modelos mais recentes de Gemini e GPT, selecionando o melhor para cada tipo de copy." },
   { question: "GPT grátis tem limite de uso?", answer: "Sim. O plano gratuito do ChatGPT tem limite de mensagens por período e usa o modelo menos avançado (GPT-3.5). Em momentos de alta demanda, o acesso pode ser restringido. Para uso profissional intenso. gerando copy para múltiplos clientes diariamente. o limite aparece rápido e interrompe o fluxo de trabalho." },
-  { question: "Vale pagar pelo ChatGPT Plus ou por uma plataforma como o Calango?", answer: "Depende do uso. Se você só precisa de geração de texto, o ChatGPT Plus (U$20/mês) resolve bem com acesso ao GPT-4. Se você precisa de imagem, copy, mockup, UGC, sessão de fotos, assets 3D e gestão de clientes em uma plataforma integrada. o Calango Studio entrega significativamente mais por um custo próximo (a partir de R$97,90/mês), com o bônus do incentivo de U$300 do Google." },
+  { question: "Vale pagar pelo ChatGPT Plus ou por uma plataforma como o Calango?", answer: "Depende do uso. Se você só precisa de geração de texto, o ChatGPT Plus (U$20/mês) resolve bem com acesso ao GPT-4. Se você precisa de imagem, copy, mockup, UGC, sessão de fotos, assets 3D e gestão de clientes em uma plataforma integrada. o Calango Studio entrega significativamente mais por um custo próximo (a partir de R$119,90/mês), com o bônus do incentivo de U$300 do Google." },
 ];
 
 const relatedPages = [
@@ -86,7 +86,7 @@ export default function GptGratisParaCriarConteudoPage() {
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="ia-gratuita/gpt-gratis-para-criar-conteudo" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="ia-gratuita/gpt-gratis-para-criar-conteudo" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

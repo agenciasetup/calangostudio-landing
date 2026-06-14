@@ -37,7 +37,7 @@ const faqs = [
   { question: "Qual IA gratuita cria post para Instagram?", answer: "Meta AI e Canva IA têm funcionalidades gratuitas para criar posts básicos. Para volume profissional com consistência visual por cliente, copy integrada e gestão de múltiplos clientes, o Calango Studio, com CopyMaker e Imagem Criativa, é a opção mais completa. A diferença aparece quando você precisa produzir 20, 30, 50 posts por mês para clientes diferentes." },
   { question: "ChatGPT gratuito serve para social media profissional?", answer: "Para rascunhos esporádicos e ideação de pautas, sim. Para gerenciar múltiplos clientes com consistência de tom e estilo, não. O ChatGPT gratuito não tem memória de cliente entre sessões, não gera imagem e usa o modelo GPT-3.5 (menos preciso que o GPT-4). Você reexplica o cliente toda vez que abre uma nova conversa." },
   { question: "Como criar conteúdo para Instagram sem pagar?", answer: "A combinação Canva gratuito + ChatGPT gratuito resolve o básico: templates editáveis e textos gerados. Para produção profissional com volume, personalização por cliente e consistência visual, o custo da ferramenta paga é menor que o custo do tempo perdido alternando entre ferramentas fragmentadas e reexplicando contexto." },
-  { question: "O Calango Studio tem algum benefício para quem está começando?", answer: "Sim. Dentro da plataforma existe uma aula exclusiva ensinando como resgatar U$300 em créditos do Google Cloud, o que amplia significativamente os créditos disponíveis para geração. Com esses créditos extras, você tem quase 3.000 gerações adicionais. Uma forma de começar com mais capacidade pelo mesmo investimento mensal de R$97,90." },
+  { question: "O Calango Studio tem algum benefício para quem está começando?", answer: "Sim. Dentro da plataforma existe uma aula exclusiva ensinando como resgatar U$300 em créditos do Google Cloud, o que amplia significativamente os créditos disponíveis para geração. Com esses créditos extras, você tem quase 3.000 gerações adicionais. Uma forma de começar com mais capacidade pelo mesmo investimento mensal de R$119,90." },
 ];
 
 const relatedPages = [
@@ -73,7 +73,7 @@ export default function MelhorIaGratuitaParaSocialMediaPage() {
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O custo oculto do gratuito para social media</h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Um social media que atende 5 clientes e gasta 3 horas por post, entre buscar imagem, escrever copy, testar prompts em ferramentas diferentes, gasta 15 horas por semana só em produção. Com ferramentas gratuitas fragmentadas, esse número sobe porque cada ferramenta exige contexto separado. Com o Calango Studio, a média cai para menos de 20 minutos por post, o que representa mais de 10 horas semanais recuperadas. Convertidas em novos clientes a R$1.500/mês, essas horas valem muito mais do que o custo do plano de R$97,90. A conta do &ldquo;grátis&rdquo; não fecha quando o preço real é medido em tempo.
+        Um social media que atende 5 clientes e gasta 3 horas por post, entre buscar imagem, escrever copy, testar prompts em ferramentas diferentes, gasta 15 horas por semana só em produção. Com ferramentas gratuitas fragmentadas, esse número sobe porque cada ferramenta exige contexto separado. Com o Calango Studio, a média cai para menos de 20 minutos por post, o que representa mais de 10 horas semanais recuperadas. Convertidas em novos clientes a R$1.500/mês, essas horas valem muito mais do que o custo do plano de R$119,90. A conta do &ldquo;grátis&rdquo; não fecha quando o preço real é medido em tempo.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O incentivo que reduz o custo real</h2>
@@ -84,7 +84,7 @@ export default function MelhorIaGratuitaParaSocialMediaPage() {
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="ia-gratuita/melhor-ia-gratuita-para-social-media" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="ia-gratuita/melhor-ia-gratuita-para-social-media" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

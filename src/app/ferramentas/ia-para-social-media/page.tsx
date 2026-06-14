@@ -40,7 +40,7 @@ const schema = {
         "Plataforma de IA para social media managers. Posts, copies, criativos e gestão de clientes.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

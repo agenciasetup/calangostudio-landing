@@ -80,7 +80,7 @@ export default function ImagemGratuitaParaUsoComericalPage() {
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">A alternativa profissional: geração com IA</h2>
       <p className="text-txt-secondary leading-relaxed mb-8">
-        Para designers e social media managers que produzem conteúdo profissional, a geração com IA oferece vantagens que nenhum banco gratuito consegue. No Calango Studio, cada imagem é original. criada sob demanda para aquela necessidade específica. Não existe preocupação com licença, atribuição ou uso compartilhado. O conteúdo é gerado no estilo do cliente, com o contexto da marca já carregado. Em menos de 2 minutos, você tem uma imagem personalizada, pronta para uso comercial, sem restrições. A partir de R$97,90/mês, o custo por imagem gerada é uma fração do que se gasta em tempo procurando em bancos gratuitos. quando se calcula o valor da hora de trabalho investida em busca e adaptação.
+        Para designers e social media managers que produzem conteúdo profissional, a geração com IA oferece vantagens que nenhum banco gratuito consegue. No Calango Studio, cada imagem é original. criada sob demanda para aquela necessidade específica. Não existe preocupação com licença, atribuição ou uso compartilhado. O conteúdo é gerado no estilo do cliente, com o contexto da marca já carregado. Em menos de 2 minutos, você tem uma imagem personalizada, pronta para uso comercial, sem restrições. A partir de R$119,90/mês, o custo por imagem gerada é uma fração do que se gasta em tempo procurando em bancos gratuitos. quando se calcula o valor da hora de trabalho investida em busca e adaptação.
       </p>
 
       <FaqSection faqs={faqs} />

@@ -206,7 +206,7 @@ export default function CalangoVsMidjourneyPage() {
             <tr>
               <td className="px-4 py-3">Preço</td>
               <td className="px-4 py-3">A partir de $10/mês (USD)</td>
-              <td className="px-4 py-3">A partir de R$97,90/mês</td>
+              <td className="px-4 py-3">A partir de R$119,90/mês</td>
             </tr>
           </tbody>
         </table>
