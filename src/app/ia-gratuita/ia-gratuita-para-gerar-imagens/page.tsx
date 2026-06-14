@@ -77,7 +77,7 @@ export default function IaGratuitaParaGerarImagensPage() {
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="ia-gratuita/ia-gratuita-para-gerar-imagens" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="ia-gratuita/ia-gratuita-para-gerar-imagens" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

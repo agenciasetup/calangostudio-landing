@@ -40,7 +40,7 @@ const schema = {
         "Gere sessões de fotos profissionais com IA usando referências de imagem.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

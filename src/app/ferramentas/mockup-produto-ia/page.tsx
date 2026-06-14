@@ -40,7 +40,7 @@ const schema = {
         "Gere mockups profissionais de qualquer produto em cenários gerados por IA.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

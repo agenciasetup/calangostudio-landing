@@ -1014,7 +1014,7 @@ export default function Apresentacao() {
                 className="glass-card p-8 rounded-2xl text-left border-accent/10"
               >
                 <p className="text-lg md:text-xl text-txt-secondary leading-relaxed">
-                  Às vezes, por conta de <span className="text-gradient-animated font-black text-2xl">R$ 169,90/mês</span>
+                  Às vezes, por conta de <span className="text-gradient-animated font-black text-2xl">R$ 199,90/mês</span>
                 </p>
                 <p className="text-lg md:text-xl text-txt-secondary leading-relaxed mt-2">
                   você tá deixando de ganhar mais de <span className="text-white font-black text-3xl md:text-4xl">R$ 5.000</span> a mais todos os meses.
@@ -1028,7 +1028,7 @@ export default function Apresentacao() {
                 className="glass-card p-8 rounded-2xl text-left border-red-500/10"
               >
                 <p className="text-lg md:text-xl text-txt-secondary leading-relaxed">
-                  Às vezes, por conta de <span className="text-white font-bold">R$ 169,90</span>, você tá
+                  Às vezes, por conta de <span className="text-white font-bold">R$ 199,90</span>, você tá
                   perdendo <span className="text-red-400 font-bold">+3 horas do seu dia</span> procurando imagens
                   e mais <span className="text-red-400 font-bold">+3h manipulando elas</span>.
                 </p>
@@ -1192,7 +1192,7 @@ export default function Apresentacao() {
 
                 <div className="flex items-baseline gap-1 mb-6 justify-center">
                   <span className="text-base text-txt-muted">R$</span>
-                  <span className="font-poppins font-black text-6xl text-gradient-animated">169,90</span>
+                  <span className="font-poppins font-black text-6xl text-gradient-animated">199,90</span>
                   <span className="text-base text-txt-muted">/mês</span>
                 </div>
 

@@ -77,7 +77,7 @@ const schema = {
         "Plataforma de IA com agente personalizado para social media managers.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

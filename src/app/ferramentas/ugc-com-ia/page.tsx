@@ -39,7 +39,7 @@ const schema = {
         "Crie fotos de UGC realistas com IA. Pessoas usando produtos sem modelo e sem produção.",
       offers: {
         "@type": "Offer",
-        price: "97.90",
+        price: "119.90",
         priceCurrency: "BRL",
       },
     },

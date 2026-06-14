@@ -52,7 +52,7 @@ const schema = {
       name: "Qual é mais barato?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "O Canva tem plano gratuito. O Calango começa em R$97,90/mês, mas é focado em produção profissional com IA e gestão de clientes. funcionalidades que o Canva não oferece.",
+        text: "O Canva tem plano gratuito. O Calango começa em R$119,90/mês, mas é focado em produção profissional com IA e gestão de clientes. funcionalidades que o Canva não oferece.",
       },
     },
     {
@@ -80,7 +80,7 @@ const faqs = [
   {
     question: "Qual é mais barato?",
     answer:
-      "O Canva tem plano gratuito e Pro a partir de R$34,90/mês. O Calango começa em R$97,90/mês, mas é focado em produção profissional com IA e gestão de clientes. funcionalidades que o Canva não oferece. Para quem atende clientes, o retorno em produtividade justifica o investimento.",
+      "O Canva tem plano gratuito e Pro a partir de R$34,90/mês. O Calango começa em R$119,90/mês, mas é focado em produção profissional com IA e gestão de clientes. funcionalidades que o Canva não oferece. Para quem atende clientes, o retorno em produtividade justifica o investimento.",
   },
   {
     question: "Canva tem gestão de clientes como o Calango?",

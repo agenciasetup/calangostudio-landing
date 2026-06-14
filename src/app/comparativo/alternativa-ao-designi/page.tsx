@@ -28,7 +28,7 @@ const schema = {
       { "@type": "Question", name: "O que o Calango Studio tem que o Designi não tem?", acceptedAnswer: { "@type": "Answer", text: "Geração de imagem com IA, copy para redes sociais, sessão de fotos virtual, UGC realista, mockups por IA e gestão de clientes com briefing." } },
       { "@type": "Question", name: "O Designi é ruim?", acceptedAnswer: { "@type": "Answer", text: "Não. O Designi é muito bom no que faz. oferecer templates e recursos visuais. Mas para quem precisa de conteúdo original e personalizado, o modelo de banco tem limitações." } },
       { "@type": "Question", name: "Posso usar Designi e Calango juntos?", acceptedAnswer: { "@type": "Answer", text: "Sim. O Designi é útil para templates e recursos editáveis. O Calango Studio é ideal para conteúdo original gerado com IA." } },
-      { "@type": "Question", name: "Quanto custa o Calango Studio comparado ao Designi?", acceptedAnswer: { "@type": "Answer", text: "Os preços são comparáveis. A partir de R$97,90/mês, o Calango Studio oferece 12 ferramentas de IA integradas além de gestão de clientes." } },
+      { "@type": "Question", name: "Quanto custa o Calango Studio comparado ao Designi?", acceptedAnswer: { "@type": "Answer", text: "Os preços são comparáveis. A partir de R$119,90/mês, o Calango Studio oferece 12 ferramentas de IA integradas além de gestão de clientes." } },
     ],
   }],
 };
@@ -37,7 +37,7 @@ const faqs = [
   { question: "O que o Calango Studio tem que o Designi não tem?", answer: "Geração de imagem com IA sob demanda, copy para redes sociais com CopyMaker, sessão de fotos virtual com Estúdio de Foto, UGC realista com UGC Build, mockups de produto por IA, assets 3D em PNG transparente e gestão de clientes com briefing salvo. São 12 ferramentas integradas que cobrem o fluxo completo de produção de conteúdo. não apenas download de recursos." },
   { question: "O Designi é ruim?", answer: "Não. O Designi é muito bom no que faz. oferecer templates, fontes, mockups e recursos visuais de qualidade para o mercado brasileiro. Mas o modelo de banco de recursos tem limitações quando você precisa de conteúdo original e personalizado para cada cliente. É uma questão de modelo, não de qualidade do produto." },
   { question: "Posso usar Designi e Calango Studio juntos?", answer: "Sim, e faz sentido para muitos designers. O Designi é útil para templates editáveis, fontes e recursos genéricos. O Calango Studio é ideal para conteúdo original. imagens de campanha, fotos de produto, mockups personalizados, copies para redes sociais. Cada ferramenta cobre uma parte diferente do fluxo de trabalho." },
-  { question: "Quanto custa o Calango Studio comparado ao Designi?", answer: "Os preços são comparáveis. A partir de R$97,90/mês, o Calango Studio oferece 12 ferramentas de IA integradas, gestão de clientes com briefing e geração ilimitada de conteúdo personalizado. O valor por ferramenta é significativamente menor quando comparado a contratar cada solução separadamente." },
+  { question: "Quanto custa o Calango Studio comparado ao Designi?", answer: "Os preços são comparáveis. A partir de R$119,90/mês, o Calango Studio oferece 12 ferramentas de IA integradas, gestão de clientes com briefing e geração ilimitada de conteúdo personalizado. O valor por ferramenta é significativamente menor quando comparado a contratar cada solução separadamente." },
 ];
 
 const relatedPages = [

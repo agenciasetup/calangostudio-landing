@@ -234,7 +234,7 @@ function OfferPopup({ onClose }: { onClose: () => void }) {
 
           {seconds > 0 && (
             <p className="text-[10px] text-zinc-500 mt-3 uppercase tracking-wider font-bold">
-              De R$ 169,90 por R$ 152,91/mês
+              De R$ 199,90 por R$ 179,91/mês
             </p>
           )}
         </div>

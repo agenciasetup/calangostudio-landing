@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AffiliateLinkBridge from "@/components/AffiliateLinkBridge";
 
 export const metadata: Metadata = {
   title: "Calango Studio | Plataforma de IA para Designers e Social Media",
@@ -128,8 +129,8 @@ export default function RootLayout({
                   offers: {
                     "@type": "AggregateOffer",
                     priceCurrency: "BRL",
-                    lowPrice: "97.90",
-                    highPrice: "319.90",
+                    lowPrice: "119.90",
+                    highPrice: "399.90",
                     offerCount: "3",
                   },
                   featureList: [
@@ -211,6 +212,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <AffiliateLinkBridge />
         {children}
       </body>
     </html>

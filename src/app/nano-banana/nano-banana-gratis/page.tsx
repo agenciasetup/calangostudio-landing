@@ -29,13 +29,13 @@ const schema = {
       applicationCategory: "DesignApplication",
       operatingSystem: "Web",
       description: "Modelo de geração de imagens com IA integrado ao Calango Studio, otimizado para produção profissional de conteúdo visual.",
-      offers: { "@type": "Offer", price: "97.90", priceCurrency: "BRL", description: "Plano Base do Calango Studio" },
+      offers: { "@type": "Offer", price: "119.90", priceCurrency: "BRL", description: "Plano Base do Calango Studio" },
     },
     {
       "@type": "FAQPage",
       mainEntity: [
-        { "@type": "Question", name: "O Nano Banana tem plano gratuito?", acceptedAnswer: { "@type": "Answer", text: "Não. O Nano Banana está disponível nos planos do Calango Studio, a partir de R$97,90/mês. Para ampliar as gerações, existe o incentivo de U$300 do Google Cloud que a plataforma ensina a resgatar." } },
-        { "@type": "Question", name: "Qual é o plano mais barato para usar o Nano Banana?", acceptedAnswer: { "@type": "Answer", text: "O plano Base do Calango Studio (R$97,90/mês) já inclui acesso a todos os geradores de imagem, incluindo o Nano Banana." } },
+        { "@type": "Question", name: "O Nano Banana tem plano gratuito?", acceptedAnswer: { "@type": "Answer", text: "Não. O Nano Banana está disponível nos planos do Calango Studio, a partir de R$119,90/mês. Para ampliar as gerações, existe o incentivo de U$300 do Google Cloud que a plataforma ensina a resgatar." } },
+        { "@type": "Question", name: "Qual é o plano mais barato para usar o Nano Banana?", acceptedAnswer: { "@type": "Answer", text: "O plano Base do Calango Studio (R$119,90/mês) já inclui acesso a todos os geradores de imagem, incluindo o Nano Banana." } },
         { "@type": "Question", name: "Quantas imagens dá para gerar por mês com o Nano Banana?", acceptedAnswer: { "@type": "Answer", text: "No plano Base, 9.000 créditos mensais, o suficiente para mais de 100 imagens com qualidade. Com o incentivo do Google ativado, você adiciona quase 3.000 gerações extras." } },
         { "@type": "Question", name: "O Nano Banana gera imagens melhores que o Midjourney?", acceptedAnswer: { "@type": "Answer", text: "São modelos com calibrações diferentes. O Nano Banana é otimizado para uso profissional em marketing e social media, com estilos prontos e consistência de resultado." } },
       ],
@@ -44,8 +44,8 @@ const schema = {
 };
 
 const faqs = [
-  { question: "O Nano Banana tem plano gratuito?", answer: "Não. O Nano Banana está disponível nos planos do Calango Studio, a partir de R$97,90/mês. Para ampliar as gerações sem custo adicional, existe o incentivo de U$300 do Google Cloud. O Calango Studio tem uma aula exclusiva ensinando como resgatar esses créditos, que equivalem a quase 3.000 gerações extras na plataforma." },
-  { question: "Qual é o plano mais barato para usar o Nano Banana?", answer: "O plano Base do Calango Studio (R$97,90/mês) já inclui acesso a todos os geradores de imagem: Nano Banana, FLUX e OpenAI. A plataforma seleciona automaticamente o modelo mais adequado para cada geração. Você não precisa escolher; recebe o melhor resultado possível." },
+  { question: "O Nano Banana tem plano gratuito?", answer: "Não. O Nano Banana está disponível nos planos do Calango Studio, a partir de R$119,90/mês. Para ampliar as gerações sem custo adicional, existe o incentivo de U$300 do Google Cloud. O Calango Studio tem uma aula exclusiva ensinando como resgatar esses créditos, que equivalem a quase 3.000 gerações extras na plataforma." },
+  { question: "Qual é o plano mais barato para usar o Nano Banana?", answer: "O plano Base do Calango Studio (R$119,90/mês) já inclui acesso a todos os geradores de imagem: Nano Banana, FLUX e OpenAI. A plataforma seleciona automaticamente o modelo mais adequado para cada geração. Você não precisa escolher; recebe o melhor resultado possível." },
   { question: "Quantas imagens dá para gerar por mês com o Nano Banana?", answer: "No plano Base, são 9.000 créditos mensais, o suficiente para mais de 100 imagens com qualidade profissional. No Pro, 12.000 créditos. No Elite, 17.500. Com o incentivo do Google Cloud ativado, você adiciona aproximadamente 125.000 créditos extras, quase 3.000 gerações adicionais." },
   { question: "O Nano Banana gera imagens melhores que o Midjourney?", answer: "São modelos com calibrações diferentes. O Nano Banana é otimizado para uso profissional em marketing e social media, com estilos prontos (Animal Art, Hero Style, Car Design, Business Style, Craft Style, Classic Style) e alta consistência de resultado. Para uso dentro de uma plataforma de workflow completo com gestão de clientes, a experiência do Nano Banana no Calango Studio supera o Midjourney em praticidade e velocidade." },
 ];
@@ -62,7 +62,7 @@ export default function NanoBananaGratisPage() {
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">Nano Banana Grátis</h1>
 
       <p className="text-txt-secondary leading-relaxed mb-8">
-        O Nano Banana é o modelo principal de geração de imagens do Calango Studio. Quem está pesquisando por &ldquo;Nano Banana grátis&rdquo; provavelmente já conhece a qualidade do modelo e quer saber se dá para usá-lo sem pagar. A resposta direta: o Nano Banana está disponível dentro dos planos do Calango Studio, que começam em R$97,90/mês. Não existe plano gratuito. Mas existe um caminho inteligente para ampliar significativamente suas gerações, e ele começa com um incentivo do Google.
+        O Nano Banana é o modelo principal de geração de imagens do Calango Studio. Quem está pesquisando por &ldquo;Nano Banana grátis&rdquo; provavelmente já conhece a qualidade do modelo e quer saber se dá para usá-lo sem pagar. A resposta direta: o Nano Banana está disponível dentro dos planos do Calango Studio, que começam em R$119,90/mês. Não existe plano gratuito. Mas existe um caminho inteligente para ampliar significativamente suas gerações, e ele começa com um incentivo do Google.
       </p>
 
       <h2 className="text-xl font-poppins font-bold text-white mb-4">O que é o Nano Banana</h2>
@@ -83,7 +83,7 @@ export default function NanoBananaGratisPage() {
       <FaqSection faqs={faqs} />
       <FuncaoShowcase slug="imagem-criativa" />
       <ResultadosGaleria />
-      <CtaBanner message="Ver planos a partir de R$97,90" slug="nano-banana/nano-banana-gratis" />
+      <CtaBanner message="Ver planos a partir de R$119,90" slug="nano-banana/nano-banana-gratis" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );
