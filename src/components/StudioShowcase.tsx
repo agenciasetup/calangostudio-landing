@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import {
@@ -42,10 +42,9 @@ const tools = [
 
 /* ─── Camadas da arte (frente para trás) + posição na prancheta ─── */
 const layers = [
-  { id: "headline", name: "Headline", icon: Type, color: "#f59e0b", box: { top: "24%", left: "8%", width: "52%", height: "26%" } },
-  { id: "selo", name: "Selo", icon: Square, color: "#22d3ee", box: { top: "7%", left: "8%", width: "30%", height: "11%" } },
-  { id: "foto", name: "Foto", icon: ImageIcon, color: "#a78bfa", box: { top: "30%", left: "44%", width: "50%", height: "65%" } },
-  { id: "fundo", name: "Fundo", icon: Square, color: "#38bdf8", box: { top: "2%", left: "2%", width: "96%", height: "96%" } },
+  { id: "headline", name: "Headline", icon: Type, color: "#f59e0b", box: { top: "50%", left: "6%", width: "84%", height: "36%" } },
+  { id: "foto", name: "Foto", icon: ImageIcon, color: "#a78bfa", box: { top: "1.5%", left: "1.5%", width: "97%", height: "97%" } },
+  { id: "fundo", name: "Fundo", icon: Square, color: "#38bdf8", box: { top: "1.5%", left: "1.5%", width: "97%", height: "97%" } },
 ];
 
 /* ─── Trilho de ferramentas (esquerda) ─── */
@@ -75,24 +74,31 @@ function ToolRail() {
 }
 
 /* ─── Caixa de seleção que pula entre as camadas ─── */
-function SelectionBox({ box }: { box: { top: string; left: string; width: string; height: string } }) {
+function SelectionBox({
+  box,
+  dragging = false,
+}: {
+  box: { top: string; left: string; width: string; height: string };
+  dragging?: boolean;
+}) {
   return (
     <div
       className="absolute pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-30"
       style={box}
     >
       <div className="absolute inset-0 border border-accent rounded-[3px]" />
-      {[
-        "-top-1 -left-1",
-        "-top-1 -right-1",
-        "-bottom-1 -left-1",
-        "-bottom-1 -right-1",
-      ].map((pos) => (
+      {["-top-1 -left-1", "-top-1 -right-1", "-bottom-1 -left-1"].map((pos) => (
         <div
           key={pos}
           className={`absolute ${pos} w-2 h-2 rounded-[2px] bg-white border border-accent shadow`}
         />
       ))}
+      {/* Aresta inferior direita: anima como se estivesse sendo arrastada */}
+      <motion.div
+        className="absolute -bottom-1 -right-1 w-2.5 h-2.5 rounded-[2px] bg-accent border border-white shadow"
+        animate={dragging ? { x: [0, 5, 0], y: [0, 6, 0] } : { x: 0, y: 0 }}
+        transition={dragging ? { duration: 9, repeat: Infinity, ease: "easeInOut" } : { duration: 0.3 }}
+      />
     </div>
   );
 }
@@ -100,68 +106,76 @@ function SelectionBox({ box }: { box: { top: string; left: string; width: string
 /* ─── Prancheta (canvas) com a arte sendo montada ─── */
 function Canvas({ active }: { active: number }) {
   const activeLayer = layers[active];
+  const isFoto = activeLayer.id === "foto";
   return (
     <div className="flex-1 flex items-center justify-center p-4 md:p-6 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.04)_1px,transparent_0)] [background-size:18px_18px]">
       <div
-        className="relative rounded-lg overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
-        style={{ width: "min(64%, 240px)", aspectRatio: "4 / 5" }}
+        className="relative rounded-lg overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.55)] bg-black"
+        style={{ width: "min(66%, 250px)", aspectRatio: "4 / 5" }}
       >
-        {/* Fundo (camada base) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0b2a4a] via-[#0e3a63] to-[#0a2540]" />
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_70%_80%,rgba(34,211,238,0.35),transparent_60%)]" />
-
-        {/* Foto */}
-        <div className="absolute" style={layers[2].box}>
-          <div className="relative w-full h-full rounded-md overflow-hidden">
-            <Image
-              src="/images/resultados/business_criativo.jpg"
-              alt="Foto na prancheta do Studio"
-              fill
-              sizes="240px"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Selo */}
-        <div
-          className="absolute flex items-center justify-center rounded-full bg-accent text-black text-[8px] md:text-[9px] font-black uppercase tracking-wider"
-          style={layers[1].box}
+        {/* Foto cobrindo 100% do fundo, crescendo devagar */}
+        <motion.div
+          className="absolute inset-0"
+          style={{ transformOrigin: "center" }}
+          animate={{ scale: [1, 1.09, 1] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         >
-          Novo
+          <Image
+            src="/images/resultados/business_criativo.jpg"
+            alt="Foto cobrindo a prancheta do Studio"
+            fill
+            sizes="250px"
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Fade entre a headline e o fundo */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(6,8,14,0.95) 3%, rgba(6,8,14,0.62) 28%, rgba(6,8,14,0.04) 52%, rgba(6,8,14,0.28) 100%)",
+          }}
+        />
+
+        {/* Legenda no topo */}
+        <div className="absolute top-[6%] left-0 right-0 text-center">
+          <span className="text-[7px] md:text-[8px] tracking-[0.34em] text-white/70 font-semibold uppercase">
+            Advocacia Andrade
+          </span>
         </div>
 
-        {/* Headline */}
-        <div className="absolute flex flex-col justify-center" style={layers[0].box}>
-          <p className="text-white font-poppins font-black leading-[1.05] text-[13px] md:text-[15px]">
-            ADVOCACIA
-          </p>
-          <p className="text-accent font-poppins font-black leading-[1.05] text-[13px] md:text-[15px]">
-            QUE RESOLVE
-          </p>
+        {/* Headline em Cinzel */}
+        <div className="absolute left-[7%] right-[7%] bottom-[15%]">
+          <span className="block text-[7px] md:text-[8px] tracking-[0.28em] text-white/65 uppercase mb-1.5">
+            Você merece
+          </span>
+          <h3 className="leading-[1] text-white" style={{ fontFamily: "'Cinzel', serif" }}>
+            <span className="block text-[19px] md:text-[23px] font-bold tracking-[0.04em]">
+              ADVOCACIA
+            </span>
+            <span className="block text-[19px] md:text-[23px] font-bold tracking-[0.04em] text-accent">
+              QUE RESOLVE
+            </span>
+          </h3>
         </div>
 
-        {/* Ação de Recorte IA aparece quando a Foto está ativa */}
-        <AnimatePresence>
-          {activeLayer.id === "foto" && (
-            <motion.div
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.3 }}
-              className="absolute z-40 flex items-center gap-1 px-2 py-1 rounded-md bg-black/85 border border-accent/40 backdrop-blur-sm"
-              style={{ top: "24%", left: "44%" }}
-            >
-              <Scissors size={9} className="text-accent" />
-              <span className="text-[8px] md:text-[9px] text-white font-semibold whitespace-nowrap">
-                Separar fundo
-              </span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Arraste pro lado */}
+        <div className="absolute bottom-[5%] left-0 right-0 flex items-center justify-center gap-1.5">
+          <span className="text-[6.5px] md:text-[7.5px] tracking-[0.3em] text-white/55 uppercase">
+            Arraste pro lado
+          </span>
+          <motion.span
+            animate={{ x: [0, 3, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="text-white/55 text-[9px] leading-none"
+          >
+            ›
+          </motion.span>
+        </div>
 
-        {/* Caixa de seleção animada */}
-        <SelectionBox box={activeLayer.box} />
+        {/* Caixa de seleção animada (aresta sendo arrastada quando a Foto está ativa) */}
+        <SelectionBox box={activeLayer.box} dragging={isFoto} />
       </div>
     </div>
   );
@@ -417,7 +431,7 @@ export default function StudioShowcase() {
             </div>
             <div className="flex items-center gap-3">
               <span className="text-[10px] md:text-[11px] text-zinc-500">
-                <span className="text-accent font-bold">4 camadas</span> · Retrato 4:5
+                <span className="text-accent font-bold">3 camadas</span> · Retrato 4:5
               </span>
               <span className="text-[10px] md:text-xs text-accent font-bold uppercase tracking-wider">
                 Studio
