@@ -170,7 +170,7 @@ export default function AIContext() {
             ))}
           </div>
           <p className="text-sm text-txt-secondary mt-4 md:mt-5">
-            Textos, imagens, composições no Design Studio e automação com o Flow — tudo em um único sistema.
+            Textos, imagens, fotos e artes montadas no Studio, tudo no contexto do seu cliente e em um só sistema.
           </p>
         </motion.div>
       </div>

@@ -7,12 +7,13 @@ import FuncaoShowcase from "@/app/components/seo/FuncaoShowcase";
 import RelatedPages from "@/app/components/seo/RelatedPages";
 
 export const metadata: Metadata = {
-  title: "Como Usar os Assets 3D | Tutorial Calango Studio",
+  title: "Como Recortar o Fundo e Gerar PNG Transparente | Tutorial Calango Studio",
   description:
-    "Crie elementos e objetos em PNG com fundo transparente usando IA. Perfeito para artes, apresentações e composições visuais.",
+    "Hoje a forma de tirar o fundo e gerar um PNG transparente é o Recorte com IA, dentro do Studio. Ele roda no seu navegador, sem custo por uso, e a imagem não sai do seu aparelho.",
   openGraph: {
-    title: "Como Usar os Assets 3D | Tutorial Calango Studio",
-    description: "Elementos 3D com fundo transparente, prontos para usar em artes.",
+    title: "Como Recortar o Fundo e Gerar PNG Transparente | Tutorial Calango Studio",
+    description:
+      "Separe o fundo de um elemento com o Recorte com IA do Studio e exporte em PNG transparente.",
     url: "https://www.calangostudio.com.br/tutoriais/assets-3d",
     siteName: "Calango Studio",
     locale: "pt_BR",
@@ -24,120 +25,147 @@ export const metadata: Metadata = {
 const schema = {
   "@context": "https://schema.org",
   "@type": "HowTo",
-  name: "Como Usar os Assets 3D no Calango Studio",
-  description: "Tutorial para criar elementos 3D com fundo transparente.",
+  name: "Como Recortar o Fundo e Gerar PNG Transparente no Calango Studio",
+  description:
+    "Tutorial para separar o fundo de um elemento com o Recorte com IA do Studio e exportar em PNG.",
   step: [
-    { "@type": "HowToStep", name: "Descrever o objeto", text: "Digite nome e descrição visual do asset." },
-    { "@type": "HowToStep", name: "Escolher material e luz", text: "Selecione material e iluminação." },
-    { "@type": "HowToStep", name: "Gerar assets", text: "A IA gera o asset principal + 3 ângulos." },
-    { "@type": "HowToStep", name: "Baixar em PNG", text: "Baixe os PNGs com fundo transparente." },
+    { "@type": "HowToStep", name: "Abrir a imagem no Studio", text: "Abra a imagem no Studio e selecione ela." },
+    { "@type": "HowToStep", name: "Separar o fundo", text: "Instale o recorte e clique em Separar fundo." },
+    { "@type": "HowToStep", name: "Refinar a máscara", text: "Refine as bordas e o cabelo no ajuste fino." },
+    { "@type": "HowToStep", name: "Exportar em PNG", text: "Exporte o elemento em PNG transparente." },
   ],
 };
 
 const faqs = [
-  { question: "Os assets já vêm com fundo transparente?", answer: "Sim. Todos os assets são gerados em PNG com remoção automática de fundo." },
-  { question: "Quais materiais posso escolher?", answer: "Plástico Fosco, Plástico Glossy, Vidro/Cristal, Metal Cromado, Ouro, Neon/Cyber, Argila e Orgânico." },
-  { question: "Posso usar referências visuais?", answer: "Sim. Você pode enviar até 4 imagens de referência para guiar a IA." },
-  { question: "Quantos ângulos são gerados?", answer: "1 asset principal (frontal) + 3 variações de ângulo (isométrico, lateral e flutuante). Você pode gerar mais 4 por vez." },
+  {
+    question: "Como faço hoje para tirar o fundo e gerar um PNG transparente?",
+    answer:
+      "Essa é a forma atual: use o Recorte com IA, que fica dentro do Studio. Você seleciona a imagem, separa o fundo e exporta em PNG. É assim que se cria um elemento com fundo transparente no Calango.",
+  },
+  {
+    question: "Onde encontro o Recorte com IA?",
+    answer:
+      "Dentro do Studio. Ao selecionar uma imagem, aparece uma barrinha flutuante em cima dela. É nessa barrinha que ficam o Separar fundo e o Refinar.",
+  },
+  {
+    question: "Preciso instalar alguma coisa?",
+    answer:
+      "Só na primeira vez. O recorte é um download único e roda no próprio navegador. Depois disso, é só usar quando quiser.",
+  },
+  {
+    question: "Tem custo por uso e a imagem vai para algum servidor?",
+    answer:
+      "Não tem custo por uso. O recorte roda no seu aparelho, então a imagem não sai dele.",
+  },
+  {
+    question: "O Separar fundo estraga a imagem original?",
+    answer:
+      "Não. Ele recorta o objeto e cria uma nova camada com ele já sem fundo, sem mexer na imagem original.",
+  },
+  {
+    question: "O que dá para ajustar no Refinar?",
+    answer:
+      "O Refinar abre um ajuste fino da máscara: pincéis para incluir ou excluir partes, ajuste de força da borda, refino de cabelo e a opção de remover o halo das bordas.",
+  },
 ];
 
 const relatedPages = [
-  { href: "/tutoriais/mockup-produto", title: "Mockup Produto", description: "Coloque seu produto em cenários realistas." },
-  { href: "/tutoriais/design-studio", title: "Design Studio", description: "Monte composições usando assets no editor visual." },
-  { href: "/tutoriais/imagem-criativa", title: "Imagem Criativa", description: "Imagens cinematográficas com estilos prontos." },
-];
-
-const materiais = [
-  { name: "Plástico Fosco", icon: "🧱" },
-  { name: "Plástico Glossy", icon: "✨" },
-  { name: "Vidro/Cristal", icon: "💎" },
-  { name: "Metal Cromado", icon: "🪞" },
-  { name: "Ouro", icon: "🥇" },
-  { name: "Neon/Cyber", icon: "💜" },
-  { name: "Argila", icon: "🏺" },
-  { name: "Orgânico", icon: "🌿" },
+  { href: "/tutoriais/design-studio", title: "Como Usar o Studio", description: "O editor visual onde fica o Recorte com IA." },
+  { href: "/tutoriais/mockup-produto", title: "Foto de Produto", description: "Sessão comercial só do produto." },
+  { href: "/tutoriais/imagem-criativa", title: "Como Usar a Imagem Criativa", description: "Crie imagens cinematográficas com estilos prontos." },
 ];
 
 export default function Assets3DPage() {
   return (
     <SeoLayout schema={schema} slug="tutoriais/assets-3d">
       <h1 className="text-3xl md:text-4xl font-poppins font-bold text-white mb-6">
-        Como Usar os Assets 3D
+        Como Recortar o Fundo e Gerar PNG Transparente
       </h1>
       <p className="text-txt-secondary leading-relaxed mb-10">
-        Gere elementos e objetos em PNG com fundo transparente. Qualquer objeto, qualquer material, pronto para usar em artes.
+        Hoje, a forma de tirar o fundo de um elemento e gerar um PNG transparente é o Recorte com
+        IA, que fica dentro do Studio. Ele roda no próprio navegador, sem custo por uso, e a imagem
+        não sai do seu aparelho. Veja como fazer em poucos passos.
       </p>
 
       {/* STEP 1 */}
       <section className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-lg">1</span>
-          <h2 className="text-xl font-poppins font-bold text-white">Descreva o Objeto</h2>
+          <h2 className="text-xl font-poppins font-bold text-white">Abra a imagem no Studio e selecione ela</h2>
         </div>
         <p className="text-txt-secondary leading-relaxed mb-4">
-          Digite o nome do asset e uma descrição visual. Opcionalmente, selecione um contexto (produto/cliente)
-          para preencher automaticamente ou envie até 4 fotos de referência.
+          Dentro do <strong className="text-white">Studio</strong>, abra a imagem que você quer
+          recortar e clique nela para selecionar. Assim que ela fica selecionada, aparece uma
+          barrinha flutuante em cima dela, com as opções de recorte.
         </p>
         <div className="rounded-xl overflow-hidden border border-white/[0.06] mb-4">
-          <Image src="/images/funcoes/assets-3d-descricao.jpg" alt="Formulário de descrição do asset 3D" width={800} height={450} className="w-full h-auto" />
+          <Image src="/images/funcoes/assets-3d.jpg" alt="Imagem selecionada no Studio com a barrinha flutuante de recorte" width={800} height={450} className="w-full h-auto" />
         </div>
-        <p className="text-xs text-txt-muted">Imagem: formulário de descrição do asset. (16:9)</p>
+        <p className="text-xs text-txt-muted">Imagem: barrinha flutuante de recorte sobre a imagem selecionada. (16:9)</p>
       </section>
 
       {/* STEP 2 */}
       <section className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-lg">2</span>
-          <h2 className="text-xl font-poppins font-bold text-white">Escolha Material e Iluminação</h2>
+          <h2 className="text-xl font-poppins font-bold text-white">Instale e clique em Separar fundo</h2>
         </div>
-        <p className="text-txt-secondary leading-relaxed mb-4">Selecione o material do seu asset:</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-          {materiais.map((m) => (
-            <div key={m.name} className="bg-bg-tertiary border border-white/[0.06] rounded-xl p-3 text-center">
-              <span className="text-xl block mb-1">{m.icon}</span>
-              <p className="text-xs font-semibold text-white">{m.name}</p>
-            </div>
-          ))}
+        <p className="text-txt-secondary leading-relaxed mb-4">
+          Na primeira vez, você instala o recorte. É um download único e ele roda no próprio
+          navegador, sem custo por uso, com a imagem ficando no seu aparelho. Depois, clique em{" "}
+          <strong className="text-white">Separar fundo</strong>.
+        </p>
+        <div className="bg-bg-tertiary border border-accent/20 rounded-xl p-4 mb-4">
+          <p className="text-sm text-accent font-semibold mb-1">O que acontece</p>
+          <p className="text-sm text-txt-secondary">
+            A IA recorta o objeto e cria uma nova camada com ele já sem fundo, sem estragar a
+            imagem original.
+          </p>
         </div>
-        <p className="text-txt-secondary leading-relaxed mb-4">E a iluminação:</p>
-        <ul className="space-y-1 mb-4">
-          {["Estúdio Soft — luz suave e uniforme", "Recorte (Rim) — contorno luminoso", "Cinemático — dramático com sombras", "Luz Natural — realista e orgânico"].map((l) => (
-            <li key={l} className="flex items-start gap-2 text-sm text-txt-secondary">
-              <span className="text-accent">•</span><span>{l}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="rounded-xl overflow-hidden border border-white/[0.06] mb-4">
-          <Image src="/images/funcoes/assets-3d-material.jpg" alt="Seleção de material e iluminação" width={800} height={450} className="w-full h-auto" />
-        </div>
-        <p className="text-xs text-txt-muted">Imagem: seleção de material e iluminação. (16:9)</p>
       </section>
 
       {/* STEP 3 */}
       <section className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-lg">3</span>
-          <h2 className="text-xl font-poppins font-bold text-white">Gere os Assets</h2>
+          <h2 className="text-xl font-poppins font-bold text-white">Refine as bordas e o cabelo</h2>
         </div>
         <p className="text-txt-secondary leading-relaxed mb-4">
-          Clique em <strong className="text-white">Gerar</strong>. A IA cria 1 asset principal (frontal) + 3 ângulos
-          (isométrico, lateral, flutuante), todos com fundo transparente. Gere +4 por vez se quiser mais variações.
+          Clique em <strong className="text-white">Refinar</strong> para abrir um ajuste fino da
+          máscara. Ali você acerta os detalhes:
         </p>
-        <div className="rounded-xl overflow-hidden border border-white/[0.06] mb-4">
-          <Image src="/images/funcoes/assets-3d-resultado.jpg" alt="Assets 3D gerados com fundo transparente" width={800} height={500} className="w-full h-auto" />
+        <div className="bg-bg-tertiary border border-white/[0.06] rounded-xl p-4 mb-4">
+          <ul className="space-y-2">
+            {[
+              "Pincéis para incluir ou excluir partes",
+              "Ajuste de força da borda",
+              "Refino de cabelo",
+              "Opção de remover o halo das bordas",
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2 text-sm text-txt-secondary">
+                <span className="text-accent mt-0.5">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <p className="text-xs text-txt-muted">Imagem: galeria de assets gerados. (16:9)</p>
+        <div className="rounded-xl overflow-hidden border border-white/[0.06] mb-4">
+          <Image src="/images/funcoes/dash-assets-3d.jpg" alt="Ajuste fino da máscara no Recorte com IA do Studio" width={800} height={500} className="w-full h-auto" />
+        </div>
+        <p className="text-xs text-txt-muted">Imagem: ajuste fino da máscara com refino de bordas e cabelo. (16:9)</p>
       </section>
 
       {/* STEP 4 */}
       <section className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           <span className="flex items-center justify-center w-10 h-10 rounded-full bg-accent/10 text-accent font-bold text-lg">4</span>
-          <h2 className="text-xl font-poppins font-bold text-white">Baixe em PNG</h2>
+          <h2 className="text-xl font-poppins font-bold text-white">Exporte em PNG transparente</h2>
         </div>
         <p className="text-txt-secondary leading-relaxed mb-4">
-          Clique em <strong className="text-white">Download</strong> para baixar cada asset como PNG com fundo transparente.
-          Ou salve direto no Google Drive.
+          Para salvar o elemento transparente, use o <strong className="text-white">Exportar</strong>{" "}
+          do Studio no formato <strong className="text-white">PNG</strong>, que mantém a
+          transparência. Pronto, você tem o seu elemento sem fundo para reaproveitar em qualquer
+          arte.
         </p>
       </section>
 
@@ -146,10 +174,19 @@ export default function Assets3DPage() {
         <div className="bg-bg-tertiary border border-accent/20 rounded-xl p-6">
           <h2 className="text-xl font-poppins font-bold text-white mb-3">Resultado</h2>
           <p className="text-txt-secondary leading-relaxed mb-4">
-            Elementos 3D em PNG transparente, prontos para usar em artes, apresentações e composições.
+            Um elemento recortado, sem fundo, em PNG transparente, pronto para entrar em posts,
+            carrosséis e qualquer criativo. Tudo feito dentro do Studio, no seu navegador, sem
+            custo por uso e sem a imagem sair do seu aparelho.
           </p>
           <div className="flex flex-wrap gap-2">
-            {["Fundo transparente", "8 materiais", "4 ângulos por geração", "PNG pronto para usar", "Salvar no Drive"].map((item) => (
+            {[
+              "Recorte com IA no Studio",
+              "Roda no navegador",
+              "Sem custo por uso",
+              "Imagem fica no seu aparelho",
+              "Refino de bordas e cabelo",
+              "Exporta em PNG transparente",
+            ].map((item) => (
               <span key={item} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 text-accent text-xs font-semibold rounded-full">✓ {item}</span>
             ))}
           </div>
@@ -157,8 +194,8 @@ export default function Assets3DPage() {
       </section>
 
       <FaqSection faqs={faqs} />
-      <FuncaoShowcase slug="assets-3d" />
-      <CtaBanner slug="tutoriais/assets-3d" message="Pronto para criar assets 3D incríveis?" />
+      <FuncaoShowcase slug="recorte-ia" />
+      <CtaBanner slug="tutoriais/assets-3d" message="Pronto para recortar seus elementos e gerar PNGs transparentes?" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
   );

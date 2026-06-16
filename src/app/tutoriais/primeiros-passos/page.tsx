@@ -68,7 +68,7 @@ const faqs = [
   {
     question: "Preciso preencher tudo para usar a plataforma?",
     answer:
-      "Não. Mas quanto mais informações você preencher, melhores serão os resultados gerados pela IA — especialmente no CopyMaker e nos geradores de imagem.",
+      "Não. Mas quanto mais informações você preencher, melhores serão os resultados gerados pela IA, especialmente no CopyMaker e nos geradores de imagem.",
   },
   {
     question: "Quantas fotos de referência devo adicionar?",

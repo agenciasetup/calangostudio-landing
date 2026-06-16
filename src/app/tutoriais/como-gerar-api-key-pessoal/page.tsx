@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title:
     "Como Gerar sua API Key Pessoal do Google | Calango Studio",
   description:
-    "Passo a passo para criar sua API Key pessoal no Google Cloud e ganhar US$ 300 de crédito gratuito — equivalente a ~150.000 Calango Coins.",
+    "Passo a passo para criar sua API Key pessoal no Google Cloud e ganhar US$ 300 de crédito gratuito, equivalente a ~150.000 Calango Coins.",
   openGraph: {
     title: "Como Gerar sua API Key Pessoal do Google | Calango Studio",
     description:
@@ -116,7 +116,7 @@ export default function ApiKeyTutorialPage() {
 
       <p className="text-txt-secondary leading-relaxed mb-4">
         Com sua API Key pessoal, você usa os créditos gratuitos do Google
-        diretamente no Calango Studio — economizando seus Calango Coins.
+        diretamente no Calango Studio, economizando seus Calango Coins.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
@@ -159,7 +159,7 @@ export default function ApiKeyTutorialPage() {
         </a>
         <p className="text-txt-secondary leading-relaxed">
           O crédito é válido por 90 dias e pode ser usado com as APIs de IA
-          generativa (Gemini) — exatamente o que o Calango Studio utiliza.
+          generativa (Gemini), exatamente o que o Calango Studio utiliza.
         </p>
       </section>
 
@@ -271,7 +271,7 @@ export default function ApiKeyTutorialPage() {
           />
         </div>
         <p className="text-xs text-txt-muted">
-          Imagem: Google AI Studio — criação de API Key. (16:9)
+          Imagem: Google AI Studio, criação de API Key. (16:9)
         </p>
       </section>
 

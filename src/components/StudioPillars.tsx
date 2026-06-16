@@ -36,10 +36,10 @@ const pillars = [
   },
   {
     title: "Produção",
-    description: "Crie posts, copies, imagens e sessões de foto com base no cliente — ou automatize tudo com o Flow.",
+    description: "Crie posts, copies, imagens e sessões de foto já com base no perfil do cliente, e finalize a arte no Studio.",
     icon: Sparkles,
     color: "from-rose-400 to-pink-500",
-    actions: ["Posts e copies", "Imagens com IA", "Fluxos automatizados"],
+    actions: ["Posts e copies", "Imagens e fotos com IA", "Edição no Studio"],
   },
   {
     title: "Análise",
