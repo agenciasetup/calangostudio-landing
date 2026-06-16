@@ -165,6 +165,17 @@ export const funcoes: Funcao[] = [
   },
   {
     slug: "assets-3d",
+    name: "Assets 3D",
+    description: "Crie elementos e objetos em PNG com fundo transparente",
+    imageSrc: "/images/funcoes/assets-3d.jpg",
+    bullets: [
+      "Fundo transparente, pronto para usar em artes",
+      "Qualquer objeto, elemento ou ícone",
+      "Qualidade 3D sem software especializado",
+    ],
+  },
+  {
+    slug: "recorte-ia",
     name: "Recorte com IA",
     description:
       "Separe o fundo e gere PNG transparente direto dentro do Studio",

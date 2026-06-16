@@ -194,7 +194,7 @@ export default function Assets3DPage() {
       </section>
 
       <FaqSection faqs={faqs} />
-      <FuncaoShowcase slug="assets-3d" />
+      <FuncaoShowcase slug="recorte-ia" />
       <CtaBanner slug="tutoriais/assets-3d" message="Pronto para recortar seus elementos e gerar PNGs transparentes?" />
       <RelatedPages items={relatedPages} />
     </SeoLayout>
