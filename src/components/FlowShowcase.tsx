@@ -230,11 +230,11 @@ function ImageNode() {
         {/* Controls */}
         <div className="flex items-center gap-1.5">
           <div className="flex-1 bg-white/[0.04] border border-white/[0.06] rounded-lg px-2 py-1.5 flex items-center justify-between">
-            <span className="text-[9px] text-zinc-400 font-medium">Nero Baiana PRO</span>
+            <span className="text-[9px] text-zinc-400 font-medium">Nano Banana PRO</span>
             <ChevronDown size={9} className="text-zinc-600" />
           </div>
           <div className="bg-white/[0.04] border border-white/[0.06] rounded-md px-1.5 py-1.5">
-            <span className="text-[9px] text-zinc-400 font-medium">1:1</span>
+            <span className="text-[9px] text-zinc-400 font-medium">4:5</span>
           </div>
           <div className="bg-white/[0.04] border border-white/[0.06] rounded-md px-1.5 py-1.5">
             <span className="text-[9px] text-zinc-400 font-medium">2K</span>

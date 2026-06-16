@@ -19,7 +19,7 @@ const calango = [
   "Prospecte, feche e gerencie clientes",
   "Organize briefings e contratos",
   "Gere conteúdos e imagens com IA",
-  "Automatize fluxos com o Flow",
+  "Monte e edite as artes no Studio",
 ];
 
 export default function ReplaceTools() {

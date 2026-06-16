@@ -6,11 +6,11 @@ import ResultadosGaleria from "@/app/components/seo/ResultadosGaleria";
 import CtaBanner from "@/app/components/seo/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Tutoriais — Como Usar o Calango Studio | Passo a Passo",
+  title: "Tutoriais: Como Usar o Calango Studio | Passo a Passo",
   description:
     "Aprenda a usar todas as funções do Calango Studio com tutoriais passo a passo. Imagem Criativa, Estúdio de Foto, CopyMaker, Mockup, UGC e muito mais.",
   openGraph: {
-    title: "Tutoriais — Como Usar o Calango Studio | Passo a Passo",
+    title: "Tutoriais: Como Usar o Calango Studio | Passo a Passo",
     description:
       "Aprenda a usar todas as funções do Calango Studio com tutoriais passo a passo.",
     url: "https://www.calangostudio.com.br/tutoriais",
@@ -57,94 +57,102 @@ const geradoresDeImagem = [
     href: "/tutoriais/imagem-criativa",
     title: "Imagem Criativa",
     description:
-      "Crie imagens cinematográficas com +10 estilos prontos em poucos segundos.",
+      "Crie imagens com 7 estilos guiados, sem precisar escrever prompt.",
     icon: "🎨",
+  },
+  {
+    href: "/tutoriais/modo-manual",
+    title: "Modo Avançado",
+    description:
+      "Crie e edite com prompt livre, várias referências e marcação na imagem.",
+    icon: "🎛️",
   },
   {
     href: "/tutoriais/estudio-de-foto",
     title: "Estúdio de Foto",
     description:
-      "Gere fotos ultra-realistas com o seu rosto em qualquer cenário.",
+      "Fotos profissionais com o seu rosto preservado em qualquer cenário.",
     icon: "📸",
-  },
-  {
-    href: "/tutoriais/mockup-produto",
-    title: "Mockup Produto",
-    description:
-      "Crie mockups profissionais do seu produto em cenários realistas.",
-    icon: "📦",
-  },
-  {
-    href: "/tutoriais/assets-3d",
-    title: "Assets 3D",
-    description: "Gere elementos e objetos em PNG com fundo transparente.",
-    icon: "💎",
   },
   {
     href: "/tutoriais/ugc-build",
     title: "UGC Build",
     description:
-      "Crie fotos ultra-realistas de pessoas usando seus produtos.",
+      "Fotos realistas de pessoas usando os seus produtos.",
     icon: "🤳",
+  },
+  {
+    href: "/tutoriais/mockup-produto",
+    title: "Foto de Produto",
+    description:
+      "Sessão de fotos só do produto, com o rótulo fiel e as cores da marca.",
+    icon: "📦",
   },
   {
     href: "/tutoriais/restaurador-pro",
     title: "Restaurador Pro",
     description:
-      "Restaure fotos antigas ou melhore a qualidade de qualquer imagem.",
+      "Recupere fotos antigas ou melhore a qualidade de qualquer imagem.",
     icon: "🔧",
-  },
-  {
-    href: "/tutoriais/modo-manual",
-    title: "Modo Manual",
-    description:
-      "Edite com controle total usando múltiplas referências visuais.",
-    icon: "🎛️",
   },
 ];
 
 const outrasFerramentas = [
   {
-    href: "/tutoriais/flow",
-    title: "Flow",
+    href: "/tutoriais/prompt-maker",
+    title: "Prompt Maker",
     description:
-      "Automatize fluxos de trabalho conectando ferramentas em um workflow visual.",
-    icon: "⚡",
+      "Extraia o prompt de qualquer imagem de referência, em segundos.",
+    icon: "🧠",
   },
   {
     href: "/tutoriais/design-studio",
-    title: "Design Studio",
+    title: "Studio",
     description:
-      "Editor visual drag-and-drop para montar layouts e composições.",
-    icon: "🎨",
+      "Editor visual com camadas, texto, efeitos e IA, dentro do navegador.",
+    icon: "✏️",
+  },
+  {
+    href: "/tutoriais/assets-3d",
+    title: "Recorte com IA",
+    description:
+      "Separe o fundo e gere PNG transparente direto no Studio.",
+    icon: "✂️",
   },
   {
     href: "/tutoriais/copymaker",
     title: "CopyMaker",
     description:
-      "Gere copy pronta para posts, carrossel, stories e reels.",
+      "Copy pronta para post, carrossel, story, sequência de story e reels.",
     icon: "✍️",
   },
   {
     href: "/tutoriais/consultor-de-perfil",
     title: "Consultor de Perfil",
     description:
-      "Auditoria estratégica do seu perfil do Instagram com plano de ação.",
+      "Auditoria do perfil do Instagram com nota e plano de ação.",
     icon: "📊",
+  },
+  {
+    href: "/tutoriais/post-analyzer",
+    title: "Post Analyzer",
+    description:
+      "Análise card a card do seu post, com nota e checklist de evolução.",
+    icon: "🔍",
   },
   {
     href: "/tutoriais/meus-clientes",
     title: "Meus Clientes",
     description:
-      "Gerencie sua base de clientes e dados estratégicos.",
+      "Cada cliente vira uma marca, com kit, demandas e galeria.",
     icon: "👥",
   },
   {
-    href: "/tutoriais/prompt-maker",
-    title: "Prompt Maker",
+    href: "/tutoriais/demandas",
+    title: "Demandas",
     description:
-      "Extraia prompts detalhados de qualquer imagem de referência.",
-    icon: "🧠",
+      "Central de produção com kanban de copy e design para todos os clientes.",
+    icon: "🗂️",
   },
 ];
 
@@ -184,7 +192,7 @@ export default function TutoriaisPage() {
         title="Tutoriais"
         subtitle="Aprenda a usar cada função do Calango Studio com guias passo a passo, simples e diretos."
         icon="📚"
-        contentCount={15}
+        contentCount={16}
         contentLabel="tutoriais"
         ctaUtmCampaign="tutoriais"
       />
