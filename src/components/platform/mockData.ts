@@ -112,9 +112,10 @@ export const clientesList: Cliente[] = [
 export const studioData = {
   projectName: "Campanha Criativa 2025",
   // Image rendered inside the artboard canvas — must exist in /public/images/resultados/
-  canvasImage: "/images/resultados/hero_criativo.jpg",
+  // business_criativo.jpg is a portrait creative (~4:5 aspect ratio)
+  canvasImage: "/images/resultados/business_criativo.jpg",
   // Zoom shown in the pill
-  zoomPercent: 75,
+  zoomPercent: 100,
 };
 
 // ─── Prospecção ──────────────────────────────────────────────────────────────

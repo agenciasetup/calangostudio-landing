@@ -7,6 +7,10 @@
  * Tool accent: fuchsia-400 (matches Sidebar.tsx key "studio")
  * Active nav key: "studio"
  *
+ * Artboard: 4:5 portrait (416×520px) centered in canvas area.
+ * Canvas image: business_criativo.jpg (portrait, ~4:5).
+ * Headline centered on artboard: "Calango.Studio, sua plataforma de Design com IA."
+ *
  * Forge (editing) animation — 6 steps, 1400 ms each, loops:
  *   step 0 — idle: canvas + layers panel, no layer selected
  *   step 1 — "Headline" layer row highlighted (selection box on it)
@@ -98,7 +102,6 @@ const RAIL_TOOLS = [
 ] as const;
 
 // Panel icons (bottom section of rail, separated by divider)
-// CopyAI is rendered inline below due to composite icon structure
 const PANEL_TOOLS_SIMPLE = [
   { icon: ImageIcon, key: "images" },
   { icon: Sparkles, key: "ai" },
@@ -167,11 +170,15 @@ export default function MockStudio({ active }: { active?: boolean }) {
   const showFotoSelection = step === 3;
   const showFundoSelection = step === 4;
 
+  // 4:5 artboard — height 560px → width 448px
+  const artboardH = 560;
+  const artboardW = Math.round(artboardH * (4 / 5));
+
   return (
     <div
       ref={ref}
       className="relative w-full rounded-[18px] overflow-hidden bg-[#050505] flex flex-col select-none"
-      style={{ height: 600 }}
+      style={{ height: 660 }}
     >
       {/* ── Topbar ─────────────────────────────────────────── */}
       <header className="h-14 flex items-center gap-3 px-3 border-b border-white/5 bg-black/40 backdrop-blur-2xl relative z-20 flex-shrink-0">
@@ -229,50 +236,81 @@ export default function MockStudio({ active }: { active?: boolean }) {
 
         {/* ── Canvas content ─────────────────────────── */}
         <div className="absolute inset-0 flex items-center justify-center">
-          {/* Artboard frame */}
+          {/* 4:5 Artboard frame */}
           <div
-            className="relative shadow-2xl rounded-sm overflow-hidden"
-            style={{ width: 320, height: 240 }}
+            className="relative shadow-[0_8px_48px_rgba(0,0,0,0.7)] rounded overflow-hidden"
+            style={{ width: artboardW, height: artboardH }}
           >
-            {/* Background image */}
+            {/* Background portrait image — object-fit cover fills the 4:5 frame */}
             <Image
               src={studioData.canvasImage}
               alt="Arte no canvas"
               fill
               className="object-cover"
-              sizes="320px"
+              sizes={`${artboardW}px`}
             />
 
-            {/* Dark gradient overlay to allow text/UI to read */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+            {/* Rich gradient overlay — bottom dark for text contrast, subtle top vignette */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/70" />
 
-            {/* Headline text layer with selection indicator on step 1/2 */}
+            {/* ── Centered Headline layer ──────────────────────── */}
             <div
-              className={`absolute top-[28px] left-[16px] right-[16px] transition-all duration-300 ${
+              className={`absolute inset-x-0 top-0 bottom-0 flex flex-col items-center justify-center px-6 transition-all duration-300 ${
                 showHeadlineSelection
-                  ? "ring-2 ring-fuchsia-400 ring-offset-1 ring-offset-transparent rounded-sm"
+                  ? "ring-2 ring-fuchsia-400 ring-offset-0 rounded"
                   : ""
               }`}
             >
-              <p className="text-white font-black text-xl leading-tight drop-shadow-lg">
-                Campanha
+              {/* Brand badge */}
+              <div className="mb-4 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                <span className="text-[10px] font-bold tracking-widest text-white/70 uppercase">
+                  Powered by IA
+                </span>
+              </div>
+
+              {/* Main headline — centered, bold, Poppins/display */}
+              <p
+                className="text-center font-black leading-tight drop-shadow-2xl"
+                style={{
+                  fontFamily: "'Poppins', 'Inter', sans-serif",
+                  fontSize: "clamp(18px, 4.5cqi, 28px)",
+                  textShadow: "0 2px 16px rgba(0,0,0,0.7)",
+                }}
+              >
+                <span className="text-white">Calango</span>
+                <span className="text-fuchsia-400">.Studio</span>
+                <span className="text-white">,</span>
                 <br />
-                <span className="text-[#ffaa00]">Criativa 2025</span>
+                <span className="text-white">sua plataforma de </span>
+                <br />
+                <span className="bg-gradient-to-r from-amber-400 to-fuchsia-400 bg-clip-text text-transparent">
+                  Design com IA.
+                </span>
               </p>
+
+              {/* Decorative CTA stub */}
+              <div className="mt-5 px-5 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/25">
+                <span
+                  className="text-[11px] font-bold text-white"
+                  style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+                >
+                  Começar agora →
+                </span>
+              </div>
             </div>
 
             {/* Foto Principal selection indicator (step 3) — covers image area */}
             {showFotoSelection && (
-              <div className="absolute inset-x-0 top-[80px] bottom-[40px] ring-2 ring-fuchsia-400 ring-offset-0 rounded-sm pointer-events-none" />
+              <div className="absolute inset-x-0 top-[45%] bottom-0 ring-2 ring-fuchsia-400 ring-offset-0 rounded pointer-events-none" />
             )}
 
             {/* Fundo selection indicator (step 4) — covers full artboard */}
             {showFundoSelection && (
-              <div className="absolute inset-0 ring-2 ring-fuchsia-400 ring-offset-0 rounded-sm pointer-events-none" />
+              <div className="absolute inset-0 ring-2 ring-fuchsia-400 ring-offset-0 rounded pointer-events-none" />
             )}
 
             {/* Artboard border */}
-            <div className="absolute inset-0 ring-1 ring-white/10 rounded-sm pointer-events-none" />
+            <div className="absolute inset-0 ring-1 ring-white/10 rounded pointer-events-none" />
           </div>
         </div>
 
@@ -289,7 +327,6 @@ export default function MockStudio({ active }: { active?: boolean }) {
                     : "text-zinc-400"
                 }`}
               >
-                {/* CopyAIIcon is a component, not a lucide icon */}
                 <Icon size={18} />
               </button>
             );
