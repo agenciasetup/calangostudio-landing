@@ -504,6 +504,88 @@ body {
 }
 
 /* ============================================================
+   PLATFORM DESIGN SYSTEM – ported from Calango.studio
+   ============================================================ */
+
+.glass-input {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  color: #fff !important;
+  backdrop-filter: blur(10px);
+  transition: all .3s ease;
+}
+.glass-input:focus {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: #ffaa00 !important;
+  outline: none !important;
+  box-shadow: 0 0 20px rgba(255,170,0,0.1);
+}
+.glass-input::placeholder {
+  color: rgba(113,113,122,0.7);
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.animate-cursor { animation: blink .9s step-end infinite; }
+
+.btn-generate {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg,#ffaa00 0%,#ff7b47 100%);
+  color: #0b0b0b;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  border-radius: 18px;
+  padding: 16px 24px;
+  box-shadow: 0 8px 20px -8px rgba(0,0,0,.6);
+  border: 0;
+  cursor: pointer;
+  transition: transform .15s ease, filter .2s ease;
+}
+.btn-generate:hover { filter: brightness(1.08); transform: translateY(-2px); }
+
+.wiz-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 13px;
+  appearance: none;
+}
+.wiz-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 13px;
+}
+.wiz-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: #fff;
+  font-size: 13px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* ============================================================
    BONUS SECTION – Fábrica de Clientes
    ============================================================ */
 
