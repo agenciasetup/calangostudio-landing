@@ -18,7 +18,7 @@
 import { Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { FitFrame } from "@/components/platform/FitFrame";
 import { PlatformChrome } from "@/components/platform/PlatformChrome";
 import MockCriarImagem from "@/components/platform/mocks/MockCriarImagem";
@@ -130,31 +130,18 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
 
-        {/* ── 1. Badge ───────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-6 md:mb-8"
-        >
-          <span className="badge-pill">
-            <Sparkles size={12} />
-            Pra quem cria com IA e precisa fechar cliente
-          </span>
-        </motion.div>
-
-        {/* ── 2. H1 ──────────────────────────────────────────────────── */}
+        {/* ── 1. H1 ──────────────────────────────────────────────────── */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.06 }}
+          transition={{ duration: 0.5, delay: 0 }}
           className="font-display font-black text-[2.4rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.05] mb-6 md:mb-8 tracking-tight"
         >
           Faça criativos usando{" "}
           <span className="text-gradient-animated">IA</span>
         </motion.h1>
 
-        {/* ── 3. Subheadline ─────────────────────────────────────────── */}
+        {/* ── 2. Subheadline ─────────────────────────────────────────── */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -165,7 +152,7 @@ export default function Hero() {
           tudo conectado com a identidade e o contexto do seu cliente.
         </motion.p>
 
-        {/* ── 4. CTAs ────────────────────────────────────────────────── */}
+        {/* ── 3. CTAs ────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +175,7 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* ── 5. Proof line ──────────────────────────────────────────── */}
+        {/* ── 4. Proof line ──────────────────────────────────────────── */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -198,7 +185,7 @@ export default function Hero() {
           ⭐ 4,9 — designers e social medias já operam no Calango Studio
         </motion.p>
 
-        {/* ── 6. Platform mock window ────────────────────────────────── */}
+        {/* ── 5. Platform mock window ────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -247,7 +234,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* ── 7. Results marquee ─────────────────────────────────────── */}
+        {/* ── 6. Results marquee ─────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
