@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { X, ArrowRight, CheckCircle, Zap } from "lucide-react";
+import { useAffiliatePricing } from "@/hooks/useAffiliatePricing";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -49,6 +50,8 @@ const itemVariantsRight = {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function Comparison() {
+  const { isAffiliate, proPrice, proPriceOriginal } = useAffiliatePricing();
+
   return (
     <section className="section-inset py-20 md:py-28 px-4 relative overflow-hidden">
       {/* Section divider */}
@@ -210,9 +213,23 @@ export default function Comparison() {
                   <p className="text-xs text-zinc-500 font-bold uppercase tracking-wider mb-1">
                     Tudo isso por
                   </p>
-                  <p className="font-display font-black text-2xl md:text-3xl text-gradient-animated leading-none">
-                    R$ 169,90
-                  </p>
+                  {isAffiliate ? (
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-sm text-zinc-500 line-through leading-none">
+                        R$ {proPriceOriginal}
+                      </span>
+                      <span className="font-display font-black text-2xl md:text-3xl text-gradient-animated leading-none">
+                        R$ {proPrice}
+                      </span>
+                      <span className="mt-1 self-start px-2 py-0.5 rounded-md bg-accent/15 border border-accent/20 text-accent text-[9px] font-black uppercase tracking-[0.12em]">
+                        preço de afiliado
+                      </span>
+                    </div>
+                  ) : (
+                    <p className="font-display font-black text-2xl md:text-3xl text-gradient-animated leading-none">
+                      R$ {proPrice}
+                    </p>
+                  )}
                 </div>
                 <span className="px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 text-xs text-accent font-black uppercase tracking-wider flex-shrink-0">
                   /mês
@@ -250,9 +267,20 @@ export default function Comparison() {
             R$ 680–880 espalhados
           </span>{" "}
           para{" "}
-          <span className="text-gradient-animated text-glow">
-            R$ 169,90 num só lugar.
-          </span>
+          {isAffiliate ? (
+            <>
+              <span className="text-white/40 line-through decoration-white/20">
+                R$ {proPriceOriginal}
+              </span>{" "}
+              <span className="text-gradient-animated text-glow">
+                R$ {proPrice} num só lugar.
+              </span>
+            </>
+          ) : (
+            <span className="text-gradient-animated text-glow">
+              R$ {proPrice} num só lugar.
+            </span>
+          )}
         </motion.p>
 
       </div>
