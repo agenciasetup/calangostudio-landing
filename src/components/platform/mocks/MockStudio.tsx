@@ -170,7 +170,8 @@ export default function MockStudio({ active }: { active?: boolean }) {
   return (
     <div
       ref={ref}
-      className="relative w-full h-full rounded-[18px] overflow-hidden bg-[#050505] flex flex-col select-none"
+      className="relative w-full rounded-[18px] overflow-hidden bg-[#050505] flex flex-col select-none"
+      style={{ height: 600 }}
     >
       {/* ── Topbar ─────────────────────────────────────────── */}
       <header className="h-14 flex items-center gap-3 px-3 border-b border-white/5 bg-black/40 backdrop-blur-2xl relative z-20 flex-shrink-0">
@@ -221,7 +222,7 @@ export default function MockStudio({ active }: { active?: boolean }) {
       </header>
 
       {/* ── Work area ──────────────────────────────────────── */}
-      <div className="flex-1 relative overflow-hidden min-h-0">
+      <div className="flex-1 relative overflow-hidden">
 
         {/* Canvas background (pasteboard) */}
         <div className="absolute inset-0 bg-[#111111]" />
@@ -350,7 +351,7 @@ export default function MockStudio({ active }: { active?: boolean }) {
           </div>
 
           {/* Layer rows */}
-          <div className="flex-1 overflow-hidden px-2 py-2 space-y-1">
+          <div className="px-2 py-2 space-y-1">
             {MOCK_LAYERS.map((layer) => (
               <LayerRow
                 key={layer.id}

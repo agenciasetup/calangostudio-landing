@@ -124,7 +124,7 @@ function getStyleImage(key: string): string {
 
 function StyleDashboard({ selectedKey }: { selectedKey?: string }) {
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-5">
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="p-3 bg-pink-500/10 text-pink-400 rounded-2xl border border-pink-500/20 shadow-glow flex-shrink-0">
@@ -149,7 +149,7 @@ function StyleDashboard({ selectedKey }: { selectedKey?: string }) {
         </div>
       </div>
 
-      <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 overflow-hidden pb-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 pb-2">
         {STYLE_CARDS.map((card) => {
           const Icon = card.icon;
           const isSelected = selectedKey === card.key;
@@ -240,12 +240,12 @@ function ConfigPreviewScreen({
   const isResult = previewState === "result";
 
   return (
-    <div className="flex flex-col h-full gap-2">
-      <div className="flex flex-col md:grid md:grid-cols-[minmax(280px,340px)_1fr] gap-2 md:gap-3 flex-1 min-h-0 items-stretch">
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-col md:grid md:grid-cols-[minmax(280px,340px)_1fr] gap-2 md:gap-3 items-start">
 
         {/* ─── INSPECTOR ─────────────────────────────────────────── */}
-        <div className="flex flex-col min-h-0 gap-2 md:gap-3 relative z-10 rounded-t-[24px] md:rounded-none border-t border-white/15 md:border-0 bg-black/40 md:bg-transparent backdrop-blur-2xl md:backdrop-blur-0 shadow-[inset_0_2px_0_rgba(255,255,255,0.22),0_-18px_38px_rgba(0,0,0,0.6)] md:shadow-none px-3 pt-3 md:p-0">
-          <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar pr-1 md:pr-2 space-y-4">
+        <div className="flex flex-col gap-2 md:gap-3 relative z-10 rounded-t-[24px] md:rounded-none border-t border-white/15 md:border-0 bg-black/40 md:bg-transparent backdrop-blur-2xl md:backdrop-blur-0 shadow-[inset_0_2px_0_rgba(255,255,255,0.22),0_-18px_38px_rgba(0,0,0,0.6)] md:shadow-none px-3 pt-3 md:p-0">
+          <div className="pr-1 md:pr-2 space-y-4">
             <div className="space-y-5 md:space-y-6 md:glass-panel md:p-6 md:rounded-[32px] md:border md:border-white/5 md:bg-black/20">
 
               {/* 1. CONTEXTO DE CRIAÇÃO (OPCIONAL) ───────────────── */}
@@ -401,10 +401,11 @@ function ConfigPreviewScreen({
           Mirrors PreviewStage with className="!h-full !max-h-none flex-1"
           wiz-preview overridden to fill column: h-full, no fixed aspect-ratio.
         */}
-        <div className="flex flex-col gap-2 md:gap-3 min-h-0 h-[65%] md:h-auto">
-          {/* Stage container — wide, fills flex column */}
+        <div className="flex flex-col gap-2 md:gap-3">
+          {/* Stage container — wide, fixed height so content doesn't collapse */}
           <div
-            className="flex-1 relative rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center min-h-0"
+            className="relative rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center"
+            style={{ minHeight: 400 }}
           >
             {/* Blurred dark ghost — shown when no result (empty OR generating) */}
             {!isResult && (
@@ -581,10 +582,10 @@ export default function MockCriarImagem({ active }: { active?: boolean }) {
   );
 
   return (
-    <div className="flex flex-col h-full gap-3" ref={ref}>
+    <div className="flex flex-col gap-3" ref={ref}>
       <StudioTopBar titleSlot={titleSlot} />
 
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div>
         {isDashboard ? (
           <StyleDashboard selectedKey={step === 1 ? "hero" : undefined} />
         ) : (

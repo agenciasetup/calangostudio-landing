@@ -2,7 +2,8 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { FUNCTIONS } from "@/components/platform/registry";
-import { PlatformSidebar } from "@/components/platform/Sidebar";
+import { FitFrame } from "@/components/platform/FitFrame";
+import { PlatformChrome } from "@/components/platform/PlatformChrome";
 
 function Lab() {
   const fn = useSearchParams().get("fn") ?? "";
@@ -11,7 +12,7 @@ function Lab() {
 
   if (!entry) {
     return (
-      <div className="min-h-screen bg-background text-txt-primary p-6 font-display">
+      <div className="h-screen w-screen overflow-hidden bg-background text-txt-primary p-6 font-display">
         <p className="text-zinc-500 text-sm">
           mock-lab: função <code className="text-primary">{fn || "—"}</code> não encontrada.
         </p>
@@ -34,25 +35,20 @@ function Lab() {
   const { Mock, key } = entry;
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      {/* Platform shell: sidebar rail + content area */}
-      <div
-        className="flex gap-3 p-3 bg-background rounded-[20px] border border-white/[0.06]"
-        style={{ minHeight: 700 }}
-      >
-        <PlatformSidebar active={key} />
-        <div className="flex flex-col flex-1 min-w-0 min-h-0">
+    <div className="h-screen w-screen overflow-hidden bg-background p-4">
+      <FitFrame className="h-full w-full">
+        <PlatformChrome active={key} topbar={null}>
           <Suspense
             fallback={
-              <div className="flex items-center justify-center h-full text-zinc-500 text-sm">
+              <div className="flex items-center justify-center py-20 text-zinc-500 text-sm">
                 Carregando...
               </div>
             }
           >
             <Mock active />
           </Suspense>
-        </div>
-      </div>
+        </PlatformChrome>
+      </FitFrame>
     </div>
   );
 }

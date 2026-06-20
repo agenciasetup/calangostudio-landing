@@ -95,7 +95,7 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
   );
 
   return (
-    <div className="flex flex-col h-full gap-3">
+    <div className="flex flex-col gap-3">
       {/* StudioTopBar */}
       <StudioTopBar titleSlot={titleSlot} rightSlot={rightSlot}>
         <StudioSelect label="Modelo de IA" value={d.model} width="190px" />
@@ -104,11 +104,11 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
       </StudioTopBar>
 
       {/* Main grid: inspector + preview */}
-      <div className="grid md:grid-cols-[minmax(300px,400px)_1fr] gap-3 flex-1 min-h-0 items-stretch">
+      <div className="grid md:grid-cols-[minmax(300px,400px)_1fr] gap-3 items-start">
 
         {/* ─── INSPECTOR ─────────────────────────────────── */}
-        <div className="flex flex-col min-h-0 gap-3">
-          <div className="flex-1 overflow-y-auto min-h-0 custom-scrollbar pr-2 space-y-4">
+        <div className="flex flex-col gap-3">
+          <div className="pr-2 space-y-4">
 
             {/* Card: Tipo de sessão + Contexto */}
             <div className="glass-panel p-5 rounded-[28px] border border-white/5 space-y-4">
@@ -215,8 +215,8 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
         </div>
 
         {/* ─── PREVIEW STAGE ─────────────────────────────── */}
-        <div className="flex flex-col gap-3 min-h-0">
-          <div className="flex-1 w-full rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center">
+        <div className="flex flex-col gap-3">
+          <div className="w-full rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center" style={{ minHeight: 400 }}>
             <div className="flex flex-col items-center justify-center gap-3 text-center px-6">
               <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-600">
                 <ImageIcon size={30} />
