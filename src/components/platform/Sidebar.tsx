@@ -22,7 +22,7 @@ const ITEMS: SidebarItem[] = [
   { icon: LayoutGrid, color: "text-zinc-500" },
   { icon: Users, color: "text-sky-400", key: "contexto" },
   { icon: Users, color: "text-sky-400", key: "clientes" },
-  { icon: Target, color: "text-primary" },
+  { icon: Target, color: "text-primary", key: "prospeccao" },
   { icon: LayoutDashboard, color: "text-violet-400" },
   { icon: Trophy, color: "text-amber-400" },
   "divider",
