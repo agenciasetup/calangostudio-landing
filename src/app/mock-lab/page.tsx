@@ -33,11 +33,12 @@ function Lab() {
   }
 
   const { Mock, key } = entry;
+  const fullscreen = "fullscreen" in entry ? entry.fullscreen : false;
 
   return (
     <div className="h-screen w-screen overflow-hidden bg-background p-4">
       <FitFrame className="h-full w-full">
-        <PlatformChrome active={key} topbar={null}>
+        <PlatformChrome active={key} topbar={null} sidebar={!fullscreen}>
           <Suspense
             fallback={
               <div className="flex items-center justify-center py-20 text-zinc-500 text-sm">

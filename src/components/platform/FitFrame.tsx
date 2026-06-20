@@ -2,18 +2,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
 /**
- * FitFrame — scales its child to fit the parent container without scrolling.
+ * FitFrame — scales its fixed-size child to fill the parent container.
  *
- * The child declares a fixed natural width (e.g. 1180px) and a content-driven
- * height. FitFrame measures both the container and the child and applies
- * transform: scale(s) with transform-origin: center, so the whole mock fits
- * the available space with NO scroll anywhere.
+ * The child (PlatformChrome) is a FIXED 1320×820 px frame with overflow:hidden,
+ * so only the first fold is visible — content is NOT scrollable and NOT scaled
+ * down to fit. FitFrame simply scales that fixed frame to fill the available
+ * container space using CSS transform: scale(s).
  *
- * Because the forge animation swaps steps of DIFFERENT heights, FitFrame:
- *   1. Observes BOTH the container and the child (re-measures on either change).
- *   2. Locks the scale to the LARGEST size seen, so the frame stays ONE fixed
- *      size across animation steps (no zoom-in/jumping) and never clips.
- *
+ * Scale formula: s = Math.min(containerW / childW, containerH / childH, maxScale)
  * Upscale is capped at `maxScale` (default 1.1). Downscale is unlimited.
  */
 
@@ -28,7 +24,6 @@ interface FitFrameProps {
 export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const maxSize = useRef({ w: 0, h: 0 });
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
@@ -43,20 +38,16 @@ export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameP
       const iW = inner.offsetWidth;
       const iH = inner.offsetHeight;
       if (iW === 0 || iH === 0 || cW === 0 || cH === 0) return;
-      // Lock to the largest content seen so the scale never jumps between
-      // animation steps of different heights — one fixed size, no clipping.
-      maxSize.current.w = Math.max(maxSize.current.w, iW);
-      maxSize.current.h = Math.max(maxSize.current.h, iH);
-      const s = Math.min(cW / maxSize.current.w, cH / maxSize.current.h, maxScale);
+      // Child is fixed-size (1320×820), so we scale directly from current dims.
+      const s = Math.min(cW / iW, cH / iH, maxScale);
       setScale(s);
     }
 
     measure();
 
-    // Re-measure on container resize AND on child content-size changes.
+    // Re-measure only on container resize (child is fixed size).
     const ro = new ResizeObserver(measure);
     ro.observe(container);
-    ro.observe(inner);
 
     return () => ro.disconnect();
   }, [maxScale]);

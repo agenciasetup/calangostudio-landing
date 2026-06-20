@@ -3,7 +3,10 @@ import { Camera, Palette, PenLine, Pencil, IdCard, Users, Target } from "lucide-
 
 /**
  * FUNCTIONS registry — ordered list of platform functions for the mock lab
- * and future FunctionsCarousel.
+ * and FunctionsCarousel.
+ *
+ * fullscreen?: true  → PlatformChrome renders with sidebar={false}, so the
+ *                       mock fills the full 1320 px width (used by Studio).
  */
 export const FUNCTIONS = [
   {
@@ -25,6 +28,7 @@ export const FUNCTIONS = [
     label: "Studio",
     Icon: PenLine,
     accent: "fuchsia",
+    fullscreen: true,
     Mock: lazy(() => import("./mocks/MockStudio")),
   },
   {

@@ -3,13 +3,12 @@
 /**
  * FunctionsCarousel
  *
- * Landing section showcasing the 6 core platform functions.
+ * Landing section showcasing the 7 core platform functions.
  * Supports tab switching, drag/swipe (Framer Motion), prev/next arrows, dot nav.
  *
  * Only the active mock is mounted → only one forge timer runs at a time.
  *
- * Order: criar-imagem, studio, criar-copy, contexto, clientes, prospeccao
- * (sessao-fotos is excluded as requested — it's not one of the 6 core)
+ * Order: criar-imagem, criar-copy, sessao-fotos, studio, contexto, clientes, prospeccao
  */
 
 import React, { Suspense, useState, useRef, useCallback } from "react";
@@ -19,12 +18,13 @@ import { FUNCTIONS } from "@/components/platform/registry";
 import { FitFrame } from "@/components/platform/FitFrame";
 import { PlatformChrome } from "@/components/platform/PlatformChrome";
 
-// ─── Ordered list of the 6 core functions (sessao-fotos excluded) ────────────
+// ─── Ordered list of the 7 core functions ────────────────────────────────────
 
 const CAROUSEL_KEYS = [
   "criar-imagem",
-  "studio",
   "criar-copy",
+  "sessao-fotos",
+  "studio",
   "contexto",
   "clientes",
   "prospeccao",
@@ -290,7 +290,11 @@ export default function FunctionsCarousel() {
                   className="absolute inset-0"
                 >
                   <FitFrame className="h-full w-full" maxScale={1.0}>
-                    <PlatformChrome active={activeEntry.key} topbar={null}>
+                    <PlatformChrome
+                      active={activeEntry.key}
+                      topbar={null}
+                      sidebar={!("fullscreen" in activeEntry && activeEntry.fullscreen)}
+                    >
                       <Suspense fallback={<MockSkeleton />}>
                         <activeEntry.Mock active={true} />
                       </Suspense>
