@@ -44,7 +44,6 @@ import {
   Crown,
   Star,
 } from "lucide-react";
-import { PlatformChrome } from "../PlatformChrome";
 import { clienteExemplo } from "../mockData";
 import { useForge } from "../useForge";
 
@@ -641,29 +640,23 @@ export default function MockContexto({ active }: { active?: boolean }) {
       : [true, true, true, true, true, true, false, false]; // step 4: same 6 done (87%)
 
   return (
-    <PlatformChrome
-      active="contexto"
-      // topbar slot: empty — this screen's header lives inside the children
-      topbar={<div />}
-    >
-      <div ref={ref} className="space-y-3">
-        {/* Client workspace header (cover + logo + name + stat chips) */}
-        <ClientHeader />
+    <div ref={ref} className="space-y-3">
+      {/* Client workspace header (cover + logo + name + stat chips) */}
+      <ClientHeader />
 
-        {/* Tab bar */}
-        <ClientTabBar />
+      {/* Tab bar */}
+      <ClientTabBar />
 
-        {/* Perfil tab content */}
-        <div className="mt-1">
-          <PerfilTabContent
-            readinessPct={readinessPct}
-            itemsDone={itemsDone}
-            showColors={showColors}
-            showPersona={showPersona}
-            showProducts={showProducts}
-          />
-        </div>
+      {/* Perfil tab content */}
+      <div className="mt-1">
+        <PerfilTabContent
+          readinessPct={readinessPct}
+          itemsDone={itemsDone}
+          showColors={showColors}
+          showPersona={showPersona}
+          showProducts={showProducts}
+        />
       </div>
-    </PlatformChrome>
+    </div>
   );
 }

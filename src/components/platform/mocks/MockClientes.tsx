@@ -35,7 +35,6 @@ import {
   Kanban,
   Trash2,
 } from "lucide-react";
-import { PlatformChrome } from "../PlatformChrome";
 import { clientesList, type Cliente } from "../mockData";
 import { useForge } from "../useForge";
 
@@ -443,46 +442,40 @@ export default function MockClientes({ active }: { active?: boolean }) {
   const readinessValues = CLIENTS.map((c) => (showBars ? c.readiness : 0));
 
   return (
-    <PlatformChrome
-      active="clientes"
-      // This screen's header lives inside children — topbar gets empty spacer
-      topbar={<div />}
-    >
-      <div ref={ref} className="space-y-5">
-        {/* Cinematic hero / wallet header */}
-        <ClientsHero />
+    <div ref={ref} className="space-y-5">
+      {/* Cinematic hero / wallet header */}
+      <ClientsHero />
 
-        {/* Client cards grid */}
-        {!showCards ? (
-          // Skeleton loading state
-          <div className="grid grid-cols-3 gap-5">
-            {CLIENTS.map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 gap-5">
-            {CLIENTS.map((client, i) => (
-              <div
-                key={client.id}
-                className="transition-all duration-500"
-                style={{
-                  opacity: showCards ? 1 : 0,
-                  transform: showCards ? "translateY(0)" : "translateY(16px)",
-                  transitionDelay: `${i * 80}ms`,
-                }}
-              >
-                <ClientBadgeCard
-                  client={client}
-                  readinessPct={readinessValues[i]}
-                  showStatus={showStatus}
-                  hovered={hoveredIdx === i}
-                />
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </PlatformChrome>
+      {/* Client cards grid */}
+      {!showCards ? (
+        // Skeleton loading state
+        <div className="grid grid-cols-3 gap-5">
+          {CLIENTS.map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-5">
+          {CLIENTS.map((client, i) => (
+            <div
+              key={client.id}
+              className="transition-all duration-500"
+              style={{
+                opacity: showCards ? 1 : 0,
+                transform: showCards ? "translateY(0)" : "translateY(16px)",
+                transitionDelay: `${i * 80}ms`,
+              }}
+            >
+              <ClientBadgeCard
+                client={client}
+                readinessPct={readinessValues[i]}
+                showStatus={showStatus}
+                hovered={hoveredIdx === i}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

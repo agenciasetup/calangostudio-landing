@@ -58,7 +58,6 @@ import {
   List,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { PlatformChrome } from "../PlatformChrome";
 import { prospectosList } from "../mockData";
 import { useForge } from "../useForge";
 
@@ -483,11 +482,11 @@ export default function MockProspeccao({ active }: { active?: boolean }) {
   const pipelineValue = activeProspects.reduce((s, p) => s + p.valueNum, 0);
 
   return (
-    <PlatformChrome
-      active="prospeccao"
-      topbar={<SalesModeTopBar />}
-    >
-      <div ref={ref} className="space-y-4">
+    <div ref={ref} className="flex flex-col gap-4">
+      {/* Sales-mode top bar (folded in from topbar slot) */}
+      <SalesModeTopBar />
+
+      <div className="space-y-4">
         {/* Pipeline header */}
         <PipelineHeader totalCount={totalCount} pipelineValue={pipelineValue} />
 
@@ -521,6 +520,6 @@ export default function MockProspeccao({ active }: { active?: boolean }) {
           ))}
         </div>
       </div>
-    </PlatformChrome>
+    </div>
   );
 }

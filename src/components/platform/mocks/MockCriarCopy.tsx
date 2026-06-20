@@ -42,7 +42,6 @@ import {
   User,
   Users,
 } from "lucide-react";
-import { PlatformChrome } from "../PlatformChrome";
 import { StudioTopBar } from "../StudioTopBar";
 import { criarCopyPosts } from "../mockData";
 import { useForge } from "../useForge";
@@ -658,9 +657,10 @@ export default function MockCriarCopy({ active }: { active?: boolean }) {
   );
 
   return (
-    <PlatformChrome active="criar-copy" topbar={<StudioTopBar titleSlot={titleSlot} />}>
+    <div ref={ref} className="flex flex-col gap-3">
+      <StudioTopBar titleSlot={titleSlot} />
+
       <div
-        ref={ref}
         className="grid grid-cols-[minmax(300px,380px)_1fr] gap-3"
         style={{ minHeight: 640 }}
       >
@@ -670,6 +670,6 @@ export default function MockCriarCopy({ active }: { active?: boolean }) {
         {/* Right: results */}
         <ResultsArea state={resultState} showCarousel={showCarousel} />
       </div>
-    </PlatformChrome>
+    </div>
   );
 }
