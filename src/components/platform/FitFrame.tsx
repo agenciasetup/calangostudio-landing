@@ -5,17 +5,16 @@ import React, { useEffect, useRef, useState } from "react";
  * FitFrame — scales its child to fit the parent container without scrolling.
  *
  * The child declares a fixed natural width (e.g. 1180px) and a content-driven
- * height. FitFrame measures both the container and the child, computes
- * s = min(containerW/childW, containerH/childH), and applies
- * transform: scale(s) with transform-origin: center.
+ * height. FitFrame measures both the container and the child and applies
+ * transform: scale(s) with transform-origin: center, so the whole mock fits
+ * the available space with NO scroll anywhere.
  *
- * Upscale is capped at 1.1 so the mock never looks blown-up on huge screens.
- * Downscale has no limit — FitFrame will shrink the child as much as needed.
+ * Because the forge animation swaps steps of DIFFERENT heights, FitFrame:
+ *   1. Observes BOTH the container and the child (re-measures on either change).
+ *   2. Locks the scale to the LARGEST size seen, so the frame stays ONE fixed
+ *      size across animation steps (no zoom-in/jumping) and never clips.
  *
- * Usage:
- *   <FitFrame className="h-full w-full">
- *     <SomeMockComponent />
- *   </FitFrame>
+ * Upscale is capped at `maxScale` (default 1.1). Downscale is unlimited.
  */
 
 interface FitFrameProps {
@@ -29,6 +28,7 @@ interface FitFrameProps {
 export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const maxSize = useRef({ w: 0, h: 0 });
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
@@ -42,17 +42,21 @@ export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameP
       const cH = container.offsetHeight;
       const iW = inner.offsetWidth;
       const iH = inner.offsetHeight;
-      if (iW === 0 || iH === 0) return;
-      const s = Math.min(cW / iW, cH / iH, maxScale);
+      if (iW === 0 || iH === 0 || cW === 0 || cH === 0) return;
+      // Lock to the largest content seen so the scale never jumps between
+      // animation steps of different heights — one fixed size, no clipping.
+      maxSize.current.w = Math.max(maxSize.current.w, iW);
+      maxSize.current.h = Math.max(maxSize.current.h, iH);
+      const s = Math.min(cW / maxSize.current.w, cH / maxSize.current.h, maxScale);
       setScale(s);
     }
 
-    // Measure once immediately (layout should be complete in useEffect)
     measure();
 
-    // Re-measure whenever container size changes
+    // Re-measure on container resize AND on child content-size changes.
     const ro = new ResizeObserver(measure);
     ro.observe(container);
+    ro.observe(inner);
 
     return () => ro.disconnect();
   }, [maxScale]);
@@ -75,7 +79,6 @@ export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameP
         style={{
           transform: `scale(${scale})`,
           transformOrigin: "center",
-          // The child content defines its own size; we must NOT constrain it here
           flexShrink: 0,
         }}
       >
