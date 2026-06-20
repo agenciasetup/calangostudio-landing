@@ -19,7 +19,14 @@
  *   ti-coins          → Coins
  *   ti-user-star      → UserStar
  *   ti-package        → Package
+ *
+ * Forge sequence (4 steps, loops):
+ *   0 → Idle: textarea empty, upload empty, preview EMPTY ("Sua foto aparecerá aqui") + blurred ghost
+ *   1 → Fill: face thumbnail appears in upload, textarea types in a scene
+ *   2 → Generate: GERAR FOTO → loading state (ORANGE spinner "Criando foto…" + ORANGE progress) over blurred ghost
+ *   3 → Result: preview shows homem_foto.jpeg contained + download/save toolbar
  */
+import Image from "next/image";
 import {
   Camera,
   Type,
@@ -34,13 +41,67 @@ import {
   Coins,
   UserStar,
   Package,
+  Loader2,
+  Download,
+  HardDrive,
+  Store,
+  RefreshCw,
+  CheckCircle2,
 } from "lucide-react";
 import { StudioTopBar, StudioSelect } from "../StudioTopBar";
 import { sessaoFotosData } from "../mockData";
+import { useForge } from "../useForge";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const RESULT_IMAGE = "/images/resultados/homem_foto.jpeg";
+const BG_GHOST_URL = RESULT_IMAGE; // same image used as desfocado ghost
+
+// The scene text shown being "typed" in the filling step
+const SCENE_TEXT =
+  "Foto profissional corporativa em estúdio com fundo cinza neutro, vestindo terno slim azul marinho, iluminação Rembrandt suave, expressão confiante...";
+
+// ─── Blurred Ghost Background ─────────────────────────────────────────────────
+// Matches PreviewStage: blur(40px) brightness(0.28) saturate(1.1) scale(1.15)
+
+function GhostBackground({ url }: { url: string }) {
+  return (
+    <div
+      aria-hidden
+      className="absolute inset-0 z-0"
+      style={{
+        backgroundImage: `url(${url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        filter: "blur(40px) brightness(0.28) saturate(1.1)",
+        transform: "scale(1.15)",
+      }}
+    />
+  );
+}
+
+// ─── Preview state type ───────────────────────────────────────────────────────
+
+type PreviewState = "empty" | "generating" | "result";
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export default function MockSessaoFotos({ active }: { active?: boolean }) {
   const d = sessaoFotosData;
+
+  // 4 steps, 1700ms per step for readable pacing
+  const { step, ref } = useForge(4, { active, loop: true, interval: 1700 });
+
+  // Derive animation state from step
+  const hasFaceRef = step >= 1; // face thumbnail visible in upload
+  const hasSceneText = step >= 1; // textarea has scene text
+  const previewState: PreviewState =
+    step === 2 ? "generating" : step === 3 ? "result" : "empty";
+  const isGenerating = previewState === "generating";
+  const isResult = previewState === "result";
+
+  // Progress value for generating step
+  const progress = isGenerating ? 62 : 0;
 
   const titleSlot = (
     <div className="flex items-center gap-2 min-w-0">
@@ -95,7 +156,7 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
   );
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3" ref={ref}>
       {/* StudioTopBar */}
       <StudioTopBar titleSlot={titleSlot} rightSlot={rightSlot}>
         <StudioSelect label="Modelo de IA" value={d.model} width="190px" />
@@ -157,19 +218,43 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest">
                 Fotos do rosto (até 5)
               </label>
-              {/* Upload dropzone */}
+              {/* Upload dropzone — shows face thumbnail once filling starts */}
               <div
-                className="relative w-full rounded-2xl overflow-hidden bg-white/[0.03] border-2 border-dashed border-white/15"
+                className="relative w-full rounded-2xl overflow-hidden bg-white/[0.03] border-2 border-dashed border-white/15 transition-all duration-500"
                 style={{ height: 128 }}
               >
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-zinc-500">
-                  <User size={24} />
-                  <span className="text-[10px] font-black uppercase tracking-widest">Upload</span>
-                </div>
+                {hasFaceRef ? (
+                  /* Face thumbnail visible in fill/generate/result steps */
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 px-4">
+                    <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 shadow-lg">
+                      <Image
+                        src={RESULT_IMAGE}
+                        alt="Referência de rosto"
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <span className="text-green-400 text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
+                        <CheckCircle2 size={10} /> 1 foto carregada
+                      </span>
+                      <span className="text-zinc-500 text-[10px] leading-snug">
+                        Adicione mais 2–4 fotos para melhor resultado
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  /* Empty upload state */
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-zinc-500">
+                    <User size={24} />
+                    <span className="text-[10px] font-black uppercase tracking-widest">Upload</span>
+                  </div>
+                )}
               </div>
               <div className="flex">
                 <button className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-black uppercase text-zinc-400">
-                  <Plus size={12} /> +1 Ref (0/5)
+                  <Plus size={12} /> +1 Ref ({hasFaceRef ? "1" : "0"}/5)
                 </button>
               </div>
               <p className="text-[10px] text-zinc-500 leading-snug">
@@ -186,9 +271,10 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
                 <h2 className="text-sm font-bold text-white">A cena</h2>
               </div>
               <textarea
-                className="w-full glass-input p-4 rounded-2xl text-white text-sm resize-y"
+                className="w-full glass-input p-4 rounded-2xl text-white text-sm resize-y transition-all duration-500"
                 style={{ minHeight: 140 }}
                 placeholder={d.scenePlaceholder}
+                value={hasSceneText ? SCENE_TEXT : ""}
                 readOnly
               />
               <div className="space-y-1.5">
@@ -207,27 +293,143 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
           </div>
 
           {/* Footer: Generate button */}
-          <div className="shrink-0">
-            <button className="btn-generate">
-              <Camera size={18} /> Gerar foto
+          <div className="shrink-0 space-y-3">
+            <button className="btn-generate" type="button">
+              {isGenerating ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" /> Criando foto…
+                </>
+              ) : (
+                <>
+                  <Camera size={18} /> {isResult ? "Gerar de novo" : "Gerar foto"}
+                </>
+              )}
             </button>
+            {/* Result action bar */}
+            {isResult && (
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 text-[11px] font-bold"
+                >
+                  <RefreshCw size={12} /> Tentar novamente
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 text-[11px] font-bold"
+                >
+                  <Camera size={12} /> +3 Variações
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
         {/* ─── PREVIEW STAGE ─────────────────────────────── */}
+        {/*
+          Wide stage filling the right column — matches PreviewStage pattern from MockCriarImagem.
+          GhostBackground shown when NOT in result state (empty + generating).
+        */}
         <div className="flex flex-col gap-3">
-          <div className="w-full rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center" style={{ minHeight: 400 }}>
-            <div className="flex flex-col items-center justify-center gap-3 text-center px-6">
-              <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-600">
-                <ImageIcon size={30} />
+          {/* Stage container — wide, fixed minHeight so content never collapses */}
+          <div
+            className="relative rounded-[24px] border border-white/[0.08] bg-black/55 overflow-hidden flex items-center justify-center"
+            style={{ minHeight: 400 }}
+          >
+            {/* Blurred dark ghost — shown when no result (empty OR generating) */}
+            {!isResult && <GhostBackground url={BG_GHOST_URL} />}
+
+            {isResult ? (
+              /* ── RESULT: contained image + toolbar ── */
+              <>
+                <img
+                  src={RESULT_IMAGE}
+                  alt="Foto gerada"
+                  className="relative z-10"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    borderRadius: "18px",
+                  }}
+                />
+                {/* Top-right toolbar: download + save to drive + sell */}
+                <div className="absolute top-3 right-3 z-20 flex gap-2">
+                  <button
+                    type="button"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/60 backdrop-blur text-white hover:bg-primary hover:text-black transition"
+                    title="Baixar foto"
+                  >
+                    <Download size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-black/60 backdrop-blur text-white hover:bg-primary hover:text-black transition"
+                    title="Salvar no Drive"
+                  >
+                    <HardDrive size={15} />
+                  </button>
+                  <button
+                    type="button"
+                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25 transition"
+                    title="Vender esta sessão"
+                  >
+                    <Store size={17} />
+                  </button>
+                </div>
+              </>
+            ) : isGenerating ? (
+              /* ── GENERATING: ORANGE spinner + label + ORANGE progress bar ── */
+              <div className="relative z-10 flex flex-col items-center gap-4 text-center px-6 w-full max-w-xs">
+                <Loader2 className="animate-spin text-primary" size={40} />
+                <div className="w-full">
+                  <p className="text-white font-bold text-sm mb-3">
+                    Criando foto…
+                  </p>
+                  {/* Orange progress bar — track h-1.5 bg-white/10, fill bg-primary */}
+                  <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-primary transition-all duration-300 rounded-full"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </div>
               </div>
-              <p className="text-white font-bold text-sm">Sua foto aparecerá aqui</p>
-              <p className="text-zinc-500 text-xs max-w-[260px] leading-relaxed">
-                Envie o rosto, descreva a cena e toque em Gerar.
-              </p>
-            </div>
+            ) : (
+              /* ── EMPTY: placeholder with blurred ghost behind ── */
+              <div className="relative z-10 flex flex-col items-center justify-center gap-3 text-center px-6">
+                <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-600">
+                  <ImageIcon size={30} />
+                </div>
+                <p className="text-white font-bold text-sm">Sua foto aparecerá aqui</p>
+                <p className="text-zinc-500 text-xs max-w-[260px] leading-relaxed">
+                  Envie o rosto, descreva a cena e toque em Gerar.
+                </p>
+              </div>
+            )}
           </div>
-          <p className="text-zinc-600 text-[11px] shrink-0 pl-1">Suas fotos vão aparecer aqui.</p>
+
+          {/* Below stage: result thumbnail + hint */}
+          <div className="shrink-0 hidden md:flex items-center gap-3">
+            {isResult ? (
+              <>
+                <div className="w-10 h-10 rounded-xl overflow-hidden border border-white/10 flex-shrink-0 relative">
+                  <Image
+                    src={RESULT_IMAGE}
+                    alt="Resultado"
+                    fill
+                    className="object-cover"
+                    sizes="40px"
+                  />
+                </div>
+                <p className="text-zinc-500 text-[11px]">
+                  Suas fotos vão aparecer aqui.
+                </p>
+              </>
+            ) : (
+              <p className="text-zinc-600 text-[11px] pl-1">Suas fotos vão aparecer aqui.</p>
+            )}
+          </div>
         </div>
 
       </div>
