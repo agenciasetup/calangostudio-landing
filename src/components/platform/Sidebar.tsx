@@ -9,7 +9,7 @@ import {
   Pencil,
   Sparkles,
   Camera,
-  Image,
+  Image as ImageIcon,
   Settings,
   LogOut,
 } from "lucide-react";
@@ -29,7 +29,7 @@ const ITEMS: SidebarItem[] = [
   { icon: Pencil, color: "text-emerald-400", key: "criar-copy" },
   { icon: Sparkles, color: "text-pink-400", key: "criar-imagem" },
   { icon: Camera, color: "text-cyan-400", key: "sessao-fotos" },
-  { icon: Image, color: "text-zinc-500" },
+  { icon: ImageIcon, color: "text-zinc-500" },
 ];
 
 export function PlatformSidebar({ active }: { active?: string }) {
