@@ -18,8 +18,14 @@ export const sessaoFotosData = {
   scenePlaceholder:
     "Ex: Foto profissional corporativa em estúdio com fundo cinza neutro, vestindo terno slim azul marinho, iluminação Rembrandt suave, expressão confiante, câmera na altura dos olhos, lente 85mm, bokeh suave...",
   detailPlaceholder: "Ex: Relógio dourado no pulso, óculos aviador...",
-  // Result image shown in the "done" animation step
-  resultImage: "/images/resultados/homem_foto.jpeg",
+  // Result image shown in the "done" animation step (full-body portrait — most striking)
+  resultImage: "/images/sessao/pele-3.webp",
+  // Reference face thumbnails shown in the "Quem será fotografado" upload area
+  refImages: [
+    "/images/sessao/pele-1.webp",
+    "/images/sessao/pele-2.webp",
+    "/images/sessao/pele-4.webp",
+  ],
 };
 
 // ─── Criar Imagem ────────────────────────────────────────────────────────────

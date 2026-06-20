@@ -54,8 +54,16 @@ import { useForge } from "../useForge";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const RESULT_IMAGE = "/images/resultados/homem_foto.jpeg";
+// pele-3.webp: full-body powerful pose — most striking, used as the generated result
+const RESULT_IMAGE = "/images/sessao/pele-3.webp";
 const BG_GHOST_URL = RESULT_IMAGE; // same image used as desfocado ghost
+
+// 3 reference face thumbnails (close-up, bust, side profile)
+const REF_THUMBS = [
+  "/images/sessao/pele-1.webp",
+  "/images/sessao/pele-2.webp",
+  "/images/sessao/pele-4.webp",
+] as const;
 
 // The scene text shown being "typed" in the filling step
 const SCENE_TEXT =
@@ -218,29 +226,34 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest">
                 Fotos do rosto (até 5)
               </label>
-              {/* Upload dropzone — shows face thumbnail once filling starts */}
+              {/* Upload dropzone — shows 3 face thumbnails once filling starts */}
               <div
                 className="relative w-full rounded-2xl overflow-hidden bg-white/[0.03] border-2 border-dashed border-white/15 transition-all duration-500"
                 style={{ height: 128 }}
               >
                 {hasFaceRef ? (
-                  /* Face thumbnail visible in fill/generate/result steps */
-                  <div className="absolute inset-0 flex items-center justify-center gap-3 px-4">
-                    <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 shadow-lg">
-                      <Image
-                        src={RESULT_IMAGE}
-                        alt="Referência de rosto"
-                        fill
-                        className="object-cover"
-                        sizes="64px"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1 min-w-0">
+                  /* 3 ref thumbnails visible in fill/generate/result steps */
+                  <div className="absolute inset-0 flex items-center gap-2 px-4">
+                    {REF_THUMBS.map((src, idx) => (
+                      <div
+                        key={idx}
+                        className="relative w-16 h-16 rounded-xl overflow-hidden border border-white/20 flex-shrink-0 shadow-lg"
+                      >
+                        <Image
+                          src={src}
+                          alt={`Referência de rosto ${idx + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                    ))}
+                    <div className="flex flex-col gap-1 min-w-0 ml-1">
                       <span className="text-green-400 text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
-                        <CheckCircle2 size={10} /> 1 foto carregada
+                        <CheckCircle2 size={10} /> 3 fotos
                       </span>
                       <span className="text-zinc-500 text-[10px] leading-snug">
-                        Adicione mais 2–4 fotos para melhor resultado
+                        Adicione mais 1–2 para melhor resultado
                       </span>
                     </div>
                   </div>
@@ -254,7 +267,7 @@ export default function MockSessaoFotos({ active }: { active?: boolean }) {
               </div>
               <div className="flex">
                 <button className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] font-black uppercase text-zinc-400">
-                  <Plus size={12} /> +1 Ref ({hasFaceRef ? "1" : "0"}/5)
+                  <Plus size={12} /> +1 Ref ({hasFaceRef ? "3" : "0"}/5)
                 </button>
               </div>
               <p className="text-[10px] text-zinc-500 leading-snug">
