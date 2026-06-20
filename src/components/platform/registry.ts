@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Camera, Palette } from "lucide-react";
+import { Camera, Palette, PenLine } from "lucide-react";
 
 /**
  * FUNCTIONS registry — ordered list of platform functions for the mock lab
@@ -20,8 +20,14 @@ export const FUNCTIONS = [
     accent: "cyan",
     Mock: lazy(() => import("./mocks/MockSessaoFotos")),
   },
-  // Tasks 8-12: add entries here when each Mock file is created:
-  // { key:"studio", label:"Studio", Icon:Palette, accent:"primary", Mock: lazy(()=>import("./mocks/MockStudio")) },
+  {
+    key: "studio",
+    label: "Studio",
+    Icon: PenLine,
+    accent: "fuchsia",
+    Mock: lazy(() => import("./mocks/MockStudio")),
+  },
+  // Tasks 9-12: add entries here when each Mock file is created:
   // { key:"criar-copy", label:"Criar Copy", Icon:Pencil, accent:"emerald", Mock: lazy(()=>import("./mocks/MockCriarCopy")) },
   // { key:"contexto", label:"Contexto de Cliente", Icon:IdCard, accent:"sky", Mock: lazy(()=>import("./mocks/MockContexto")) },
   // { key:"clientes", label:"Gerenciar Clientes", Icon:Users, accent:"sky", Mock: lazy(()=>import("./mocks/MockClientes")) },

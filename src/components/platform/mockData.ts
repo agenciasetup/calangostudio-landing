@@ -107,6 +107,16 @@ export const clientesList: Cliente[] = [
   { id: "3", nome: "Fazenda Verde", initials: "FV", color: "#22c55e", segmento: "Agronegócio", readiness: 42, status: "prospecto" },
 ];
 
+// ─── Studio ──────────────────────────────────────────────────────────────────
+
+export const studioData = {
+  projectName: "Campanha Criativa 2025",
+  // Image rendered inside the artboard canvas — must exist in /public/images/resultados/
+  canvasImage: "/images/resultados/hero_criativo.jpg",
+  // Zoom shown in the pill
+  zoomPercent: 75,
+};
+
 // ─── Prospecção ──────────────────────────────────────────────────────────────
 
 export type Prospect = {
