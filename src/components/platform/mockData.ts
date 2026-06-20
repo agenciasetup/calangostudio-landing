@@ -1,7 +1,9 @@
 /**
  * mockData.ts
  * Static data used by platform mock components.
- * All image paths are under /images/resultados/ (public directory).
+ * Image paths are under /images/resultados/ (public directory) and MUST exist.
+ * Client logos use color + initials (gradient box), not image files —
+ * mirrors the platform's "no logo" state.
  * No secrets; strings and paths only.
  */
 
@@ -17,7 +19,7 @@ export const sessaoFotosData = {
     "Ex: Foto profissional corporativa em estúdio com fundo cinza neutro, vestindo terno slim azul marinho, iluminação Rembrandt suave, expressão confiante, câmera na altura dos olhos, lente 85mm, bokeh suave...",
   detailPlaceholder: "Ex: Relógio dourado no pulso, óculos aviador...",
   // Result image shown in the "done" animation step
-  resultImage: "/images/resultados/sessao-fotos-resultado.jpg",
+  resultImage: "/images/resultados/homem_foto.jpeg",
 };
 
 // ─── Criar Imagem ────────────────────────────────────────────────────────────
@@ -33,7 +35,7 @@ export const criarImagemStyles: ImageStyle[] = [
   { key: "car", label: "Car Design", image: "/images/resultados/car_criativo.jpg" },
   { key: "hero", label: "Hero Style", image: "/images/resultados/hero_criativo.jpg" },
   { key: "business", label: "Business", image: "/images/resultados/business_criativo.jpg" },
-  { key: "craft", label: "Craft", image: "/images/resultados/craft_criativo.jpg" },
+  { key: "craft", label: "Craft", image: "/images/resultados/hero3_criativo.jpg" },
   { key: "classic", label: "Classic", image: "/images/resultados/classic_criativo.jpg" },
 ];
 
@@ -78,6 +80,8 @@ export const criarCopyPosts: CopyPost[] = [
 
 export const clienteExemplo = {
   nome: "Calango Pay",
+  initials: "CP",
+  color: "#1f6feb",
   segmento: "Fintech · Pagamentos",
   persona: "Empreendedores 25–45 anos",
   cores: ["#00c896", "#0066ff", "#f5f5f5"],
@@ -90,37 +94,17 @@ export const clienteExemplo = {
 export type Cliente = {
   id: string;
   nome: string;
+  initials: string;
+  color: string;
   segmento: string;
-  avatar: string;
   readiness: number;
   status: "ativo" | "prospecto" | "pausado";
 };
 
 export const clientesList: Cliente[] = [
-  {
-    id: "1",
-    nome: "Calango Pay",
-    segmento: "Fintech",
-    avatar: "/images/resultados/cliente-calangopay.jpg",
-    readiness: 87,
-    status: "ativo",
-  },
-  {
-    id: "2",
-    nome: "Studio Noir",
-    segmento: "Fotografia",
-    avatar: "/images/resultados/cliente-studionoir.jpg",
-    readiness: 65,
-    status: "ativo",
-  },
-  {
-    id: "3",
-    nome: "Fazenda Verde",
-    segmento: "Agronegócio",
-    avatar: "/images/resultados/cliente-fazendaverde.jpg",
-    readiness: 42,
-    status: "prospecto",
-  },
+  { id: "1", nome: "Calango Pay", initials: "CP", color: "#1f6feb", segmento: "Fintech", readiness: 87, status: "ativo" },
+  { id: "2", nome: "Studio Noir", initials: "SN", color: "#3f3f46", segmento: "Fotografia", readiness: 65, status: "ativo" },
+  { id: "3", nome: "Fazenda Verde", initials: "FV", color: "#22c55e", segmento: "Agronegócio", readiness: 42, status: "prospecto" },
 ];
 
 // ─── Prospecção ──────────────────────────────────────────────────────────────
