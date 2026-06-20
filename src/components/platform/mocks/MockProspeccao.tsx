@@ -14,27 +14,29 @@
  *   1. Sales-mode top-bar (← back, Sparkle icon + "Fábrica de Clientes" branding,
  *      center nav with Hoje/Pipeline/Resultados/Serviços, right CTA "+ Novo prospect")
  *   2. Pipeline page header (title + stats, search bar, Funil/Lista toggle, Novo button)
- *   3. Kanban columns (5 active stages: Prospectar, Abordar, Não respondeu, Oferta feita,
- *      Pensando) + divider + 3 outcome stages (Fechou, Vender de novo, Não quis)
+ *   3. Kanban columns (8 stages at NORMAL width ~248px each ≈ 1984px total)
+ *      The row overflows to the right — the outer viewport's overflow:hidden crops it.
  *
  * Stage colors match fcUi.tsx STAGE_META exactly.
  *
- * Forge sequence (5 steps, 1500ms, loops):
- *   0 — IDLE:    Pipeline loaded, all cards visible, no animation active
- *   1 — LIFT:    "Clínica Saúde+" card in "Abordar" column lifts (scale + opacity highlight)
- *   2 — MOVE:    Card transitions into "Oferta feita" column (opacity in source drops, target glows)
- *   3 — LAND:    Card appears fully in "Oferta feita", counter on source column -1, target +1
- *   4 — SETTLE:  Back to idle with new state, brief green "win" badge shows on moved card
- *   (loops back to 0)
+ * Forge / animation: horizontal pan of the kanban row.
+ *   PAN_POSITIONS: [ 0, -380, -760, -380 ] px (translateX on the row)
+ *   Each step uses a CSS transition (ease-in-out 0.8s) so the pan is smooth.
+ *   Reduced-motion → pinned to position 1 (-380px) showing middle columns.
+ *   The forge timer advances steps 0→1→2→3→0→… at 2000ms per step.
+ *
+ * Card-lift accent: "Clínica Saúde+" lifts briefly when the pan crosses "Abordar".
+ *   (lifted when step === 1, winId badge when step === 2)
  *
  * Lucide icons (matching real PipelinePage + SalesModeLayout + fcUi):
  *   Search, Send, Hourglass, HandCoins, Brain, XCircle, CheckCircle2, Repeat,
  *   ArrowLeft, Sparkle, Home, Kanban, BarChart3, Briefcase, Plus, CalendarClock,
  *   Users, Flame, MoreHorizontal, Target, List
  *
- * NO overflow-y-auto — FitFrame scales whole window; kanban columns lay out fully.
+ * NO overflow-y-auto — FitFrame scales whole window; kanban row scrolls via animation only.
  */
 
+import { useRef, useEffect, useState } from "react";
 import {
   Search,
   Send,
@@ -54,12 +56,9 @@ import {
   CalendarClock,
   Flame,
   MoreHorizontal,
-  Target,
   List,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { prospectosList } from "../mockData";
-import { useForge } from "../useForge";
 
 // ─── Stage meta (mirrors fcUi.tsx STAGE_META exactly) ────────────────────────
 
@@ -84,25 +83,43 @@ const STAGE_META: Record<string, StageMeta> = {
   vender_novamente: { label: "Vender de novo",   icon: Repeat,       text: "text-purple-400",  bg: "bg-purple-500/10",  border: "border-purple-500/20",  dot: "bg-purple-400",  outcome: true },
 };
 
-const ACTIVE_STAGES = ["prospectar", "abordar", "nao_respondeu", "oferta_feita", "pensando"];
-const OUTCOME_STAGES = ["fechou", "vender_novamente", "nao_quis"];
+// All 8 stages in display order
+const ALL_STAGES = [
+  "prospectar",
+  "abordar",
+  "nao_respondeu",
+  "oferta_feita",
+  "pensando",
+  "fechou",
+  "vender_novamente",
+  "nao_quis",
+];
 
-// ─── Mock prospect data extended from prospectosList ─────────────────────────
-// The mockData prospectosList has 5 prospects spread across 3 stages.
-// Map them into the real 8-stage pipeline. We add more cards to make the
-// kanban look populated and realistic.
+const OUTCOME_STAGES = new Set(["fechou", "vender_novamente", "nao_quis"]);
+
+// ─── Horizontal pan positions (translateX on the kanban row) ──────────────────
+// Content area ≈ 1200px. Each column = 248px + 8px gap ≈ 256px.
+// Position 0: columns 0-4 visible (Prospectar→Pensando)
+// Position 1: columns 1-5 visible (Abordar→Fechou), shift -380px
+// Position 2: columns 3-7 visible (Oferta feita→Não quis), shift -760px
+// Sequence: 0 → 1 → 2 → 1 → 0 → … (pendulum, stays centered on interesting columns)
+const PAN_POSITIONS = [0, -380, -760, -380];
+// PAN_STEPS is the count of positions in the sequence
+const PAN_STEP_COUNT = PAN_POSITIONS.length; // 4
+
+// ─── Mock prospect data ───────────────────────────────────────────────────────
 
 type MockProspect = {
   id: string;
   firstName: string;
   company: string;
   niche: string;
-  value: string;      // display string
-  valueNum: number;   // numeric for totals
+  value: string;
+  valueNum: number;
   stage: string;
   temperature: "frio" | "morno" | "quente";
-  followup?: string;  // "hoje" | "atrasado" | undefined
-  nextStep?: string;  // short label
+  followup?: string;
+  nextStep?: string;
   nextUrgency?: "critical" | "high" | "medium" | "low";
 };
 
@@ -143,7 +160,7 @@ function hashName(name: string): number {
   return Math.abs(h);
 }
 
-// ─── Avatar (mirrors fcUi.tsx Avatar component) ───────────────────────────────
+// ─── Avatar ───────────────────────────────────────────────────────────────────
 
 function Avatar({ name, company, size = "sm" }: { name: string; company?: string; size?: "sm" | "md" }) {
   const hue = AVATAR_HUES[hashName(name) % AVATAR_HUES.length];
@@ -161,7 +178,7 @@ function Avatar({ name, company, size = "sm" }: { name: string; company?: string
   );
 }
 
-// ─── Temperature dot (mirrors TEMP_META) ─────────────────────────────────────
+// ─── Temperature dot ──────────────────────────────────────────────────────────
 
 const TEMP_DOT: Record<string, string> = {
   frio:   "bg-slate-400",
@@ -169,19 +186,15 @@ const TEMP_DOT: Record<string, string> = {
   quente: "bg-emerald-400",
 };
 
-// ─── ProspectCard (mirrors PipelinePage FunnelColumn card) ───────────────────
+// ─── ProspectCard ─────────────────────────────────────────────────────────────
 
 function ProspectCard({
   p,
   lifted = false,
-  faded = false,
-  highlighted = false,
   showWin = false,
 }: {
   p: MockProspect;
   lifted?: boolean;
-  faded?: boolean;
-  highlighted?: boolean;
   showWin?: boolean;
 }) {
   const showAlert = p.nextStep && (p.nextUrgency === "critical" || p.nextUrgency === "high");
@@ -198,10 +211,10 @@ function ProspectCard({
   return (
     <div
       className={`rounded-xl bg-[#101013] border p-3 shadow-sm transition-all duration-300 ${
-        lifted ? "-translate-y-1 shadow-xl border-white/20 ring-1 ring-primary/30" :
-        highlighted ? "border-cyan-500/40 ring-1 ring-cyan-500/20 shadow-lg shadow-cyan-500/10" :
-        "border-white/[0.07]"
-      } ${faded ? "opacity-25 scale-95" : "opacity-100"}`}
+        lifted
+          ? "-translate-y-1 shadow-xl border-white/20 ring-1 ring-primary/30"
+          : "border-white/[0.07]"
+      }`}
     >
       <div className="flex items-center gap-2.5">
         <Avatar name={p.firstName} company={p.company} size="sm" />
@@ -216,9 +229,9 @@ function ProspectCard({
 
       {/* Win badge */}
       {showWin && (
-        <div className="mt-2 flex items-center gap-1.5 px-2 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20">
-          <HandCoins size={11} className="text-cyan-400 flex-shrink-0" />
-          <span className="text-cyan-400 text-[10px] font-semibold">Oferta enviada!</span>
+        <div className="mt-2 flex items-center gap-1.5 px-2 py-1 rounded-lg bg-primary/10 border border-primary/20">
+          <HandCoins size={11} className="text-primary flex-shrink-0" />
+          <span className="text-primary text-[10px] font-semibold">Em contato!</span>
         </div>
       )}
 
@@ -250,25 +263,19 @@ function ProspectCard({
   );
 }
 
-// ─── FunnelColumn (mirrors PipelinePage FunnelColumn) ────────────────────────
+// ─── FunnelColumn ─────────────────────────────────────────────────────────────
 
 function FunnelColumn({
   stage,
   prospects,
-  isOver = false,
   muted = false,
   liftedId,
-  fadedId,
-  highlightedId,
   winId,
 }: {
   stage: string;
   prospects: MockProspect[];
-  isOver?: boolean;
   muted?: boolean;
   liftedId?: string;
-  fadedId?: string;
-  highlightedId?: string;
   winId?: string;
 }) {
   const meta = STAGE_META[stage];
@@ -277,11 +284,10 @@ function FunnelColumn({
 
   return (
     <div
-      className={`flex flex-col flex-1 min-w-[140px] rounded-2xl border transition-all duration-200 ${
-        isOver
-          ? `${meta.border} ${meta.bg} ring-1 ring-inset ring-white/10`
-          : `border-white/[0.05] ${muted ? "bg-transparent" : "bg-white/[0.015]"}`
+      className={`flex flex-col rounded-2xl border transition-all duration-200 flex-shrink-0 ${
+        `border-white/[0.05] ${muted ? "bg-transparent" : "bg-white/[0.015]"}`
       }`}
+      style={{ width: 248 }}
     >
       {/* Column header */}
       <div className="px-3 pt-3 pb-2 flex items-center gap-2">
@@ -302,10 +308,8 @@ function FunnelColumn({
       {/* Cards */}
       <div className="flex-1 px-2 pb-2 space-y-2">
         {prospects.length === 0 && (
-          <div className={`py-8 text-center rounded-xl border border-dashed transition-all ${
-            isOver ? meta.border : "border-white/[0.04]"
-          }`}>
-            <p className="text-gray-700 text-[10px]">{isOver ? "Solte aqui" : "Vazio"}</p>
+          <div className="py-8 text-center rounded-xl border border-dashed border-white/[0.04]">
+            <p className="text-gray-700 text-[10px]">Vazio</p>
           </div>
         )}
         {prospects.map((p) => (
@@ -313,8 +317,6 @@ function FunnelColumn({
             key={p.id}
             p={p}
             lifted={p.id === liftedId}
-            faded={p.id === fadedId}
-            highlighted={p.id === highlightedId}
             showWin={p.id === winId}
           />
         ))}
@@ -323,11 +325,11 @@ function FunnelColumn({
   );
 }
 
-// ─── Sales-mode top bar (mirrors SalesModeLayout header) ──────────────────────
+// ─── Sales-mode top bar ───────────────────────────────────────────────────────
 
 const NAV_ITEMS_SALES = [
-  { icon: Home,     label: "Hoje",       active: false },
-  { icon: Kanban,   label: "Pipeline",   active: true  },
+  { icon: Home,      label: "Hoje",       active: false },
+  { icon: Kanban,    label: "Pipeline",   active: true  },
   { icon: BarChart3, label: "Resultados", active: false },
   { icon: Briefcase, label: "Serviços",   active: false },
 ];
@@ -372,7 +374,6 @@ function SalesModeTopBar() {
 
       {/* Right: daily goal + CTA */}
       <div className="flex items-center gap-2.5">
-        {/* Daily goal indicator */}
         <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.05]">
           <Flame size={11} className="text-primary" />
           <div className="w-14 h-1 rounded-full bg-white/[0.07] overflow-hidden">
@@ -380,7 +381,6 @@ function SalesModeTopBar() {
           </div>
           <span className="text-[10px] font-bold tabular-nums text-primary">3/5</span>
         </div>
-        {/* CTA */}
         <div className="flex items-center gap-1 pl-2.5 pr-3 py-1.5 rounded-xl bg-primary text-black text-[11px] font-bold shadow-lg shadow-primary/20">
           <Plus size={13} strokeWidth={2.5} />
           Novo prospect
@@ -390,7 +390,7 @@ function SalesModeTopBar() {
   );
 }
 
-// ─── Pipeline header (mirrors PipelinePage header) ────────────────────────────
+// ─── Pipeline header ──────────────────────────────────────────────────────────
 
 function PipelineHeader({ totalCount, pipelineValue }: { totalCount: number; pipelineValue: number }) {
   return (
@@ -436,88 +436,110 @@ function PipelineHeader({ totalCount, pipelineValue }: { totalCount: number; pip
 // ─── Main component ───────────────────────────────────────────────────────────
 
 /**
- * Forge sequence (5 steps, 1500ms, loops):
- *   0 — IDLE:     Pipeline loaded, all cards in initial positions
- *   1 — LIFT:     "Clínica Saúde+" lifts in "Abordar" (highlighted, -translate-y, glow)
- *   2 — TRANSIT:  Card fades in source column (faded), target "Oferta feita" glows
- *   3 — LAND:     Card appears in "Oferta feita" (highlighted), "Abordar" count -1
- *   4 — SETTLE:   Win badge on moved card, columns normalize
- *   (loops to 0)
+ * Animation: horizontal pan (translateX) of the kanban row.
+ *
+ * Pan sequence (pendulum):
+ *   step 0 → translateX(  0px)  — shows Prospectar … Pensando
+ *   step 1 → translateX(-380px) — shows Abordar … Fechou
+ *   step 2 → translateX(-760px) — shows Oferta feita … Não quis
+ *   step 3 → translateX(-380px) — swings back to center
+ *   → loops back to step 0
+ *
+ * Card lift accent: "Clínica Saúde+" (id p3, stage "abordar") lifts at step 1
+ *   and shows a small badge at step 2 (visible when pan is centred on Abordar column).
+ *
+ * Reduced-motion: pinned to step 1 (−380px), showing a balanced mid-view.
  */
 export default function MockProspeccao({ active }: { active?: boolean }) {
-  const { step, ref } = useForge(5, { active, loop: true, interval: 1500 });
+  const outerRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
+  const [visible, setVisible] = useState(false);
 
-  // The card that moves: "Clínica Saúde+" (id: p3), from "abordar" → "oferta_feita"
-  const MOVING_CARD_ID = "p3";
-  const MOVING_CARD = PROSPECTS.find((p) => p.id === MOVING_CARD_ID)!;
+  // IntersectionObserver
+  useEffect(() => {
+    const el = outerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setVisible(entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
-  // Build column data per step
-  // step 0,1,2: card is in "abordar"; step 3,4: card is in "oferta_feita"
-  const cardInSource = step < 3;
-  const cardInTarget = step >= 3;
+  // Step ticker — respects visibility, active, and reduced-motion
+  useEffect(() => {
+    const reduce =
+      typeof matchMedia !== "undefined" &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const byStage = (stage: string): MockProspect[] => {
-    return PROSPECTS.filter((p) => {
-      if (p.id === MOVING_CARD_ID) {
-        if (stage === "abordar") return cardInSource;
-        if (stage === "oferta_feita") return cardInTarget;
-        return false;
-      }
-      return p.stage === stage;
-    });
-  };
+    if (reduce) {
+      setStep(1); // pin to mid-view
+      return;
+    }
 
-  // Animation states
-  const liftedId    = step === 1 ? MOVING_CARD_ID : undefined;
-  const fadedId     = step === 2 ? MOVING_CARD_ID : undefined;
-  const highlightedId = step === 3 ? MOVING_CARD_ID : undefined;
-  const winId       = step === 4 ? MOVING_CARD_ID : undefined;
+    if (!visible || active === false) return;
 
-  // Column glow: "oferta_feita" glows when card is about to land
-  const ofertaOver  = step === 2;
+    let i = step;
+    const t = setInterval(() => {
+      i = (i + 1) % PAN_STEP_COUNT;
+      setStep(i);
+    }, 2000);
 
-  // Total prospects (active pipeline only, not outcomes)
-  const activeProspects = PROSPECTS.filter((p) => !STAGE_META[p.stage]?.outcome);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, active]);
+
+  // Pan translateX driven by current step
+  const translateX = PAN_POSITIONS[step] ?? 0;
+
+  // Card accent: lift p3 when centred on Abordar column (step 1)
+  const liftedId = step === 1 ? "p3" : undefined;
+  // Show win badge on p3 when at step 2 (pan moved past, still in column)
+  const winId = step === 2 ? "p3" : undefined;
+
+  // Stats
+  const activeProspects = PROSPECTS.filter((p) => !OUTCOME_STAGES.has(p.stage));
   const totalCount = activeProspects.length;
   const pipelineValue = activeProspects.reduce((s, p) => s + p.valueNum, 0);
 
+  // Prospects per stage
+  const byStage = (stage: string) => PROSPECTS.filter((p) => p.stage === stage);
+
   return (
-    <div ref={ref} className="flex flex-col gap-4">
-      {/* Sales-mode top bar (folded in from topbar slot) */}
+    <div ref={outerRef} className="flex flex-col gap-4">
+      {/* Sales-mode top bar */}
       <SalesModeTopBar />
 
       <div className="space-y-4">
         {/* Pipeline header */}
         <PipelineHeader totalCount={totalCount} pipelineValue={pipelineValue} />
 
-        {/* Kanban board — all columns side by side, no overflow */}
-        <div className="flex gap-2">
-          {/* Active stages */}
-          {ACTIVE_STAGES.map((stage) => (
-            <FunnelColumn
-              key={stage}
-              stage={stage}
-              prospects={byStage(stage)}
-              isOver={stage === "oferta_feita" && ofertaOver}
-              liftedId={stage === "abordar" ? liftedId : undefined}
-              fadedId={stage === "abordar" ? fadedId : undefined}
-              highlightedId={stage === "oferta_feita" ? highlightedId : undefined}
-              winId={stage === "oferta_feita" ? winId : undefined}
-            />
-          ))}
-
-          {/* Separator */}
-          <div className="w-px bg-white/[0.06] mx-0.5 flex-shrink-0 self-stretch" />
-
-          {/* Outcome stages */}
-          {OUTCOME_STAGES.map((stage) => (
-            <FunnelColumn
-              key={stage}
-              stage={stage}
-              prospects={byStage(stage)}
-              muted
-            />
-          ))}
+        {/*
+          Kanban board — overflow hidden wrapper so columns beyond the right edge
+          are simply cropped by the existing viewport overflow:hidden.
+          The row itself is wider than the content area (~1984px for 8 columns).
+        */}
+        <div className="overflow-hidden">
+          <div
+            className="flex gap-2"
+            style={{
+              transform: `translateX(${translateX}px)`,
+              transition: "transform 0.85s cubic-bezier(0.45, 0, 0.3, 1)",
+              willChange: "transform",
+            }}
+          >
+            {ALL_STAGES.map((stage) => (
+              <FunnelColumn
+                key={stage}
+                stage={stage}
+                prospects={byStage(stage)}
+                muted={OUTCOME_STAGES.has(stage)}
+                liftedId={stage === "abordar" ? liftedId : undefined}
+                winId={stage === "abordar" ? winId : undefined}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
