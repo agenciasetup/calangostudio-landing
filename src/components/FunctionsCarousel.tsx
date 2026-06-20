@@ -30,8 +30,6 @@ const CAROUSEL_KEYS = [
   "prospeccao",
 ] as const;
 
-type CarouselKey = (typeof CAROUSEL_KEYS)[number];
-
 const CAROUSEL_ENTRIES = CAROUSEL_KEYS.map((key) => {
   const entry = FUNCTIONS.find((f) => f.key === key);
   if (!entry) throw new Error(`FunctionsCarousel: registry missing key "${key}"`);

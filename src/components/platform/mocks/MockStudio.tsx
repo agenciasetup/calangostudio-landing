@@ -26,13 +26,11 @@ import Image from "next/image";
 import {
   ArrowLeft,
   Brush,
-  Circle,
   Download,
   Eraser,
   Grid3X3,
   Keyboard,
   Hand,
-  Hexagon,
   ImageIcon,
   LayoutTemplate,
   Library,

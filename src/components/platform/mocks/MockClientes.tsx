@@ -30,7 +30,6 @@
 import {
   Plus,
   Users,
-  Lock,
   Wand2,
   Kanban,
   Trash2,

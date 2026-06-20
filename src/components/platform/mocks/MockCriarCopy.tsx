@@ -29,7 +29,6 @@ import {
   RefreshCw,
   Sparkles,
   Wand2,
-  Loader2,
   Palette,
   Save,
   Copy,
@@ -38,12 +37,10 @@ import {
   MessageCircle,
   Send,
   Bookmark,
-  Image as ImageIcon,
   User,
   Users,
 } from "lucide-react";
 import { StudioTopBar } from "../StudioTopBar";
-import { criarCopyPosts } from "../mockData";
 import { useForge } from "../useForge";
 import { useState } from "react";
 
