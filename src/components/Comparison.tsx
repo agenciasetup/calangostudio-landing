@@ -2,7 +2,11 @@
 
 import { motion } from "framer-motion";
 import { X, ArrowRight, CheckCircle, Zap } from "lucide-react";
-import { useAffiliatePricing } from "@/hooks/useAffiliatePricing";
+import { useAffiliate } from "@/lib/useAffiliate";
+
+// Preço do plano Pro — fonte única de verdade com a seção de Planos (Pricing.tsx).
+const PRO_PRICE_DIRECT = "199,90";
+const PRO_PRICE_AFFILIATE = "169,90";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -50,7 +54,11 @@ const itemVariantsRight = {
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function Comparison() {
-  const { isAffiliate, proPrice, proPriceOriginal } = useAffiliatePricing();
+  // Mesma detecção de afiliado da seção de Planos (?ref= → localStorage), pra os
+  // dois preços nunca divergirem.
+  const isAffiliate = !!useAffiliate();
+  const proPrice = isAffiliate ? PRO_PRICE_AFFILIATE : PRO_PRICE_DIRECT;
+  const proPriceOriginal = PRO_PRICE_DIRECT;
 
   return (
     <section className="section-inset py-20 md:py-28 px-4 relative overflow-hidden">
