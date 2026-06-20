@@ -3,158 +3,193 @@
 /**
  * Hero — premium full-section hero for Calango Studio.
  *
- * Animation: step-machine driven by a setInterval (step 0–4, ~1800ms each).
- * Respects prefers-reduced-motion: pins to a static "designed" final state.
+ * LEFT column: copy (headline / subhead / CTAs / proof line) — unchanged.
  *
- * Steps:
- *   0 — idle    cursor parked off-artboard, no selection, headline opacity 1
- *   1 — select  cursor on headline, selection box appears, layer highlighted
- *   2 — opacity cursor on slider, slider + headline opacity → 55%
- *   3 — color   cursor on swatches, swatch gets accent ring, opacity eases back
- *   4 — rest    selection fades, cursor drifts off → loop to 0
+ * RIGHT column: CreativeScene — a curated, ambient, ABSTRACT composition.
+ * NOT a literal editor. ~8 overlapping design-tool motifs (shapes, swatches,
+ * floating creative card, tool glyphs, a hint of a selection box) drifting and
+ * bobbing on offset timings, with a couple of accents smoothly cycling hue
+ * (filter: hue-rotate over ~16–20s) — the "mudando o HSL" the user asked for.
+ *
+ * Motion is GPU-friendly (transform / opacity / filter only). With
+ * prefers-reduced-motion the scene renders as a calm, beautifully-arranged
+ * STATIC composition (every animate prop collapses to its resting value and the
+ * hue-rotate keyframes are disabled via inline style).
  */
 
-import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import type { Transition } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
   MousePointer2,
   Type as TypeIcon,
-  Square,
-  Brush,
-  ImageIcon,
+  Pipette,
+  SlidersHorizontal,
   Sparkles,
+  Square,
 } from "lucide-react";
 
-const ARTBOARD_IMAGE = "/images/resultados/car_criativo.jpg";
-const STEP_MS = 1800;
-const TOTAL_STEPS = 5; // 0…4
+const FLOATING_IMAGE = "/images/resultados/car_criativo.jpg";
 
-// ── Smooth spring transition used for all animated properties ────────────────
-const SMOOTH = { type: "spring", stiffness: 160, damping: 28 } as const;
-const EASE = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } as const;
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  Step machine hook
-// ─────────────────────────────────────────────────────────────────────────────
-function useAnimStep(reduced: boolean): number {
-  const [step, setStep] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    if (reduced) return;
-    intervalRef.current = setInterval(() => {
-      setStep((s) => (s + 1) % TOTAL_STEPS);
-    }, STEP_MS);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [reduced]);
-
-  return step;
+// A slow looping float helper — keeps every element on its own offset so the
+// composition reads as organic rather than synchronized.
+function floatTransition(duration: number, delay: number): Transition {
+  return {
+    duration,
+    delay,
+    repeat: Infinity,
+    repeatType: "mirror",
+    ease: "easeInOut",
+  };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Cursor positions per step (as % of the canvas region)
-//  These are absolute pixel-fraction positions for the top-left of the cursor.
+//  Squircle "artboard" — soft glass tile drifting + slow rotate
 // ─────────────────────────────────────────────────────────────────────────────
-const CURSOR_TARGETS: Record<number, { x: string; y: string }> = {
-  0: { x: "90%", y: "8%" },   // idle — top-right corner, outside artboard
-  1: { x: "50%", y: "62%" },  // select — on the headline text
-  2: { x: "28%", y: "82%" },  // opacity — on the opacity slider
-  3: { x: "55%", y: "82%" },  // color — on the swatch area
-  4: { x: "92%", y: "10%" },  // rest — drift back off
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  Editor cursor — absolutely positioned SVG pointer + "Você" tag
-// ─────────────────────────────────────────────────────────────────────────────
-function EditorCursor({ step, reduced }: { step: number; reduced: boolean }) {
-  const target = reduced ? CURSOR_TARGETS[1] : CURSOR_TARGETS[step];
-
+function Squircle({ reduced }: { reduced: boolean }) {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none absolute left-0 top-0 z-40"
-      animate={{ x: target.x, y: target.y }}
-      transition={EASE}
+      className="pointer-events-none absolute left-[8%] top-[14%] h-[150px] w-[128px] sm:h-[190px] sm:w-[164px]"
+      style={{
+        borderRadius: "38% 42% 40% 36% / 40% 38% 42% 40%",
+        background:
+          "linear-gradient(150deg, rgba(255,170,0,0.16), rgba(255,123,71,0.05) 60%, transparent)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        backdropFilter: "blur(2px)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
+        willChange: "transform",
+      }}
+      animate={
+        reduced
+          ? { rotate: -6 }
+          : { y: [0, -18, 0], x: [0, 8, 0], rotate: [-7, -2, -7] }
+      }
+      transition={reduced ? undefined : floatTransition(13, 0)}
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Hue-cycling gradient orbs — the "mudando o HSL" accents.
+//  The hue-rotate runs as a CSS keyframe (className) so it loops independently
+//  of framer-motion's transform float; under reduced-motion we drop the class.
+// ─────────────────────────────────────────────────────────────────────────────
+function HueOrb({
+  reduced,
+  className,
+  size,
+  duration,
+  delay,
+  drift,
+}: {
+  reduced: boolean;
+  className: string;
+  size: number;
+  duration: number;
+  delay: number;
+  drift: { y: number; x: number };
+}) {
+  return (
+    <motion.div
+      aria-hidden
+      className={`pointer-events-none absolute rounded-full ${
+        reduced ? "" : "hero-hue-cycle"
+      } ${className}`}
+      style={{
+        height: size,
+        width: size,
+        background:
+          "radial-gradient(circle at 35% 30%, #ffd27a, #ffaa00 38%, #ff7b47 72%, rgba(255,123,71,0.15))",
+        filter: "blur(0.5px)",
+        mixBlendMode: "screen",
+        opacity: 0.85,
+        willChange: "transform, filter",
+      }}
+      animate={
+        reduced
+          ? undefined
+          : { y: [0, drift.y, 0], x: [0, drift.x, 0] }
+      }
+      transition={reduced ? undefined : floatTransition(duration, delay)}
+    />
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Floating creative card — grounds the scene as "criativos"
+// ─────────────────────────────────────────────────────────────────────────────
+function CreativeCard({ reduced }: { reduced: boolean }) {
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute right-[6%] top-[20%] z-20 w-[150px] sm:w-[182px]"
       style={{ willChange: "transform" }}
+      animate={
+        reduced
+          ? { rotate: 5 }
+          : { y: [0, 16, 0], rotate: [4, 7, 4] }
+      }
+      transition={reduced ? undefined : floatTransition(11, 0.6)}
     >
-      {/* nudge the tip to be the pointer hotspot */}
-      <div className="relative -translate-x-1 -translate-y-1">
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          className="drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
-        >
-          <path
-            d="M4 2.5 L18.5 11 L11.5 12.2 L8.4 18.8 Z"
-            fill="#ffffff"
-            stroke="#0b0b0b"
-            strokeWidth="1.1"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <span
-          className="absolute left-4 top-4 whitespace-nowrap rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-[#0b0b0b]"
-          style={{ background: "linear-gradient(135deg,#ffaa00,#ff7b47)" }}
-        >
-          Você
-        </span>
+      <div
+        className="relative overflow-hidden rounded-[18px] border border-white/12"
+        style={{
+          aspectRatio: "4 / 5",
+          boxShadow:
+            "0 30px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.07)",
+        }}
+      >
+        <Image
+          src={FLOATING_IMAGE}
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 640px) 45vw, 182px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/15" />
+        <div className="absolute left-2.5 top-2.5 flex items-center gap-1 rounded-full border border-white/20 bg-black/40 px-2 py-0.5 backdrop-blur-sm">
+          <Sparkles size={9} className="text-[#ffaa00]" />
+          <span className="text-[8px] font-semibold uppercase tracking-wider text-white/90">
+            Criativo · IA
+          </span>
+        </div>
       </div>
     </motion.div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Selection box — dashed accent border + 8 square handles
-//  Visible when step is 1 (select) or 2 (opacity) or 3 (color)
+//  Hint of a selection box — dashed accent border + 4 corner handles, drifting
 // ─────────────────────────────────────────────────────────────────────────────
-const HANDLE_POSITIONS: Array<{ left: string; top: string }> = [
+const CORNERS = [
   { left: "0%", top: "0%" },
-  { left: "50%", top: "0%" },
   { left: "100%", top: "0%" },
-  { left: "0%", top: "50%" },
-  { left: "100%", top: "50%" },
   { left: "0%", top: "100%" },
-  { left: "50%", top: "100%" },
   { left: "100%", top: "100%" },
 ];
 
-function SelectionBox({ step, reduced }: { step: number; reduced: boolean }) {
-  const visible = reduced || (step >= 1 && step <= 3);
-
+function SelectionHint({ reduced }: { reduced: boolean }) {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none absolute z-30"
-      style={{
-        // positioned over the headline text area inside the artboard
-        left: "16%",
-        right: "16%",
-        top: "60%",
-        height: "14%",
-        transformOrigin: "center center",
-        willChange: "opacity, transform",
-      }}
-      animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.96 }}
-      transition={SMOOTH}
+      className="pointer-events-none absolute left-[26%] top-[58%] z-30 h-[78px] w-[120px] sm:h-[96px] sm:w-[150px]"
+      style={{ willChange: "transform, opacity" }}
+      animate={
+        reduced
+          ? { opacity: 0.9, rotate: -3 }
+          : { y: [0, -12, 0], x: [0, -6, 0], rotate: [-4, 0, -4], opacity: [0.75, 1, 0.75] }
+      }
+      transition={reduced ? undefined : floatTransition(15, 1.2)}
     >
-      {/* dashed accent border */}
-      <div className="absolute inset-0 rounded-[4px] border border-dashed border-[#ffaa00]" />
-      {/* 8 handles */}
-      {HANDLE_POSITIONS.map((h, i) => (
+      <div className="absolute inset-0 rounded-[6px] border border-dashed border-[#ffaa00]/80" />
+      {CORNERS.map((c, i) => (
         <span
           key={i}
           className="absolute h-2 w-2 rounded-[2px] border border-[#030303] bg-[#ffaa00] shadow-[0_0_6px_rgba(255,170,0,0.6)]"
-          style={{
-            left: h.left,
-            top: h.top,
-            transform: "translate(-50%,-50%)",
-          }}
+          style={{ left: c.left, top: c.top, transform: "translate(-50%,-50%)" }}
         />
       ))}
     </motion.div>
@@ -162,57 +197,81 @@ function SelectionBox({ step, reduced }: { step: number; reduced: boolean }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Opacity control — floating mini-slider, appears only in step 2
+//  Floating tool glyph — frosted chip with a lucide icon, gentle bob
 // ─────────────────────────────────────────────────────────────────────────────
-function OpacityControl({ step, reduced }: { step: number; reduced: boolean }) {
-  const opacityValue = (reduced || step === 2) ? 0.55 : 1;
-  const thumbPct = opacityValue * 100; // 55 or 100
-  const label = `${Math.round(thumbPct)}%`;
-  const visible = reduced || step === 2;
-
+function ToolGlyph({
+  reduced,
+  Icon,
+  className,
+  duration,
+  delay,
+  drift,
+  accent = false,
+}: {
+  reduced: boolean;
+  Icon: typeof MousePointer2;
+  className: string;
+  duration: number;
+  delay: number;
+  drift: { y: number; x: number; r: number };
+  accent?: boolean;
+}) {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none absolute z-40"
-      style={{ left: "10%", bottom: "6%", willChange: "opacity" }}
-      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 8 }}
-      transition={SMOOTH}
+      className={`pointer-events-none absolute z-30 flex h-9 w-9 items-center justify-center rounded-xl border backdrop-blur-md sm:h-10 sm:w-10 ${className}`}
+      style={{
+        background: accent
+          ? "linear-gradient(135deg, rgba(255,170,0,0.22), rgba(255,123,71,0.12))"
+          : "rgba(255,255,255,0.05)",
+        borderColor: accent ? "rgba(255,170,0,0.4)" : "rgba(255,255,255,0.12)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.45)",
+        willChange: "transform",
+      }}
+      animate={
+        reduced
+          ? { rotate: drift.r * 0.4 }
+          : { y: [0, drift.y, 0], x: [0, drift.x, 0], rotate: [0, drift.r, 0] }
+      }
+      transition={reduced ? undefined : floatTransition(duration, delay)}
+    >
+      <Icon size={16} className={accent ? "text-[#ffaa00]" : "text-zinc-300"} />
+    </motion.div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Opacity chip — a small "Opacidade" slider, a wink of "editing"
+// ─────────────────────────────────────────────────────────────────────────────
+function OpacityChip({ reduced }: { reduced: boolean }) {
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute bottom-[12%] left-[14%] z-30"
+      style={{ willChange: "transform" }}
+      animate={
+        reduced
+          ? { rotate: 2 }
+          : { y: [0, -10, 0], rotate: [0, 2, 0] }
+      }
+      transition={reduced ? undefined : floatTransition(12, 1.8)}
     >
       <div
-        className="rounded-xl border border-white/10 px-3 py-2.5 backdrop-blur-md"
-        style={{
-          background: "rgba(255,255,255,0.05)",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-        }}
+        className="rounded-xl border border-white/12 px-3 py-2 backdrop-blur-md"
+        style={{ background: "rgba(255,255,255,0.05)", boxShadow: "0 10px 30px rgba(0,0,0,0.45)" }}
       >
-        <div className="mb-2 flex items-center justify-between gap-6">
-          <span className="text-[9px] font-semibold uppercase tracking-wider text-zinc-400">
+        <div className="mb-1.5 flex items-center gap-1.5">
+          <SlidersHorizontal size={10} className="text-[#ffaa00]" />
+          <span className="text-[8px] font-semibold uppercase tracking-wider text-zinc-400">
             Opacidade
           </span>
-          <motion.span
-            className="text-[10px] font-bold tabular-nums text-[#ffaa00]"
-            animate={{ opacity: 1 }}
-            key={label}
-          >
-            {label}
-          </motion.span>
         </div>
-        {/* Track */}
-        <div className="relative h-1.5 w-32 rounded-full bg-white/10">
-          {/* Accent fill */}
-          <motion.div
-            className="absolute inset-y-0 left-0 rounded-full"
+        <div className="relative h-1.5 w-24 rounded-full bg-white/10">
+          <div
+            className="absolute inset-y-0 left-0 w-[62%] rounded-full"
             style={{ background: "linear-gradient(90deg,#ffaa00,#ff7b47)" }}
-            animate={{ width: `${thumbPct}%` }}
-            transition={EASE}
           />
-          {/* Thumb */}
-          <motion.div
-            className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#030303] bg-white shadow-[0_0_8px_rgba(255,170,0,0.5)]"
-            animate={{ left: `${thumbPct}%` }}
-            transition={EASE}
-            style={{ willChange: "left" }}
-          />
+          <div className="absolute left-[62%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#030303] bg-white shadow-[0_0_8px_rgba(255,170,0,0.5)]" />
         </div>
       </div>
     </motion.div>
@@ -220,252 +279,135 @@ function OpacityControl({ step, reduced }: { step: number; reduced: boolean }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Layers panel — "Headline" row highlights when step ≥ 1 and ≤ 3
+//  Color swatches strip — a hue-cycling accent (the playful HSL move)
 // ─────────────────────────────────────────────────────────────────────────────
-function LayersPanel({ step, reduced }: { step: number; reduced: boolean }) {
-  const highlighted = reduced || (step >= 1 && step <= 3);
-
-  const rows = [
-    { icon: TypeIcon, label: "Headline", active: true },
-    { icon: ImageIcon, label: "Foto", active: false },
-    { icon: Square, label: "Fundo", active: false },
-  ];
-
+function SwatchStrip({ reduced }: { reduced: boolean }) {
   return (
-    <div className="hidden h-full w-[112px] shrink-0 flex-col gap-1 border-l border-white/[0.06] bg-white/[0.012] p-2 sm:flex">
-      <div className="mb-1 px-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">
-        Camadas
-      </div>
-      {rows.map((row) => {
-        const Icon = row.icon;
-        return (
-          <div
-            key={row.label}
-            className="relative flex items-center gap-1.5 rounded-md px-1.5 py-1.5"
-          >
-            {row.active && (
-              <motion.span
-                aria-hidden
-                className="absolute inset-0 rounded-md"
-                animate={{
-                  opacity: highlighted ? 1 : 0,
-                }}
-                transition={SMOOTH}
-                style={{
-                  background: "rgba(255,170,0,0.12)",
-                  border: "1px solid rgba(255,170,0,0.35)",
-                  willChange: "opacity",
-                }}
-              />
-            )}
-            <Icon
-              size={11}
-              className={`relative ${row.active ? "text-[#ffaa00]" : "text-zinc-500"}`}
-            />
-            <span
-              className={`relative text-[10px] font-medium ${
-                row.active ? "text-zinc-200" : "text-zinc-500"
-              }`}
-            >
-              {row.label}
-            </span>
-            <span
-              className={`relative ml-auto h-1.5 w-1.5 rounded-full ${
-                row.active ? "bg-[#ffaa00]/70" : "bg-zinc-600"
-              }`}
-            />
-          </div>
-        );
-      })}
-
-      {/* swatch row — swatch 2 gets accent ring on step 3 */}
-      <div className="mt-auto flex items-center gap-1.5 px-1.5 pt-2">
-        {["#ffaa00", "#ff7b47", "#ffffff", "#7c7c87"].map((c, i) => {
-          const swatchActive = (reduced || step === 3) && i === 1;
-          return (
-            <motion.span
-              key={c}
-              className="h-3 w-3 rounded-full border border-white/15"
-              style={{ background: c }}
-              animate={{
-                scale: swatchActive ? 1.35 : 1,
-                boxShadow: swatchActive
-                  ? "0 0 0 2px #ffaa00"
-                  : "0 0 0 0px transparent",
-              }}
-              transition={SMOOTH}
-            />
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  Tool rail
-// ─────────────────────────────────────────────────────────────────────────────
-function ToolRail() {
-  const tools = [
-    { icon: MousePointer2, active: true },
-    { icon: TypeIcon, active: false },
-    { icon: Square, active: false },
-    { icon: Brush, active: false },
-    { icon: ImageIcon, active: false },
-  ];
-  return (
-    <div className="hidden w-9 shrink-0 flex-col items-center gap-1.5 border-r border-white/[0.06] bg-white/[0.012] py-3 sm:flex">
-      {tools.map((t, i) => {
-        const Icon = t.icon;
-        return (
-          <div
-            key={i}
-            className={`flex h-6 w-6 items-center justify-center rounded-md ${
-              t.active
-                ? "bg-[#ffaa00]/15 text-[#ffaa00]"
-                : "text-zinc-600"
-            }`}
-          >
-            <Icon size={13} />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-//  The artboard — headline text opacity is bound to the step
-// ─────────────────────────────────────────────────────────────────────────────
-function Artboard({ step, reduced }: { step: number; reduced: boolean }) {
-  // Headline is faded to 55% only during step 2 (opacity beat)
-  const headlineOpacity = (reduced || step === 2) ? 0.55 : 1;
-
-  return (
-    <div className="relative flex flex-1 items-center justify-center bg-[#050506] p-5 sm:p-7">
-      {/* ambient glow */}
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute right-[16%] bottom-[16%] z-30"
+      style={{ willChange: "transform" }}
+      animate={
+        reduced
+          ? { rotate: -4 }
+          : { y: [0, 14, 0], x: [0, -8, 0], rotate: [-3, 1, -3] }
+      }
+      transition={reduced ? undefined : floatTransition(14, 0.4)}
+    >
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.5]"
-        style={{
-          background:
-            "radial-gradient(120% 80% at 50% 0%, rgba(255,170,0,0.05), transparent 60%)",
-        }}
-      />
-
-      {/* artboard card */}
-      <div
-        className="relative w-full max-w-[230px] overflow-hidden rounded-[14px] border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.6)]"
-        style={{ aspectRatio: "4 / 5" }}
+        className={`flex gap-1.5 rounded-2xl border border-white/12 p-2 backdrop-blur-md ${
+          reduced ? "" : "hero-hue-cycle"
+        }`}
+        style={{ background: "rgba(255,255,255,0.05)", boxShadow: "0 12px 30px rgba(0,0,0,0.45)" }}
       >
-        <Image
-          src={ARTBOARD_IMAGE}
-          alt="Criativo gerado no Calango Studio"
-          fill
-          priority
-          sizes="(max-width: 640px) 60vw, 230px"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/30" />
-
-        {/* badge */}
-        <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full border border-white/20 bg-black/40 px-2 py-0.5 backdrop-blur-sm">
-          <Sparkles size={9} className="text-[#ffaa00]" />
-          <span className="text-[8px] font-semibold uppercase tracking-wider text-white/90">
-            Nova coleção
-          </span>
-        </div>
-
-        {/* headline — opacity controlled by step */}
-        <motion.div
-          className="absolute inset-x-3 bottom-4"
-          animate={{ opacity: headlineOpacity }}
-          transition={EASE}
-          style={{ willChange: "opacity" }}
-        >
-          <p className="font-display text-[1.15rem] font-black leading-[1.05] tracking-tight text-white">
-            Calango
-            <br />
-            Studio
-          </p>
-          <p className="mt-1 text-[8px] font-medium uppercase tracking-[0.2em] text-[#ffaa00]">
-            Direção criativa · IA
-          </p>
-        </motion.div>
+        {["#ffaa00", "#ff7b47", "#ff5d8f", "#7c5cff"].map((c, i) => (
+          <span
+            key={c}
+            className="h-5 w-5 rounded-full border border-white/20"
+            style={{
+              background: c,
+              boxShadow: i === 0 ? "0 0 0 2px rgba(255,170,0,0.5)" : undefined,
+            }}
+          />
+        ))}
+        <span className="ml-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-white/15 bg-black/30">
+          <Pipette size={11} className="text-zinc-300" />
+        </span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Editor scene — assembles all pieces
+//  CreativeScene — assembles the floating composition
 // ─────────────────────────────────────────────────────────────────────────────
-function EditorScene() {
+function CreativeScene() {
   const reduced = useReducedMotion() ?? false;
-  const step = useAnimStep(reduced);
 
   return (
-    <div className="relative">
-      {/* ambient glow behind the editor window */}
+    <motion.div
+      initial={reduced ? false : { opacity: 0, scale: 0.97 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      className="relative mx-auto aspect-square w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[520px]"
+    >
+      {/* soft ambient glow blobs behind everything */}
       <div
-        className="pointer-events-none absolute -inset-6 rounded-[40px] opacity-70 blur-[60px]"
+        className="pointer-events-none absolute left-[28%] top-[22%] h-[60%] w-[60%] rounded-full opacity-70 blur-[70px]"
         style={{
           background:
-            "radial-gradient(60% 60% at 70% 30%, rgba(255,170,0,0.18), transparent 70%)",
+            "radial-gradient(circle, rgba(255,170,0,0.20), rgba(255,123,71,0.06) 50%, transparent 72%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute right-[14%] bottom-[18%] h-[42%] w-[42%] rounded-full opacity-60 blur-[60px]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(124,92,255,0.16), transparent 70%)",
         }}
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 28, scale: 0.985 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative overflow-hidden rounded-[22px] border border-white/[0.09]"
-        style={{
-          background: "rgba(10,10,12,0.9)",
-          boxShadow:
-            "0 40px 120px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        {/* hairline accent */}
-        <div className="absolute left-1/2 top-0 h-px w-1/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ffaa00]/50 to-transparent" />
+      {/* layered composition (back → front via z-index) */}
+      <Squircle reduced={reduced} />
 
-        {/* top bar */}
-        <div className="flex items-center gap-3 border-b border-white/[0.06] bg-white/[0.015] px-4 py-2.5">
-          <div className="flex items-center gap-2">
-            <span
-              className="flex h-5 w-5 items-center justify-center rounded-md"
-              style={{ background: "linear-gradient(135deg,#ffaa00,#ff7b47)" }}
-            >
-              <span className="h-2 w-2 rounded-[3px] bg-[#0b0b0b]" />
-            </span>
-            <span className="font-display text-[11px] font-bold tracking-tight text-zinc-200">
-              Calango Studio
-            </span>
-          </div>
-          <span className="mx-auto hidden text-[10px] font-medium text-zinc-500 md:inline">
-            criativo-cliente · 1080×1350
-          </span>
-          <span className="ml-auto rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-semibold tabular-nums text-zinc-400">
-            100%
-          </span>
-        </div>
+      <HueOrb
+        reduced={reduced}
+        className="left-[2%] bottom-[20%] z-10"
+        size={92}
+        duration={17}
+        delay={0.3}
+        drift={{ y: -22, x: 10 }}
+      />
+      <HueOrb
+        reduced={reduced}
+        className="right-[2%] top-[6%] z-10"
+        size={64}
+        duration={20}
+        delay={1.4}
+        drift={{ y: 18, x: -12 }}
+      />
 
-        {/* editor body */}
-        <div className="relative flex h-[330px] sm:h-[380px] md:h-[420px]">
-          <ToolRail />
+      <CreativeCard reduced={reduced} />
+      <SelectionHint reduced={reduced} />
+      <OpacityChip reduced={reduced} />
+      <SwatchStrip reduced={reduced} />
 
-          {/* canvas region — all overlays are positioned relative to this */}
-          <div className="relative flex-1">
-            <Artboard step={step} reduced={reduced} />
-            <SelectionBox step={step} reduced={reduced} />
-            <OpacityControl step={step} reduced={reduced} />
-            <EditorCursor step={step} reduced={reduced} />
-          </div>
-
-          <LayersPanel step={step} reduced={reduced} />
-        </div>
-      </motion.div>
-    </div>
+      {/* drifting design-tool glyphs */}
+      <ToolGlyph
+        reduced={reduced}
+        Icon={MousePointer2}
+        className="left-[40%] top-[6%]"
+        duration={10}
+        delay={0.2}
+        drift={{ y: 14, x: 6, r: -8 }}
+        accent
+      />
+      <ToolGlyph
+        reduced={reduced}
+        Icon={TypeIcon}
+        className="left-[4%] top-[44%]"
+        duration={13}
+        delay={1.1}
+        drift={{ y: -16, x: 8, r: 6 }}
+      />
+      <ToolGlyph
+        reduced={reduced}
+        Icon={Square}
+        className="right-[8%] top-[58%]"
+        duration={12}
+        delay={0.7}
+        drift={{ y: 12, x: -8, r: -6 }}
+      />
+      <ToolGlyph
+        reduced={reduced}
+        Icon={Sparkles}
+        className="right-[34%] top-[10%]"
+        duration={11}
+        delay={1.6}
+        drift={{ y: 16, x: -6, r: 8 }}
+        accent
+      />
+    </motion.div>
   );
 }
 
@@ -551,9 +493,9 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* RIGHT: live editor scene */}
+        {/* RIGHT: ambient creative scene */}
         <div className="relative w-full">
-          <EditorScene />
+          <CreativeScene />
         </div>
       </div>
     </section>

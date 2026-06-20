@@ -212,6 +212,26 @@ body {
   will-change: transform;
 }
 
+/* Hero creative scene — smooth HSL/hue cycling for the color accents
+   (orbs, swatch strip). Loops independently of the framer-motion floats. */
+@keyframes hero-hue-cycle {
+  0%   { filter: hue-rotate(0deg); }
+  50%  { filter: hue-rotate(38deg); }
+  100% { filter: hue-rotate(0deg); }
+}
+
+.hero-hue-cycle {
+  animation: hero-hue-cycle 18s ease-in-out infinite;
+  will-change: filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-hue-cycle {
+    animation: none;
+    filter: none;
+  }
+}
+
 /* ============================================================
    FLOATING PARTICLES (CSS-only for performance)
    ============================================================ */
