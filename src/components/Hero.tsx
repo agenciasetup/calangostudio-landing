@@ -3,22 +3,19 @@
 /**
  * Hero — premium full-section hero for Calango Studio.
  *
- * Signature element: a LIVE design-editing animation. The right side is a
- * minimal design editor (top bar, tool rail, layers panel) wrapped around a
- * real artboard creative. A custom cursor glides in, snaps a selection box
- * onto the headline element, nudges a corner handle, then drags an opacity
- * slider while the element fades in sync — then rests "designed" and loops.
+ * Animation: step-machine driven by a setInterval (step 0–4, ~1800ms each).
+ * Respects prefers-reduced-motion: pins to a static "designed" final state.
  *
- * Layout: copy LEFT, editor scene RIGHT (desktop) / stacked (mobile).
- * Brand: dark #030303, glass panels, accent orange→coral used ONLY for the
- * active selection / highlighted layer / opacity fill / CTA.
- *
- * The VSL lives in DemoSection.tsx — intentionally not here.
- * Respects prefers-reduced-motion: renders a static "designed" final state.
+ * Steps:
+ *   0 — idle    cursor parked off-artboard, no selection, headline opacity 1
+ *   1 — select  cursor on headline, selection box appears, layer highlighted
+ *   2 — opacity cursor on slider, slider + headline opacity → 55%
+ *   3 — color   cursor on swatches, swatch gets accent ring, opacity eases back
+ *   4 — rest    selection fades, cursor drifts off → loop to 0
  */
 
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion, type Transition } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -30,48 +27,62 @@ import {
   Sparkles,
 } from "lucide-react";
 
-// ── Artboard creative (verified to exist, 896×1200 → 3:4 portrait) ───────────
 const ARTBOARD_IMAGE = "/images/resultados/car_criativo.jpg";
+const STEP_MS = 1800;
+const TOTAL_STEPS = 5; // 0…4
 
-// ── Master loop timing ───────────────────────────────────────────────────────
-// One shared duration keeps every track in lock-step. Keyframe `times` below
-// are fractions of this duration, so the cursor, selection, handle nudge and
-// opacity slider all hit their marks together.
-const LOOP = 10.5; // seconds
-
-const loopTransition = (times: number[]): Transition => ({
-  duration: LOOP,
-  times,
-  repeat: Infinity,
-  ease: "easeInOut",
-});
+// ── Smooth spring transition used for all animated properties ────────────────
+const SMOOTH = { type: "spring", stiffness: 160, damping: 28 } as const;
+const EASE = { duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } as const;
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Editor cursor — custom SVG pointer with a tiny name tag
+//  Step machine hook
 // ─────────────────────────────────────────────────────────────────────────────
-function EditorCursor({ reduced }: { reduced: boolean }) {
-  // Path through the artboard (% of the scene box). Beats:
-  // park → glide to headline → hold on selection → grab corner handle →
-  // travel to opacity control → drag → drift to color swatch → exit.
-  const x = reduced
-    ? ["44%"]
-    : ["88%", "48%", "48%", "37%", "37%", "30%", "30%", "63%", "88%"];
-  const y = reduced
-    ? ["63%"]
-    : ["18%", "60%", "60%", "70%", "70%", "84%", "84%", "40%", "18%"];
-  const times = [0, 0.14, 0.26, 0.34, 0.44, 0.52, 0.66, 0.82, 1];
+function useAnimStep(reduced: boolean): number {
+  const [step, setStep] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (reduced) return;
+    intervalRef.current = setInterval(() => {
+      setStep((s) => (s + 1) % TOTAL_STEPS);
+    }, STEP_MS);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [reduced]);
+
+  return step;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Cursor positions per step (as % of the canvas region)
+//  These are absolute pixel-fraction positions for the top-left of the cursor.
+// ─────────────────────────────────────────────────────────────────────────────
+const CURSOR_TARGETS: Record<number, { x: string; y: string }> = {
+  0: { x: "90%", y: "8%" },   // idle — top-right corner, outside artboard
+  1: { x: "50%", y: "62%" },  // select — on the headline text
+  2: { x: "28%", y: "82%" },  // opacity — on the opacity slider
+  3: { x: "55%", y: "82%" },  // color — on the swatch area
+  4: { x: "92%", y: "10%" },  // rest — drift back off
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  Editor cursor — absolutely positioned SVG pointer + "Você" tag
+// ─────────────────────────────────────────────────────────────────────────────
+function EditorCursor({ step, reduced }: { step: number; reduced: boolean }) {
+  const target = reduced ? CURSOR_TARGETS[1] : CURSOR_TARGETS[step];
 
   return (
     <motion.div
       aria-hidden
       className="pointer-events-none absolute left-0 top-0 z-40"
-      initial={reduced ? { x: "44%", y: "63%" } : false}
-      animate={reduced ? { x, y } : { x, y }}
-      transition={reduced ? undefined : loopTransition(times)}
+      animate={{ x: target.x, y: target.y }}
+      transition={EASE}
       style={{ willChange: "transform" }}
     >
+      {/* nudge the tip to be the pointer hotspot */}
       <div className="relative -translate-x-1 -translate-y-1">
-        {/* Pointer glyph */}
         <svg
           width="22"
           height="22"
@@ -87,7 +98,6 @@ function EditorCursor({ reduced }: { reduced: boolean }) {
             strokeLinejoin="round"
           />
         </svg>
-        {/* Name tag */}
         <span
           className="absolute left-4 top-4 whitespace-nowrap rounded-md px-1.5 py-0.5 text-[9px] font-semibold tracking-wide text-[#0b0b0b]"
           style={{ background: "linear-gradient(135deg,#ffaa00,#ff7b47)" }}
@@ -100,111 +110,73 @@ function EditorCursor({ reduced }: { reduced: boolean }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Selection box — dashed accent border + 8 handles, overlaid on the headline
+//  Selection box — dashed accent border + 8 square handles
+//  Visible when step is 1 (select) or 2 (opacity) or 3 (color)
 // ─────────────────────────────────────────────────────────────────────────────
-function SelectionHandles() {
-  // 8 handles on corners + edge midpoints, centered on the box border via
-  // explicit left/top percentages + a -50%/-50% transform.
-  const handles: Array<{ left: string; top: string }> = [
-    { left: "0%", top: "0%" },
-    { left: "50%", top: "0%" },
-    { left: "100%", top: "0%" },
-    { left: "0%", top: "50%" },
-    { left: "100%", top: "50%" },
-    { left: "0%", top: "100%" },
-    { left: "50%", top: "100%" },
-    { left: "100%", top: "100%" },
-  ];
+const HANDLE_POSITIONS: Array<{ left: string; top: string }> = [
+  { left: "0%", top: "0%" },
+  { left: "50%", top: "0%" },
+  { left: "100%", top: "0%" },
+  { left: "0%", top: "50%" },
+  { left: "100%", top: "50%" },
+  { left: "0%", top: "100%" },
+  { left: "50%", top: "100%" },
+  { left: "100%", top: "100%" },
+];
+
+function SelectionBox({ step, reduced }: { step: number; reduced: boolean }) {
+  const visible = reduced || (step >= 1 && step <= 3);
+
   return (
-    <>
-      {handles.map((h, i) => (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute z-30"
+      style={{
+        // positioned over the headline text area inside the artboard
+        left: "16%",
+        right: "16%",
+        top: "60%",
+        height: "14%",
+        transformOrigin: "center center",
+        willChange: "opacity, transform",
+      }}
+      animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.96 }}
+      transition={SMOOTH}
+    >
+      {/* dashed accent border */}
+      <div className="absolute inset-0 rounded-[4px] border border-dashed border-[#ffaa00]" />
+      {/* 8 handles */}
+      {HANDLE_POSITIONS.map((h, i) => (
         <span
           key={i}
           className="absolute h-2 w-2 rounded-[2px] border border-[#030303] bg-[#ffaa00] shadow-[0_0_6px_rgba(255,170,0,0.6)]"
           style={{
             left: h.left,
             top: h.top,
-            transform: "translate(-50%, -50%)",
+            transform: "translate(-50%,-50%)",
           }}
         />
       ))}
-    </>
-  );
-}
-
-function SelectionBox({ reduced }: { reduced: boolean }) {
-  // Selection appears around the headline, then the corner-grab nudges scale.
-  const opacity = reduced ? 1 : [0, 0, 1, 1, 1, 1, 1, 0, 0];
-  const scale = reduced ? 1 : [1, 1, 1, 1.045, 1.045, 1, 1, 1, 1];
-  const times = [0, 0.18, 0.24, 0.34, 0.46, 0.52, 0.74, 0.82, 1];
-
-  return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none absolute z-30"
-      // sits over the headline text element inside the artboard
-      style={{
-        left: "8%",
-        right: "8%",
-        top: "57%",
-        height: "16%",
-        transformOrigin: "left center",
-        willChange: "transform, opacity",
-      }}
-      initial={reduced ? { opacity: 1, scale: 1 } : false}
-      animate={{ opacity, scale }}
-      transition={reduced ? undefined : loopTransition(times)}
-    >
-      <div className="absolute inset-0 rounded-[4px] border border-dashed border-[#ffaa00]" />
-      <SelectionHandles />
     </motion.div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Floating opacity control — thumb slides 100% → 55%, label syncs
+//  Opacity control — floating mini-slider, appears only in step 2
 // ─────────────────────────────────────────────────────────────────────────────
-function OpacityControl({ reduced }: { reduced: boolean }) {
-  // Panel fades in with the slider beat, fades out at rest.
-  const panelOpacity = reduced ? 1 : [0, 0, 0, 1, 1, 1, 0, 0];
-  const panelTimes = [0, 0.34, 0.42, 0.5, 0.66, 0.74, 0.8, 1];
-
-  // Thumb position along the track (left %). 100% → 55%.
-  const thumbLeft = reduced
-    ? ["55%"]
-    : ["100%", "100%", "100%", "55%", "55%", "100%"];
-  const thumbTimes = [0, 0.42, 0.5, 0.6, 0.72, 0.8];
-
-  // Live numeric label, flipped to 55% at ~58% of the loop and back at ~80%,
-  // staying in phase with the slider thumb + element opacity beats.
-  const [label, setLabel] = useState(reduced ? "55%" : "100%");
-  useEffect(() => {
-    if (reduced) return;
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const ms = LOOP * 1000;
-    const schedule = (atFraction: number, value: string) => {
-      timers.push(setTimeout(() => setLabel(value), ms * atFraction));
-    };
-    const runCycle = () => {
-      schedule(0.58, "55%");
-      schedule(0.8, "100%");
-    };
-    runCycle();
-    const loop = setInterval(runCycle, ms);
-    return () => {
-      clearInterval(loop);
-      timers.forEach(clearTimeout);
-    };
-  }, [reduced]);
+function OpacityControl({ step, reduced }: { step: number; reduced: boolean }) {
+  const opacityValue = (reduced || step === 2) ? 0.55 : 1;
+  const thumbPct = opacityValue * 100; // 55 or 100
+  const label = `${Math.round(thumbPct)}%`;
+  const visible = reduced || step === 2;
 
   return (
     <motion.div
       aria-hidden
       className="pointer-events-none absolute z-40"
-      style={{ left: "13%", bottom: "9%", willChange: "opacity" }}
-      initial={reduced ? { opacity: 1 } : false}
-      animate={{ opacity: panelOpacity }}
-      transition={reduced ? undefined : loopTransition(panelTimes)}
+      style={{ left: "10%", bottom: "6%", willChange: "opacity" }}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 8 }}
+      transition={SMOOTH}
     >
       <div
         className="rounded-xl border border-white/10 px-3 py-2.5 backdrop-blur-md"
@@ -217,29 +189,28 @@ function OpacityControl({ reduced }: { reduced: boolean }) {
           <span className="text-[9px] font-semibold uppercase tracking-wider text-zinc-400">
             Opacidade
           </span>
-          <span className="text-[10px] font-bold tabular-nums text-[#ffaa00]">
+          <motion.span
+            className="text-[10px] font-bold tabular-nums text-[#ffaa00]"
+            animate={{ opacity: 1 }}
+            key={label}
+          >
             {label}
-          </span>
+          </motion.span>
         </div>
         {/* Track */}
         <div className="relative h-1.5 w-32 rounded-full bg-white/10">
-          {/* Accent fill follows the thumb (right→left) */}
+          {/* Accent fill */}
           <motion.div
             className="absolute inset-y-0 left-0 rounded-full"
-            style={{
-              background: "linear-gradient(90deg,#ffaa00,#ff7b47)",
-              willChange: "width",
-            }}
-            initial={reduced ? { width: "55%" } : false}
-            animate={{ width: thumbLeft }}
-            transition={reduced ? undefined : loopTransition(thumbTimes)}
+            style={{ background: "linear-gradient(90deg,#ffaa00,#ff7b47)" }}
+            animate={{ width: `${thumbPct}%` }}
+            transition={EASE}
           />
           {/* Thumb */}
           <motion.div
             className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#030303] bg-white shadow-[0_0_8px_rgba(255,170,0,0.5)]"
-            initial={reduced ? { left: "55%" } : false}
-            animate={{ left: thumbLeft }}
-            transition={reduced ? undefined : loopTransition(thumbTimes)}
+            animate={{ left: `${thumbPct}%` }}
+            transition={EASE}
             style={{ willChange: "left" }}
           />
         </div>
@@ -249,12 +220,10 @@ function OpacityControl({ reduced }: { reduced: boolean }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Layers panel — the "Headline" row highlights in sync with the selection
+//  Layers panel — "Headline" row highlights when step ≥ 1 and ≤ 3
 // ─────────────────────────────────────────────────────────────────────────────
-function LayersPanel({ reduced }: { reduced: boolean }) {
-  // highlight on while selection is active
-  const highlight = reduced ? 1 : [0, 0, 1, 1, 1, 1, 0, 0];
-  const times = [0, 0.18, 0.24, 0.46, 0.7, 0.74, 0.8, 1];
+function LayersPanel({ step, reduced }: { step: number; reduced: boolean }) {
+  const highlighted = reduced || (step >= 1 && step <= 3);
 
   const rows = [
     { icon: TypeIcon, label: "Headline", active: true },
@@ -267,26 +236,26 @@ function LayersPanel({ reduced }: { reduced: boolean }) {
       <div className="mb-1 px-1 text-[9px] font-bold uppercase tracking-wider text-zinc-600">
         Camadas
       </div>
-      {rows.map((row, i) => {
+      {rows.map((row) => {
         const Icon = row.icon;
         return (
           <div
             key={row.label}
             className="relative flex items-center gap-1.5 rounded-md px-1.5 py-1.5"
           >
-            {/* highlight wash for the Headline row */}
             {row.active && (
               <motion.span
                 aria-hidden
                 className="absolute inset-0 rounded-md"
+                animate={{
+                  opacity: highlighted ? 1 : 0,
+                }}
+                transition={SMOOTH}
                 style={{
                   background: "rgba(255,170,0,0.12)",
                   border: "1px solid rgba(255,170,0,0.35)",
                   willChange: "opacity",
                 }}
-                initial={reduced ? { opacity: 1 } : false}
-                animate={{ opacity: highlight }}
-                transition={reduced ? undefined : loopTransition(times)}
               />
             )}
             <Icon
@@ -300,45 +269,41 @@ function LayersPanel({ reduced }: { reduced: boolean }) {
             >
               {row.label}
             </span>
-            {/* visibility dot */}
             <span
               className={`relative ml-auto h-1.5 w-1.5 rounded-full ${
-                i === 0 ? "bg-[#ffaa00]/70" : "bg-zinc-600"
+                row.active ? "bg-[#ffaa00]/70" : "bg-zinc-600"
               }`}
             />
           </div>
         );
       })}
 
-      {/* swatch row — cursor "picks" a swatch near the end of the loop */}
+      {/* swatch row — swatch 2 gets accent ring on step 3 */}
       <div className="mt-auto flex items-center gap-1.5 px-1.5 pt-2">
-        {["#ffaa00", "#ff7b47", "#ffffff", "#7c7c87"].map((c, i) => (
-          <motion.span
-            key={c}
-            className="h-3 w-3 rounded-full border border-white/15"
-            style={{ background: c, willChange: "transform" }}
-            initial={reduced ? { scale: i === 1 ? 1.25 : 1 } : false}
-            animate={
-              reduced
-                ? { scale: i === 1 ? 1.25 : 1 }
-                : i === 1
-                  ? { scale: [1, 1, 1, 1.35, 1, 1], boxShadow: ["0 0 0 rgba(0,0,0,0)", "0 0 0 rgba(0,0,0,0)", "0 0 0 rgba(0,0,0,0)", "0 0 8px rgba(255,123,71,0.7)", "0 0 0 rgba(0,0,0,0)", "0 0 0 rgba(0,0,0,0)"] }
-                  : { scale: 1 }
-            }
-            transition={
-              reduced || i !== 1
-                ? undefined
-                : loopTransition([0, 0.78, 0.82, 0.86, 0.92, 1])
-            }
-          />
-        ))}
+        {["#ffaa00", "#ff7b47", "#ffffff", "#7c7c87"].map((c, i) => {
+          const swatchActive = (reduced || step === 3) && i === 1;
+          return (
+            <motion.span
+              key={c}
+              className="h-3 w-3 rounded-full border border-white/15"
+              style={{ background: c }}
+              animate={{
+                scale: swatchActive ? 1.35 : 1,
+                boxShadow: swatchActive
+                  ? "0 0 0 2px #ffaa00"
+                  : "0 0 0 0px transparent",
+              }}
+              transition={SMOOTH}
+            />
+          );
+        })}
       </div>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Tool rail — left edge, lucide tool icons (move tool stays active)
+//  Tool rail
 // ─────────────────────────────────────────────────────────────────────────────
 function ToolRail() {
   const tools = [
@@ -370,18 +335,15 @@ function ToolRail() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  The artboard — the real creative being edited
+//  The artboard — headline text opacity is bound to the step
 // ─────────────────────────────────────────────────────────────────────────────
-function Artboard({ reduced }: { reduced: boolean }) {
-  // The selected headline element's opacity animates in sync with the slider.
-  const elOpacity = reduced
-    ? 0.55
-    : [1, 1, 1, 1, 1, 0.55, 0.55, 1, 1];
-  const elTimes = [0, 0.42, 0.5, 0.56, 0.6, 0.64, 0.74, 0.82, 1];
+function Artboard({ step, reduced }: { step: number; reduced: boolean }) {
+  // Headline is faded to 55% only during step 2 (opacity beat)
+  const headlineOpacity = (reduced || step === 2) ? 0.55 : 1;
 
   return (
     <div className="relative flex flex-1 items-center justify-center bg-[#050506] p-5 sm:p-7">
-      {/* faint artboard checker / glow floor */}
+      {/* ambient glow */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.5]"
         style={{
@@ -390,12 +352,11 @@ function Artboard({ reduced }: { reduced: boolean }) {
         }}
       />
 
-      {/* the design (4:5-ish artboard) */}
+      {/* artboard card */}
       <div
         className="relative w-full max-w-[230px] overflow-hidden rounded-[14px] border border-white/10 shadow-[0_24px_70px_rgba(0,0,0,0.6)]"
         style={{ aspectRatio: "4 / 5" }}
       >
-        {/* photo layer */}
         <Image
           src={ARTBOARD_IMAGE}
           alt="Criativo gerado no Calango Studio"
@@ -404,10 +365,9 @@ function Artboard({ reduced }: { reduced: boolean }) {
           sizes="(max-width: 640px) 60vw, 230px"
           className="object-cover"
         />
-        {/* legibility gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/30" />
 
-        {/* small badge / shape element */}
+        {/* badge */}
         <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full border border-white/20 bg-black/40 px-2 py-0.5 backdrop-blur-sm">
           <Sparkles size={9} className="text-[#ffaa00]" />
           <span className="text-[8px] font-semibold uppercase tracking-wider text-white/90">
@@ -415,12 +375,11 @@ function Artboard({ reduced }: { reduced: boolean }) {
           </span>
         </div>
 
-        {/* headline text element — this is what gets selected + faded */}
+        {/* headline — opacity controlled by step */}
         <motion.div
           className="absolute inset-x-3 bottom-4"
-          initial={reduced ? { opacity: 0.55 } : false}
-          animate={{ opacity: elOpacity }}
-          transition={reduced ? undefined : loopTransition(elTimes)}
+          animate={{ opacity: headlineOpacity }}
+          transition={EASE}
           style={{ willChange: "opacity" }}
         >
           <p className="font-display text-[1.15rem] font-black leading-[1.05] tracking-tight text-white">
@@ -438,10 +397,11 @@ function Artboard({ reduced }: { reduced: boolean }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-//  Editor scene — chrome + rail + artboard + layers + overlays
+//  Editor scene — assembles all pieces
 // ─────────────────────────────────────────────────────────────────────────────
 function EditorScene() {
   const reduced = useReducedMotion() ?? false;
+  const step = useAnimStep(reduced);
 
   return (
     <div className="relative">
@@ -466,10 +426,10 @@ function EditorScene() {
           backdropFilter: "blur(12px)",
         }}
       >
-        {/* hairline accent at the very top */}
+        {/* hairline accent */}
         <div className="absolute left-1/2 top-0 h-px w-1/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[#ffaa00]/50 to-transparent" />
 
-        {/* ── top bar ─────────────────────────────────────────────── */}
+        {/* top bar */}
         <div className="flex items-center gap-3 border-b border-white/[0.06] bg-white/[0.015] px-4 py-2.5">
           <div className="flex items-center gap-2">
             <span
@@ -482,32 +442,27 @@ function EditorScene() {
               Calango Studio
             </span>
           </div>
-
-          {/* center: artboard name */}
           <span className="mx-auto hidden text-[10px] font-medium text-zinc-500 md:inline">
             criativo-cliente · 1080×1350
           </span>
-
-          {/* zoom pill */}
           <span className="ml-auto rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[10px] font-semibold tabular-nums text-zinc-400">
             100%
           </span>
         </div>
 
-        {/* ── editor body ─────────────────────────────────────────── */}
+        {/* editor body */}
         <div className="relative flex h-[330px] sm:h-[380px] md:h-[420px]">
           <ToolRail />
 
-          {/* canvas region (holds artboard + all motion overlays) */}
+          {/* canvas region — all overlays are positioned relative to this */}
           <div className="relative flex-1">
-            <Artboard reduced={reduced} />
-            {/* overlays are positioned relative to this canvas region */}
-            <SelectionBox reduced={reduced} />
-            <OpacityControl reduced={reduced} />
-            <EditorCursor reduced={reduced} />
+            <Artboard step={step} reduced={reduced} />
+            <SelectionBox step={step} reduced={reduced} />
+            <OpacityControl step={step} reduced={reduced} />
+            <EditorCursor step={step} reduced={reduced} />
           </div>
 
-          <LayersPanel reduced={reduced} />
+          <LayersPanel step={step} reduced={reduced} />
         </div>
       </motion.div>
     </div>
@@ -525,7 +480,7 @@ export default function Hero() {
 
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden px-4 pb-20 pt-28 sm:px-6 md:pt-32 lg:px-10">
-      {/* ── ambient background: faint grid + one quiet accent glow ──── */}
+      {/* ambient background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="hero-grid-bg absolute inset-0" />
         <div
@@ -538,7 +493,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">
-        {/* ── LEFT: copy ───────────────────────────────────────────── */}
+        {/* LEFT: copy */}
         <div className="text-center lg:text-left">
           <motion.h1
             initial={{ opacity: 0, y: 22 }}
@@ -596,7 +551,7 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* ── RIGHT: the live editor scene (signature) ─────────────── */}
+        {/* RIGHT: live editor scene */}
         <div className="relative w-full">
           <EditorScene />
         </div>
