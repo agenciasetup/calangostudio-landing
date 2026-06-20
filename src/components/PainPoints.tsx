@@ -149,15 +149,11 @@ export default function PainPoints() {
             Travas do designer
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight leading-tight">
-            Travou em alguma parte
-            <br />
-            do processo?{" "}
-            <span className="text-gradient-animated">O Calango entra aí.</span>
+            Onde você trava,{" "}
+            <span className="text-gradient-animated">o Calango destrava.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            Cada etapa onde você trava,
-            <br className="sm:hidden" />
-            o Studio já tem uma resposta pronta.
+            Da prospecção à entrega — todo gargalo do designer já vem com resposta pronta.
           </p>
         </motion.div>
 

@@ -44,11 +44,11 @@ export default function HowItWorks() {
             Fluxo completo
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            Do primeiro contato{" "}
-            <span className="text-gradient-animated">até a entrega.</span>
+            Do primeiro contato à entrega —{" "}
+            <span className="text-gradient-animated">num fluxo só.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-xl mx-auto">
-            O fluxo completo, sem pular de ferramenta em ferramenta.
+            Sem abrir 6 abas, sem perder o cliente no meio do caminho.
           </p>
         </motion.div>
 
