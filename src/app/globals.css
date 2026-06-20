@@ -629,6 +629,103 @@ body {
 }
 
 /* ============================================================
+   TESTIMONIALS – Real feedback marquee
+   ============================================================ */
+
+/* Section: clip overflow so marquee doesn't bleed into viewport scroll */
+.testimonials-section {
+  overflow: hidden;
+}
+
+/* Each marquee row: full-width, clips its content */
+.marquee-track-wrapper {
+  width: 100%;
+  overflow: hidden;
+  cursor: default;
+  /* Pause animation when cursor enters the row */
+}
+
+.marquee-track-wrapper:hover .scroll-row-left,
+.marquee-track-wrapper:hover .scroll-row-right {
+  animation-play-state: paused;
+}
+
+/* The scrolling track itself */
+.marquee-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  padding: 4px 0; /* room for card box-shadow */
+}
+
+@media (min-width: 768px) {
+  .marquee-track {
+    gap: 16px;
+  }
+}
+
+/* Individual feedback card */
+.feedback-card {
+  width: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .feedback-card {
+    width: 240px;
+    border-radius: 20px;
+  }
+}
+
+.feedback-card:hover,
+.feedback-card:focus-visible {
+  transform: scale(1.04) translateY(-3px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 30px rgba(255, 170, 0, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  z-index: 2;
+  position: relative;
+}
+
+.feedback-card__img {
+  border-radius: inherit;
+}
+
+/* ---- Reduced-motion: hide marquee, show static grid ---- */
+
+.testimonials-static-grid {
+  display: none; /* hidden by default; marquee is shown */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-marquee-area {
+    display: none;
+  }
+
+  .testimonials-static-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .testimonials-static-card {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.40);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ============================================================
    BONUS SECTION – Fábrica de Clientes
    ============================================================ */
 

@@ -1,57 +1,104 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Quote, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
+import Image from "next/image";
 
-const testimonials = [
-  {
-    name: "Gabriel Castro",
-    role: "Designer & Social Media",
-    text: "Reuniram tudo que eu precisava e até mais em um lugar só. Meu fluxo de produção ficou 1000x mais rápido, sem contar a facilidade de usar para o resultado que entrega.",
-    gradient: "from-amber-500 to-orange-500",
-  },
-  {
-    name: "Matheus",
-    role: "Social Media Manager",
-    text: "Surpreendeu em absolutamente tudo. Layout, qualidade e agilidade, tudo com base no nosso serviço. Acelerou meu trampo em MUITOS %.",
-    gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    name: "David",
-    role: "Designer Freelancer",
-    text: "Várias funcionalidades em um só lugar, tirando a necessidade de assinar várias IAs. Melhor investimento que fiz em 2026!",
-    gradient: "from-purple-500 to-violet-500",
-  },
-  {
-    name: "Ruyana Jones",
-    role: "Diretora de Arte",
-    text: "Surpreendeu nos mockups e Upscale. Duas ferramentas boas demais!",
-    gradient: "from-pink-500 to-rose-500",
-  },
-];
+// All 19 real feedback screenshots from public/images/feedbacks/
+const feedbackImages = Array.from({ length: 19 }, (_, i) => ({
+  src: `/images/feedbacks/feedback-${i + 1}.jpg`,
+  alt: `Feedback real de cliente ${i + 1}`,
+}));
 
-function StarRating() {
+// Row 1: images 1–10 → scrolls left
+// Row 2: images 10–19 → scrolls right
+const row1 = feedbackImages.slice(0, 10);
+const row2 = feedbackImages.slice(10, 19);
+
+// Card widths and gaps mirror what's in globals.css
+const CARD_W_DESKTOP = 240;
+const CARD_W_MOBILE = 200;
+const GAP_DESKTOP = 16;
+const GAP_MOBILE = 12;
+
+function computeSetWidth(count: number, cardW: number, gap: number): number {
+  // (cardW + gap) × count — the width of one full set before duplication
+  return (cardW + gap) * count;
+}
+
+interface FeedbackCardProps {
+  src: string;
+  alt: string;
+}
+
+function FeedbackCard({ src, alt }: FeedbackCardProps) {
   return (
-    <div className="flex gap-0.5">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} size={12} className="text-accent fill-accent" />
-      ))}
+    <div
+      className="feedback-card"
+      tabIndex={0}
+      role="img"
+      aria-label={alt}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={240}
+        height={400}
+        loading="lazy"
+        sizes="(max-width: 767px) 200px, 240px"
+        className="feedback-card__img"
+        style={{ width: "100%", height: "auto", display: "block" }}
+      />
+    </div>
+  );
+}
+
+interface MarqueeRowProps {
+  images: typeof feedbackImages;
+  direction: "left" | "right";
+}
+
+function MarqueeRow({ images, direction }: MarqueeRowProps) {
+  // Duplicate the set for a seamless infinite loop
+  const doubled = [...images, ...images];
+  const cls =
+    direction === "left" ? "scroll-row-left" : "scroll-row-right";
+
+  const setWidthDesktop = computeSetWidth(images.length, CARD_W_DESKTOP, GAP_DESKTOP);
+  const setWidthMobile = computeSetWidth(images.length, CARD_W_MOBILE, GAP_MOBILE);
+
+  return (
+    <div className="marquee-track-wrapper" aria-hidden="true">
+      <div
+        className={`marquee-track ${cls}`}
+        style={
+          {
+            "--set-width": `${setWidthDesktop}px`,
+            "--set-width-mobile": `${setWidthMobile}px`,
+          } as React.CSSProperties
+        }
+      >
+        {doubled.map((img, i) => (
+          <FeedbackCard key={`${direction}-${i}`} src={img.src} alt={img.alt} />
+        ))}
+      </div>
     </div>
   );
 }
 
 export default function Testimonials() {
   return (
-    <section className="section-inset py-16 md:py-20 px-4">
+    <section className="section-inset testimonials-section py-16 md:py-20">
       <div className="section-divider max-w-5xl mx-auto mb-12 md:mb-16" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
-          className="text-center mb-10 md:mb-16"
+          className="text-center mb-10 md:mb-14 px-4"
         >
           <span className="badge-pill mb-6 inline-flex">
             <MessageSquare size={12} />
@@ -59,48 +106,50 @@ export default function Testimonials() {
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
             Quem usa,{" "}
-            <span className="text-gradient-animated">
-              não volta atrás.
-            </span>
+            <span className="text-gradient-animated">não volta atrás.</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: Math.min(i * 0.06, 0.2), duration: 0.4 }}
-              whileHover={{ y: -3 }}
-              className="group glass-card p-5 md:p-7 hover:!border-white/15 transition-all duration-300 relative overflow-hidden"
-            >
-              {/* Subtle glow on hover */}
-              <div className="absolute -top-10 -right-10 w-24 h-24 bg-accent/3 rounded-full blur-[40px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Marquee rows — clipped to section width */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="testimonials-marquee-area"
+        >
+          <MarqueeRow images={row1} direction="left" />
+          <div className="h-3 md:h-4" />
+          <MarqueeRow images={row2} direction="right" />
+        </motion.div>
 
-              <div className="relative">
-                <Quote size={20} className="text-accent/20 mb-3 md:mb-4" />
-
-                <div className="flex items-center gap-3 mb-4 md:mb-5">
-                  <div className={`w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center text-sm font-bold text-white shadow-lg`}>
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <p className="font-poppins font-bold text-white text-sm">{t.name}</p>
-                    <p className="text-[11px] text-txt-muted">{t.role}</p>
-                  </div>
-                  <div className="ml-auto">
-                    <StarRating />
-                  </div>
-                </div>
-                <p className="text-txt-secondary leading-relaxed text-sm md:text-[15px]">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-              </div>
-            </motion.div>
+        {/* Reduced-motion fallback: static wrapped grid */}
+        <div className="testimonials-static-grid px-4">
+          {feedbackImages.map((img, i) => (
+            <div key={i} className="testimonials-static-card">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={240}
+                height={400}
+                loading="lazy"
+                sizes="(max-width: 640px) 45vw, 220px"
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </div>
           ))}
         </div>
+
+        {/* Quiet trust line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="text-center text-[11px] text-[rgba(161,161,170,0.5)] tracking-[0.2em] uppercase mt-8 md:mt-10 px-4"
+        >
+          feedbacks reais &middot; sem filtro &middot; sem edição
+        </motion.p>
       </div>
     </section>
   );
