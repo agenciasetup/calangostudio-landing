@@ -26,10 +26,18 @@ const config: Config = {
         },
         glass: "rgba(255,255,255,0.08)",
         "glass-border": "rgba(255,255,255,0.10)",
+        // Platform design-system tokens (additive — no collision with accent above)
+        primary: { DEFAULT: "#ffaa00", hover: "#ffc040" },
+        background: "#030303",
+        surface: "#0a0a0c",
       },
       fontFamily: {
         poppins: ["'Poppins'", "sans-serif"],
         inter: ["'Inter'", "sans-serif"],
+        display: ["'Poppins'", "sans-serif"],
+      },
+      backgroundImage: {
+        "brand-gradient": "linear-gradient(135deg,#ffaa00 0%,#ff7b47 100%)",
       },
       borderRadius: {
         "2xl": "18px",

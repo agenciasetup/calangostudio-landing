@@ -48,13 +48,11 @@ export default function AIContext() {
             Inteligência artificial
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            As melhores IAs, com{" "}
-            <span className="text-gradient-animated">contexto pronto</span>{" "}
-            para trabalhar por você.
+            A IA que já{" "}
+            <span className="text-gradient-animated">conhece o seu cliente.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            No Calango Studio, você não precisa assinar várias ferramentas separadas e ficar pulando de uma para outra.
-            A IA trabalha com base no briefing, nicho, tom de voz e referências do seu cliente. Ela não cria no vazio.
+            Nada de criar no vazio: ela usa o briefing, o nicho, o tom de voz e as referências de cada cliente. As melhores IAs — OpenAI, Gemini, FLUX, Claude — num login só.
           </p>
         </motion.div>
 

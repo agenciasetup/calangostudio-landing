@@ -94,7 +94,7 @@ export default function ProspectingImpact() {
             Prospecção ativa
           </span>
           <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            Vamos te lembrar{" "}
+            Todo dia a gente te lembra{" "}
             <span className="text-gradient-animated">de prospectar.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto leading-relaxed">

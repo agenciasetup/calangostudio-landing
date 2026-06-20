@@ -18,7 +18,7 @@ export default function CTAFinal() {
           transition={{ duration: 0.5 }}
           className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 md:mb-6 tracking-tight"
         >
-          Seu trabalho não precisa continuar{" "}
+          Para de trabalhar{" "}
           <span className="text-gradient-animated text-glow-strong">
             espalhado.
           </span>
