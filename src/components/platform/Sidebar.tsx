@@ -20,7 +20,7 @@ type SidebarItem =
 
 const ITEMS: SidebarItem[] = [
   { icon: LayoutGrid, color: "text-zinc-500" },
-  { icon: Users, color: "text-sky-400" },
+  { icon: Users, color: "text-sky-400", key: "contexto" },
   { icon: Target, color: "text-primary" },
   { icon: LayoutDashboard, color: "text-violet-400" },
   { icon: Trophy, color: "text-amber-400" },
