@@ -144,8 +144,8 @@ export default function Pricing() {
   const isAffiliate = !!affiliate;
 
   return (
-    <section id="planos" className="section-elevated py-16 md:py-20 px-4 relative">
-      {/* Pulsing glow */}
+    <section id="planos" className="section-elevated atmo section-pad px-4 relative">
+      {/* Pulsing glow — subtle amber (the offer moment) */}
       <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/15 blur-[100px] md:blur-[200px]" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
@@ -160,7 +160,7 @@ export default function Pricing() {
             <CreditCard size={12} />
             Planos e preços
           </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight">
             Escolha o plano ideal para a operação{" "}
             <span className="text-gradient-animated">que você quer construir.</span>
           </h2>

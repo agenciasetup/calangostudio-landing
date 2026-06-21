@@ -770,3 +770,148 @@ body {
     animation: none;
   }
 }
+
+/* ============================================================
+   REDESIGN 2026 — shared premium primitives
+   The "use Poppins better + give each section room to breathe"
+   layer: balanced headlines, film grain depth, atmosphere wrappers,
+   3D perspective, edge-lit cards.
+   ============================================================ */
+
+/* Balanced, tight headlines — premium typesetting on the brand font (Poppins).
+   text-wrap:balance evens ragged lines; negative tracking tightens big display. */
+.text-balance {
+  text-wrap: balance;
+}
+.headline {
+  text-wrap: balance;
+  letter-spacing: -0.035em;
+}
+.headline-tight {
+  text-wrap: balance;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+/* Generous section rhythm — "herói" sections breathe more than support ones. */
+.section-pad {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+.section-pad-lg {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+  .section-pad-lg {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+}
+
+/* Atmosphere wrapper — isolates stacking context so per-section glows/grain
+   never bleed into neighbours (kills the "everything is one orange wash" feel). */
+.atmo {
+  position: relative;
+  isolation: isolate;
+}
+
+/* 3D perspective parent for tilt windows. */
+.perspective {
+  perspective: 1400px;
+}
+.perspective-near {
+  perspective: 900px;
+}
+
+/* Subtle film grain — adds analog depth on dark hero/atmosphere sections.
+   Pure CSS (SVG turbulence data-URI), no image request. Desktop only. */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+@media (max-width: 767px) {
+  .grain::after {
+    display: none;
+  }
+}
+
+/* Edge-lit premium card — soft top highlight + deep ambient drop.
+   Cleaner and more "iOS" than the heavy glass-card border. */
+.card-lit {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+    0 30px 80px -40px rgba(0, 0, 0, 0.85);
+}
+
+/* Hairline label — quiet uppercase eyebrow, neutral (not always orange). */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(161, 161, 170, 0.9);
+}
+
+/* Soft vertical fade divider between sections (replaces the hard orange line). */
+.fade-seam {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after {
+    display: none;
+  }
+}
+
+/* Vertical "wall of love" — columns drift at different speeds so the varied
+   screenshot heights read as an intentional masonry instead of a jagged band.
+   Each column duplicates its set; translateY(-50%) loops it seamlessly. */
+@keyframes vscroll-up {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -50%, 0); }
+}
+@keyframes vscroll-down {
+  from { transform: translate3d(0, -50%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.vmarquee {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.vmarquee--up {
+  animation: vscroll-up var(--dur, 52s) linear infinite;
+}
+.vmarquee--down {
+  animation: vscroll-down var(--dur, 52s) linear infinite;
+}
+.vwall:hover .vmarquee {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vmarquee--up,
+  .vmarquee--down {
+    animation: none;
+  }
+}

@@ -68,8 +68,8 @@ function FAQItem({ faq }: { faq: (typeof faqs)[number] }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-16 md:py-20 px-4">
-      <div className="section-divider max-w-4xl mx-auto mb-12 md:mb-16" />
+    <section id="faq" className="atmo section-pad px-4">
+      <div className="fade-seam max-w-4xl mx-auto mb-12 md:mb-16" />
 
       <div className="max-w-3xl mx-auto">
         <motion.div
@@ -79,11 +79,11 @@ export default function FAQ() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-16"
         >
-          <span className="badge-pill mb-6 inline-flex">
+          <span className="eyebrow mb-6 inline-flex">
             <HelpCircle size={12} />
             Perguntas frequentes
           </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight">
             Antes de assinar, você{" "}
             <span className="text-gradient-animated">
               provavelmente quer saber:

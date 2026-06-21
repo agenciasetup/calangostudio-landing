@@ -1,296 +1,210 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { X, ArrowRight, CheckCircle, Zap } from "lucide-react";
-import { useAffiliate } from "@/lib/useAffiliate";
+/**
+ * Comparison — "6 assinaturas viram 1".
+ *
+ * Reframed as a calm visual equation instead of two heavy competing cards:
+ *   [the old way — quiet, neutral, struck-through]  →  [Calango — the only color]
+ * The left side is deliberately desaturated (the past); colour and glow live
+ * only on the Calango side (the answer). Far less text, far less red.
+ */
 
-// Preço do plano Pro — fonte única de verdade com a seção de Planos (Pricing.tsx).
+import { motion } from "framer-motion";
+import { ArrowRight, Check, Zap } from "lucide-react";
+import { useAffiliate } from "@/lib/useAffiliate";
+import { reveal, revealX, staggerContainer, inView } from "@/lib/motion";
+
+// Single source of truth with Pricing.tsx.
 const PRO_PRICE_DIRECT = "199,90";
 const PRO_PRICE_AFFILIATE = "169,90";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-interface Tool {
-  name: string;
-  purpose: string;
-  price: string;
-}
-
-const TOOLS: Tool[] = [
-  { name: "ChatGPT",            purpose: "copy / ideias",          price: "R$ 99,90" },
-  { name: "Magnific (Freepik)", purpose: "upscale / imagem",       price: "R$ 180,00" },
-  { name: "Adobe",              purpose: "edição",                 price: "R$ 235,00" },
-  { name: "Canva PRO",          purpose: "design",                 price: "R$ 34,90" },
-  { name: "Flux",               purpose: "gerar imagem",           price: "R$ 29,90" },
-  { name: "CRM",                purpose: "prospecção / gestão",    price: "R$ 100–300" },
+const TOOLS = [
+  { name: "ChatGPT", price: "99,90" },
+  { name: "Magnific (Freepik)", price: "180,00" },
+  { name: "Adobe", price: "235,00" },
+  { name: "Canva PRO", price: "34,90" },
+  { name: "Flux", price: "29,90" },
+  { name: "CRM", price: "100 a 300" },
 ];
 
-const CALANGO_FEATURES = [
-  "Gere copy e ideias com IA",
-  "Upscale e edição de imagem",
-  "Adobe-like — direto na plataforma",
-  "Design e layouts prontos",
-  "Geração de imagem com IA",
-  "CRM + missões de prospecção",
-];
-
-// ─── Stagger config ───────────────────────────────────────────────────────────
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-};
-
-const itemVariantsRight = {
-  hidden: { opacity: 0, x: 16 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.4 } },
-};
-
-// ─── Component ────────────────────────────────────────────────────────────────
+const PILLS = ["IA com contexto", "Studio de edição", "CRM + prospecção"];
 
 export default function Comparison() {
-  // Mesma detecção de afiliado da seção de Planos (?ref= → localStorage), pra os
-  // dois preços nunca divergirem.
   const isAffiliate = !!useAffiliate();
   const proPrice = isAffiliate ? PRO_PRICE_AFFILIATE : PRO_PRICE_DIRECT;
-  const proPriceOriginal = PRO_PRICE_DIRECT;
 
   return (
-    <section className="section-inset py-20 md:py-28 px-4 relative overflow-hidden">
-      {/* Section divider */}
-      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
+    <section
+      className="atmo relative overflow-hidden section-pad px-4"
+      style={{ background: "#040404" }}
+      aria-label="Comparação de custos"
+    >
+      <div className="fade-seam absolute inset-x-0 top-0" aria-hidden />
+      {/* one quiet amber glow, behind the Calango card */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-[10%] top-1/2 h-[440px] w-[440px] -translate-y-1/2 rounded-full blur-[150px]"
+        style={{ background: "rgba(255,170,0,0.06)" }}
+      />
 
-      {/* Background glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[900px] h-[400px] md:h-[600px] bg-accent/5 blur-[120px] rounded-full" />
-      </div>
-
-      <div className="relative z-10 max-w-5xl mx-auto">
-
-        {/* ── Heading ──────────────────────────────────────────────────────── */}
+      <div className="relative z-10 mx-auto max-w-5xl">
+        {/* ── Heading ─────────────────────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-12 md:mb-16"
+          variants={staggerContainer(0.08)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={inView}
+          className="mb-14 text-center md:mb-20"
         >
-          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            Pare de pagar{" "}
-            <span className="text-gradient-animated">6 assinaturas.</span>
-          </h2>
-          <p className="text-txt-secondary text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Pra fazer o que o Calango faz sozinho, hoje você junta — e paga — isto tudo:
-          </p>
+          <motion.span variants={reveal(12)} className="eyebrow mb-6 inline-flex">
+            Sua stack hoje
+          </motion.span>
+          <motion.h2
+            variants={reveal(20)}
+            className="headline-tight font-display text-4xl font-black sm:text-5xl md:text-6xl"
+          >
+            Pare de pagar <span className="text-gradient-animated">6 assinaturas.</span>
+          </motion.h2>
+          <motion.p
+            variants={reveal(16)}
+            className="mx-auto mt-5 max-w-xl text-base text-txt-secondary md:text-lg"
+          >
+            Tudo o que o Calango faz sozinho hoje você junta e paga em seis lugares diferentes.
+          </motion.p>
         </motion.div>
 
-        {/* ── Two-column layout ────────────────────────────────────────────── */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
-
-          {/* Left — the messy expensive stack */}
+        {/* ── The equation ────────────────────────────────────────────────── */}
+        <div className="grid items-center gap-5 lg:grid-cols-[1fr_auto_1fr]">
+          {/* LEFT — the old way, quiet & neutral */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="rounded-2xl md:rounded-3xl bg-black/40 border border-red-500/15 p-6 md:p-8 relative overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            variants={revealX(-24)}
+            className="rounded-[28px] border border-white/[0.07] bg-white/[0.015] p-6 md:p-7"
           >
-            {/* Red glow */}
-            <div className="absolute top-0 right-0 w-48 h-48 bg-red-500/5 rounded-full blur-[80px] pointer-events-none" />
-
-            <p className="font-display font-bold text-base md:text-lg text-zinc-400 mb-1 relative z-10">
-              O que você paga hoje:
+            <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-600">
+              O jeito antigo · 6 logins
             </p>
-            <p className="text-xs text-zinc-600 font-semibold uppercase tracking-wider mb-6 relative z-10">
-              Espalhado em 6 logins diferentes
-            </p>
-
-            {/* Tool rows */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="space-y-3 relative z-10"
-            >
-              {TOOLS.map((tool) => (
-                <motion.div
-                  key={tool.name}
-                  variants={itemVariants}
-                  className="flex items-center gap-3 group"
+            <ul className="space-y-2">
+              {TOOLS.map((t) => (
+                <li
+                  key={t.name}
+                  className="flex items-center justify-between rounded-xl border border-white/[0.04] bg-white/[0.02] px-3.5 py-2.5"
                 >
-                  <div className="w-6 h-6 rounded-md bg-red-500/10 border border-red-500/15 flex items-center justify-center flex-shrink-0">
-                    <X size={11} className="text-red-400/70" />
-                  </div>
-                  <div className="flex-1 flex items-baseline justify-between gap-2 min-w-0">
-                    <span className="text-sm md:text-base text-zinc-400 line-through decoration-red-500/30 truncate">
-                      {tool.name}
-                    </span>
-                    <span className="text-xs text-zinc-600 flex-shrink-0">{tool.purpose}</span>
-                  </div>
-                  <span className="text-sm font-bold text-red-400/80 flex-shrink-0 tabular-nums">
-                    {tool.price}
-                  </span>
-                </motion.div>
+                  <span className="text-sm font-medium text-zinc-400">{t.name}</span>
+                  <span className="text-xs tabular-nums text-zinc-600">R$ {t.price}</span>
+                </li>
               ))}
-            </motion.div>
-
-            {/* Total */}
-            <div className="mt-6 pt-5 border-t border-red-500/15 relative z-10">
-              <div className="flex items-baseline justify-between gap-3">
-                <div>
-                  <p className="text-xs text-zinc-600 font-bold uppercase tracking-wider mb-1">
-                    Total mensal
-                  </p>
-                  <p className="font-display font-black text-2xl md:text-3xl text-red-400 leading-none line-through decoration-red-500/60">
-                    R$ 680 – R$ 880
-                  </p>
-                </div>
-                <span className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/15 text-xs text-red-400 font-bold uppercase tracking-wider flex-shrink-0">
-                  /mês
-                </span>
-              </div>
-              <p className="mt-2 text-xs text-zinc-600 font-medium">
-                ≈ R$ 579,70 fixo + CRM R$ 100–300
-              </p>
+            </ul>
+            <div className="mt-5 flex items-baseline justify-between border-t border-white/[0.06] pt-4">
+              <span className="text-[11px] uppercase tracking-wider text-zinc-600">
+                Total mensal
+              </span>
+              <span className="font-display text-2xl font-black text-zinc-500 line-through decoration-zinc-600/50">
+                R$ 680 a 880
+              </span>
             </div>
           </motion.div>
 
-          {/* Right — the single Calango card */}
+          {/* CENTER — 6 → 1 connector */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl md:rounded-3xl bg-black/40 border border-accent/25 p-6 md:p-8 relative overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            variants={reveal(0)}
+            className="flex items-center justify-center gap-3 py-2 lg:flex-col lg:gap-2 lg:py-0"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/30 bg-accent/10 text-accent shadow-[0_0_24px_rgba(255,170,0,0.18)]">
+              <ArrowRight size={20} strokeWidth={2.5} className="rotate-90 lg:rotate-0" />
+            </div>
+            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-500">
+              6 → 1
+            </span>
+          </motion.div>
+
+          {/* RIGHT — the Calango card, the only colour on the page here */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            variants={revealX(24)}
+            className="card-lit relative overflow-hidden p-6 md:p-7"
             style={{
+              borderColor: "rgba(255,170,0,0.22)",
               boxShadow:
-                "0 20px 80px rgba(0,0,0,0.45), 0 0 80px rgba(255,170,0,0.07)",
+                "inset 0 1px 0 0 rgba(255,255,255,0.07), 0 30px 80px -40px rgba(0,0,0,0.85), 0 0 90px rgba(255,170,0,0.07)",
             }}
           >
-            {/* Accent glow */}
-            <div className="absolute top-0 left-0 w-56 h-56 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
-            {/* Thin top accent line */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-
-            <div className="flex items-center gap-2 mb-1 relative z-10">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-accent-end flex items-center justify-center flex-shrink-0 shadow-[0_0_16px_rgba(255,170,0,0.3)]">
-                <Zap size={14} className="text-black" strokeWidth={2.5} />
+            <div
+              aria-hidden
+              className="absolute right-0 top-0 h-44 w-44 rounded-full bg-accent/10 blur-[70px]"
+            />
+            <div className="relative z-10 flex items-center gap-2.5">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient shadow-[0_0_18px_rgba(255,170,0,0.35)]">
+                <Zap size={16} className="text-black" strokeWidth={2.5} />
               </div>
-              <p className="font-display font-bold text-base md:text-lg text-white">
-                Calango Studio
-              </p>
+              <span className="font-display text-lg font-bold text-white">Calango Studio</span>
             </div>
-            <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider mb-6 relative z-10">
-              Tudo em um lugar. Um login.
+            <p className="relative z-10 mt-1.5 text-[11px] uppercase tracking-wider text-zinc-500">
+              Tudo num login só
             </p>
 
-            {/* Features */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="space-y-3 relative z-10"
-            >
-              {CALANGO_FEATURES.map((feature, i) => (
-                <motion.div
-                  key={i}
-                  variants={itemVariantsRight}
-                  className="flex items-center gap-3"
+            <div className="relative z-10 mt-6 flex flex-wrap gap-2">
+              {PILLS.map((p) => (
+                <span
+                  key={p}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/[0.06] px-3 py-1.5 text-[11px] font-semibold text-accent"
                 >
-                  <div className="w-6 h-6 rounded-md bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle size={12} className="text-accent" />
-                  </div>
-                  <span className="text-sm md:text-base text-white font-medium">
-                    {feature}
-                  </span>
-                </motion.div>
+                  <Check size={11} strokeWidth={3} /> {p}
+                </span>
               ))}
-            </motion.div>
+            </div>
 
-            {/* Price payoff */}
-            <div className="mt-6 pt-5 border-t border-accent/15 relative z-10">
-              <div className="flex items-baseline justify-between gap-3 mb-3">
-                <div>
-                  <p className="text-xs text-zinc-500 font-bold uppercase tracking-wider mb-1">
-                    Tudo isso por
-                  </p>
-                  {isAffiliate ? (
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-sm text-zinc-500 line-through leading-none">
-                        R$ {proPriceOriginal}
-                      </span>
-                      <span className="font-display font-black text-2xl md:text-3xl text-gradient-animated leading-none">
-                        R$ {proPrice}
-                      </span>
-                      <span className="mt-1 self-start px-2 py-0.5 rounded-md bg-accent/15 border border-accent/20 text-accent text-[9px] font-black uppercase tracking-[0.12em]">
-                        preço de afiliado
-                      </span>
-                    </div>
-                  ) : (
-                    <p className="font-display font-black text-2xl md:text-3xl text-gradient-animated leading-none">
-                      R$ {proPrice}
-                    </p>
-                  )}
-                </div>
-                <span className="px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/20 text-xs text-accent font-black uppercase tracking-wider flex-shrink-0">
-                  /mês
+            <div className="relative z-10 mt-7 flex items-end gap-2">
+              <div>
+                {isAffiliate && (
+                  <span className="block text-sm leading-none text-zinc-600 line-through">
+                    R$ {PRO_PRICE_DIRECT}
+                  </span>
+                )}
+                <span className="font-display text-[2.75rem] font-black leading-none text-gradient-animated md:text-5xl">
+                  R$ {proPrice}
                 </span>
               </div>
-              <p className="text-xs md:text-sm text-zinc-400 leading-relaxed mb-5">
-                Tudo isso — e ainda a prospecção com missões pra fechar cliente.
-              </p>
-
-              <a
-                href="#planos"
-                className="inline-flex items-center gap-2 w-full justify-center py-3.5 md:py-4 rounded-xl md:rounded-2xl bg-gradient-to-r from-accent to-accent-end text-black font-black text-sm tracking-[0.14em] uppercase shadow-[0_0_24px_rgba(255,170,0,0.22)] hover:shadow-[0_0_40px_rgba(255,170,0,0.35)] hover:-translate-y-0.5 transition-all duration-300 group"
-              >
-                Quero tudo num lugar
-                <ArrowRight
-                  size={15}
-                  strokeWidth={2.5}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </a>
+              <span className="pb-1 text-sm text-zinc-500">/mês</span>
             </div>
+            {isAffiliate && (
+              <span className="relative z-10 mt-3 inline-flex rounded-md border border-accent/20 bg-accent/[0.08] px-2 py-0.5 text-[9px] font-black uppercase tracking-[0.12em] text-accent">
+                preço de afiliado
+              </span>
+            )}
+
+            <a
+              href="#planos"
+              className="btn-primary relative z-10 mt-6 flex w-full items-center justify-center gap-2 px-6 py-4 text-sm font-black"
+            >
+              Quero tudo num lugar
+              <ArrowRight size={15} strokeWidth={2.5} />
+            </a>
           </motion.div>
         </div>
 
-        {/* ── Bottom payoff line ───────────────────────────────────────────── */}
+        {/* ── Payoff line ─────────────────────────────────────────────────── */}
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.4 }}
-          className="font-display font-bold text-lg sm:text-xl md:text-2xl text-center mt-10 md:mt-14 max-w-2xl mx-auto leading-snug"
+          initial="hidden"
+          whileInView="visible"
+          viewport={inView}
+          variants={reveal(16)}
+          className="mx-auto mt-12 max-w-2xl text-center font-display text-lg font-bold leading-snug md:mt-16 md:text-2xl"
         >
           De{" "}
-          <span className="text-red-400 line-through decoration-red-400/60">
-            R$ 680–880 espalhados
+          <span className="text-zinc-500 line-through decoration-zinc-600/50">
+            R$ 680 a 880 espalhados
           </span>{" "}
           para{" "}
-          {isAffiliate ? (
-            <>
-              <span className="text-white/40 line-through decoration-white/20">
-                R$ {proPriceOriginal}
-              </span>{" "}
-              <span className="text-gradient-animated text-glow">
-                R$ {proPrice} num só lugar.
-              </span>
-            </>
-          ) : (
-            <span className="text-gradient-animated text-glow">
-              R$ {proPrice} num só lugar.
-            </span>
-          )}
+          <span className="text-gradient-animated text-glow">R$ {proPrice} num lugar só.</span>
         </motion.p>
-
       </div>
     </section>
   );

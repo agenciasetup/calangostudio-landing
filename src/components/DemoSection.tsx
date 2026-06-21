@@ -267,8 +267,8 @@ function VSLPlayer() {
 /* ─── DemoSection ─── */
 export default function DemoSection() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Ambient background */}
+    <section className="atmo relative section-pad overflow-hidden">
+      {/* Ambient background — faint amber, low wash */}
       <div className="pointer-events-none absolute inset-0">
         <div className="section-glow-pulse w-[600px] h-[600px] bg-gradient-to-br from-accent/10 via-accent-end/5 to-transparent blur-[120px]" />
       </div>
@@ -282,11 +282,11 @@ export default function DemoSection() {
           transition={{ duration: 0.4 }}
           className="text-center mb-10 md:mb-14"
         >
-          <span className="badge-pill mb-5 inline-flex">
+          <span className="eyebrow mb-5 inline-flex">
             <Play size={12} />
             Apresentação completa
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight">
             Veja a demo{" "}
             <span className="text-gradient-animated">completa.</span>
           </h2>
