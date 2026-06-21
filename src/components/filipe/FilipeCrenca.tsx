@@ -71,7 +71,7 @@ export default function FilipeCrenca() {
             />
           </a>
           <a
-            href="https://instagram.com/lipeslourenco"
+            href="https://instagram.com/lipealourenco"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 px-5 py-3 rounded-xl glass-panel hover:bg-white/[0.06] transition-colors text-sm"

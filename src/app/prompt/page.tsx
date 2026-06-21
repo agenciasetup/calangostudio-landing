@@ -70,7 +70,7 @@ const jsonLd = {
     founder: {
       "@type": "Person",
       name: "Filipe Lourenço",
-      url: "https://instagram.com/lipeslourenco",
+      url: "https://instagram.com/lipealourenco",
       jobTitle: "Designer e Empreendedor",
     },
   },

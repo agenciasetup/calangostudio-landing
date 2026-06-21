@@ -60,7 +60,7 @@ const jsonLd = {
       url: "https://www.calangostudio.com.br/filipe-lourenco",
       image: "https://www.calangostudio.com.br/images/filipe-lourenco.webp",
       sameAs: [
-        "https://instagram.com/lipeslourenco",
+        "https://instagram.com/lipealourenco",
         "https://instagram.com/agenciasetup",
       ],
       knowsAbout: [

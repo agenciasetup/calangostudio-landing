@@ -272,7 +272,7 @@ export default function MockStudio({ active }: { active?: boolean }) {
               className={`absolute inset-x-9 bottom-[104px] rounded p-2 transition-all duration-300 ${
                 showHeadlineSelection ? "ring-2 ring-accent" : ""
               }`}
-              style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+              style={{ fontFamily: "var(--font-poppins), var(--font-inter), sans-serif" }}
             >
               <p
                 className="font-black leading-[0.92] text-white"

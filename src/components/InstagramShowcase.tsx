@@ -182,7 +182,10 @@ function CarouselPost() {
 // ─── Phone-framed IG profile with feed ────────────────────────────────────────
 function PhoneProfile() {
   return (
-    <div className="relative mx-auto w-[290px] rounded-[44px] border border-white/12 bg-[#050506] p-2.5 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08)] sm:w-[310px]">
+    <div
+      aria-hidden
+      className="relative mx-auto w-[290px] rounded-[44px] border border-white/12 bg-[#050506] p-2.5 shadow-[0_50px_120px_-30px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08)] sm:w-[310px]"
+    >
       {/* dynamic island */}
       <div className="absolute left-1/2 top-[14px] z-20 h-[26px] w-[88px] -translate-x-1/2 rounded-full bg-black" />
 

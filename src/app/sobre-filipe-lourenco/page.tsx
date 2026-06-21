@@ -56,7 +56,7 @@ const schema = {
       url: "https://www.calangostudio.com.br/sobre-filipe-lourenco",
       image: "https://www.calangostudio.com.br/images/filipe-lourenco.webp",
       sameAs: [
-        "https://instagram.com/lipeslourenco",
+        "https://instagram.com/lipealourenco",
         "https://instagram.com/agenciasetup",
       ],
       knowsAbout: [
@@ -376,12 +376,12 @@ export default function SobreFilipeLourencoPage() {
       <p className="text-txt-secondary leading-relaxed mb-8">
         Você pode acompanhar Filipe Lourenço no Instagram{" "}
         <a
-          href="https://instagram.com/lipeslourenco"
+          href="https://instagram.com/lipealourenco"
           target="_blank"
           rel="noopener noreferrer"
           className="text-accent hover:text-accent-hover transition-colors"
         >
-          @lipeslourenco
+          @lipealourenco
         </a>{" "}
         e a Agência Setup em{" "}
         <a
