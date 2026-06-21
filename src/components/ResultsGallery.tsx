@@ -280,16 +280,16 @@ export default function ResultsGallery() {
   const items = activeTab === "criativos" ? CRIATIVOS : SESSAO;
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-28 px-4 sm:px-6">
+    <section className="atmo relative overflow-hidden section-pad px-4 sm:px-6">
       {/* Section divider */}
-      <div className="section-divider max-w-5xl mx-auto mb-16 md:mb-20" />
+      <div className="fade-seam max-w-5xl mx-auto mb-16 md:mb-20" />
 
-      {/* Ambient glow */}
+      {/* Ambient glow — neutral/cool, very subtle (let the images carry the color) */}
       <div
         className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] rounded-full blur-[180px]"
         style={{
           background:
-            "radial-gradient(circle, rgba(255,170,0,0.05), rgba(255,123,71,0.02) 50%, transparent 72%)",
+            "radial-gradient(circle, rgba(124,92,255,0.05), rgba(255,255,255,0.02) 50%, transparent 72%)",
         }}
       />
 
@@ -303,13 +303,13 @@ export default function ResultsGallery() {
           className="text-center mb-10 md:mb-14"
         >
           {/* Eyebrow */}
-          <div className="badge-pill mb-6 inline-flex">
+          <div className="eyebrow mb-6 inline-flex">
             <Sparkles size={11} />
             Resultados reais
           </div>
 
           {/* Headline */}
-          <h2 className="font-poppins font-black text-4xl sm:text-5xl md:text-[3.5rem] tracking-tight mb-5 leading-[1.05]">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight mb-5">
             O que sai{" "}
             <span className="text-gradient-animated">daqui.</span>
           </h2>

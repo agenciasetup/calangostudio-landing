@@ -1,5 +1,14 @@
 "use client";
 
+/**
+ * PainPoints — "Onde você trava, o Calango destrava."
+ *
+ * Reframed from a wall of red alarms into a calm, confident "trava → destrava"
+ * read: the trava (the blocker) is a quiet muted label, the Calango answer is
+ * the lit hero line with a single amber accent. No red glow, no eight identical
+ * alarm icons. Two calm columns: before vs. after closing the client.
+ */
+
 import { motion } from "framer-motion";
 import {
   Target,
@@ -8,206 +17,179 @@ import {
   ClipboardList,
   FileSignature,
   Sparkles,
-  Image,
+  Image as ImageIcon,
   ScanSearch,
-  AlertCircle,
-  ArrowRight,
 } from "lucide-react";
+import { reveal, revealX, staggerContainer, inView } from "@/lib/motion";
 
-const salesPains = [
+type Pain = { trava: string; destrava: string; icon: React.ElementType };
+
+const salesPains: Pain[] = [
   {
-    question: "Não sabe prospectar?",
-    answer: "O Calango organiza sua rotina de prospecção com missões diárias e lembretes.",
+    trava: "Não sabe prospectar?",
+    destrava: "Missões diárias e lembretes organizam sua rotina de prospecção.",
     icon: Target,
   },
   {
-    question: "Tem medo de ser invasivo?",
-    answer: "O Calango já traz um funil de mensagens pensado para abordagem natural.",
+    trava: "Tem medo de ser invasivo?",
+    destrava: "Um funil de mensagens pensado pra abordagem natural já vem pronto.",
     icon: MessageCircle,
   },
   {
-    question: "Não sabe o que mandar?",
-    answer: "O Calango entrega mensagens prontas para iniciar conversa e avançar na venda.",
+    trava: "Não sabe o que mandar?",
+    destrava: "Mensagens prontas pra iniciar a conversa e avançar na venda.",
     icon: Handshake,
   },
   {
-    question: "Fechou e não sabe o próximo passo?",
-    answer: "O Calango organiza o onboarding e o briefing do cliente automaticamente.",
+    trava: "Fechou e travou no próximo passo?",
+    destrava: "O onboarding e o briefing do cliente se organizam sozinhos.",
     icon: ClipboardList,
   },
 ];
 
-const productionPains = [
+const productionPains: Pain[] = [
   {
-    question: "Não sabe fazer contrato?",
-    answer: "O Calango gera a estrutura para você formalizar o serviço com o cliente.",
+    trava: "Não sabe fazer contrato?",
+    destrava: "O Calango gera a estrutura pra você formalizar o serviço.",
     icon: FileSignature,
   },
   {
-    question: "Não sabe como produzir rápido?",
-    answer: "O Calango gera conteúdo, copy e imagem com base no contexto do cliente — e o Flow automatiza o fluxo inteiro.",
+    trava: "Precisa produzir rápido?",
+    destrava: "Copy e imagem saem do contexto do cliente, e o Flow automatiza o fluxo.",
     icon: Sparkles,
   },
   {
-    question: "Precisa de imagens?",
-    answer: "O Calango gera imagens e sessões de fotos direto do briefing salvo.",
-    icon: Image,
+    trava: "Precisa de imagens?",
+    destrava: "Imagens e sessões de foto direto do briefing salvo.",
+    icon: ImageIcon,
   },
   {
-    question: "Quer analisar o perfil do cliente?",
-    answer: "O Calango já faz isso dentro do fluxo, antes de você criar.",
+    trava: "Quer analisar o perfil do cliente?",
+    destrava: "A análise acontece dentro do fluxo, antes de você criar.",
     icon: ScanSearch,
   },
 ];
 
-function PainCard({
-  item,
-  index,
-  direction,
-}: {
-  item: { question: string; answer: string; icon: React.ElementType };
-  index: number;
-  direction: "left" | "right";
-}) {
+function PainCard({ item, direction }: { item: Pain; direction: "left" | "right" }) {
+  const Icon = item.icon;
   return (
     <motion.div
-      initial={{ opacity: 0, x: direction === "left" ? -30 : 30 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-      whileHover={{ scale: 1.02, borderColor: "rgba(255,170,0,0.25)" }}
-      className="group rounded-2xl bg-black/40 border border-white/[0.08] p-5 md:p-6 transition-all duration-300 relative overflow-hidden cursor-default"
+      variants={revealX(direction === "left" ? -20 : 20)}
+      whileHover={{ y: -3 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className="group relative overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.015] p-5 transition-colors duration-300 hover:border-accent/20 md:p-6"
     >
-      {/* Hover glow */}
-      <div className="absolute inset-0 bg-accent/[0.02] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* left accent bar — lights amber on hover */}
+      <span className="absolute left-0 top-0 h-full w-[2px] bg-accent/0 transition-colors duration-300 group-hover:bg-accent/70" />
 
-      <div className="relative z-10">
-        {/* Question with red accent */}
-        <div className="flex items-start gap-3 mb-3">
-          <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-red-500/15 group-hover:border-red-500/30 transition-all duration-300">
-            <AlertCircle size={16} className="text-red-400" strokeWidth={2} />
-          </div>
-          <p className="font-poppins font-bold text-sm md:text-base text-red-400 pt-1.5">
-            {item.question}
-          </p>
-        </div>
+      {/* trava — quiet, muted */}
+      <p className="mb-3 text-sm font-semibold text-zinc-500">{item.trava}</p>
 
-        {/* Answer with arrow indicator */}
-        <div className="flex items-start gap-3 pl-0 md:pl-[52px]">
-          <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/15 transition-colors duration-300 md:hidden">
-            <item.icon size={13} className="text-accent" strokeWidth={2} />
-          </div>
-          <div className="hidden md:flex w-8 h-8 rounded-lg bg-accent/8 border border-accent/15 items-center justify-center flex-shrink-0 group-hover:bg-accent/15 transition-colors duration-300">
-            <item.icon size={14} className="text-accent" strokeWidth={2} />
-          </div>
-          <p className="text-xs md:text-sm text-txt-secondary leading-relaxed pt-1 group-hover:text-txt-primary transition-colors duration-300">
-            {item.answer}
-          </p>
-        </div>
-      </div>
-
-      {/* Hover arrow */}
-      <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
-        <ArrowRight size={14} className="text-accent/50" />
+      {/* destrava — the confident answer */}
+      <div className="flex items-start gap-3">
+        <span className="mt-px flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-accent/15 bg-accent/[0.08] text-accent transition-colors duration-300 group-hover:bg-accent/15">
+          <Icon size={15} strokeWidth={2} />
+        </span>
+        <p className="text-sm leading-relaxed text-zinc-300 transition-colors duration-300 group-hover:text-white">
+          {item.destrava}
+        </p>
       </div>
     </motion.div>
   );
 }
 
+function Column({
+  label,
+  caption,
+  pains,
+  direction,
+}: {
+  label: string;
+  caption: string;
+  pains: Pain[];
+  direction: "left" | "right";
+}) {
+  return (
+    <div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={inView}
+        variants={reveal(10)}
+        className="mb-6 flex items-baseline gap-3"
+      >
+        <p className="font-display text-lg font-bold text-white md:text-xl">{label}</p>
+        <p className="text-[11px] uppercase tracking-wider text-zinc-600">{caption}</p>
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={inView}
+        variants={staggerContainer(0.08)}
+        className="space-y-3 md:space-y-4"
+      >
+        {pains.map((item, i) => (
+          <PainCard key={i} item={item} direction={direction} />
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function PainPoints() {
   return (
-    <section className="section-elevated py-20 md:py-28 px-4 relative overflow-hidden">
-      {/* Pulsing glow BG */}
-      <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-red-500/20 blur-[100px] md:blur-[180px]" />
+    <section
+      className="atmo relative overflow-hidden section-pad px-4"
+      style={{ background: "#040404" }}
+      aria-label="Travas do designer"
+    >
+      <div className="fade-seam absolute inset-x-0 top-0" aria-hidden />
+      {/* single calm amber whisper, top-center */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full blur-[150px]"
+        style={{ background: "rgba(255,170,0,0.045)" }}
+      />
 
-      {/* Floating decorative icons */}
-      <motion.div
-        animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-[10%] hidden lg:block opacity-[0.04]"
-      >
-        <AlertCircle size={80} />
-      </motion.div>
-      <motion.div
-        animate={{ y: [0, 12, 0], rotate: [0, -8, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-        className="absolute bottom-32 left-[6%] hidden lg:block opacity-[0.04]"
-      >
-        <Sparkles size={60} />
-      </motion.div>
-
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 mx-auto max-w-5xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-14 md:mb-20"
+          variants={staggerContainer(0.08)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={inView}
+          className="mb-14 text-center md:mb-20"
         >
-          <span className="badge-pill mb-6 inline-flex" style={{ background: "rgba(239,68,68,0.08)", borderColor: "rgba(239,68,68,0.2)", color: "#f87171" }}>
-            <AlertCircle size={12} />
-            Travas do designer
-          </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight leading-tight">
+          <motion.span variants={reveal(12)} className="eyebrow mb-6 inline-flex">
+            Da venda à entrega
+          </motion.span>
+          <motion.h2
+            variants={reveal(20)}
+            className="headline-tight font-display text-4xl font-black sm:text-5xl md:text-6xl"
+          >
             Onde você trava,{" "}
             <span className="text-gradient-animated">o Calango destrava.</span>
-          </h2>
-          <p className="text-txt-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            Da prospecção à entrega — todo gargalo do designer já vem com resposta pronta.
-          </p>
+          </motion.h2>
+          <motion.p
+            variants={reveal(16)}
+            className="mx-auto mt-5 max-w-xl text-base text-txt-secondary md:text-lg"
+          >
+            Todo gargalo do designer já vem com resposta pronta.
+          </motion.p>
         </motion.div>
 
-        {/* Two columns: Sales | Production */}
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
-          {/* Column 1: Sales pains */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4 }}
-              className="flex items-center gap-3 mb-5 md:mb-6"
-            >
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-                <Target size={18} className="text-red-400" />
-              </div>
-              <div>
-                <p className="font-poppins font-bold text-lg md:text-xl text-white">Dores de venda</p>
-                <p className="text-[11px] text-txt-muted">Onde você trava antes de fechar</p>
-              </div>
-            </motion.div>
-
-            <div className="space-y-3 md:space-y-4">
-              {salesPains.map((item, i) => (
-                <PainCard key={i} item={item} index={i} direction="left" />
-              ))}
-            </div>
-          </div>
-
-          {/* Column 2: Production pains */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex items-center gap-3 mb-5 md:mb-6"
-            >
-              <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-                <Sparkles size={18} className="text-red-400" />
-              </div>
-              <div>
-                <p className="font-poppins font-bold text-lg md:text-xl text-white">Dores de produção</p>
-                <p className="text-[11px] text-txt-muted">Onde você trava depois de fechar</p>
-              </div>
-            </motion.div>
-
-            <div className="space-y-3 md:space-y-4">
-              {productionPains.map((item, i) => (
-                <PainCard key={i} item={item} index={i} direction="right" />
-              ))}
-            </div>
-          </div>
+        <div className="grid gap-8 md:gap-12 lg:grid-cols-2">
+          <Column
+            label="Antes de fechar"
+            caption="a venda"
+            pains={salesPains}
+            direction="left"
+          />
+          <Column
+            label="Depois de fechar"
+            caption="a entrega"
+            pains={productionPains}
+            direction="right"
+          />
         </div>
       </div>
     </section>

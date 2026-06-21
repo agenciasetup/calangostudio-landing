@@ -5,8 +5,8 @@ import { ArrowRight, Instagram } from "lucide-react";
 
 export default function CTAFinal() {
   return (
-    <section className="section-elevated py-16 md:py-20 px-4 relative overflow-hidden">
-      {/* Pulsing glow */}
+    <section className="section-elevated atmo section-pad px-4 relative overflow-hidden">
+      {/* Pulsing glow — amber, punchy (final CTA) */}
       <div className="section-glow-pulse w-[400px] md:w-[700px] h-[400px] md:h-[700px] bg-accent/25 blur-[80px] md:blur-[150px]" />
       <div className="section-glow-pulse-alt w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-accent-end/15 blur-[60px] md:blur-[120px]" style={{ top: "60%", left: "60%" }} />
 
@@ -16,7 +16,7 @@ export default function CTAFinal() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
-          className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-5 md:mb-6 tracking-tight"
+          className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-5 md:mb-6 tracking-tight"
         >
           Para de trabalhar{" "}
           <span className="text-gradient-animated text-glow-strong">

@@ -17,7 +17,8 @@
  * hue-rotate keyframes are disabled via inline style).
  */
 
-import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { Transition } from "framer-motion";
 import Image from "next/image";
 import {
@@ -415,13 +416,23 @@ function CreativeScene() {
 //  Hero
 // ─────────────────────────────────────────────────────────────────────────────
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion() ?? false;
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  // Creative scene drifts up faster than the copy as you scroll into the page.
+  const sceneY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -110]);
+  const copyY = useTransform(scrollYProgress, [0, 1], reduced ? [0, 0] : [0, -44]);
+
   const handleScrollToFuncoes = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     document.querySelector("#funcoes")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative flex min-h-[92vh] items-center overflow-hidden px-4 pb-20 pt-28 sm:px-6 md:pt-32 lg:px-10">
+    <section ref={heroRef} className="relative flex min-h-[92vh] items-center overflow-hidden px-4 pb-20 pt-28 sm:px-6 md:pt-32 lg:px-10">
       {/* ambient background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="hero-grid-bg absolute inset-0" />
@@ -436,12 +447,12 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10">
         {/* LEFT: copy */}
-        <div className="text-center lg:text-left">
+        <motion.div style={{ y: copyY }} className="text-center lg:text-left">
           <motion.h1
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[2.6rem] font-black leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-[4rem]"
+            className="headline font-display text-[2.7rem] font-black leading-[1.02] tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem]"
           >
             Faça criativos
             <br className="hidden sm:block" /> usando{" "}
@@ -454,8 +465,8 @@ export default function Hero() {
             transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-txt-secondary md:text-lg lg:mx-0"
           >
-            Crie copy, gere imagens, faça sessão de fotos e construa suas artes —
-            tudo conectado com a identidade e o contexto do seu cliente.
+            Crie copy, gere imagens, faça sessão de fotos e construa suas artes.
+            Tudo conectado com a identidade e o contexto do seu cliente.
           </motion.p>
 
           <motion.div
@@ -489,14 +500,14 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.28 }}
             className="mt-7 text-[11px] font-medium text-zinc-500 md:text-xs"
           >
-            ⭐ 4,9 — designers e social medias já operam no Calango Studio
+            ⭐ 4,9 · designers e social medias já operam no Calango Studio
           </motion.p>
-        </div>
+        </motion.div>
 
         {/* RIGHT: ambient creative scene */}
-        <div className="relative w-full">
+        <motion.div style={{ y: sceneY }} className="relative w-full">
           <CreativeScene />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

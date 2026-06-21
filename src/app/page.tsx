@@ -8,6 +8,7 @@ const FunctionsCarousel = dynamic(() => import("@/components/FunctionsCarousel")
 const AIContext = dynamic(() => import("@/components/AIContext"));
 const StudioFocus = dynamic(() => import("@/components/StudioFocus"));
 const ResultsGallery = dynamic(() => import("@/components/ResultsGallery"));
+const InstagramShowcase = dynamic(() => import("@/components/InstagramShowcase"));
 const Comparison = dynamic(() => import("@/components/Comparison"));
 const PainPoints = dynamic(() => import("@/components/PainPoints"));
 const HowItWorks = dynamic(() => import("@/components/HowItWorks"));
@@ -43,6 +44,8 @@ export default function Home() {
         <StudioFocus />
         {/* 5 — Galeria de resultados */}
         <ResultsGallery />
+        {/* 5b — Feed do cliente: criativos montados num perfil de Instagram */}
+        <InstagramShowcase />
         {/* 6 — Pare de pagar 6 assinaturas */}
         <Comparison />
         {/* 7 — Travas do designer */}

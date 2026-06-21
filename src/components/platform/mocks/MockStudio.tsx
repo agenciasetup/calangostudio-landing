@@ -55,6 +55,7 @@ import {
   Layers,
   SquareDashed,
   Trash2,
+  ArrowDownRight,
 } from "lucide-react";
 import { useForge } from "../useForge";
 import { studioData } from "../mockData";
@@ -77,6 +78,9 @@ const MOCK_LAYERS = [
   { id: "foto", name: "Foto Principal", type: "image", icon: ImageIcon },
   { id: "fundo", name: "Fundo", type: "image", icon: ImageIcon },
 ] as const;
+
+// Decorative barcode bar widths (px) for the artboard's "IA + DESIGNER" mark.
+const BARCODE = [2, 1, 1, 3, 1, 2, 1, 1, 2, 3, 1, 1, 2, 1, 3, 1, 2, 1, 1, 2, 1, 3, 1, 1, 2, 1, 2, 1, 3, 1];
 
 // Map step → which layer id is "selected"
 function getSelectedLayerId(step: number): string | null {
@@ -121,7 +125,7 @@ function LayerRow({
     <div
       className={`group flex items-center gap-2 px-2 py-2.5 rounded-xl transition-all duration-300 ${
         isSelected
-          ? "bg-fuchsia-400/15 border border-fuchsia-400/30"
+          ? "bg-accent/15 border border-accent/30"
           : "bg-white/[0.025] border border-white/[0.06]"
       }`}
     >
@@ -132,7 +136,7 @@ function LayerRow({
       {/* type icon thumb */}
       <span
         className={`flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center ${
-          isSelected ? "bg-fuchsia-400/20 text-fuchsia-300" : "bg-white/5 text-zinc-500"
+          isSelected ? "bg-accent/20 text-accent" : "bg-white/5 text-zinc-500"
         }`}
       >
         <Icon size={12} />
@@ -232,83 +236,100 @@ export default function MockStudio({ active }: { active?: boolean }) {
         {/* Canvas background (pasteboard) */}
         <div className="absolute inset-0 bg-[#111111]" />
 
-        {/* ── Canvas content ─────────────────────────── */}
+        {/* ── Canvas content (reference-style carousel cover) ───────── */}
         <div className="absolute inset-0 flex items-center justify-center">
           {/* 4:5 Artboard frame */}
           <div
-            className="relative shadow-[0_8px_48px_rgba(0,0,0,0.7)] rounded overflow-hidden"
+            className="relative overflow-hidden rounded shadow-[0_8px_48px_rgba(0,0,0,0.7)]"
             style={{ width: artboardW, height: artboardH }}
           >
-            {/* Background portrait image — object-fit cover fills the 4:5 frame */}
+            {/* Foto Principal — full-bleed background image (founder photo, moody) */}
             <Image
-              src={studioData.canvasImage}
+              src="/images/filipe-lourenco.webp"
               alt="Arte no canvas"
               fill
               className="object-cover"
+              style={{ objectPosition: "center 22%" }}
               sizes={`${artboardW}px`}
             />
 
-            {/* Rich gradient overlay — bottom dark for text contrast, subtle top vignette */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/70" />
-
-            {/* ── Centered Headline layer ──────────────────────── */}
+            {/* Black fade — heavy at the bottom (imagem → fade preto → texto) */}
             <div
-              className={`absolute inset-x-0 top-0 bottom-0 flex flex-col items-center justify-center px-6 transition-all duration-300 ${
-                showHeadlineSelection
-                  ? "ring-2 ring-fuchsia-400 ring-offset-0 rounded"
-                  : ""
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.78) 24%, rgba(0,0,0,0.18) 56%, rgba(0,0,0,0.45) 100%)",
+              }}
+            />
+
+            {/* Foto Principal selection (step 3) */}
+            {showFotoSelection && (
+              <div className="pointer-events-none absolute inset-x-3 top-3 bottom-[44%] rounded ring-2 ring-accent" />
+            )}
+
+            {/* Headline block — the "Headline" layer (selection target) */}
+            <div
+              className={`absolute inset-x-9 bottom-[104px] rounded p-2 transition-all duration-300 ${
+                showHeadlineSelection ? "ring-2 ring-accent" : ""
               }`}
+              style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
             >
-              {/* Brand badge */}
-              <div className="mb-4 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-                <span className="text-[10px] font-bold tracking-widest text-white/70 uppercase">
-                  Powered by IA
-                </span>
-              </div>
-
-              {/* Main headline — centered, bold, Poppins/display */}
               <p
-                className="text-center font-black leading-tight drop-shadow-2xl"
-                style={{
-                  fontFamily: "'Poppins', 'Inter', sans-serif",
-                  fontSize: "clamp(18px, 4.5cqi, 28px)",
-                  textShadow: "0 2px 16px rgba(0,0,0,0.7)",
-                }}
+                className="font-black leading-[0.92] text-white"
+                style={{ fontSize: 42, textShadow: "0 2px 16px rgba(0,0,0,0.6)" }}
               >
-                <span className="text-white">Calango</span>
-                <span className="text-fuchsia-400">.Studio</span>
-                <span className="text-white">,</span>
-                <br />
-                <span className="text-white">sua plataforma de </span>
-                <br />
-                <span className="bg-gradient-to-r from-amber-400 to-fuchsia-400 bg-clip-text text-transparent">
-                  Design com IA.
-                </span>
+                8 motivos
               </p>
+              <p
+                className="mt-2 font-bold leading-[1.12] text-white"
+                style={{ fontSize: 17, textShadow: "0 2px 12px rgba(0,0,0,0.75)" }}
+              >
+                pra você não ignorar a revolução da I.A.
+              </p>
+              <p
+                className="font-bold leading-[1.12]"
+                style={{ fontSize: 17, color: "#ffc24b", textShadow: "0 2px 12px rgba(0,0,0,0.75)" }}
+              >
+                no mercado criativo.
+              </p>
+            </div>
 
-              {/* Decorative CTA stub */}
-              <div className="mt-5 px-5 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/25">
+            {/* Divider + drag row */}
+            <div className="absolute inset-x-9 bottom-8">
+              <div className="h-px w-full bg-white/20" />
+              <div className="mt-3 flex items-center justify-between gap-2">
                 <span
-                  className="text-[11px] font-bold text-white"
-                  style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+                  className="rounded-md border border-white/25 px-2.5 py-1.5 text-[8px] font-bold tracking-[0.18em]"
+                  style={{ color: "#ffc24b" }}
                 >
-                  Começar agora →
+                  ARRASTA PARA O LADO
+                </span>
+                <div className="flex flex-col items-center gap-0.5">
+                  <div className="flex h-3.5 items-stretch gap-[1.5px]">
+                    {BARCODE.map((w, i) => (
+                      <span key={i} className="bg-white/55" style={{ width: w }} />
+                    ))}
+                  </div>
+                  <span className="text-[6px] font-bold tracking-[0.35em] text-white/40">
+                    IA + DESIGNER
+                  </span>
+                </div>
+                <span
+                  className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md border border-white/25"
+                  style={{ color: "#ffc24b" }}
+                >
+                  <ArrowDownRight size={14} />
                 </span>
               </div>
             </div>
 
-            {/* Foto Principal selection indicator (step 3) — covers image area */}
-            {showFotoSelection && (
-              <div className="absolute inset-x-0 top-[45%] bottom-0 ring-2 ring-fuchsia-400 ring-offset-0 rounded pointer-events-none" />
-            )}
-
-            {/* Fundo selection indicator (step 4) — covers full artboard */}
+            {/* Fundo selection (step 4) */}
             {showFundoSelection && (
-              <div className="absolute inset-0 ring-2 ring-fuchsia-400 ring-offset-0 rounded pointer-events-none" />
+              <div className="pointer-events-none absolute inset-0 rounded ring-2 ring-accent" />
             )}
 
             {/* Artboard border */}
-            <div className="absolute inset-0 ring-1 ring-white/10 rounded pointer-events-none" />
+            <div className="pointer-events-none absolute inset-0 rounded ring-1 ring-white/10" />
           </div>
         </div>
 

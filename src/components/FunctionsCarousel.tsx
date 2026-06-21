@@ -206,7 +206,7 @@ export default function FunctionsCarousel() {
   };
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-28 lg:py-32">
+    <section className="atmo relative overflow-hidden section-pad">
       {/* Ambient glow */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-primary/[0.035] rounded-full blur-[160px]" />
       <div className="pointer-events-none absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-violet-500/[0.025] rounded-full blur-[120px]" />
@@ -225,12 +225,12 @@ export default function FunctionsCarousel() {
             <Layers2 size={12} />
             A plataforma por dentro
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight">
             Veja cada função{" "}
             <span className="text-gradient-animated">funcionando.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            Arraste ou clique numa função — cada tela é o Calango Studio real.
+            Arraste ou clique em qualquer função. Cada tela é o Calango Studio rodando de verdade.
           </p>
         </motion.div>
 
@@ -339,7 +339,7 @@ export default function FunctionsCarousel() {
 
         {/* Active function label beneath nav */}
         <p className="mt-3 text-center text-[11px] font-bold uppercase tracking-widest text-zinc-600">
-          {activeIdx + 1} / {CAROUSEL_ENTRIES.length} — {activeEntry.label}
+          {activeIdx + 1} / {CAROUSEL_ENTRIES.length} · {activeEntry.label}
         </p>
       </div>
     </section>

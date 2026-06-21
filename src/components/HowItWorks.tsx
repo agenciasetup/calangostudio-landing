@@ -34,15 +34,15 @@ export default function HowItWorks() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="como-funciona" className="py-20 md:py-28 px-4 relative overflow-hidden">
-      {/* Ambient glow */}
+    <section id="como-funciona" className="atmo section-pad px-4 relative overflow-hidden">
+      {/* Ambient glow — faint warm amber, no pulse */}
       <div
         aria-hidden
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[700px] h-[400px] md:h-[700px] rounded-full blur-[80px] md:blur-[150px] pointer-events-none"
         style={{ background: "rgba(255,170,0,0.04)" }}
       />
 
-      <div className="section-divider max-w-5xl mx-auto mb-14 md:mb-20" />
+      <div className="fade-seam max-w-5xl mx-auto mb-14 md:mb-20" />
 
       <div className="max-w-6xl mx-auto">
         {/* ── Heading ──────────────────────────────────────────────────────── */}
@@ -53,12 +53,12 @@ export default function HowItWorks() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="badge-pill mb-6 inline-flex">
+          <span className="eyebrow mb-6 inline-flex">
             <Workflow size={12} />
             Fluxo completo
           </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
-            Do primeiro contato à entrega —{" "}
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight">
+            Do primeiro contato à entrega,{" "}
             <span className="text-gradient-animated">num fluxo só.</span>
           </h2>
           <p className="text-txt-secondary text-base md:text-lg max-w-xl mx-auto">

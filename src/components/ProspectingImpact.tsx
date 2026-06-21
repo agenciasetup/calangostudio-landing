@@ -68,8 +68,8 @@ const testimonials = [
 
 export default function ProspectingImpact() {
   return (
-    <section className="section-elevated py-20 md:py-28 px-4 relative overflow-hidden">
-      {/* Pulsing glow */}
+    <section className="section-elevated atmo section-pad px-4 relative overflow-hidden">
+      {/* Pulsing glow — blue atmosphere kept for differentiation */}
       <div className="section-glow-pulse w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-blue-500/15 blur-[100px] md:blur-[180px]" />
 
       {/* Floating icons */}
@@ -89,11 +89,11 @@ export default function ProspectingImpact() {
           transition={{ duration: 0.4 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="badge-pill mb-6 inline-flex">
+          <span className="eyebrow mb-6 inline-flex">
             <Crosshair size={12} />
             Prospecção ativa
           </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl mb-4 tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight">
             Todo dia a gente te lembra{" "}
             <span className="text-gradient-animated">de prospectar.</span>
           </h2>

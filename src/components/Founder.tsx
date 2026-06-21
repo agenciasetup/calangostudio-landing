@@ -5,9 +5,10 @@ import { Instagram, ExternalLink, ArrowRight } from "lucide-react";
 
 export default function Founder() {
   return (
-    <section className="py-16 md:py-24 px-4 relative overflow-hidden">
+    <section className="atmo section-pad px-4 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-accent/5 rounded-full blur-[100px] md:blur-[160px]" />
+        {/* Ambient glow — neutral, minimal */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-white/[0.02] rounded-full blur-[100px] md:blur-[160px]" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
@@ -18,10 +19,10 @@ export default function Founder() {
           transition={{ duration: 0.5 }}
           className="text-center mb-10 md:mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-accent/30 text-accent text-xs font-semibold tracking-widest uppercase mb-4">
+          <span className="eyebrow mb-4 inline-flex">
             Sobre o criador
           </span>
-          <h2 className="font-poppins font-black text-3xl sm:text-4xl md:text-5xl tracking-tight">
+          <h2 className="headline-tight font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-tight">
             Filipe Lourenço
           </h2>
         </motion.div>
