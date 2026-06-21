@@ -32,9 +32,9 @@ const config: Config = {
         surface: "#0a0a0c",
       },
       fontFamily: {
-        poppins: ["'Poppins'", "sans-serif"],
-        inter: ["'Inter'", "sans-serif"],
-        display: ["'Poppins'", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        inter: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-poppins)", "sans-serif"],
       },
       backgroundImage: {
         "brand-gradient": "linear-gradient(135deg,#ffaa00 0%,#ff7b47 100%)",

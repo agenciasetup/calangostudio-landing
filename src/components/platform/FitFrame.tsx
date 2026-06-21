@@ -56,6 +56,7 @@ export function FitFrame({ children, className = "", maxScale = 1.1 }: FitFrameP
     <div
       ref={containerRef}
       className={className}
+      aria-hidden="true"
       style={{
         width: "100%",
         height: "100%",

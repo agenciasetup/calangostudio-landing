@@ -867,7 +867,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  color: rgba(161, 161, 170, 0.9);
+  color: #a8a8b4;
 }
 
 /* Soft vertical fade divider between sections (replaces the hard orange line). */

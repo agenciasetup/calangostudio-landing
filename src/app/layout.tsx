@@ -1,6 +1,23 @@
 import type { Metadata } from "next";
+import { Poppins, Inter } from "next/font/google";
 import "./globals.css";
 import AffiliateLinkBridge from "@/components/AffiliateLinkBridge";
+
+// Self-hosted, optimized fonts via next/font (no render-blocking Google Fonts request).
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-poppins",
+  display: "swap",
+  preload: true,
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "600", "700", "900"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: "Calango Studio | Plataforma de IA para Designers e Social Media",
@@ -69,18 +86,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${poppins.variable} ${inter.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Inter:wght@400;600;700;900&family=Cinzel:wght@500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
         <meta name="theme-color" content="#030303" />
         <meta name="color-scheme" content="dark" />
       </head>
@@ -106,7 +113,7 @@ export default function RootLayout({
                     "@id": "https://www.calangostudio.com.br/#founder",
                     name: "Filipe Lourenço",
                     url: "https://www.calangostudio.com.br/filipe-lourenco",
-                    sameAs: ["https://instagram.com/lipeslourenco"],
+                    sameAs: ["https://instagram.com/lipealourenco"],
                     jobTitle: "Designer e Empreendedor Digital",
                   },
                   address: {

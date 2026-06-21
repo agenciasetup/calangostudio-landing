@@ -137,7 +137,7 @@ export default function PromptUsageGuide() {
             </a>{" "}
             de{" "}
             <a
-              href="https://instagram.com/lipeslourenco"
+              href="https://instagram.com/lipealourenco"
               target="_blank"
               rel="noopener noreferrer"
               className="text-accent/80 hover:text-accent transition-colors"

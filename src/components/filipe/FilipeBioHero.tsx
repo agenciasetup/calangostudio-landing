@@ -58,14 +58,14 @@ export default function FilipeBioHero() {
             {/* Social links under photo */}
             <div className="flex gap-3 mt-6 justify-center">
               <a
-                href="https://instagram.com/lipeslourenco"
+                href="https://instagram.com/lipealourenco"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl glass-panel hover:bg-white/[0.06] transition-colors text-sm"
               >
                 <Instagram size={15} className="text-accent" />
                 <span className="text-txt-secondary group-hover:text-white transition-colors">
-                  @lipeslourenco
+                  @lipealourenco
                 </span>
                 <ExternalLink size={10} className="text-txt-muted opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
